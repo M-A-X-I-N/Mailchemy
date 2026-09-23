@@ -7,7 +7,7 @@ This file is intentionally concise. Durable technical and architectural facts be
 ## 1.1 Before changing anything
 
 1. Read the root [`README.md`](README.md) for current scope and project status.
-2. Read [`docs/README.md`](docs/README.md) for the design-document map and current architectural vocabulary.
+2. Read [`docs/README.md`](docs/README.md) for the design-document map; use [`docs/GLOSSARY.md`](docs/GLOSSARY.md) for durable project vocabulary.
 3. Before source archaeology, standards/API investigation, or semantic-surface research, read [`research/README.md`](research/README.md) and the applicable methodology document.
 4. If present and relevant, consult persisted agent-specific context under [`.agents/`](.agents/).
 5. Inspect the current repository state before assuming an earlier chat, checkpoint, or remembered design still matches `main`.
@@ -32,12 +32,15 @@ These are current project invariants unless the human explicitly changes them:
 - The IR is **not** restricted to the global intersection of every supported system.
 - Semantic operations use stable, versioned identifiers. Versioning belongs to semantic contracts, not to provider quirks.
 - An adapter may support only a constrained/refined subset of a semantic capability. Such restrictions do not create new global semantic capabilities merely because one endpoint is limited.
-- Compatibility is evaluated for the concrete source/target set and concrete rule instances, not by a single global yes/no capability matrix.
+- Compatibility is evaluated for the concrete source/target set, concrete rule instances, and relevant execution structure, not by a single global yes/no capability matrix.
+- Leaf support is insufficient when ordering/state matters: rule boundaries, continuation, intermediate-state visibility, trigger context, default delivery, and terminality can be part of semantics.
+- Exactness for ordered/stateful rules may require execution-trace equivalence rather than merely matching the same leaf conditions/actions.
 - Adapters may realize semantics directly or through exact, semantics-preserving rewrites.
 - One semantic expression may have multiple valid exact realizations, and a realization may expand into an arbitrary expression tree rather than a one-to-one capability substitution.
 - Unsupported or lossy mappings must be reported explicitly. Do not silently broaden, narrow, drop, or approximate a rule.
 - Approximate/lossy conversion, if ever supported, must be an explicit mode distinct from normal exact interoperability.
 - Dialect/codec semantics and rule storage/transport are separate concerns. For example, Sieve is a rule language while ManageSieve is a transport/store interface.
+- A concrete endpoint capability profile may further restrict what its dialect/codec can realize; runtime/provider limits do not redefine the global semantic contract.
 - Remote providers are not privileged. Local/client formats such as Thunderbird rules and future serialization formats are first-class potential inputs/outputs.
 - A portable/export format, if desired, should be modeled as another adapter/codec with a schema rather than made the internal architecture.
 
@@ -49,7 +52,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the detailed rationale an
 - Keep root documentation navigational and high-level; avoid duplicating detailed architecture across multiple files.
 - Keep agent-only procedure in `.agents/`; do not hide authoritative project facts there.
 - Keep evidence, native-system investigations, and cross-system research lineage in `research/`; promote durable Mailchemy architecture conclusions into `docs/` rather than making research documents silently authoritative for project design.
-- Prefer precise terminology. In particular, distinguish semantic capability, constraint/refinement, rewrite, codec/dialect, and store/endpoint.
+- Prefer the terminology in [`docs/GLOSSARY.md`](docs/GLOSSARY.md). In particular, distinguish semantic capability, constraint/refinement, realization/rewrite, codec/dialect, store/endpoint, and leaf support from structural realizability.
 - Avoid provider-specific assumptions in core architectural documentation unless they are clearly presented as examples.
 - Preserve Git history and recoverability by default. Do not rewrite, discard, or make existing commits/history unreachable through destructive ref movement or history editing without explicit human authorization naming the affected history/ref(s) and destructive action. Prefer additive corrective/revert commits.
 
