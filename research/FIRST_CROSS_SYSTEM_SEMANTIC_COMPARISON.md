@@ -24,7 +24,7 @@ This document distinguishes:
 - **potential exact overlap** — may be exactly realizable for some concrete instances;
 - **related but distinct** — similar user intent, materially different semantics;
 - **system-specific** — no useful common semantic identity established;
-- **deferred** — exactness depends on control-flow work reserved for M18–M23.
+- **deferred** — exactness depends on the dedicated control-flow investigation and synthesis phase.
 
 ## 3. High-level matrix
 
@@ -303,7 +303,7 @@ Trash-state rewrites may also be possible, but Purelymail currently lacks advert
 
 ## 11. Purelymail validates endpoint refinement
 
-M16 gives a concrete three-layer model:
+The Purelymail endpoint-profile investigation gives a concrete three-layer model:
 
 ```text
 semantic operation exists in Mailchemy
@@ -372,4 +372,4 @@ The first cross-system comparison supports the current Mailchemy architecture.
 4. Endpoint capability refinement is a real requirement, demonstrated directly by Purelymail.
 5. The first concrete capability registry should **wait until after the control-flow block**, because execution semantics may split concepts that currently look identical.
 
-The result of M17 is therefore not a frozen registry. It is a much narrower answer to what that registry will eventually need to describe.
+The result of this first semantic synthesis is therefore not a frozen registry. It is a much narrower answer to what that registry will eventually need to describe.
