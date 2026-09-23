@@ -73,6 +73,7 @@ Put information where it belongs:
 - root `README.md`: project overview and current high-level state;
 - `docs/`: durable Mailchemy architecture, terminology, design, compatibility concepts, and future technical policy;
 - `research/`: native-system evidence, individual investigations, focused studies, and cross-system syntheses;
+- `planning/`: explicitly authorized active roadmaps/task plans; provisional sequencing only, not architecture authority;
 - root `AGENTS.md`: concise agent rules and routing;
 - `.agents/`: detailed agent-specific procedure/context.
 
