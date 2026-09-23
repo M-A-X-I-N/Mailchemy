@@ -10,7 +10,7 @@ If `AGENTS.md` is for the tireless silicon interns, this file is for the people 
 
 At the moment, the repository is intentionally much better at **describing the transmutation circle** than actually transmuting mail.
 
-The architecture currently centers on a canonical semantic IR, versioned semantic capabilities, adapter-local capability refinements/constraints, exact semantic rewrites, and a separation between rule dialects/codecs and stores/endpoints.
+The architecture currently centers on a canonical semantic IR, versioned semantic capabilities, adapter-local capability refinements/constraints, exact semantic rewrites, structural realizability for ordered/stateful rules, and a separation between rule dialects/codecs and stores/endpoints.
 
 There is no product implementation yet.
 
@@ -50,9 +50,10 @@ If you find a document claiming otherwise, congratulations: you found either a b
 
 - [`README.md`](README.md) — project overview and current high-level state.
 - [`docs/README.md`](docs/README.md) — documentation map and reading order.
+- [`docs/GLOSSARY.md`](docs/GLOSSARY.md) — canonical project vocabulary.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — canonical architecture and semantic-interoperability model.
 - [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md) — the first motivating rule systems/endpoints.
-- [`research/`](research/) — evidence, semantic-surface investigations, and later cross-system syntheses.
+- [`research/README.md`](research/README.md) — research map covering methodology, per-system investigations, and cross-system syntheses.
 - [`AGENTS.md`](AGENTS.md) — instructions and repository boundaries for automated contributors.
 - [`.agents/`](.agents/) — heavier persisted agent workflow/context.
 
