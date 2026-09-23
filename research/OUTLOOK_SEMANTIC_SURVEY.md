@@ -98,7 +98,7 @@ Rules are ordered.
 
 The `sequence` property identifies execution order, and Outlook's UI exposes changing rule order.
 
-Detailed multi-rule execution belongs to M20, but order is part of the native model rather than merely UI presentation.
+Detailed multi-rule execution is analyzed in [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md), but order is part of the native model rather than merely UI presentation.
 
 ## 3. Conditions and match semantics
 
@@ -320,7 +320,7 @@ Assigning a category is therefore semantically distinct from moving/copying the 
 
 `stopProcessingRules` determines whether later rules should be evaluated.
 
-This is an explicit control-flow action/property and is preserved here for completeness, with deeper analysis deferred to M20.
+This is an explicit control-flow action/property and is preserved here for completeness, with deeper analysis in [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md).
 
 ## 6. Container and message-state model
 
@@ -468,7 +468,7 @@ This is store/account-state validation, separate from the semantic concept of mo
 
 ## 10. Control-flow facts for later follow-up
 
-These facts are preserved here and should be studied systematically in M20.
+These facts are preserved here and studied systematically in [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md).
 
 ### 10.1 Explicit sequence
 
@@ -490,7 +490,7 @@ Default UI state is not itself a semantic requirement of the Graph resource, so 
 
 ### 10.4 Interaction between move/delete and later rules
 
-The exact effect of folder moves, deletes, redirects, and state mutation on later rule evaluation needs focused investigation in M20.
+The exact effect of folder moves, deletes, redirects, and state mutation on later rule evaluation is analyzed further in [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md).
 
 No conclusion is made here.
 
@@ -532,7 +532,7 @@ A future decoder encountering a server rule outside the writable API subset may 
 4. Boundary semantics for `minimumSize` and `maximumSize`.
 5. Whether conditionless rules created through Graph behave as unconditional match-all rules in all target account types.
 6. How multiple actions within one rule are ordered and whether order can affect observable behavior.
-7. How move/copy/delete/redirect actions affect subsequent rules. Deferred to M20.
+7. How move/copy/delete/redirect actions affect subsequent rules. See [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md).
 8. What kinds of existing Outlook rules surface as `isReadOnly`, and whether any relevant rules are omitted entirely from Graph listing.
 9. How category-name changes affect stored rule predicates/actions that reference category strings.
 10. Account/product-specific rule-count, size, or complexity limits.
