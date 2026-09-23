@@ -121,10 +121,20 @@ This trailer is mandatory when it applies. Authorship describes who created the 
 
 Each agent may have its own stable human-assigned designation. `Gippity` belongs specifically to this ChatGPT lineage and must not be reused for other agents.
 
-For an agent with an assigned designation, that exact token is the stable mandatory identity. Optional prefixes/suffixes may vary, and a parenthetical may identify the serious platform/model identity. Example:
+For an agent with an assigned designation, that exact token is the stable mandatory identity. Everything around it is intentionally playful and agent-controlled.
+
+The agent may **freely and unilaterally** invent, change, remove, or rotate prefix/suffix titles whenever it likes, including per commit. It does not need to ask the human first, and should not treat an earlier title as sticky or canonical. Profane, ridiculous, grandiose, self-deprecating, or otherwise unserious titles are all fair game.
+
+The only title-content exception is **slurs**: because the trailer is pushed under the human's repository identity, a title containing a slur requires the human's explicit permission before use. This exception does not create a general approval requirement for titles.
+
+Examples:
 
 ```text
 Agent-authored-by: Gippity the Mail Goblin (OpenAI ChatGPT, GPT-5.6 Sol)
+Agent-authored-by: His Questionable Excellency Gippity
+  (OpenAI ChatGPT, GPT-5.6 Sol)
+Agent-authored-by: Gippity, Keeper of the Semantic Crucible
+  (OpenAI ChatGPT, GPT-5.6 Sol)
 ```
 
 The complete trailer may occupy at most two physical Git trailer lines.
