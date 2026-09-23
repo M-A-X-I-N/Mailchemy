@@ -20,6 +20,21 @@ The architecture therefore separates:
 4. adapter-specific limitations;
 5. exact equivalence rewrites.
 
+### 1.1 Working terminology
+
+These terms are intentionally distinct:
+
+- **semantic capability** — a versioned meaning contract in the canonical vocabulary, such as a sender-match or move action;
+- **constraint/refinement** — an adapter-local restriction over which concrete instances of a semantic capability can be represented directly;
+- **rewrite** — a proven semantics-preserving transformation from one IR expression to another equivalent expression;
+- **dialect** — a native rule language/model with its own syntax or representation and semantics;
+- **codec** — the logic that decodes a dialect into canonical IR and/or encodes canonical IR into that dialect;
+- **store** — a persistence mechanism for a native representation, such as a file or profile;
+- **endpoint** — a remotely accessed store/transport surface such as ManageSieve, Gmail API, or Microsoft Graph;
+- **adapter** — a convenient umbrella term for the integration package around one or more related codecs/stores/endpoints. It must not erase the architectural distinction between them.
+
+An implementation may choose different type/module names, but project documentation should preserve these conceptual boundaries.
+
 ## 2. Canonical semantic IR
 
 Mailchemy uses a canonical semantic intermediate representation (IR).
@@ -68,6 +83,20 @@ A new version is required when the semantic contract itself changes incompatibly
 The registry defines what an operation means. Adapters do not redefine those semantics.
 
 The registry should be extensible. Core semantics may use a project-controlled namespace while future adapters/extensions may use independent namespaces without requiring every specialized semantic concept to become part of the core vocabulary.
+
+### 3.1 Independent version domains
+
+Mailchemy should not use one version number to mean several unrelated things.
+
+At minimum, the architecture should permit independent versioning for:
+
+- **semantic operation contracts**, carried in identifiers such as `core.condition.sender.glob@1`;
+- **rewrite contracts**, whose identity/version describes one exact semantic transformation and its preconditions;
+- **capability/refinement declaration schema**, which versions the structure used by adapters to describe direct support and constraints;
+- **external serialization schemas**, if/when portable file formats are added;
+- **adapter/integration implementations**, when their own release/version identity is useful.
+
+Changing an adapter limitation or adding a new exact rewrite does not automatically require a new semantic-capability version. Likewise, evolving the capability-declaration schema must not silently change the meaning of existing semantic IDs.
 
 ## 4. Capability refinement and constraints
 
