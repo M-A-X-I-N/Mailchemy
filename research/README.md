@@ -38,6 +38,7 @@ These studies apply [`CONTROL_FLOW_INVESTIGATION_METHOD.md`](CONTROL_FLOW_INVEST
 ## Current syntheses
 
 - [`FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md`](FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md) — first comparison across Sieve/Purelymail, Gmail, Outlook, and Thunderbird; identifies candidate semantic families and explicit non-equivalences without freezing final capability IDs.
+- [`CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md`](CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md) — compares execution traces, rule boundaries, stop scope, mutation visibility, move/copy/delete continuation, trigger context, failure semantics, and transformation safety.
 
 ## Research lineage
 
