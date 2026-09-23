@@ -12,6 +12,7 @@ Research findings may justify later changes to architecture documentation, but a
 ## Current methodology
 
 - [`SEMANTIC_SURVEY_METHOD.md`](SEMANTIC_SURVEY_METHOD.md) — common scope, evidence rules, comparison dimensions, and document template for the initial per-system semantic-surface surveys.
+- [`CONTROL_FLOW_INVESTIGATION_METHOD.md`](CONTROL_FLOW_INVESTIGATION_METHOD.md) — trace-oriented contract for comparing rule order, action order, mutation visibility, stop behavior, delivery lifecycle, and other execution semantics.
 
 ## Current semantic-surface surveys
 
