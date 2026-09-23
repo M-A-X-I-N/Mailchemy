@@ -51,7 +51,7 @@ They should **not** yet:
 - freeze final Mailchemy capability IDs;
 - design the concrete control-flow IR;
 - choose a rewrite-planner algorithm;
-- claim cross-system equivalence before M23;
+- claim cross-system equivalence before the later control-flow synthesis;
 - invent behavior where authoritative evidence is missing;
 - expand into general synchronization/conflict policy.
 
