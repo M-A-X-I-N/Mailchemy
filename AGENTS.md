@@ -17,11 +17,11 @@ Repository state and durable project documentation are authoritative over rememb
 
 ## 1.2 Current project phase
 
-Mailchemy is currently in architecture/documentation bootstrap.
+Mailchemy's initial architecture/research bootstrap is complete. Product implementation has not yet begun.
 
-Do not begin product implementation, select a programming language/runtime, create package-manager scaffolding, or freeze concrete public APIs unless the human task explicitly asks for that work.
+Do not begin product implementation, select a programming language/runtime, create package-manager scaffolding, or freeze concrete public APIs unless the human task explicitly starts that work.
 
-Research, documentation, repository policy, format/protocol investigation, and design refinement are allowed. Small executable probes may be added later when a task explicitly calls for them, but they must not silently become the architecture.
+Research, documentation, repository policy, format/protocol investigation, targeted semantic experiments, and design refinement remain allowed. When implementation begins, prefer a deliberately narrow exact end-to-end slice and avoid turning provisional implementation choices into global architecture without evidence.
 
 ## 1.3 Architectural hard rules
 
