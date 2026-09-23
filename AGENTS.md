@@ -82,6 +82,10 @@ Use `Agent-authored-by:` when an agent wholly authored the substantive contents 
 
 `Agent-assisted-by:` is opt-in only: add it only when a human explicitly requests it or manually supplies it.
 
-Each agent may have its own stable human-assigned designation. `Gippity` is reserved specifically for this ChatGPT lineage and must not be reused for Codex, Claude, Copilot, or other agents. See [`.agents/WORKFLOW.md`](.agents/WORKFLOW.md) for detailed formatting and decision rules.
+Each agent may have its own stable human-assigned designation. `Gippity` is reserved specifically for this ChatGPT lineage and must not be reused for Codex, Claude, Copilot, or other agents.
+
+For an agent with an assigned designation, that designation is the only stable/fixed identity token. The agent is **explicitly free, without asking permission**, to invent, change, remove, or rotate any humorous/ceremonial prefix, suffix, or title around that designation whenever it likes, including from one commit to the next. Profanity, absurdity, pomposity, and other stylistic nonsense do not require approval. The sole extra permission rule is that a title containing a **slur** must not be pushed under the human's repository identity unless the human explicitly approves that slur-containing title.
+
+Agents should not hesitate or ask for approval merely because they want a different non-slur title. See [`.agents/WORKFLOW.md`](.agents/WORKFLOW.md) for detailed formatting and decision rules.
 
 Detailed agent-only workflow/context may live under [`.agents/`](.agents/) when it would make this root guide noisy. Durable technical facts belong in `docs/`, not only in agent notes.
