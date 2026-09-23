@@ -21,9 +21,11 @@ Mailchemy's goal is not to invent one "true" replacement rule language. Instead,
 - Translate **meaning**, not syntax.
 - Do not silently broaden, narrow, drop, or approximate a rule.
 - The internal semantic IR is not globally limited by the weakest supported adapter.
-- Compatibility is negotiated dynamically for the actual source, target(s), and concrete rule instances.
+- Compatibility is negotiated dynamically for the actual source, target(s), concrete rule instances, and semantically relevant execution structure.
 - Adapter limitations are represented as **refinements/constraints** on semantic capabilities rather than contaminating the global capability vocabulary.
-- Exact semantic rewrites may provide alternative realizations when a target cannot encode a capability directly.
+- Exact semantic rewrites may provide alternative realizations when a target cannot encode a capability or execution structure directly.
+- Ordered/stateful rules require preserving relevant execution semantics: rule boundaries, continuation, mutation visibility, trigger context, and terminality can affect meaning.
+- Endpoint capability profiles can further refine what a dialect/codec can realize on a particular connected service.
 - Rule language/dialect semantics are separate from storage/transport. Sieve and ManageSieve, for example, are distinct concerns.
 - Local/client formats such as Thunderbird rules are first-class potential inputs/outputs alongside hosted providers.
 - If a portable file format is useful later, it can be another codec/adapter rather than becoming the internal architecture.
@@ -44,9 +46,9 @@ These are initial targets, not a closed list.
 
 Start with [`docs/README.md`](docs/README.md).
 
-The current architecture is documented in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), and initial target-system notes are in [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md).
+Project vocabulary is defined in [`docs/GLOSSARY.md`](docs/GLOSSARY.md), the current architecture in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), and initial target-system notes in [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md).
 
-Evidence-gathering and native-system investigations live under [`research/`](research/). The initial survey methodology is defined in [`research/SEMANTIC_SURVEY_METHOD.md`](research/SEMANTIC_SURVEY_METHOD.md).
+Evidence-gathering, native-system investigations, and cross-system syntheses live under [`research/`](research/). See [`research/README.md`](research/README.md) for the evidence lineage and both current research methodologies.
 
 ## Repository policy
 
