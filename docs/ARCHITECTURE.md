@@ -22,6 +22,8 @@ The architecture therefore separates:
 
 ### 1.1 Working terminology
 
+[`GLOSSARY.md`](GLOSSARY.md) owns the durable definitions of Mailchemy project vocabulary. This section keeps only the architectural distinctions needed to read this document.
+
 These terms are intentionally distinct:
 
 - **semantic capability** — a versioned meaning contract in the canonical vocabulary, such as a sender-match or move action;
