@@ -18,6 +18,7 @@ Research findings may justify later changes to architecture documentation, but a
 These are individual native-system investigations performed under [`SEMANTIC_SURVEY_METHOD.md`](SEMANTIC_SURVEY_METHOD.md). They are evidence inputs, not the cross-system synthesis.
 
 - [`SIEVE_SEMANTIC_SURVEY.md`](SIEVE_SEMANTIC_SURVEY.md) — standardized Sieve baseline plus relevant standards-track extensions; provider-specific Sieve behavior remains separate.
+- [`PURELYMAIL_SIEVE_CAPABILITY_PROFILE.md`](PURELYMAIL_SIEVE_CAPABILITY_PROFILE.md) — live 2026 Purelymail ManageSieve capability advertisement and endpoint-specific Sieve subset.
 - [`GMAIL_SEMANTIC_SURVEY.md`](GMAIL_SEMANTIC_SURVEY.md) — Gmail Filter criteria/actions, Gmail search-language surface, labels/state, and public-API versus product-surface asymmetries.
 - [`OUTLOOK_SEMANTIC_SURVEY.md`](OUTLOOK_SEMANTIC_SURVEY.md) — Microsoft Graph Inbox Rules, typed predicates/actions, folders/categories, sequence, and read/write asymmetries.
 - [`THUNDERBIRD_SEMANTIC_SURVEY.md`](THUNDERBIRD_SEMANTIC_SURVEY.md) — Thunderbird client-local message filters, search terms/actions, local persistence, tags/folders, and extension points.
