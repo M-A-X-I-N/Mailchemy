@@ -431,7 +431,7 @@ Any exact adapter implementation will need tests and current documentation for t
 
 ## 9. Control-flow facts for later follow-up
 
-These facts are recorded for M19, not exhaustively analyzed here.
+These facts are recorded here and analyzed in [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md).
 
 ### 9.1 Filters are incoming-message rules
 
@@ -453,7 +453,7 @@ The official sources reviewed here do not establish enough precise semantics abo
 - whether all matching filters always contribute actions;
 - ordering of multiple actions on one filter.
 
-Those belong explicitly to M19.
+Those are analyzed in [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md).
 
 ### 9.4 "Apply filter to matching conversations" is creation-time behavior
 
@@ -500,7 +500,7 @@ Round-trip compatibility between XML and API representations is not assumed unti
 
 ## 11. Unresolved questions
 
-1. Precisely how are multiple simultaneously matching filters ordered and combined? Deferred to M19.
+1. Precisely how are multiple simultaneously matching filters ordered and combined? See [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md).
 2. Can public Filter API `get/list` faithfully represent UI filters containing `Send template` or other non-Action-schema behaviors?
 3. What exact XML schema/version behavior does Gmail's import/export feature use today?
 4. Which Gmail search operators are valid when used in filter `query`, versus valid only in interactive search contexts?
@@ -509,7 +509,7 @@ Round-trip compatibility between XML and API representations is not assumed unti
 7. How should categories be modeled: as ordinary system-label transitions, classifier interaction, or provider-specific semantics?
 8. Which action combinations are rejected or normalized when creating filters through the API?
 9. Are there account/product-specific limits on total filter count or query complexity that matter to an adapter?
-10. How does forwarding interact with other matching filter actions and multiple filters? Deferred to M19.
+10. How does forwarding interact with other matching filter actions and multiple filters? See [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md).
 
 ## 12. Survey summary
 
