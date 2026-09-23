@@ -71,7 +71,8 @@ When a claimed equivalence is uncertain, treat it as unproven until supported by
 Put information where it belongs:
 
 - root `README.md`: project overview and current high-level state;
-- `docs/`: durable architecture, terminology, design, compatibility concepts, and future technical policy;
+- `docs/`: durable Mailchemy architecture, terminology, design, compatibility concepts, and future technical policy;
+- `research/`: native-system evidence, individual investigations, focused studies, and cross-system syntheses;
 - root `AGENTS.md`: concise agent rules and routing;
 - `.agents/`: detailed agent-specific procedure/context.
 
