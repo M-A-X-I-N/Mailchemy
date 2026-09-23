@@ -480,19 +480,51 @@ It should not need knowledge of every other adapter's limitations.
 
 ## 13. Explicitly open questions
 
-The architecture above is the current design direction, but these implementation choices remain intentionally open:
+The architecture/research bootstrap is now mature enough to support a **first implementation slice**, but several implementation decisions intentionally remain open.
+
+Not every open question must be solved globally before implementation begins. Prefer choosing only what the first exact end-to-end slice requires.
+
+### 13.1 Decisions needed for an initial implementation slice
+
+A first implementation effort will need to choose, at minimum:
 
 - implementation language/runtime;
-- concrete IR type representation;
-- plugin/discovery mechanism for adapters;
-- concrete capability/constraint registration API;
-- rewrite-planner algorithm and cost model;
-- whether common constraints receive globally versioned identifiers or primarily reusable implementation types;
-- concrete IR representation for ordering, grouping, continuation, trigger context, intermediate-state visibility, default delivery, and terminality;
-- schema and existence of any portable serialization format;
-- CLI/UI shape;
-- synchronization policy and conflict handling;
-- initial exact capability vocabulary;
-- targeted experiments for currently underdocumented provider execution behavior, including Gmail multi-filter state visibility, Outlook intermediate-state visibility, Thunderbird automatic-vs-manual execution parity, and Purelymail's account/user Sieve handoff.
+- the first deliberately narrow end-to-end slice and its initial exact semantic vocabulary;
+- concrete IR types sufficient to represent both the selected leaf semantics and the execution structure required by that slice;
+- concrete codec/store/endpoint interfaces sufficient for the selected source and target;
+- a representation for realization outcomes such as Direct, Derived, and Unsupported, including useful diagnostics;
+- the first capability/refinement declaration/checking API;
+- a minimum exact-rewrite registration/planning mechanism for any rewrites required by the slice;
+- semantic/round-trip test oracles strong enough to prove the exactness claims being implemented.
 
-These should be decided from evidence and implementation needs rather than inferred from pseudocode examples in design discussion.
+These choices may be provisional implementation architecture rather than final global APIs, provided they preserve the durable semantic boundaries documented here.
+
+### 13.2 Questions that can remain deferred
+
+The following do not need global answers merely to begin a narrow implementation slice:
+
+- general plugin/discovery mechanism for adapters;
+- sophisticated rewrite-planner search/cost heuristics beyond the needs of the first slice;
+- whether common constraints receive globally versioned identifiers or primarily reusable implementation types;
+- schema and existence of any portable serialization format;
+- final CLI/UI shape;
+- synchronization policy and conflict handling;
+- complete capability coverage for every initial target;
+- broad lossy-conversion design.
+
+They should be decided from actual implementation pressure rather than prematurely frozen.
+
+### 13.3 Evidence gaps that conditionally constrain implementation
+
+Some native-system behavior remains deliberately unresolved:
+
+- Gmail multi-filter match snapshots and conflicting-action/state-visibility behavior;
+- Outlook intermediate-state visibility across sequential rules and some delete-continuation details;
+- Thunderbird automatic-incoming parity with the strongly evidenced manual/after-the-fact execution path;
+- Purelymail account-level → user-level Sieve pipeline and implicit-keep handoff;
+- some runtime failure/rollback and forward/reply snapshot semantics across providers.
+
+These gaps are **not universal blockers**. A first exact implementation may avoid depending on them.
+
+If a selected capability or rewrite does depend on one of these behaviors, the missing behavior becomes a targeted research/test prerequisite for that claim of exact support.
+
