@@ -48,6 +48,8 @@ Start with [`docs/README.md`](docs/README.md).
 
 Project vocabulary is defined in [`docs/GLOSSARY.md`](docs/GLOSSARY.md), the current architecture in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), and initial target-system notes in [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md).
 
+The explicitly authorized first implementation roadmap lives under [`planning/`](planning/), starting with [`planning/CAPABILITY_REGISTRY_HARNESS.md`](planning/CAPABILITY_REGISTRY_HARNESS.md).
+
 Evidence-gathering, native-system investigations, and cross-system syntheses live under [`research/`](research/). See [`research/README.md`](research/README.md) for the evidence lineage and both current research methodologies.
 
 ## Repository policy
