@@ -24,11 +24,11 @@ These are individual native-system investigations performed under [`SEMANTIC_SUR
 - [`OUTLOOK_SEMANTIC_SURVEY.md`](OUTLOOK_SEMANTIC_SURVEY.md) — Microsoft Graph Inbox Rules, typed predicates/actions, folders/categories, sequence, and read/write asymmetries.
 - [`THUNDERBIRD_SEMANTIC_SURVEY.md`](THUNDERBIRD_SEMANTIC_SURVEY.md) — Thunderbird client-local message filters, search terms/actions, local persistence, tags/folders, and extension points.
 
-The first cross-system comparison should consume these native-system surveys together with the Purelymail endpoint profile rather than rewriting them into provider-pair-specific notes.
+The first cross-system comparison consumes these native-system surveys together with the Purelymail endpoint profile rather than rewriting them into provider-pair-specific notes.
 
 ## Current control-flow investigations
 
-These studies apply [`CONTROL_FLOW_INVESTIGATION_METHOD.md`](CONTROL_FLOW_INVESTIGATION_METHOD.md) to the initial rule systems. They are individual execution-semantics investigations; the cross-system control-flow synthesis remains separate.
+These studies apply [`CONTROL_FLOW_INVESTIGATION_METHOD.md`](CONTROL_FLOW_INVESTIGATION_METHOD.md) to the initial rule systems. They preserve the individual execution evidence consumed by the separate cross-system control-flow synthesis.
 
 - [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md) — script sequencing, implicit keep, stop/return scope, mutable variables/flags/headers, delivery-action interaction, failure semantics, and Purelymail-specific execution caveats.
 - [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md) — incoming-filter execution, lack of public ordering/stop primitives, action-object semantics, and explicitly unresolved multi-filter mutation visibility.
