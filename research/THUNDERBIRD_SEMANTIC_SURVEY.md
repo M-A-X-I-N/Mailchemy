@@ -555,7 +555,7 @@ This is endpoint/profile-state validation, not a different semantic "move" opera
 
 ## 10. Control-flow facts for later follow-up
 
-These facts are preserved for M21 and are intentionally not fully synthesized here.
+These facts are preserved here and analyzed in [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md).
 
 ### 10.1 Filters are ordered
 
@@ -606,13 +606,13 @@ This is a semantic restriction, not just a UI inconvenience.
 
 `StopExecution` is a core action and current action sorting places it last within a filter.
 
-How it affects subsequent rules in each trigger context belongs to M21.
+How it affects subsequent rules in each trigger context is analyzed in [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md).
 
 ### 10.5 Move/delete and later-filter visibility
 
 Thunderbird Help explicitly warns that moving a message can affect whether later filters can operate on it and may cause reordering where possible.
 
-The exact cross-filter semantics need focused study in M21.
+The exact cross-filter semantics are studied in [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md).
 
 ## 11. Decode/encode asymmetries
 
@@ -656,8 +656,8 @@ A future codec should not assume that successfully parsing `msgFilterRules.dat` 
 
 1. Exact attribute/operator applicability matrix for each filter execution context and account type.
 2. Exact MIME/body-search semantics across plain text, HTML, multipart messages, and partially downloaded IMAP/POP content.
-3. Full execution semantics of multiple ordered filters after move/copy/delete. Deferred to M21.
-4. Exact StopExecution behavior in each trigger context. Deferred to M21.
+3. Full execution semantics of multiple ordered filters after move/copy/delete. See [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md).
+4. Exact StopExecution behavior in each trigger context. See [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md).
 5. Exact semantics of Reply: template source, identity, threading headers, recipient behavior, and MIME composition.
 6. Exact semantics of Forward and how they compare with Sieve redirect, Gmail forward, and Graph forward/redirect.
 7. Delete behavior across IMAP, POP, local folders, and account deletion settings.
