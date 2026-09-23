@@ -46,6 +46,8 @@ Start with [`docs/README.md`](docs/README.md).
 
 The current architecture is documented in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), and initial target-system notes are in [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md).
 
+Evidence-gathering and native-system investigations live under [`research/`](research/). The initial survey methodology is defined in [`research/SEMANTIC_SURVEY_METHOD.md`](research/SEMANTIC_SURVEY_METHOD.md).
+
 ## Repository policy
 
 Agent-facing workflow and repository conventions live in [`AGENTS.md`](AGENTS.md) and [`.agents/`](.agents/).
