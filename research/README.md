@@ -26,6 +26,15 @@ These are individual native-system investigations performed under [`SEMANTIC_SUR
 
 The first cross-system comparison should consume these native-system surveys together with the Purelymail endpoint profile rather than rewriting them into provider-pair-specific notes.
 
+## Current control-flow investigations
+
+These studies apply [`CONTROL_FLOW_INVESTIGATION_METHOD.md`](CONTROL_FLOW_INVESTIGATION_METHOD.md) to the initial rule systems. They are individual execution-semantics investigations; the cross-system control-flow synthesis remains separate.
+
+- [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md) — script sequencing, implicit keep, stop/return scope, mutable variables/flags/headers, delivery-action interaction, failure semantics, and Purelymail-specific execution caveats.
+- [`GMAIL_CONTROL_FLOW.md`](GMAIL_CONTROL_FLOW.md) — incoming-filter execution, lack of public ordering/stop primitives, action-object semantics, and explicitly unresolved multi-filter mutation visibility.
+- [`OUTLOOK_CONTROL_FLOW.md`](OUTLOOK_CONTROL_FLOW.md) — explicit rule sequence, `stopProcessingRules`, move-versus-stop behavior, action-object ordering limits, and unresolved intermediate-state visibility.
+- [`THUNDERBIRD_CONTROL_FLOW.md`](THUNDERBIRD_CONTROL_FLOW.md) — trigger contexts, effective filter/action ordering, manual-path mutation visibility, move/delete terminality, copy continuation, and non-atomic failure behavior.
+
 ## Current syntheses
 
 - [`FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md`](FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md) — first comparison across Sieve/Purelymail, Gmail, Outlook, and Thunderbird; identifies candidate semantic families and explicit non-equivalences without freezing final capability IDs.
