@@ -593,7 +593,7 @@ No concrete adapter policy is selected in this survey.
 
 ## 12. Unresolved questions
 
-1. Which exact extension set does the initial Purelymail endpoint advertise today?
+1. **Resolved for 2026-09-24:** the current Purelymail endpoint profile is recorded in [`PURELYMAIL_SIEVE_CAPABILITY_PROFILE.md`](PURELYMAIL_SIEVE_CAPABILITY_PROFILE.md). Future work should still rediscover capabilities at runtime because the advertised set can change.
 2. Which standardized extensions should be considered part of Mailchemy's **first implementation scope**, as opposed to merely representable future semantics?
 3. How should implementation-dependent `body :text` extraction be classified for exact cross-system equivalence?
 4. What mailbox naming, creation, special-use, and flag behaviors are actually available on initial Sieve targets?
