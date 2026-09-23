@@ -52,6 +52,7 @@ If you find a document claiming otherwise, congratulations: you found either a b
 - [`docs/README.md`](docs/README.md) — documentation map and reading order.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — canonical architecture and semantic-interoperability model.
 - [`docs/INITIAL_TARGETS.md`](docs/INITIAL_TARGETS.md) — the first motivating rule systems/endpoints.
+- [`research/`](research/) — evidence, semantic-surface investigations, and later cross-system syntheses.
 - [`AGENTS.md`](AGENTS.md) — instructions and repository boundaries for automated contributors.
 - [`.agents/`](.agents/) — heavier persisted agent workflow/context.
 
