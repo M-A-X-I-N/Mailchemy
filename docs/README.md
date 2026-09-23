@@ -4,7 +4,8 @@ This directory contains Mailchemy's durable human-facing architecture and design
 
 ## Current documents
 
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) — canonical architecture, semantic IR, capability refinements, rewrite planning, codecs, stores/endpoints, and exactness rules.
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — canonical architecture, semantic IR, capability refinements, rewrite planning, codecs, stores/endpoints, exactness rules, and execution-structure implications.
+- [`GLOSSARY.md`](GLOSSARY.md) — durable project vocabulary for semantic capabilities, refinements, rewrites, realization, adapters/codecs/stores/endpoints, exactness, execution context, terminality, and structural support.
 - [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) — motivating rule systems/endpoints and why each matters to the design.
 
 ## Reading order
@@ -12,8 +13,9 @@ This directory contains Mailchemy's durable human-facing architecture and design
 For a fresh reader:
 
 1. root [`../README.md`](../README.md);
-2. [`ARCHITECTURE.md`](ARCHITECTURE.md);
-3. [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) when concrete system examples are useful.
+2. [`GLOSSARY.md`](GLOSSARY.md) for project vocabulary;
+3. [`ARCHITECTURE.md`](ARCHITECTURE.md);
+4. [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) when concrete system examples are useful.
 
 ## Documentation policy
 
