@@ -62,6 +62,21 @@ Sieve ↔ Thunderbird
 
 "Universal" compatibility is contextual, not a single global bit.
 
+Research also establishes that the IR cannot be reduced to an unordered bag of leaf conditions and actions. For stateful or ordered rule systems, **execution structure can itself carry meaning**.
+
+The canonical model must therefore be capable, in some implementation-defined form, of preserving enough information about:
+
+- execution/trigger context when it affects semantics;
+- ordering or absence of ordering guarantees;
+- rule/action grouping when boundaries are observable;
+- continuation barriers such as "do not evaluate later rules";
+- intermediate-state visibility between mutations and later predicates;
+- default/local-delivery behavior;
+- action terminality as distinct from the action's primary state/lifecycle effect;
+- target action-order constraints where arbitrary interleavings are not realizable.
+
+This requirement does **not** settle the concrete IR type hierarchy. It only establishes that representations with the same leaf operations are not necessarily semantically equivalent when they produce different observable execution traces.
+
 ## 3. Semantic capability registry
 
 Semantic primitives use stable, versioned identifiers.
@@ -135,9 +150,9 @@ sender.glob.no-leading.max-one-wildcard
 
 That avoids combinatorial capability-taxonomy growth and allows new adapters to describe their own limitations without modifying the global semantic registry.
 
-### 4.1 Instance-level support
+### 4.1 Instance- and structure-level support
 
-Compatibility must be evaluated for the **concrete IR node**, not only for the capability identifier.
+Compatibility must be evaluated for the **concrete IR node or semantic/execution structure**, not only for the capability identifier.
 
 For example, an adapter may directly support:
 
@@ -154,6 +169,21 @@ sender.glob("*@example.com")
 even though both use the same semantic capability ID.
 
 Common simple constraints may eventually have reusable identifiers or declarative schemas, but the architecture must also permit an adapter-specific predicate when a real system's limitations are too irregular to model elegantly.
+
+Control-flow research adds an important case: a target may support two leaf operations independently while lacking a proven exact realization of their composition.
+
+For example:
+
+```text
+mark-read action      → directly supported
+unread predicate      → directly supported
+
+mark-read
+then later test unread
+                      → unsupported or unproven as a structure
+```
+
+Support checking must therefore be able to reject a larger execution region even when every leaf node is individually recognized.
 
 The adapter's concrete support check remains authoritative.
 
@@ -179,6 +209,7 @@ A rewrite:
 - may have a stable/versioned rewrite identity;
 - may transform one expression into another expression;
 - may expand one node into many nodes or an arbitrary expression tree;
+- may transform a larger execution region when rule boundaries, ordering, or continuation are semantically relevant;
 - may have multiple alternative exact realizations.
 
 Example:
@@ -219,13 +250,14 @@ Therefore the rewrite system should be understood as expression transformation r
 For a target adapter, conceptual realization is:
 
 ```text
-1. Can the target encode this expression directly?
+1. Can the target encode this semantic expression/structure directly?
    ├── yes → encode it
    └── no
        ↓
 2. Search exact rewrite alternatives.
        ↓
-3. Find a semantically equivalent expression the target can encode.
+3. Find a semantically equivalent expression/structure
+   that satisfies target and endpoint execution constraints.
    ├── found → encode that realization
    └── none → report incompatibility
 ```
@@ -252,9 +284,9 @@ Derived
 Unsupported
 ```
 
-- **Direct** — the adapter can encode the concrete semantic expression directly.
-- **Derived** — the expression cannot be encoded directly, but an exact rewrite path reaches a realizable expression.
-- **Unsupported** — no proven exact realization is available.
+- **Direct** — the adapter can encode the concrete semantic expression/structure directly.
+- **Derived** — the expression/structure cannot be encoded directly, but an exact rewrite path reaches a realizable equivalent.
+- **Unsupported** — no proven exact realization is available for the requested expression/structure and target context.
 
 A derived realization should retain its derivation path for diagnostics and explainability.
 
@@ -263,6 +295,8 @@ The traditional "capability matrix" is therefore a **derived view** of the regis
 ## 7. Exactness and loss
 
 Normal Mailchemy interoperability is exact.
+
+For simple stateless predicates/actions, exactness may be established locally. For ordered or stateful rules, exactness can require **execution-trace equivalence**: relevant evaluations, state transitions, delivery outcomes, continuation decisions, and external side effects must remain semantically equivalent.
 
 The system must not silently:
 
@@ -318,6 +352,22 @@ Microsoft Graph
 
 Some systems fuse these concerns operationally, but the architecture should not.
 
+### 8.1 Endpoint capability profiles
+
+A codec's semantic reach and a concrete endpoint's usable capability set are separate questions.
+
+The initial Purelymail investigation demonstrates:
+
+```text
+canonical semantic operation
+        ↓
+Sieve codec can represent it
+        ↓
+connected endpoint advertises/accepts it
+```
+
+A general Sieve codec may understand a standardized extension that a particular ManageSieve endpoint does not advertise. Runtime-discovered, account-specific, or provider-specific endpoint constraints must therefore participate in realization planning without redefining the dialect's semantic contracts.
+
 This separation permits unusual but useful combinations such as:
 
 ```text
@@ -365,7 +415,9 @@ IR
 native rule'
 ```
 
-should preserve meaning even if formatting, generated IDs, ordering, or provider-normalized representation changes.
+should preserve meaning even if formatting, generated IDs, or provider-normalized representation changes.
+
+Ordering/grouping may change only when that change is proven semantically irrelevant or an exact rewrite proves the resulting execution trace equivalent. Research has shown that rule boundaries and action order can be observable semantics, so ordering is not generally cosmetic.
 
 Cross-system round trips should also be testable through normalized semantic IR:
 
@@ -434,10 +486,11 @@ The architecture above is the current design direction, but these implementation
 - concrete capability/constraint registration API;
 - rewrite-planner algorithm and cost model;
 - whether common constraints receive globally versioned identifiers or primarily reusable implementation types;
-- rule ordering/control-flow semantics in the first capability set;
+- concrete IR representation for ordering, grouping, continuation, trigger context, intermediate-state visibility, default delivery, and terminality;
 - schema and existence of any portable serialization format;
 - CLI/UI shape;
 - synchronization policy and conflict handling;
-- initial exact capability vocabulary.
+- initial exact capability vocabulary;
+- targeted experiments for currently underdocumented provider execution behavior, including Gmail multi-filter state visibility, Outlook intermediate-state visibility, Thunderbird automatic-vs-manual execution parity, and Purelymail's account/user Sieve handoff.
 
 These should be decided from evidence and implementation needs rather than inferred from pseudocode examples in design discussion.
