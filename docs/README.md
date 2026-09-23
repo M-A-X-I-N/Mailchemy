@@ -23,9 +23,8 @@ This directory owns durable project architecture and terminology.
 
 Do not turn implementation examples into settled implementation choices unless the project has explicitly made that decision. Current architecture intentionally does **not** choose a programming language, package layout, CLI surface, portable serialization format, or concrete public API.
 
-
 ## Research boundary
 
-Native-system evidence and investigations live under [`../research/`](../research/) rather than here.
+Native-system evidence, per-system investigations, and cross-system syntheses live under [`../research/`](../research/) rather than here. Start with [`../research/README.md`](../research/README.md).
 
 Research documents establish what external systems do. This directory owns what Mailchemy has decided about its own architecture. When research changes an architectural conclusion, update the applicable document here instead of relying on readers to infer the change from a research report.
