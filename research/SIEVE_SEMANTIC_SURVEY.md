@@ -285,7 +285,7 @@ Tests can be nested in conditionals.
 
 When the Variables extension is active, test evaluation is explicitly short-circuited left-to-right where needed because matching can set match variables.
 
-That is a control-flow-adjacent semantic fact and should be revisited in M18, but it is preserved here because it can affect observable variable state.
+That is a control-flow-adjacent semantic fact and is examined in [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md), but it is preserved here because it can affect observable variable state.
 
 ## 5. Actions and state transitions
 
@@ -314,7 +314,7 @@ Base `keep`, `fileinto`, `redirect`, and `discard` cancel the implicit keep.
 
 This means absence of a disposition action is itself semantically meaningful. A future translation that ignores implicit keep could easily duplicate or lose delivery.
 
-Full action interaction belongs to M18, but the concept cannot be omitted from the semantic surface.
+Full action interaction is examined in [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md), but the concept cannot be omitted from the semantic surface.
 
 ### 5.3 Copy semantics
 
@@ -444,7 +444,7 @@ Standard Sieve's primary organizational target is a mailbox, plus IMAP flags/key
 
 A multi-label model such as Gmail's is therefore not natively identical to `fileinto`.
 
-That is a cross-system comparison point for M16, not an equivalence conclusion here.
+That is a cross-system comparison point for [`FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md`](FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md), not an equivalence conclusion here.
 
 ## 7. Representation and store boundary
 
@@ -543,7 +543,7 @@ This creates a semantic portability hazard even when both systems nominally supp
 
 ## 10. Control-flow facts for later follow-up
 
-These facts are preserved here but should be investigated systematically in M18.
+These facts are preserved here and investigated systematically in [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md).
 
 ### 10.1 Sequential execution and `stop`
 
@@ -597,7 +597,7 @@ No concrete adapter policy is selected in this survey.
 2. Which standardized extensions should be considered part of Mailchemy's **first implementation scope**, as opposed to merely representable future semantics?
 3. How should implementation-dependent `body :text` extraction be classified for exact cross-system equivalence?
 4. What mailbox naming, creation, special-use, and flag behaviors are actually available on initial Sieve targets?
-5. How should Sieve script-level control structures map to rule systems whose API model is a flat ordered list? Deferred to M18/M22.
+5. How should Sieve script-level control structures map to rule systems whose API model is a flat ordered list? See [`SIEVE_CONTROL_FLOW.md`](SIEVE_CONTROL_FLOW.md) and [`CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md`](CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md).
 6. How should vendor extension syntax be preserved when Mailchemy can decode the script structurally but lacks a semantic contract for the extension?
 7. How should variables and stateful message mutation interact with a canonical semantic expression model? This needs synthesis after the other native systems are surveyed.
 
