@@ -35,10 +35,11 @@ For substantive repository work, use this default orientation path:
 1. [`../AGENTS.md`](../AGENTS.md) — concise project boundaries, current phase, semantic-interoperability invariants, and repository rules.
 2. [`WORKFLOW.md`](WORKFLOW.md) — checkpoint, recovery, commit/provenance, and Git-history rules.
 3. [`../README.md`](../README.md) — project purpose and current status.
-4. [`../docs/README.md`](../docs/README.md) — documentation map and terminology.
-5. [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) — current canonical architecture and rationale.
-6. [`../research/README.md`](../research/README.md) — research lineage and methodology when the task involves native-system evidence or comparison.
-7. Read only the leaf documents relevant to the current task.
+4. [`../docs/README.md`](../docs/README.md) — durable documentation map.
+5. [`../docs/GLOSSARY.md`](../docs/GLOSSARY.md) — canonical project vocabulary.
+6. [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) — current canonical architecture and rationale.
+7. [`../research/README.md`](../research/README.md) — research lineage, methodologies, individual investigations, and syntheses when the task involves native-system evidence or comparison.
+8. Read only the leaf documents relevant to the current task.
 
 Repository state and current files remain authoritative over remembered conversation context. The working conversation may carry newer task sequencing, but durable technical conclusions belong in the repository.
 
