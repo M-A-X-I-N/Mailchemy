@@ -360,7 +360,7 @@ This synthesis intentionally does not settle:
 
 Those questions now matter more because several otherwise-promising mappings depend on execution order.
 
-They belong to M18–M23.
+They belong to the dedicated control-flow investigations and cross-system control-flow synthesis.
 
 ## 15. Conclusions
 
