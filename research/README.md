@@ -13,6 +13,17 @@ Research findings may justify later changes to architecture documentation, but a
 
 - [`SEMANTIC_SURVEY_METHOD.md`](SEMANTIC_SURVEY_METHOD.md) — common scope, evidence rules, comparison dimensions, and document template for the initial per-system semantic-surface surveys.
 
+## Current semantic-surface surveys
+
+These are individual native-system investigations performed under [`SEMANTIC_SURVEY_METHOD.md`](SEMANTIC_SURVEY_METHOD.md). They are evidence inputs, not the cross-system synthesis.
+
+- [`SIEVE_SEMANTIC_SURVEY.md`](SIEVE_SEMANTIC_SURVEY.md) — standardized Sieve baseline plus relevant standards-track extensions; provider-specific Sieve behavior remains separate.
+- [`GMAIL_SEMANTIC_SURVEY.md`](GMAIL_SEMANTIC_SURVEY.md) — Gmail Filter criteria/actions, Gmail search-language surface, labels/state, and public-API versus product-surface asymmetries.
+- [`OUTLOOK_SEMANTIC_SURVEY.md`](OUTLOOK_SEMANTIC_SURVEY.md) — Microsoft Graph Inbox Rules, typed predicates/actions, folders/categories, sequence, and read/write asymmetries.
+- [`THUNDERBIRD_SEMANTIC_SURVEY.md`](THUNDERBIRD_SEMANTIC_SURVEY.md) — Thunderbird client-local message filters, search terms/actions, local persistence, tags/folders, and extension points.
+
+The first cross-system comparison should consume these four documents rather than rewriting them into provider-pair-specific notes.
+
 ## Research lineage
 
 Use this directory so a fresh reader can distinguish:
