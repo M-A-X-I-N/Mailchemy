@@ -27,7 +27,7 @@ The investigations should answer:
 
 > Given the same initial message and rule set, what observable sequence of evaluations, state changes, deliveries, and side effects does this system perform?
 
-This document defines the comparison contract for M19-M22. The later M23 synthesis will compare the results.
+This document defines the comparison contract for the four system-specific control-flow investigations. The later control-flow synthesis will compare the results.
 
 ## 2. Scope boundary
 
@@ -440,7 +440,7 @@ Not every system supports every scenario. Unsupported scenarios are themselves u
 
 ## 9. Suggested investigation document shape
 
-Each of M19-M22 should generally follow:
+Each system-specific control-flow investigation should generally follow:
 
 ```text
 # <System> control-flow investigation
@@ -467,7 +467,7 @@ The shape may be adapted where the native system genuinely differs.
 
 ## 10. Completion criteria
 
-A system-specific control-flow study is ready for M23 when it can say, with evidence or explicit uncertainty:
+A system-specific control-flow study is ready for cross-system synthesis when it can say, with evidence or explicit uncertainty:
 
 - what starts processing;
 - how rules are ordered;
@@ -485,7 +485,7 @@ Unknown is acceptable. Hidden assumptions are not.
 
 ## 11. Expected synthesis output
 
-M23 should be able to compare **execution traces**, not merely native keywords.
+The later control-flow synthesis should be able to compare **execution traces**, not merely native keywords.
 
 The desired end state is enough evidence to say things such as:
 
