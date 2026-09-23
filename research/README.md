@@ -23,7 +23,11 @@ These are individual native-system investigations performed under [`SEMANTIC_SUR
 - [`OUTLOOK_SEMANTIC_SURVEY.md`](OUTLOOK_SEMANTIC_SURVEY.md) — Microsoft Graph Inbox Rules, typed predicates/actions, folders/categories, sequence, and read/write asymmetries.
 - [`THUNDERBIRD_SEMANTIC_SURVEY.md`](THUNDERBIRD_SEMANTIC_SURVEY.md) — Thunderbird client-local message filters, search terms/actions, local persistence, tags/folders, and extension points.
 
-The first cross-system comparison should consume these four documents rather than rewriting them into provider-pair-specific notes.
+The first cross-system comparison should consume these native-system surveys together with the Purelymail endpoint profile rather than rewriting them into provider-pair-specific notes.
+
+## Current syntheses
+
+- [`FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md`](FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md) — first comparison across Sieve/Purelymail, Gmail, Outlook, and Thunderbird; identifies candidate semantic families and explicit non-equivalences without freezing final capability IDs.
 
 ## Research lineage
 
