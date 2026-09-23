@@ -2,15 +2,16 @@
 
 Mailchemy is an interoperability project for translating email-filter and message-rule semantics between heterogeneous rule systems without silently changing their meaning.
 
-This file is intentionally concise. Durable technical and architectural facts belong in the human-facing documentation under `docs/`; detailed agent procedure belongs under [`.agents/`](.agents/).
+This file is intentionally concise. Durable technical and architectural facts belong in the human-facing documentation under `docs/`; evidence and native-system investigations belong under [`research/`](research/); detailed agent procedure belongs under [`.agents/`](.agents/).
 
 ## 1.1 Before changing anything
 
 1. Read the root [`README.md`](README.md) for current scope and project status.
 2. Read [`docs/README.md`](docs/README.md) for the design-document map and current architectural vocabulary.
-3. If present and relevant, consult persisted agent-specific context under [`.agents/`](.agents/).
-4. Inspect the current repository state before assuming an earlier chat, checkpoint, or remembered design still matches `main`.
-5. Read only the leaf documents relevant to the task after orienting through the navigation documents.
+3. Before source archaeology, standards/API investigation, or semantic-surface research, read [`research/README.md`](research/README.md) and the applicable methodology document.
+4. If present and relevant, consult persisted agent-specific context under [`.agents/`](.agents/).
+5. Inspect the current repository state before assuming an earlier chat, checkpoint, or remembered design still matches `main`.
+6. Read only the leaf documents relevant to the task after orienting through the navigation documents.
 
 Repository state and durable project documentation are authoritative over remembered conversation context. A conversation may carry newer task sequencing, but durable design decisions discovered there should be written back to the appropriate project document.
 
@@ -47,6 +48,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the detailed rationale an
 - Do not create a repository-local active TODO/task ledger unless the human explicitly asks for one. Active task/checkpoint tracking belongs in the working conversation.
 - Keep root documentation navigational and high-level; avoid duplicating detailed architecture across multiple files.
 - Keep agent-only procedure in `.agents/`; do not hide authoritative project facts there.
+- Keep evidence, native-system investigations, and cross-system research lineage in `research/`; promote durable Mailchemy architecture conclusions into `docs/` rather than making research documents silently authoritative for project design.
 - Prefer precise terminology. In particular, distinguish semantic capability, constraint/refinement, rewrite, codec/dialect, and store/endpoint.
 - Avoid provider-specific assumptions in core architectural documentation unless they are clearly presented as examples.
 - Preserve Git history and recoverability by default. Do not rewrite, discard, or make existing commits/history unreachable through destructive ref movement or history editing without explicit human authorization naming the affected history/ref(s) and destructive action. Prefer additive corrective/revert commits.
