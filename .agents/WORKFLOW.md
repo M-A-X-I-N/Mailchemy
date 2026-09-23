@@ -36,7 +36,7 @@ If an orphan tree or blob exactly contains the intended checkpoint, prefer promo
 
 Use the smallest validation that genuinely proves the changed behavior.
 
-During architecture/documentation bootstrap, appropriate validation is usually:
+For documentation-only or research-only changes, appropriate validation is usually:
 
 - re-reading the changed docs for conflicting authority or terminology;
 - checking internal links and paths;
@@ -62,7 +62,7 @@ Agents should not:
 - collapse provider-specific storage/transport concerns into semantic capabilities;
 - create global semantic capability IDs merely to encode one adapter's local limitation;
 - turn an example provider quirk into a universal architectural assumption;
-- begin implementation while the project remains explicitly in documentation/bootstrap unless the human asks for it.
+- begin product implementation or freeze foundational implementation choices unless the human task explicitly starts that work.
 
 When a claimed equivalence is uncertain, treat it as unproven until supported by authoritative specification evidence or tests.
 
