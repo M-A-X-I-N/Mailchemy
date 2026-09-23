@@ -37,7 +37,8 @@ For substantive repository work, use this default orientation path:
 3. [`../README.md`](../README.md) — project purpose and current status.
 4. [`../docs/README.md`](../docs/README.md) — documentation map and terminology.
 5. [`../docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) — current canonical architecture and rationale.
-6. Read only the leaf documents relevant to the current task.
+6. [`../research/README.md`](../research/README.md) — research lineage and methodology when the task involves native-system evidence or comparison.
+7. Read only the leaf documents relevant to the current task.
 
 Repository state and current files remain authoritative over remembered conversation context. The working conversation may carry newer task sequencing, but durable technical conclusions belong in the repository.
 
@@ -46,9 +47,10 @@ Repository state and current files remain authoritative over remembered conversa
 When information conflicts, prefer the source that owns the subject:
 
 1. repository source/configuration for what the tree currently does;
-2. `docs/` for durable architecture, semantics, policy, and design;
-3. root `README.md` for project orientation/current high-level state;
-4. root `AGENTS.md` for concise agent rules and routing;
-5. `.agents/` for supporting agent workflow/context.
+2. `docs/` for durable Mailchemy architecture, semantics, policy, and design;
+3. `research/` for evidence, native-system investigations, and cross-system research synthesis;
+4. root `README.md` for project orientation/current high-level state;
+5. root `AGENTS.md` for concise agent rules and routing;
+6. `.agents/` for supporting agent workflow/context.
 
 The working conversation may contain newer **task status**, but it should not silently override durable project documentation. If a conversation changes a durable project fact, update the appropriate repository document.
