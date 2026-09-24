@@ -12,13 +12,11 @@ import {
 } from "./realization-target.js";
 
 export type LeafSemanticExpression =
-  | ConditionCapabilityExpression
-  | ActionCapabilityExpression;
+  ConditionCapabilityExpression | ActionCapabilityExpression;
 
 export type StructuralSemanticExpression = AndExpression | RuleExpression;
 
-export interface StructuredDirectRealizationTarget
-  extends DirectRealizationTarget {
+export interface StructuredDirectRealizationTarget extends DirectRealizationTarget {
   readonly checkLeafDirectRealization: (
     expression: LeafSemanticExpression,
   ) => DirectRealizationResult;
