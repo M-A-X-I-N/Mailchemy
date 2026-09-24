@@ -1151,11 +1151,46 @@ The first implementation milestone is not complete until CI prevents regressions
 
 ---
 
-# Phase K — First exact rewrite support
+# Phase K — Implementation hygiene and code documentation
+
+This phase deliberately waits until the first cross-IO implementation milestone exists. The purpose is to clean up the implementation after enough real pressure has accumulated to reveal useful boundaries, but before exact-rewrite support adds another architectural layer.
+
+## CRH-44 — Document, prettify, and reorganize the implementation
+
+**Goal:** perform a deliberate implementation-hygiene pass over the codebase once R2 is complete.
+
+The exact scope of this task is intentionally **not frozen yet**. The human will provide the desired documentation, presentation, organization, and cleanup requirements when this task is reached.
+
+Expected areas may include:
+
+- code/file/module organization;
+- naming and readability;
+- public/internal API presentation;
+- comments and implementation documentation;
+- removal or consolidation of temporary scaffolding;
+- formatting/presentation conventions beyond automated Prettier output;
+- making important architecture boundaries easier for a human reader to discover in the code;
+- related cleanup that is easier to judge after several real IO implementations exist.
+
+This task must not become an excuse for architecture churn or behavior changes disguised as cleanup. Any semantic/architectural change discovered during the pass should be separated and justified explicitly.
+
+**Acceptance:**
+
+- do not begin until the human supplies the detailed requirements for this pass;
+- all existing semantic/conformance behavior remains green unless an explicitly approved change says otherwise;
+- cleanup materially improves the human readability/maintainability of the implemented slice;
+- durable documentation is updated where appropriate;
+- no provider support claim or exactness classification changes silently as part of reorganization.
+
+**Depends on:** CRH-43.
+
+---
+
+# Phase L — First exact rewrite support
 
 This phase begins only after the direct-support harness is stable.
 
-## CRH-44 — Define minimal rewrite identity/registration contract
+## CRH-45 — Define minimal rewrite identity/registration contract
 
 A rewrite registration needs at least:
 
@@ -1169,7 +1204,7 @@ No generalized graph planner yet.
 
 ---
 
-## CRH-45 — Add rewrite contract-test harness
+## CRH-46 — Add rewrite contract-test harness
 
 A rewrite must have tests proving:
 
@@ -1180,7 +1215,7 @@ A rewrite must have tests proving:
 
 ---
 
-## CRH-46 — Implement one deliberately boring exact rewrite
+## CRH-47 — Implement one deliberately boring exact rewrite
 
 Choose a rewrite whose equivalence can be proven cleanly from the defined semantic contracts.
 
@@ -1196,7 +1231,7 @@ Do **not** choose a rewrite merely because it increases the compatibility matrix
 
 ---
 
-## CRH-47 — Upgrade realization reporting to Derived for the first rewrite
+## CRH-48 — Upgrade realization reporting to Derived for the first rewrite
 
 Show:
 
@@ -1209,9 +1244,9 @@ Still no broad search algorithm required.
 
 ---
 
-# Phase L — First-slice closure and expansion workflow
+# Phase M — First-slice closure and expansion workflow
 
-## CRH-48 — Document the "add a capability" contributor workflow
+## CRH-49 — Document the "add a capability" contributor workflow
 
 By this point the repository should be able to prescribe a repeatable process:
 
@@ -1229,7 +1264,7 @@ This should become the main contributor path for incremental semantic expansion.
 
 ---
 
-## CRH-49 — Document the "add an IO variant" workflow
+## CRH-50 — Document the "add an IO variant" workflow
 
 A new IO variant should primarily need to:
 
@@ -1244,7 +1279,7 @@ It should not need pairwise knowledge of every existing adapter.
 
 ---
 
-## CRH-50 — Reconcile implementation findings back into architecture
+## CRH-51 — Reconcile implementation findings back into architecture
 
 Perform a deliberate architecture review after the first slice.
 
@@ -1263,7 +1298,7 @@ Update `docs/` only where evidence now supports a durable conclusion.
 
 ---
 
-## CRH-51 — Define the next capability tranche from conformance gaps
+## CRH-52 — Define the next capability tranche from conformance gaps
 
 Do **not** simply pick whichever capability is easiest.
 
@@ -1317,13 +1352,13 @@ This is the **first major implementation milestone**.
 
 ## Milestone R3 — First derived realization
 
-Complete through CRH-47.
+Complete through CRH-48.
 
 Success means one exact rewrite is registered, independently tested, and reported as Derived without introducing a sophisticated planner.
 
 ## Milestone R4 — Repeatable extension model
 
-Complete through CRH-51.
+Complete through CRH-52.
 
 Success means the repository can tell contributors how to add new semantics and new IO variants using the same machinery.
 
@@ -1362,8 +1397,8 @@ For chat/tool-session continuity, these groups benefit from being worked in one 
 | H | CRH-34–36 | Outlook codec slice |
 | I | CRH-37–39 | Thunderbird codec slice |
 | J | CRH-40–43 | cross-IO milestone and CI |
-| K | CRH-44–47 | first exact rewrite path |
-| L | CRH-48–51 | consolidation and expansion workflow |
+| K | CRH-45–47 | first exact rewrite path |
+| L | CRH-49–51 | consolidation and expansion workflow |
 
 A fresh chat should stop at group boundaries when the next group would benefit materially from a clean context/recovery checkpoint.
 
