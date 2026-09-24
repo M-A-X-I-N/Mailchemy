@@ -7,7 +7,7 @@
 | CRH-01 — Select implementation runtime/toolchain | Done | TypeScript/ESM toolchain selected; temporarily pinned to TypeScript 6.0.3 until the typed-lint stack supports TypeScript 7 |
 | CRH-02 — Create minimal project scaffold | Done | `@mailchemy/core` + `@mailchemy/conformance`, npm workspace, reproducible lockfile |
 | CRH-03 — Establish validation commands | Done | `npm run check` covers build/typecheck, typed lint, formatting, and tests |
-| CRH-04 — Add minimal CI | Validating | Ubuntu + Windows GitHub Actions matrix running the canonical check |
+| CRH-04 — Add minimal CI | Done | Ubuntu + Windows GitHub Actions matrix; run `35937740003` passed both jobs |
 
 No semantic capability implementation has started yet.
 
