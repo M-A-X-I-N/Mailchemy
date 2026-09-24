@@ -34,4 +34,12 @@ export {
   type CodecRoundTripRun,
 } from "./round-trip.js";
 
+export {
+  buildConformanceMatrix,
+  renderConformanceMatrixMarkdown,
+  type ConformanceMatrix,
+  type ConformanceMatrixCell,
+  type ConformanceMatrixRow,
+} from "./matrix.js";
+
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;
