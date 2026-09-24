@@ -55,7 +55,9 @@ export function buildConformanceMatrix(
 
     for (const targetId of targetIds) {
       const run = runsByTarget.get(targetId);
-      const result = run?.results.find((entry) => entry.fixtureId === fixtureId);
+      const result = run?.results.find(
+        (entry) => entry.fixtureId === fixtureId,
+      );
       cells[targetId] =
         result === undefined ? NOT_TESTED_CELL : cellFromResult(result);
     }
@@ -124,7 +126,7 @@ function renderCell(cell: ConformanceMatrixCell): string {
     case "direct":
       return cell.expectationMatched ? "Direct" : "Direct ⚠";
     case "unsupported":
-      return `${cell.expectationMatched ? "" : "⚠ " }Unsupported (${escapeCell(cell.reasonCode)})`;
+      return `${cell.expectationMatched ? "" : "⚠ "}Unsupported (${escapeCell(cell.reasonCode)})`;
     case "error":
       return `Error: ${escapeCell(cell.message)}`;
     case "not-tested":

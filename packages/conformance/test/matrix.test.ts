@@ -63,11 +63,9 @@ describe("conformance matrix", () => {
         ),
     });
 
-    const directRun = runTargetRealizationConformance(
-      registry,
-      directTarget,
-      [{ fixture, expected: { kind: "direct" } }],
-    );
+    const directRun = runTargetRealizationConformance(registry, directTarget, [
+      { fixture, expected: { kind: "direct" } },
+    ]);
     const unsupportedRun = runTargetRealizationConformance(
       registry,
       unsupportedTarget,
