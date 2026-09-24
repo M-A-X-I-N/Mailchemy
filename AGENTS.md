@@ -18,11 +18,11 @@ Repository state and durable project documentation are authoritative over rememb
 
 ## 1.2 Current project phase
 
-Mailchemy's initial architecture/research bootstrap is complete. Product implementation has not yet begun.
+Mailchemy's initial architecture/research bootstrap is complete. Implementation has begun under the explicitly authorized capability-registry/conformance-harness roadmap in `planning/`.
 
-Do not begin product implementation, select a programming language/runtime, create package-manager scaffolding, or freeze concrete public APIs unless the human task explicitly starts that work.
+The current R0 work is infrastructure only: TypeScript workspace/tooling, registry/harness primitives, and synthetic conformance tests. Do not jump ahead into real provider/capability implementation outside the active roadmap sequence unless the human explicitly redirects the work.
 
-Research, documentation, repository policy, format/protocol investigation, targeted semantic experiments, and design refinement remain allowed. When implementation begins, prefer a deliberately narrow exact end-to-end slice and avoid turning provisional implementation choices into global architecture without evidence.
+Research, documentation, repository policy, format/protocol investigation, targeted semantic experiments, and design refinement remain allowed. Keep provisional implementation choices from silently becoming global architecture without evidence.
 
 ## 1.3 Architectural hard rules
 

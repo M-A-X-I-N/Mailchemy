@@ -2,7 +2,7 @@
 
 **Mailchemy** is an interoperability project for translating email-filter and message-rule semantics between heterogeneous rule systems **without silently changing what the rules mean**.
 
-The initial architecture/research bootstrap is complete. There is no product implementation yet; the next implementation work should begin with a deliberately narrow exact end-to-end slice rather than prematurely freezing every open design choice.
+The initial architecture/research bootstrap is complete. Implementation has begun with the R0 capability-registry/conformance-harness foundation; no real provider/capability semantics are implemented yet.
 
 ## What Mailchemy is trying to solve
 

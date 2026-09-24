@@ -12,9 +12,9 @@ At the moment, the repository is intentionally much better at **describing the t
 
 The architecture currently centers on a canonical semantic IR, versioned semantic capabilities, adapter-local capability refinements/constraints, exact semantic rewrites, structural realizability for ordered/stateful rules, and a separation between rule dialects/codecs and stores/endpoints.
 
-There is no product implementation yet.
+Implementation has now begun with the deliberately narrow capability-registry/conformance-harness foundation. Real provider/capability semantics are not implemented yet.
 
-That is deliberate.
+That narrow start is deliberate.
 
 ## 1.2 Why "Mailchemy"?
 
