@@ -69,3 +69,11 @@ export {
   type UnsupportedReason,
   type UnsupportedReasonCode,
 } from "./realization.js";
+
+export {
+  InvalidRealizationTargetError,
+  defineDirectRealizationTarget,
+  type DirectRealizationResult,
+  type DirectRealizationTarget,
+  type DirectRealizationTargetDefinition,
+} from "./realization-target.js";
