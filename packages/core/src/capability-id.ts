@@ -52,7 +52,7 @@ export function createCapabilityId(
   segments: readonly [string, string, ...string[]],
   version: number,
 ): CapabilityId {
-  const source = `${segments.join(".")}@${version}`;
+  const source = `${segments.join(".")}@${String(version)}`;
 
   validateSegments(segments, source);
   validateVersion(version, source);
