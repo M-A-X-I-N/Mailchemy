@@ -35,10 +35,11 @@
 | CRH-29 — Add Sieve round-trip conformance fixtures | Done | Shared Direct fixtures run through the codec round-trip harness; representative native Sieve fixtures cover exact mark-read, Subject exactness refusal, comments/require lists, and opaque unrelated constructs |
 | CRH-30 — Implement Purelymail endpoint-profile overlay | Done | Runtime-supplied normalized Sieve extension profiles narrow the generic target; missing `imap4flags` yields `endpoint-profile-missing`; the 2026-09-24 Purelymail advertisement is a dated replaceable fixture |
 | CRH-31 — Implement minimal Gmail Filter representation codec | Done | Added offline `@mailchemy/gmail` Filter-object codec: exact UNREAD removal for mark-read, explicit Subject/attachment exactness refusal, and opaque preservation of query/unrelated fields |
+| CRH-32 — Implement Gmail direct-realization/refinement checks | Done | Added executable Gmail Direct/Unsupported classification: mark-read Direct, Subject and attachment exactness unproven, and composed structures dependent on child realizability |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-31 are complete. The first Sieve/Purelymail slice is complete, and the initial offline Gmail Filter representation codec now exists. The remaining active Gmail block is CRH-32–33: direct-realization classification and round-trip/native conformance.
+CRH-27 through CRH-32 are complete. The first Sieve/Purelymail slice is complete, and the Gmail codec plus executable direct-realization target now exist. The remaining active Gmail task is CRH-33: round-trip and native-fixture conformance.
 
 ## 1. Purpose
 
