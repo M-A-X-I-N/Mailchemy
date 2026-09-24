@@ -51,3 +51,8 @@ export {
   type ConditionExpression,
   type RuleExpression,
 } from "./expression.js";
+
+export {
+  validateCanonicalExpression,
+  validateCapabilitySpecimen,
+} from "./semantic-validation.js";
