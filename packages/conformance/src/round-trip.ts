@@ -65,10 +65,7 @@ function runCase<TNative>(
     testCase.fixture.expression,
   );
 
-  if (
-    testCase.fixture.expectedValidation !== "valid" ||
-    !inputValidation.ok
-  ) {
+  if (testCase.fixture.expectedValidation !== "valid" || !inputValidation.ok) {
     return failure(
       testCase.fixture.id,
       "invalid-input",
