@@ -46,7 +46,12 @@ function collectSpecimenIssues(
   path: readonly ValidationPathSegment[],
 ): ValidationIssue[] {
   if (!isRecord(value) || value.kind !== "capability") {
-    return [shapeIssue(path, 'Expected a capability specimen with kind "capability".')];
+    return [
+      shapeIssue(
+        path,
+        'Expected a capability specimen with kind "capability".',
+      ),
+    ];
   }
 
   if (typeof value.capabilityId !== "string") {
@@ -110,10 +115,7 @@ function collectSpecimenIssues(
 
   if (!parameterValidation.ok) {
     issues.push(
-      ...prefixedIssues(
-        [...path, "parameters"],
-        parameterValidation.issues,
-      ),
+      ...prefixedIssues([...path, "parameters"], parameterValidation.issues),
     );
   }
 
@@ -144,21 +146,17 @@ function collectConditionIssues(
 
   try {
     if (value.kind === "condition") {
-      return collectSpecimenIssues(
-        registry,
-        value.specimen,
-        "condition",
-        [...path, "specimen"],
-      );
+      return collectSpecimenIssues(registry, value.specimen, "condition", [
+        ...path,
+        "specimen",
+      ]);
     }
 
     if (value.kind === "and") {
-      const issues = collectSpecimenIssues(
-        registry,
-        value.operator,
-        "logic",
-        [...path, "operator"],
-      );
+      const issues = collectSpecimenIssues(registry, value.operator, "logic", [
+        ...path,
+        "operator",
+      ]);
 
       if (!Array.isArray(value.operands)) {
         issues.push(
@@ -229,12 +227,10 @@ function collectActionIssues(
       ];
     }
 
-    return collectSpecimenIssues(
-      registry,
-      value.specimen,
-      "action",
-      [...path, "specimen"],
-    );
+    return collectSpecimenIssues(registry, value.specimen, "action", [
+      ...path,
+      "specimen",
+    ]);
   } finally {
     stack.delete(value);
   }
@@ -311,6 +307,8 @@ export function validateCanonicalExpression(
   registry: CapabilityRegistry,
   value: unknown,
 ): ValidationResult<CanonicalExpression> {
+  const originalValue: unknown = value;
+
   if (!isRecord(value)) {
     return invalid(shapeIssue([], "Expected a canonical expression object."));
   }
@@ -338,11 +336,7 @@ export function validateCanonicalExpression(
     return invalid(...issues);
   }
 
-  return valid(value as CanonicalExpression);
+  return valid(originalValue as CanonicalExpression);
 }
 
-export type {
-  ActionExpression,
-  ConditionExpression,
-  RuleExpression,
-};
+export type { ActionExpression, ConditionExpression, RuleExpression };

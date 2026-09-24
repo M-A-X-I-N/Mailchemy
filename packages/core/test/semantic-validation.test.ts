@@ -19,10 +19,7 @@ interface BooleanParameters {
   readonly value: boolean;
 }
 
-function booleanContract(
-  id: string,
-  role: "condition" | "action" | "logic",
-) {
+function booleanContract(id: string, role: "condition" | "action" | "logic") {
   return defineSemanticCapability<BooleanParameters>({
     id: parseCapabilityId(id),
     role,
@@ -79,9 +76,7 @@ describe("validateCanonicalExpression", () => {
       [left, right],
     );
     const expression = createRuleExpression(combined, [
-      createActionExpression(
-        createCapabilitySpecimen(action, { value: true }),
-      ),
+      createActionExpression(createCapabilitySpecimen(action, { value: true })),
     ]);
 
     expect(validateCanonicalExpression(registry, expression)).toEqual({
