@@ -10,7 +10,7 @@ Decision date: 2026-09-24.
 
 ## Language and emitted runtime
 
-Mailchemy implementation source uses **TypeScript 7**, initially pinned to **TypeScript 7.0.2**.
+Mailchemy implementation source uses **TypeScript 6**, initially pinned to **TypeScript 6.0.3**.
 
 The library emits **ECMAScript modules (ESM)** targeting **ES2022**.
 
@@ -27,6 +27,14 @@ host-independent semantic/core library
       ↓
 host-specific adapters/integrations around the boundary
 ```
+
+### TypeScript 7 adoption
+
+TypeScript 7 is already stable, but the current type-aware linting stack used by Mailchemy does not yet declare compatibility with it.
+
+The project therefore remains on the latest TypeScript 6 patch while `typescript-eslint` officially supports TypeScript only below 6.1. This is a tooling-compatibility pin, not an architectural dependency on the JavaScript-based TypeScript compiler.
+
+Upgrade to TypeScript 7 should be treated as routine maintenance once the lint/type-analysis stack declares support and the normal validation suite passes.
 
 ## Development and CI host
 
