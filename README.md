@@ -2,7 +2,7 @@
 
 **Mailchemy** is an interoperability project for translating email-filter and message-rule semantics between heterogeneous rule systems **without silently changing what the rules mean**.
 
-The initial architecture/research bootstrap, R0 conformance-harness foundation, and R1 first canonical semantic tranche are complete. Mailchemy now implements documented core contracts for subject containment, explicit MIME attachment presence, mark-read, and conjunction, plus shared rule-shaped fixtures. The first deliberately narrow Sieve codec and direct-realization target now exist; the active block is completing Sieve round-trip conformance and the Purelymail endpoint refinement.
+The initial architecture/research bootstrap, R0 conformance-harness foundation, and R1 first canonical semantic tranche are complete. Mailchemy now implements documented core contracts for subject containment, explicit MIME attachment presence, mark-read, and conjunction, plus shared rule-shaped fixtures. The first deliberately narrow Sieve codec, direct-realization target, and round-trip/native conformance fixtures now exist; the active block is completing the Purelymail endpoint refinement.
 
 ## What Mailchemy is trying to solve
 
