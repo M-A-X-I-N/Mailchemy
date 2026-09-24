@@ -7,12 +7,7 @@
     "sourceMap": false,
     "noEmit": true,
     "types": [],
-    "lib": [
-      "ES2022",
-      "DOM"
-    ]
+    "lib": ["ES2022", "DOM"]
   },
-  "include": [
-    "packages/**/*.test.ts"
-  ]
+  "include": ["packages/**/*.test.ts"]
 }
