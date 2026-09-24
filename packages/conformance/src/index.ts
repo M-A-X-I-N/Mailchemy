@@ -25,4 +25,13 @@ export {
   type TargetRealizationRun,
 } from "./target-runner.js";
 
+export {
+  runCodecRoundTrips,
+  type CanonicalEquivalence,
+  type CodecRoundTripCase,
+  type CodecRoundTripCaseResult,
+  type CodecRoundTripFailureKind,
+  type CodecRoundTripRun,
+} from "./round-trip.js";
+
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;
