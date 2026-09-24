@@ -25,10 +25,15 @@
 | CRH-19 — Implement codec round-trip harness | Done | Encode/decode flow validates both canonical ends and requires explicit semantic-equivalence logic rather than AST/native byte equality |
 | CRH-20 — Implement conformance matrix/report model | Done | Machine-readable matrix and deterministic Markdown report are generated from executable target-runner results |
 | CRH-21 — Add harness self-tests with fake targets/codecs | Done | Synthetic integration tests cover Direct, known absence, refinement rejection, exactness-unproven, endpoint-profile rejection, structural rejection, and semantic codec round trip; CI run `35944361660` passed Ubuntu + Windows |
+| CRH-22 — Define and register `subject.contains@1` | Done | `core.condition.subject.contains@1` defines decoded/unfolded logical Subject values, NFC + locale-independent lowercase containment, any-field behavior for repeats, missing=false, and empty-needle invalidity |
+| CRH-23 — Define and register `has-attachment@1` | Done | `core.condition.has-attachment@1` uses a deliberately narrow MIME contract: explicit non-multipart `Content-Disposition: attachment`; filename/inline/provider heuristics excluded |
+| CRH-24 — Define and register `mark-read@1` | Done | `core.action.mark-read@1` is the idempotent leaf transition to canonical read state; continuation/intermediate visibility remain structural semantics |
+| CRH-25 — Define and register `logic.and@1` | Done | `core.logic.and@1` requires at least two valid condition operands, preserves operand order, and does not normalize structures by sorting |
+| CRH-26 — Register first rule-shaped canonical specimens | Done | Shared A/B/C rule fixtures plus NFC, whitespace-needle, and reversed-AND-order definition edges are executable against the accumulated core registry; CI run `35945935522` passed Ubuntu + Windows |
 
-**Milestone R0 is complete.** The registry, realization interfaces, codec boundary, endpoint refinement, conformance runners, generated reporting, and synthetic integration tests are now executable.
+**Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-No real email-provider semantic capability contract has been implemented yet. The next roadmap block, CRH-22–26, introduces the first real canonical semantic tranche.
+No provider-specific codec/target implementation has started yet. The next roadmap block, CRH-27–30, implements the first Sieve codec/realization slice and applies the Purelymail endpoint refinement.
 
 ## 1. Purpose
 
