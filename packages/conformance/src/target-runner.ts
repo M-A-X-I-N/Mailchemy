@@ -42,9 +42,7 @@ export function runTargetRealizationConformance(
   target: DirectRealizationTarget,
   cases: readonly TargetRealizationCase[],
 ): TargetRealizationRun {
-  const results = cases.map((testCase) =>
-    runCase(registry, target, testCase),
-  );
+  const results = cases.map((testCase) => runCase(registry, target, testCase));
 
   return Object.freeze({
     targetId: target.id,
@@ -63,10 +61,7 @@ function runCase(
     testCase.fixture.expression,
   );
 
-  if (
-    testCase.fixture.expectedValidation !== "valid" ||
-    !validation.ok
-  ) {
+  if (testCase.fixture.expectedValidation !== "valid" || !validation.ok) {
     return Object.freeze({
       fixtureId: testCase.fixture.id,
       expected: testCase.expected,
@@ -104,7 +99,6 @@ function matchesExpectation(
   }
 
   return (
-    actual.kind === "unsupported" &&
-    actual.reason.code === expected.reasonCode
+    actual.kind === "unsupported" && actual.reason.code === expected.reasonCode
   );
 }
