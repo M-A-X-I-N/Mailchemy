@@ -81,7 +81,9 @@ describe("CapabilitySpecimen", () => {
     const other = createCapabilitySpecimen(otherContract, { value: true });
 
     expect(areCapabilitySpecimensEqual(registry, trueA, trueB)).toBe(true);
-    expect(areCapabilitySpecimensEqual(registry, trueA, falseValue)).toBe(false);
+    expect(areCapabilitySpecimensEqual(registry, trueA, falseValue)).toBe(
+      false,
+    );
     expect(areCapabilitySpecimensEqual(registry, trueA, other)).toBe(false);
   });
 
@@ -90,11 +92,7 @@ describe("CapabilitySpecimen", () => {
     const specimen = createCapabilitySpecimen(contract, { value: true });
 
     expect(
-      areCapabilitySpecimensEqual(
-        new CapabilityRegistry(),
-        specimen,
-        specimen,
-      ),
+      areCapabilitySpecimensEqual(new CapabilityRegistry(), specimen, specimen),
     ).toBe(false);
   });
 });
