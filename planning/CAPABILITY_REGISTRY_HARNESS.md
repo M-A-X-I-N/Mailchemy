@@ -1271,7 +1271,23 @@ The convention should be enforced automatically where practical through the repo
 
 **Goal:** comprehensively document the implemented TypeScript codebase using doc comments, including internal implementation details rather than documenting only the public API.
 
-Scope is intentionally exhaustive. Every TypeScript file and every meaningful code entity that can sensibly carry documentation should be covered, including:
+CRH-44C is an **umbrella task** split into bounded sections so the work can move across chats without requiring one enormous documentation pass. The split is by semantic/package boundary rather than arbitrary file count.
+
+The main failure mode to prevent is methodology drift: later sections must not gradually develop different standards for what deserves a comment, how much detail to include, or how semantic/exactness claims are phrased.
+
+### Shared CRH-44C protocol
+
+Every CRH-44C section after C1 must follow the same procedure:
+
+1. Re-read the documentation contract and representative exemplars established by CRH-44C1.
+2. Read the applicable durable architecture/semantic documentation before documenting implementation meaning.
+3. Document the section exhaustively using the C1 rules; do not invent a section-local documentation style.
+4. If the existing contract is insufficient, update the shared contract **first**, justify the addition, and apply the new rule to any earlier CRH-44C sections it affects before continuing.
+5. Treat documentation discoveries that imply semantic/architectural changes as separate findings; do not silently alter behavior while commenting code.
+6. Run the full canonical validation before checkpointing the section.
+7. Record the section as complete only when its source **and corresponding tests/fixtures** meet the shared coverage standard.
+
+Scope remains intentionally exhaustive. Every TypeScript file and every meaningful code entity that can sensibly carry documentation should be covered, including:
 
 - file/module purpose;
 - exported and internal functions;
@@ -1287,13 +1303,217 @@ Documentation should explain **meaning, responsibility, invariants, exactness as
 
 This is a documentation pass, not an architecture-change pass. If documenting something exposes a design problem, record/separate that problem rather than silently changing semantics while commenting it.
 
-**Acceptance:**
+#### CRH-44C1 — Freeze the documentation contract and representative exemplars
+
+Before bulk documentation begins, establish the reusable methodology that all later sections must follow.
+
+This section should:
+
+- define exactly what "everything documented" means for Mailchemy TypeScript;
+- define expectations for module comments, declarations, members, constants, helpers, parser internals, fixtures, test suites, and individual test cases;
+- define when `@param`, `@returns`, `@throws`, examples, references, or implementation notes are appropriate;
+- define how comments should distinguish semantic contract facts, adapter limitations, exactness evidence, implementation mechanics, and provisional assumptions;
+- define anti-patterns such as comments that merely restate a name/type or claim stronger semantics than the implementation/docs prove;
+- establish representative examples covering at least a semantic type/contract, a non-trivial internal helper, a codec/parser helper, and a test/fixture;
+- persist the contract in a durable repository document so later chats do not depend on conversational memory.
+
+No later CRH-44C section may weaken or locally reinterpret this contract.
+
+**Depends on:** CRH-44B.
+
+---
+
+#### CRH-44C2 — Document the core semantic model and capability layer
+
+Document the coherent core layer that defines Mailchemy's canonical vocabulary and semantic specimens, including corresponding tests.
+
+Primary surface includes:
+
+- capability identities and parsing/rendering;
+- capability contracts and registry behavior;
+- canonical capability declarations;
+- semantic specimens;
+- canonical expression shapes;
+- validation result primitives and closely related foundational helpers;
+- package exports relevant to this layer;
+- associated unit/integrity tests.
+
+This section establishes how the C1 methodology reads when applied to the canonical semantic foundation.
+
+**Depends on:** CRH-44C1.
+
+---
+
+#### CRH-44C3 — Document core realization, codec, endpoint, and semantic-validation machinery
+
+Complete the remaining `@mailchemy/core` implementation and corresponding tests.
+
+Primary surface includes:
+
+- realization result types and reason semantics;
+- direct-realization target contracts;
+- structured realizability;
+- codec encode/decode boundaries;
+- endpoint-profile refinement;
+- recursive canonical semantic validation;
+- associated tests for realization, codecs, endpoint refinement, structure, and validation.
+
+The documentation must preserve the distinction between semantic meaning, codec behavior, target realizability, and endpoint narrowing.
+
+**Depends on:** CRH-44C2.
+
+---
+
+#### CRH-44C4 — Document conformance fixtures and contract-validation machinery
+
+Document the first coherent half of `@mailchemy/conformance` together with the tests that prove it.
+
+Primary surface includes:
+
+- shared fixture abstractions;
+- capability-contract runner behavior;
+- initial semantic fixture families;
+- rule-shaped fixtures;
+- fixture validation/integrity behavior;
+- corresponding tests.
+
+Comments must make clear which facts are canonical fixture semantics versus harness expectations.
+
+**Depends on:** CRH-44C3.
+
+---
+
+#### CRH-44C5 — Document conformance target, round-trip, and matrix machinery
+
+Complete `@mailchemy/conformance` and corresponding tests.
+
+Primary surface includes:
+
+- target realization conformance;
+- codec round-trip conformance;
+- matrix/report generation;
+- harness self-tests and synthetic target/codec evidence;
+- corresponding tests and helpers.
+
+Comments must clearly distinguish the harness's evidence model from the semantics of any concrete provider.
+
+**Depends on:** CRH-44C4.
+
+---
+
+#### CRH-44C6 — Document the Sieve and Purelymail implementation slice
+
+Document the full `@mailchemy/sieve` package and corresponding tests/fixtures as one section because the dialect implementation and endpoint-profile refinement share semantics.
+
+Primary surface includes:
+
+- Sieve codec/parser/tokenizer internals;
+- Sieve direct-realization target;
+- endpoint-profile normalization/refinement;
+- dated Purelymail capability profile;
+- native Sieve fixtures;
+- codec, target, endpoint, and conformance tests.
+
+Comments must keep Sieve dialect semantics separate from Purelymail endpoint capability evidence.
+
+**Depends on:** CRH-44C5.
+
+---
+
+#### CRH-44C7 — Document the Gmail implementation slice
+
+Document the full `@mailchemy/gmail` package and corresponding tests/fixtures.
+
+Primary surface includes:
+
+- Gmail Filter native representation handling;
+- codec encode/decode and opaque preservation;
+- direct-realization classification;
+- native fixtures;
+- codec, target, and conformance tests.
+
+**Depends on:** CRH-44C6.
+
+---
+
+#### CRH-44C8 — Document the Outlook / Microsoft Graph implementation slice
+
+Document the full `@mailchemy/outlook` package and corresponding tests/fixtures.
+
+Primary surface includes:
+
+- Inbox Rule native representation handling;
+- codec encode/decode and opaque preservation;
+- sequence/exceptions/stop-processing preservation boundaries;
+- direct-realization classification;
+- native fixtures;
+- codec, target, and conformance tests.
+
+**Depends on:** CRH-44C7.
+
+---
+
+#### CRH-44C9 — Document the Thunderbird implementation slice
+
+Document the full `@mailchemy/thunderbird` package and corresponding tests/fixtures.
+
+Primary surface includes:
+
+- line-oriented filter parsing/encoding;
+- preservation of rule envelope, trigger, custom, and unknown constructs;
+- direct-realization classification;
+- native fixtures;
+- codec, target, and conformance tests.
+
+**Depends on:** CRH-44C8.
+
+---
+
+#### CRH-44C10 — Document the cross-IO aggregation layer
+
+Document the full `@mailchemy/cross-io` package and corresponding tests/baselines.
+
+Primary surface includes:
+
+- initial conformance-matrix aggregation;
+- canonical-routed cross-codec semantic round trips;
+- negative exactness/refusal tests;
+- frozen matrix baseline and its purpose.
+
+Comments must make clear that this package aggregates existing truths; it does not redefine adapter semantics.
+
+**Depends on:** CRH-44C9.
+
+---
+
+#### CRH-44C11 — Perform the exhaustive coverage and methodology-drift audit
+
+Close the umbrella task with a repository-wide review rather than assuming the package-local passes collectively guarantee consistency.
+
+Audit for:
+
+- TypeScript files or meaningful declarations missed by the section passes;
+- public/internal entities whose comments merely restate syntax rather than explaining intent;
+- inconsistent terminology or differing levels of documentation for equivalent constructs;
+- stale comments created by later sections;
+- semantic/exactness claims that exceed durable documentation or executable evidence;
+- methodology additions made late in the pass that were not reconciled into earlier sections;
+- source/test/fixture areas that do not meet the C1 coverage contract.
+
+Use automated coverage checks where practical, but do not treat a syntactic "has a doc comment" check as proof that the documentation is useful or correct.
+
+CRH-44C is complete only after this audit finds the repository consistent under one documentation methodology.
+
+**Depends on:** CRH-44C1–CRH-44C10.
+
+### CRH-44C umbrella acceptance
 
 - the TypeScript implementation is comprehensively covered by `/** ... */` doc comments, including private/internal helpers;
 - important semantic/exactness boundaries are understandable from the code without requiring the reader to reverse-engineer implementation intent;
 - comments remain consistent with the durable architecture/semantic docs and do not invent stronger support claims;
+- all sections follow one explicit shared methodology rather than drifting independently;
 - no behavior, semantic contract, provider support claim, or exactness classification changes as part of the documentation pass;
-- typecheck, lint, formatting checks, tests, and CI remain green.
+- typecheck, lint, formatting checks, tests, and CI remain green at every checkpoint.
 
 **Depends on:** CRH-44B.
 
@@ -1514,7 +1734,7 @@ For chat/tool-session continuity, these groups benefit from being worked in one 
 | H | CRH-34–36 | Outlook codec slice |
 | I | CRH-37–39 | Thunderbird codec slice |
 | J | CRH-40–43 | cross-IO milestone and CI |
-| K | CRH-44A–44C (more CRH-44 subtasks TBD) | staged human-directed code-style/documentation pass after R2; file-structure reorganization will be specified later |
+| K | CRH-44A–44C11 (more CRH-44 subtasks TBD) | staged human-directed code-style/documentation pass after R2; CRH-44C uses one frozen documentation methodology across bounded sections; file-structure reorganization will be specified later |
 | L | CRH-45–48 | first exact rewrite path |
 | M | CRH-49–52 | consolidation and expansion workflow |
 
