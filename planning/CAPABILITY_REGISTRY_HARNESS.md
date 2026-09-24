@@ -1192,32 +1192,63 @@ This phase deliberately waits until the first cross-IO implementation milestone 
 
 ## CRH-44 — Document, prettify, and reorganize the implementation
 
-**Goal:** perform a deliberate implementation-hygiene pass over the codebase once R2 is complete.
+This remains the umbrella implementation-hygiene phase. It is intentionally being specified in stages as the human supplies the desired conventions. File/module-structure reorganization is expected later, but is **not yet specified** and must not be started as part of the tasks below.
 
-The exact scope of this task is intentionally **not frozen yet**. The human will provide the desired documentation, presentation, organization, and cleanup requirements when this task is reached.
+### CRH-44A — Standardize indentation to four spaces
 
-Expected areas may include:
+**Goal:** make four-space indentation the repository's explicit source-formatting convention before any broader documentation/reorganization work.
 
-- code/file/module organization;
-- naming and readability;
-- public/internal API presentation;
-- comments and implementation documentation;
-- removal or consolidation of temporary scaffolding;
-- formatting/presentation conventions beyond automated Prettier output;
-- making important architecture boundaries easier for a human reader to discover in the code;
-- related cleanup that is easier to judge after several real IO implementations exist.
+Interpretation for this task:
 
-This task must not become an excuse for architecture churn or behavior changes disguised as cleanup. Any semantic/architectural change discovered during the pass should be separated and justified explicitly.
+- indentation uses **four spaces per level**;
+- literal tab characters are not used for source indentation;
+- formatter/editor configuration should encode the convention rather than relying on manual formatting;
+- existing code should be reformatted mechanically without semantic changes.
 
 **Acceptance:**
 
-- do not begin until the human supplies the detailed requirements for this pass;
-- all existing semantic/conformance behavior remains green unless an explicitly approved change says otherwise;
-- cleanup materially improves the human readability/maintainability of the implemented slice;
-- durable documentation is updated where appropriate;
-- no provider support claim or exactness classification changes silently as part of reorganization.
+- Prettier/editor-facing formatting configuration expresses four-space indentation and spaces rather than literal tabs;
+- applicable existing source/config files are reformatted consistently;
+- no behavior, semantic contract, provider support claim, or exactness classification changes as part of the formatting pass;
+- typecheck, lint, formatting checks, tests, and CI remain green.
 
 **Depends on:** CRH-43.
+
+---
+
+### CRH-44B — Add exhaustive `/** ... */` documentation comments
+
+**Goal:** comprehensively document the implemented TypeScript codebase using doc comments, including internal implementation details rather than documenting only the public API.
+
+Scope is intentionally exhaustive. Every TypeScript file and every meaningful code entity that can sensibly carry documentation should be covered, including:
+
+- file/module purpose;
+- exported and internal functions;
+- classes and constructors;
+- interfaces, type aliases, and enums;
+- interface/type members and class members;
+- exported and internal constants with semantic or structural meaning;
+- codec/target/profile/fixture declarations;
+- test helpers, suites, and cases where a doc comment can make intent discoverable;
+- non-obvious parsing, validation, exactness, preservation, or conformance logic.
+
+Documentation should explain **meaning, responsibility, invariants, exactness assumptions, and why a construct exists** rather than merely restating its identifier. Use tags such as `@param`, `@returns`, and `@throws` where they materially improve the documentation.
+
+This is a documentation pass, not an architecture-change pass. If documenting something exposes a design problem, record/separate that problem rather than silently changing semantics while commenting it.
+
+**Acceptance:**
+
+- the TypeScript implementation is comprehensively covered by `/** ... */` doc comments, including private/internal helpers;
+- important semantic/exactness boundaries are understandable from the code without requiring the reader to reverse-engineer implementation intent;
+- comments remain consistent with the durable architecture/semantic docs and do not invent stronger support claims;
+- no behavior, semantic contract, provider support claim, or exactness classification changes as part of the documentation pass;
+- typecheck, lint, formatting checks, tests, and CI remain green.
+
+**Depends on:** CRH-44A.
+
+---
+
+Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 
@@ -1432,7 +1463,7 @@ For chat/tool-session continuity, these groups benefit from being worked in one 
 | H | CRH-34–36 | Outlook codec slice |
 | I | CRH-37–39 | Thunderbird codec slice |
 | J | CRH-40–43 | cross-IO milestone and CI |
-| K | CRH-44 | human-directed implementation documentation/reorganization pass after R2 |
+| K | CRH-44A–44B (more CRH-44 subtasks TBD) | staged human-directed formatting/documentation pass after R2; file-structure reorganization will be specified later |
 | L | CRH-45–48 | first exact rewrite path |
 | M | CRH-49–52 | consolidation and expansion workflow |
 
