@@ -121,7 +121,6 @@ function runFixture(
     actualValidation,
     validationPassed,
     oracleResults: Object.freeze(oracleResults),
-    passed:
-      validationPassed && oracleResults.every((result) => result.passed),
+    passed: validationPassed && oracleResults.every((result) => result.passed),
   });
 }
