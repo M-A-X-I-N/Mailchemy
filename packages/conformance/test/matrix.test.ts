@@ -111,11 +111,9 @@ describe("conformance matrix", () => {
       id: "target-a",
       checkDirectRealization: () => directRealization(),
     });
-    const directRun = runTargetRealizationConformance(
-      registry,
-      directTarget,
-      [{ fixture, expected: { kind: "direct" } }],
-    );
+    const directRun = runTargetRealizationConformance(registry, directTarget, [
+      { fixture, expected: { kind: "direct" } },
+    ]);
 
     const markdown = renderConformanceMatrixMarkdown(
       buildConformanceMatrix([directRun]),
