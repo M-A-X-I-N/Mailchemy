@@ -1196,6 +1196,8 @@ This remains the umbrella implementation-hygiene phase. It is intentionally bein
 
 ### CRH-44A — Standardize indentation to four spaces
 
+**Status:** Done.
+
 **Goal:** make four-space indentation the repository's explicit source-formatting convention before any broader documentation/reorganization work.
 
 Interpretation for this task:
@@ -1295,7 +1297,7 @@ This is a documentation pass, not an architecture-change pass. If documenting so
 
 ---
 
-Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A is complete. CRH-44B is the active task. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

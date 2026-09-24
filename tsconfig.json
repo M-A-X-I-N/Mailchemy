@@ -1,26 +1,26 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./packages/core"
-    },
-    {
-      "path": "./packages/conformance"
-    },
-    {
-      "path": "./packages/sieve"
-    },
-    {
-      "path": "./packages/gmail"
-    },
-    {
-      "path": "./packages/outlook"
-    },
-    {
-      "path": "./packages/thunderbird"
-    },
-    {
-      "path": "./packages/cross-io"
-    }
-  ]
+    "files": [],
+    "references": [
+        {
+            "path": "./packages/core"
+        },
+        {
+            "path": "./packages/conformance"
+        },
+        {
+            "path": "./packages/sieve"
+        },
+        {
+            "path": "./packages/gmail"
+        },
+        {
+            "path": "./packages/outlook"
+        },
+        {
+            "path": "./packages/thunderbird"
+        },
+        {
+            "path": "./packages/cross-io"
+        }
+    ]
 }

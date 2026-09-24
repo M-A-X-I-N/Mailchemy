@@ -1,14 +1,14 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "tsBuildInfoFile": "./dist/thunderbird.tsbuildinfo"
-  },
-  "references": [
-    {
-      "path": "../core"
-    }
-  ],
-  "include": ["src/**/*.ts"]
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "tsBuildInfoFile": "./dist/thunderbird.tsbuildinfo"
+    },
+    "references": [
+        {
+            "path": "../core"
+        }
+    ],
+    "include": ["src/**/*.ts"]
 }
