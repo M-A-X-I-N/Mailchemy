@@ -5,8 +5,7 @@ import type {
 } from "./realization.js";
 
 export type DirectRealizationResult =
-  | DirectRealization
-  | UnsupportedRealization;
+  DirectRealization | UnsupportedRealization;
 
 export interface DirectRealizationTarget {
   readonly id: string;
