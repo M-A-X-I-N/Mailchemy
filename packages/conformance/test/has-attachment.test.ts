@@ -15,14 +15,11 @@ describe("core.condition.has-attachment@1", () => {
     const registry = new CapabilityRegistry();
     registry.register(hasAttachmentCapability);
 
-    const result = runCapabilityContractTests(
-      registry,
-      hasAttachmentFixtures,
-      {
-        oracles: new Map([
-          [
-            hasAttachmentCapability.id,
-            (fixture) => {
+    const result = runCapabilityContractTests(registry, hasAttachmentFixtures, {
+      oracles: new Map([
+        [
+          hasAttachmentCapability.id,
+          (fixture) => {
               const entities = fixture.oracle?.entities;
               const expectedMatch = fixture.oracle?.expectedMatch;
 
@@ -73,11 +70,10 @@ describe("core.condition.has-attachment@1", () => {
                 passed: actual === expectedMatch,
                 message: "Evaluated has-attachment@1 semantic oracle.",
               };
-            },
-          ],
-        ]),
-      },
-    );
+          },
+        ],
+      ]),
+    });
 
     expect(result.passed).toBe(true);
     expect(result.coverage).toEqual([

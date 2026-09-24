@@ -6,11 +6,7 @@ import {
 
 import { defineCanonicalFixture } from "../fixture.js";
 
-function validFixture(
-  id: string,
-  previousReadState: boolean,
-  notes: string,
-) {
+function validFixture(id: string, previousReadState: boolean, notes: string) {
   return defineCanonicalFixture({
     id,
     capabilities: [markReadCapability.id],

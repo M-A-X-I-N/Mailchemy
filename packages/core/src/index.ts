@@ -134,10 +134,7 @@ export {
   type MimeEntityAttachmentView,
 } from "./capabilities/has-attachment.js";
 
-export {
-  applyMarkRead,
-  markReadCapability,
-} from "./capabilities/mark-read.js";
+export { applyMarkRead, markReadCapability } from "./capabilities/mark-read.js";
 
 export {
   evaluateLogicalAnd,

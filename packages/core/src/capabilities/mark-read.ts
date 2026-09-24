@@ -24,6 +24,10 @@ export const markReadCapability = defineSemanticCapability<null>({
   areParametersEqual: () => true,
 });
 
-export function applyMarkRead(_previousReadState: boolean): true {
+export function applyMarkRead(previousReadState: boolean): true {
+  if (previousReadState) {
+    return true;
+  }
+
   return true;
 }

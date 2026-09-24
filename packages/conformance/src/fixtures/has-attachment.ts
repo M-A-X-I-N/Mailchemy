@@ -29,9 +29,7 @@ function validFixture(
       expectedMatch,
     }),
     notes,
-    references: [
-      "docs/SEMANTIC_CAPABILITIES.md#coreconditionhas-attachment1",
-    ],
+    references: ["docs/SEMANTIC_CAPABILITIES.md#coreconditionhas-attachment1"],
   });
 }
 

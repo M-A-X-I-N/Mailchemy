@@ -34,8 +34,7 @@ describe("core.action.mark-read@1", () => {
             }
 
             return {
-              passed:
-                applyMarkRead(previousReadState) === expectedReadState,
+              passed: applyMarkRead(previousReadState) === expectedReadState,
               message: "Evaluated mark-read@1 state transition oracle.",
             };
           },
