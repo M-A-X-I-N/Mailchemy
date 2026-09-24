@@ -133,3 +133,8 @@ export {
   hasAttachmentCapability,
   type MimeEntityAttachmentView,
 } from "./capabilities/has-attachment.js";
+
+export {
+  applyMarkRead,
+  markReadCapability,
+} from "./capabilities/mark-read.js";

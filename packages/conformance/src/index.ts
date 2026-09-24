@@ -43,6 +43,7 @@ export {
 } from "./matrix.js";
 
 export { hasAttachmentFixtures } from "./fixtures/has-attachment.js";
+export { markReadFixtures } from "./fixtures/mark-read.js";
 export { subjectContainsFixtures } from "./fixtures/subject-contains.js";
 
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;

@@ -111,3 +111,51 @@ See:
 
 - [First cross-system semantic comparison §4.6](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#46-attachment-presence-is-a-three-system-overlap)
 - the individual Gmail, Outlook, Thunderbird, and Sieve semantic-surface surveys under [`../research/`](../research/README.md)
+
+
+## `core.action.mark-read@1`
+
+**Role:** action.
+
+**Parameters:** none. The canonical parameter value is `null`.
+
+### State transition
+
+The action's leaf semantic is:
+
+```text
+message.readState := read
+```
+
+The prior read state does not affect the result:
+
+- unread → read;
+- read → read.
+
+The action is therefore idempotent with respect to this canonical state property.
+
+### Deliberately excluded from the leaf contract
+
+Version 1 does **not** by itself define:
+
+- whether later predicates/rules observe the new read state;
+- whether executing the action stops or continues rule processing;
+- when the state mutation is committed relative to other actions;
+- what trigger contexts permit the action;
+- provider failure/rollback behavior;
+- how provider-specific read/unread storage is represented.
+
+Those are execution-structure, target, endpoint, or failure semantics. They must not be smuggled into the meaning of the leaf action.
+
+A target may therefore directly support the leaf `mark-read@1` operation while a larger structure such as “mark read, then later test unread” remains structurally Unsupported or exactness-unproven.
+
+### Evidence
+
+The initial comparison identified read/unread state as one of the strongest cross-system semantic candidates, with native representations in Sieve/IMAP flags, Gmail, Outlook, and Thunderbird.
+
+Control-flow research separately established that intermediate-state visibility and continuation vary across systems, which is why this leaf contract does not claim those behaviors.
+
+See:
+
+- [First cross-system semantic comparison §7.1](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#71-readunread-is-one-of-the-strongest-candidates)
+- [Cross-system control-flow synthesis](../research/CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md)
