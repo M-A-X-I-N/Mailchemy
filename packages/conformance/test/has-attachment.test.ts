@@ -20,56 +20,56 @@ describe("core.condition.has-attachment@1", () => {
         [
           hasAttachmentCapability.id,
           (fixture) => {
-              const entities = fixture.oracle?.entities;
-              const expectedMatch = fixture.oracle?.expectedMatch;
+            const entities = fixture.oracle?.entities;
+            const expectedMatch = fixture.oracle?.expectedMatch;
 
+            if (
+              !Array.isArray(entities) ||
+              typeof expectedMatch !== "boolean"
+            ) {
+              return {
+                passed: false,
+                message: "Attachment fixture oracle metadata is malformed.",
+              };
+            }
+
+            const parsed = entities.map((entity) => {
               if (
-                !Array.isArray(entities) ||
-                typeof expectedMatch !== "boolean"
+                typeof entity !== "object" ||
+                entity === null ||
+                !("dispositionType" in entity) ||
+                !("isMultipart" in entity) ||
+                (entity.dispositionType !== null &&
+                  typeof entity.dispositionType !== "string") ||
+                typeof entity.isMultipart !== "boolean"
               ) {
-                return {
-                  passed: false,
-                  message: "Attachment fixture oracle metadata is malformed.",
-                };
+                return null;
               }
-
-              const parsed = entities.map((entity) => {
-                if (
-                  typeof entity !== "object" ||
-                  entity === null ||
-                  !("dispositionType" in entity) ||
-                  !("isMultipart" in entity) ||
-                  (entity.dispositionType !== null &&
-                    typeof entity.dispositionType !== "string") ||
-                  typeof entity.isMultipart !== "boolean"
-                ) {
-                  return null;
-                }
-
-                return {
-                  dispositionType: entity.dispositionType,
-                  isMultipart: entity.isMultipart,
-                };
-              });
-
-              if (parsed.some((entity) => entity === null)) {
-                return {
-                  passed: false,
-                  message: "Attachment fixture entity metadata is malformed.",
-                };
-              }
-
-              const actual = evaluateHasAttachment(
-                parsed as {
-                  readonly dispositionType: string | null;
-                  readonly isMultipart: boolean;
-                }[],
-              );
 
               return {
-                passed: actual === expectedMatch,
-                message: "Evaluated has-attachment@1 semantic oracle.",
+                dispositionType: entity.dispositionType,
+                isMultipart: entity.isMultipart,
               };
+            });
+
+            if (parsed.some((entity) => entity === null)) {
+              return {
+                passed: false,
+                message: "Attachment fixture entity metadata is malformed.",
+              };
+            }
+
+            const actual = evaluateHasAttachment(
+              parsed as {
+                readonly dispositionType: string | null;
+                readonly isMultipart: boolean;
+              }[],
+            );
+
+            return {
+              passed: actual === expectedMatch,
+              message: "Evaluated has-attachment@1 semantic oracle.",
+            };
           },
         ],
       ]),

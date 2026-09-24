@@ -44,8 +44,7 @@ describe("core.logic.and@1", () => {
               }
 
               return {
-                passed:
-                  evaluateLogicalAnd(operandResults) === expectedMatch,
+                passed: evaluateLogicalAnd(operandResults) === expectedMatch,
                 message: "Evaluated logic.and@1 truth oracle.",
               };
             },

@@ -39,7 +39,11 @@ describe("initial shared rule fixtures", () => {
 
     expect(fixture).toBeDefined();
 
-    if (fixture === undefined || typeof fixture.expression !== "object" || fixture.expression === null) {
+    if (
+      fixture === undefined ||
+      typeof fixture.expression !== "object" ||
+      fixture.expression === null
+    ) {
       return;
     }
 

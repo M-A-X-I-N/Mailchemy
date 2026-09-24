@@ -25,7 +25,9 @@ function hasAttachment() {
 }
 
 function markRead() {
-  return createActionExpression(createCapabilitySpecimen(markReadCapability, null));
+  return createActionExpression(
+    createCapabilitySpecimen(markReadCapability, null),
+  );
 }
 
 export const initialRuleFixtures = Object.freeze([
@@ -35,7 +37,9 @@ export const initialRuleFixtures = Object.freeze([
     expression: createRuleExpression(subjectContains("invoice"), [markRead()]),
     expectedValidation: "valid",
     notes: 'A: IF subject contains "invoice" THEN mark read.',
-    references: ["planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens"],
+    references: [
+      "planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens",
+    ],
   }),
   defineCanonicalFixture({
     id: "rule.b.has-attachment-mark-read",
@@ -43,7 +47,9 @@ export const initialRuleFixtures = Object.freeze([
     expression: createRuleExpression(hasAttachment(), [markRead()]),
     expectedValidation: "valid",
     notes: "B: IF has attachment THEN mark read.",
-    references: ["planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens"],
+    references: [
+      "planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens",
+    ],
   }),
   defineCanonicalFixture({
     id: "rule.c.subject-invoice-and-attachment-mark-read",
@@ -63,12 +69,16 @@ export const initialRuleFixtures = Object.freeze([
     expectedValidation: "valid",
     notes:
       'C: IF subject contains "invoice" AND has attachment THEN mark read.',
-    references: ["planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens"],
+    references: [
+      "planning/CAPABILITY_REGISTRY_HARNESS.md#45-initial-rule-shaped-specimens",
+    ],
   }),
   defineCanonicalFixture({
     id: "rule.edge.subject-nfc-canonicalization",
     capabilities: [subjectContainsCapability.id, markReadCapability.id],
-    expression: createRuleExpression(subjectContains("Cafe\u0301"), [markRead()]),
+    expression: createRuleExpression(subjectContains("Cafe\u0301"), [
+      markRead(),
+    ]),
     expectedValidation: "valid",
     notes:
       "Definition edge: decomposed Unicode subject needle is canonicalized to NFC.",
