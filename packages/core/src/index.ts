@@ -30,3 +30,10 @@ export {
   type ValidationPathSegment,
   type ValidationResult,
 } from "./validation.js";
+
+export {
+  InvalidCapabilityParametersError,
+  areCapabilitySpecimensEqual,
+  createCapabilitySpecimen,
+  type CapabilitySpecimen,
+} from "./semantic-specimen.js";
