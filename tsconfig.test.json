@@ -6,7 +6,11 @@
     "declarationMap": false,
     "sourceMap": false,
     "noEmit": true,
-    "types": []
+    "types": [],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ]
   },
   "include": [
     "packages/**/*.test.ts"
