@@ -17,4 +17,12 @@ export {
   type ContractOracleResult,
 } from "./contract-runner.js";
 
+export {
+  runTargetRealizationConformance,
+  type TargetRealizationCase,
+  type TargetRealizationCaseResult,
+  type TargetRealizationExpectation,
+  type TargetRealizationRun,
+} from "./target-runner.js";
+
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;
