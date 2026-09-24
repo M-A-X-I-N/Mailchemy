@@ -5,6 +5,8 @@ import {
   renderInitialCrossIoConformanceMatrixMarkdown,
 } from "../src/index.js";
 
+import { expectedInitialConformanceMatrixMarkdown } from "./fixtures/expected-initial-conformance-matrix.js";
+
 describe("initial cross-IO conformance matrix", () => {
   it("covers all initial targets and canonically valid shared fixtures", () => {
     const matrix = buildInitialCrossIoConformanceMatrix();
@@ -57,6 +59,7 @@ describe("initial cross-IO conformance matrix", () => {
     const second = renderInitialCrossIoConformanceMatrixMarkdown();
 
     expect(second).toBe(first);
+    expect(first).toBe(expectedInitialConformanceMatrixMarkdown);
     expect(first).toContain(
       "| Fixture | gmail.filter.direct@1 | outlook.graph.inbox-rule.direct@1 | sieve.direct@1 | sieve.endpoint:purelymail.managesieve.2026-09-24 | thunderbird.msg-filter-rules.direct@1 |",
     );
