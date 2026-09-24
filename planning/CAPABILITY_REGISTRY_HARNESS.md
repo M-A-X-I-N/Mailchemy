@@ -30,10 +30,11 @@
 | CRH-24 — Define and register `mark-read@1` | Done | `core.action.mark-read@1` is the idempotent leaf transition to canonical read state; continuation/intermediate visibility remain structural semantics |
 | CRH-25 — Define and register `logic.and@1` | Done | `core.logic.and@1` requires at least two valid condition operands, preserves operand order, and does not normalize structures by sorting |
 | CRH-26 — Register first rule-shaped canonical specimens | Done | Shared A/B/C rule fixtures plus NFC, whitespace-needle, and reversed-AND-order definition edges are executable against the accumulated core registry; CI run `35945935522` passed Ubuntu + Windows |
+| CRH-27 — Implement minimal Sieve decode/encode support for initial capabilities | Done | Added `@mailchemy/sieve` with narrow text parsing/encoding, exact `imap4flags` mark-read mapping, explicit Subject/AND exactness refusal, and opaque preservation of unrelated constructs |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-No provider-specific codec/target implementation has started yet. The next roadmap block, CRH-27–30, implements the first Sieve codec/realization slice and applies the Purelymail endpoint refinement.
+CRH-27 is complete: the first deliberately narrow Sieve codec now exists. The remaining active Sieve/Purelymail block is CRH-28–30: direct-realization declarations, round-trip conformance, and the Purelymail endpoint refinement.
 
 ## 1. Purpose
 
