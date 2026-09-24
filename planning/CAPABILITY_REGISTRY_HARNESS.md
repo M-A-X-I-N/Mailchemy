@@ -41,10 +41,11 @@
 | CRH-35 — Implement Outlook direct-realization/refinement checks | Done | Added executable Outlook Direct/Unsupported classification: mark-read Direct, Subject and attachment exactness unproven, and composed structures dependent on child realizability |
 | CRH-36 — Add Outlook round-trip and native-fixture conformance | Done | Shared Direct mark-read fixtures round-trip semantically; representative Graph fixtures cover provider metadata, Subject/attachment exactness refusal, sequence, exceptions, stop-processing, and unrelated actions |
 | CRH-37 — Implement minimal Thunderbird rule codec | Done | Added offline `@mailchemy/thunderbird` line-oriented filter codec: exact isolated `Mark read` fragments, explicit Subject/attachment exactness refusal, and opaque preservation of rule trigger/envelope, custom, and unknown constructs |
+| CRH-38 — Implement Thunderbird direct-realization/refinement checks | Done | Added executable Thunderbird Direct/Unsupported classification: mark-read Direct without assigning a trigger, Subject and attachment exactness unproven, and composed structures dependent on child realizability |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-37 are complete. The Sieve/Purelymail, Gmail, and Outlook / Microsoft Graph slices are complete, and the initial offline Thunderbird rule codec now exists. The remaining active Thunderbird block is CRH-38–39: direct-realization classification and round-trip/native conformance.
+CRH-27 through CRH-38 are complete. The Sieve/Purelymail, Gmail, and Outlook / Microsoft Graph slices are complete, and the Thunderbird codec plus executable direct-realization target now exist. The remaining active Thunderbird task is CRH-39: round-trip and native-fixture conformance.
 
 ## 1. Purpose
 
