@@ -36,9 +36,7 @@ export interface RegisteredCapabilityContract {
   readonly role: CapabilityRole;
   readonly description: string;
   readonly references: readonly string[];
-  readonly validateParameters: (
-    value: unknown,
-  ) => ValidationResult<unknown>;
+  readonly validateParameters: (value: unknown) => ValidationResult<unknown>;
   readonly areParametersEqual: (left: unknown, right: unknown) => boolean;
 }
 

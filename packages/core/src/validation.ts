@@ -35,9 +35,7 @@ export function valid<T>(value: T): ValidationResult<T> {
   });
 }
 
-export function invalid(
-  ...issues: ValidationIssue[]
-): ValidationResult<never> {
+export function invalid(...issues: ValidationIssue[]): ValidationResult<never> {
   if (issues.length === 0) {
     throw new Error("An invalid validation result must contain an issue.");
   }

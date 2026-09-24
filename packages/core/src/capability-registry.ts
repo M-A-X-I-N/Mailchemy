@@ -1,7 +1,4 @@
-import {
-  capabilityIdKey,
-  type CapabilityId,
-} from "./capability-id.js";
+import { capabilityIdKey, type CapabilityId } from "./capability-id.js";
 import {
   eraseCapabilityContract,
   type RegisteredCapabilityContract,
