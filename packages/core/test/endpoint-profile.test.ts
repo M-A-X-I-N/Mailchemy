@@ -24,11 +24,11 @@ const flagCondition = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "test.null.invalid",
-                      "Expected a null parameter.",
-                  ),
-              ),
+                validationIssue(
+                    "test.null.invalid",
+                    "Expected a null parameter.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
@@ -40,11 +40,11 @@ const absentCondition = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "test.null.invalid",
-                      "Expected a null parameter.",
-                  ),
-              ),
+                validationIssue(
+                    "test.null.invalid",
+                    "Expected a null parameter.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
@@ -59,11 +59,11 @@ const baseTarget = defineDirectRealizationTarget({
         expression.specimen.capabilityId === flagCondition.id
             ? directRealization()
             : unsupportedRealization(
-                  unsupportedReason(
-                      "capability-absent",
-                      "Synthetic dialect does not expose this capability.",
-                  ),
-              ),
+                unsupportedReason(
+                    "capability-absent",
+                    "Synthetic dialect does not expose this capability.",
+                ),
+            ),
 });
 
 describe("endpoint capability-profile refinement", () => {
@@ -80,11 +80,11 @@ describe("endpoint capability-profile refinement", () => {
                 endpoint.data.features.includes("flag")
                     ? directRealization()
                     : unsupportedRealization(
-                          unsupportedReason(
-                              "endpoint-profile-missing",
-                              'Endpoint profile does not advertise required feature "flag".',
-                          ),
-                      ),
+                        unsupportedReason(
+                            "endpoint-profile-missing",
+                            'Endpoint profile does not advertise required feature "flag".',
+                        ),
+                    ),
         });
 
         expect(
@@ -119,11 +119,11 @@ describe("endpoint capability-profile refinement", () => {
                 endpoint.data.features.includes("flag")
                     ? directRealization()
                     : unsupportedRealization(
-                          unsupportedReason(
-                              "endpoint-profile-missing",
-                              "Required feature is missing.",
-                          ),
-                      ),
+                        unsupportedReason(
+                            "endpoint-profile-missing",
+                            "Required feature is missing.",
+                        ),
+                    ),
         });
 
         expect(target.checkDirectRealization(condition(flagCondition))).toEqual(

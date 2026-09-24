@@ -49,15 +49,13 @@ export function areCapabilitySpecimensEqual(
     left: CapabilitySpecimen,
     right: CapabilitySpecimen,
 ): boolean {
-    if (left.capabilityId !== right.capabilityId) {
+    if (left.capabilityId !== right.capabilityId)
         return false;
-    }
 
     const contract = registry.get(left.capabilityId);
 
-    if (contract === undefined) {
+    if (contract === undefined)
         return false;
-    }
 
     return contract.areParametersEqual(left.parameters, right.parameters);
 }

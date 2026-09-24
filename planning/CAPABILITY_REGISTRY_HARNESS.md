@@ -1220,6 +1220,8 @@ Interpretation for this task:
 
 ### CRH-44B — Prefer brace-less single-statement control bodies
 
+**Status:** Done.
+
 **Goal:** establish a consistent control-flow style in which a control statement whose child body is exactly one statement omits braces and places that child statement on the following indented line.
 
 Preferred form:
@@ -1297,7 +1299,7 @@ This is a documentation pass, not an architecture-change pass. If documenting so
 
 ---
 
-CRH-44A is complete. CRH-44B is the active task. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A and CRH-44B are complete. CRH-44C remains intentionally pending human authorization. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

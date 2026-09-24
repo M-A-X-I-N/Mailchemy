@@ -47,9 +47,8 @@ describe("core.condition.has-attachment@1", () => {
                                         typeof entity.dispositionType !==
                                             "string") ||
                                     typeof entity.isMultipart !== "boolean"
-                                ) {
+                                )
                                     return null;
-                                }
 
                                 return {
                                     dispositionType: entity.dispositionType,

@@ -82,9 +82,8 @@ function encodeGmailFilter(expression: CanonicalExpression) {
 }
 
 function decodeGmailFilter(native: GmailFilterNative) {
-    if (!isRecord(native)) {
+    if (!isRecord(native))
         return invalidNative("Expected a Gmail Filter object.");
-    }
 
     const unknownTopLevelKey = firstUnknownKey(native, TOP_LEVEL_KEYS);
 
@@ -95,20 +94,17 @@ function decodeGmailFilter(native: GmailFilterNative) {
         );
     }
 
-    if (native.id !== undefined && typeof native.id !== "string") {
+    if (native.id !== undefined && typeof native.id !== "string")
         return invalidNative("Gmail Filter id must be a string when present.");
-    }
 
     const criteriaResult = inspectCriteria(native.criteria);
 
     if (criteriaResult.kind !== "none") {
-        if (criteriaResult.kind === "opaque") {
+        if (criteriaResult.kind === "opaque")
             return opaqueNative(native, criteriaResult.message);
-        }
 
-        if (criteriaResult.kind === "invalid") {
+        if (criteriaResult.kind === "invalid")
             return invalidNative(criteriaResult.message);
-        }
 
         return unsupportedNativeDecode(
             nativeDecodeReason("exactness-unproven", criteriaResult.message),
@@ -127,9 +123,8 @@ type CriteriaInspection =
 function inspectCriteria(
     criteria: GmailFilterCriteriaNative | undefined,
 ): CriteriaInspection {
-    if (criteria === undefined) {
+    if (criteria === undefined)
         return { kind: "none" };
-    }
 
     if (!isRecord(criteria)) {
         return {

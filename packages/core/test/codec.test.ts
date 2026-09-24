@@ -28,9 +28,8 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -72,13 +71,11 @@ describe("SemanticCodec", () => {
                 );
             },
             decode: (native) => {
-                if (native === "BOOL:true") {
+                if (native === "BOOL:true")
                     return decodedNative(booleanExpression(true));
-                }
 
-                if (native === "BOOL:false") {
+                if (native === "BOOL:false")
                     return decodedNative(booleanExpression(false));
-                }
 
                 if (native.startsWith("EXT:")) {
                     return opaqueNative(
@@ -144,11 +141,11 @@ describe("SemanticCodec", () => {
                 native.startsWith("OPAQUE:")
                     ? opaqueNative(native, "Preserved but not understood.")
                     : unsupportedNativeDecode(
-                          nativeDecodeReason(
-                              "semantic-unsupported",
-                              "Native construct cannot be represented or preserved.",
-                          ),
-                      ),
+                        nativeDecodeReason(
+                            "semantic-unsupported",
+                            "Native construct cannot be represented or preserved.",
+                        ),
+                    ),
         });
 
         expect(codec.decode("OPAQUE:vendor-extension")).toEqual({

@@ -27,9 +27,8 @@ const booleanCapability = defineSemanticCapability<{
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -123,7 +122,7 @@ describe("runCapabilityContractTests", () => {
                                           expression.specimen.parameters as {
                                               readonly value: boolean;
                                           }
-                                      ).value
+                                    ).value
                                     : undefined;
 
                             return {

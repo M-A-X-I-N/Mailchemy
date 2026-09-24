@@ -33,9 +33,8 @@ export function defineDirectRealizationTarget(
 ): DirectRealizationTarget {
     const id = definition.id.trim();
 
-    if (id.length === 0) {
+    if (id.length === 0)
         throw new InvalidRealizationTargetError("Target ID must not be empty.");
-    }
 
     return Object.freeze({
         id,

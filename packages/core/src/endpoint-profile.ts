@@ -76,9 +76,8 @@ export function refineTargetWithEndpointProfile<TData>(
             const baseResult =
                 definition.baseTarget.checkDirectRealization(expression);
 
-            if (baseResult.kind === "unsupported") {
+            if (baseResult.kind === "unsupported")
                 return baseResult;
-            }
 
             return definition.refineDirectRealization(
                 expression,

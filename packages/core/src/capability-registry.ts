@@ -24,9 +24,8 @@ export class CapabilityRegistry {
     ): RegisteredCapabilityContract {
         const key = capabilityIdKey(contract.id);
 
-        if (this.#contracts.has(key)) {
+        if (this.#contracts.has(key))
             throw new DuplicateCapabilityIdError(contract.id);
-        }
 
         const registered = eraseCapabilityContract(contract);
         this.#contracts.set(key, registered);

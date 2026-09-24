@@ -103,9 +103,8 @@ function runFixture(
         for (const capabilityId of fixture.capabilities) {
             const oracle = oracles?.get(capabilityId);
 
-            if (oracle === undefined) {
+            if (oracle === undefined)
                 continue;
-            }
 
             const result = oracle(fixture, validation.value);
             oracleResults.push(

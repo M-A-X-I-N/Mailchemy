@@ -69,9 +69,8 @@ function encodeSieve(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
         expression.specimen.capabilityId === markReadCapability.id
-    ) {
+    )
         return encodedNative('require "imap4flags";\n\naddflag "\\\\Seen";\n');
-    }
 
     if (containsSubjectCondition(expression)) {
         return unsupportedRealization(
@@ -163,13 +162,11 @@ function containsSubjectCondition(expression: CanonicalExpression): boolean {
         );
     }
 
-    if (expression.kind === "and") {
+    if (expression.kind === "and")
         return expression.operands.some(containsSubjectCondition);
-    }
 
-    if (expression.kind === "rule") {
+    if (expression.kind === "rule")
         return containsSubjectCondition(expression.condition);
-    }
 
     return false;
 }
@@ -204,9 +201,9 @@ class Parser {
 
         while (this.peekIdentifier("require")) {
             this.consume();
-            for (const extension of this.parseStringList()) {
+            for (const extension of this.parseStringList())
                 required.add(extension.toLowerCase());
-            }
+
             this.expectPunctuation(";");
         }
 
@@ -249,9 +246,8 @@ class Parser {
     }
 
     private parseCondition(): ParsedCondition {
-        if (this.peekIdentifier("header")) {
+        if (this.peekIdentifier("header"))
             return this.parseHeaderContains();
-        }
 
         if (this.peekIdentifier("allof")) {
             this.consume();
@@ -333,9 +329,8 @@ class Parser {
         const headerName = headerNames[0];
         const key = keys[0];
 
-        if (key === undefined) {
+        if (key === undefined)
             throw new SieveParseError("Expected one Subject containment key.");
-        }
 
         return {
             kind: "header-contains",
@@ -346,9 +341,8 @@ class Parser {
     }
 
     private parseStringList(): readonly string[] {
-        if (!this.peekPunctuation("[")) {
+        if (!this.peekPunctuation("["))
             return [this.expectString()];
-        }
 
         this.consume();
         const values = [this.expectString()];
@@ -368,17 +362,16 @@ class Parser {
         if (
             token.kind !== "identifier" ||
             token.value.toLowerCase() !== value.toLowerCase()
-        ) {
+        )
             throw new SieveParseError('Expected identifier "' + value + '".');
-        }
+
     }
 
     private expectString(): string {
         const token = this.consume();
 
-        if (token.kind !== "string") {
+        if (token.kind !== "string")
             throw new SieveParseError("Expected a Sieve quoted string.");
-        }
 
         return token.value;
     }
@@ -386,9 +379,9 @@ class Parser {
     private expectPunctuation(value: string): void {
         const token = this.consume();
 
-        if (token.kind !== "punctuation" || token.value !== value) {
+        if (token.kind !== "punctuation" || token.value !== value)
             throw new SieveParseError('Expected "' + value + '".');
-        }
+
     }
 
     private peekIdentifier(value: string): boolean {
@@ -411,9 +404,8 @@ class Parser {
     private consume(): Token {
         const token = this.tokens[this.index];
 
-        if (token === undefined) {
+        if (token === undefined)
             throw new SieveParseError("Unexpected end of Sieve input.");
-        }
 
         this.index += 1;
         return token;
@@ -427,9 +419,8 @@ function tokenize(source: string): readonly Token[] {
     while (index < source.length) {
         const character = source[index];
 
-        if (character === undefined) {
+        if (character === undefined)
             break;
-        }
 
         if (/\s/u.test(character)) {
             index += 1;
@@ -445,9 +436,8 @@ function tokenize(source: string): readonly Token[] {
         if (source.startsWith("/*", index)) {
             const end = source.indexOf("*/", index + 2);
 
-            if (end === -1) {
+            if (end === -1)
                 throw new SieveParseError("Unterminated Sieve block comment.");
-            }
 
             index = end + 2;
             continue;
@@ -501,9 +491,8 @@ function readBareToken(
     while (
         index < source.length &&
         /[A-Za-z0-9_.-]/u.test(source[index] ?? "")
-    ) {
+    )
         index += 1;
-    }
 
     if (index === startIndex) {
         throw new SieveParseError(
@@ -527,13 +516,11 @@ function readQuotedString(
     while (index < source.length) {
         const character = source[index];
 
-        if (character === undefined) {
+        if (character === undefined)
             break;
-        }
 
-        if (character === '"') {
+        if (character === '"')
             return { value, nextIndex: index + 1 };
-        }
 
         if (character === "\\") {
             const escaped = source[index + 1];

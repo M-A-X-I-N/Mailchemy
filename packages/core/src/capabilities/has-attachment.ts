@@ -20,11 +20,11 @@ export const hasAttachmentCapability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "has-attachment.parameters",
-                      "has-attachment@1 takes no parameters; expected null.",
-                  ),
-              ),
+                validationIssue(
+                    "has-attachment.parameters",
+                    "has-attachment@1 takes no parameters; expected null.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 

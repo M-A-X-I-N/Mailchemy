@@ -47,23 +47,20 @@ describe("initial shared rule fixtures", () => {
             fixture === undefined ||
             typeof fixture.expression !== "object" ||
             fixture.expression === null
-        ) {
+        )
             return;
-        }
 
         const expression = fixture.expression;
 
         expect(expression.kind).toBe("rule");
 
-        if (expression.kind !== "rule") {
+        if (expression.kind !== "rule")
             return;
-        }
 
         expect(expression.condition.kind).toBe("and");
 
-        if (expression.condition.kind !== "and") {
+        if (expression.condition.kind !== "and")
             return;
-        }
 
         expect(expression.condition.operator.capabilityId).toBe(
             logicalAndCapability.id,
@@ -94,9 +91,8 @@ describe("initial shared rule fixtures", () => {
             fixture.expression === null ||
             fixture.expression.kind !== "rule" ||
             fixture.expression.condition.kind !== "and"
-        ) {
+        )
             return;
-        }
 
         expect(
             fixture.expression.condition.operands.map((operand) =>

@@ -55,9 +55,8 @@ function encodeThunderbird(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
         expression.specimen.capabilityId === markReadCapability.id
-    ) {
+    )
         return encodedNative('action="Mark read"\n');
-    }
 
     if (containsInitialThunderbirdCondition(expression)) {
         return unsupportedRealization(
@@ -117,9 +116,8 @@ function decodeThunderbird(native: ThunderbirdFilterNative) {
         );
     }
 
-    if (parsed.condition !== undefined) {
+    if (parsed.condition !== undefined)
         return decodeConditionFragment(native, parsed);
-    }
 
     if (parsed.actions.length === 1 && parsed.actions[0] === "Mark read") {
         return decodedNative(
@@ -210,23 +208,20 @@ interface ParsedConditionTerm {
 function parseLinearCondition(
     condition: string,
 ): readonly ParsedConditionTerm[] | undefined {
-    if (!condition.startsWith("AND ")) {
+    if (!condition.startsWith("AND "))
         return undefined;
-    }
 
     const source = condition.slice(4).trim();
     const matches = [...source.matchAll(/\(([^,]+),([^,]+),([^)]*)\)/gu)];
 
-    if (matches.length === 0) {
+    if (matches.length === 0)
         return undefined;
-    }
 
     const consumed = matches.map((match) => match[0]).join(" ");
     const normalizedSource = source.replace(/\s+/gu, " ").trim();
 
-    if (consumed !== normalizedSource) {
+    if (consumed !== normalizedSource)
         return undefined;
-    }
 
     return matches.map((match) => ({
         field: (match[1] ?? "").trim().toLowerCase(),
@@ -236,21 +231,17 @@ function parseLinearCondition(
 }
 
 function firstEnvelopeField(parsed: ParsedThunderbirdText): string | undefined {
-    if (parsed.name !== undefined) {
+    if (parsed.name !== undefined)
         return "name";
-    }
 
-    if (parsed.enabled !== undefined) {
+    if (parsed.enabled !== undefined)
         return "enabled";
-    }
 
-    if (parsed.type !== undefined) {
+    if (parsed.type !== undefined)
         return "type";
-    }
 
-    if (parsed.description !== undefined) {
+    if (parsed.description !== undefined)
         return "description";
-    }
 
     return undefined;
 }
@@ -261,33 +252,30 @@ function parseThunderbirdText(source: string): ParsedThunderbirdText {
     for (const rawLine of source.split(/\r?\n/u)) {
         const line = rawLine.trim();
 
-        if (line.length === 0) {
+        if (line.length === 0)
             continue;
-        }
 
         const match = /^([^=]+)="((?:[^"\\]|\\.)*)"$/u.exec(line);
 
-        if (match === null) {
+        if (match === null)
             throw new Error(`Invalid Thunderbird filter line: ${line}`);
-        }
 
         const key = (match[1] ?? "").trim();
         const value = unescapeQuotedValue(match[2] ?? "");
         const existing = values.get(key);
 
-        if (existing === undefined) {
+        if (existing === undefined)
             values.set(key, [value]);
-        } else {
+        else
             existing.push(value);
-        }
+
     }
 
     const singleton = (key: string): string | undefined => {
         const entries = values.get(key);
 
-        if (entries === undefined) {
+        if (entries === undefined)
             return undefined;
-        }
 
         if (entries.length !== 1) {
             throw new Error(

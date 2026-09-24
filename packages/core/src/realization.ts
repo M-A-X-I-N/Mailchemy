@@ -35,9 +35,8 @@ export function directRealization(): DirectRealization {
 export function derivedRealization(explanation: string): DerivedRealization {
     const normalized = explanation.trim();
 
-    if (normalized.length === 0) {
+    if (normalized.length === 0)
         throw new Error("Derived realization explanation must not be empty.");
-    }
 
     return Object.freeze({
         kind: "derived",
@@ -51,9 +50,8 @@ export function unsupportedReason(
 ): UnsupportedReason {
     const normalized = message.trim();
 
-    if (normalized.length === 0) {
+    if (normalized.length === 0)
         throw new Error("Unsupported realization message must not be empty.");
-    }
 
     return Object.freeze({
         code,

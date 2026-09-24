@@ -29,11 +29,11 @@ const capability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "test.null.invalid",
-                      "Expected a null parameter.",
-                  ),
-              ),
+                validationIssue(
+                    "test.null.invalid",
+                    "Expected a null parameter.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 

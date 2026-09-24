@@ -60,9 +60,8 @@ export function defineSemanticCodec<TNative>(
 ): SemanticCodec<TNative> {
     const id = definition.id.trim();
 
-    if (id.length === 0) {
+    if (id.length === 0)
         throw new InvalidCodecDefinitionError("Codec ID must not be empty.");
-    }
 
     return Object.freeze({
         id,
@@ -122,9 +121,8 @@ export function unsupportedNativeDecode(
 function requireMessage(message: string, label: string): string {
     const normalized = message.trim();
 
-    if (normalized.length === 0) {
+    if (normalized.length === 0)
         throw new Error(`${label} must not be empty.`);
-    }
 
     return normalized;
 }

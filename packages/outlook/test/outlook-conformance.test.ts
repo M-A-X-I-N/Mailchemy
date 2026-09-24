@@ -44,9 +44,8 @@ function areEquivalent(
     left: CanonicalExpression,
     right: CanonicalExpression,
 ): boolean {
-    if (left.kind !== "action" || right.kind !== "action") {
+    if (left.kind !== "action" || right.kind !== "action")
         return false;
-    }
 
     return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
 }

@@ -91,9 +91,8 @@ function encodeOutlookRule(expression: CanonicalExpression) {
 }
 
 function decodeOutlookRule(native: OutlookMessageRuleNative) {
-    if (!isRecord(native)) {
+    if (!isRecord(native))
         return invalidNative("Expected an Outlook messageRule object.");
-    }
 
     const unknownTopLevelKey = firstUnknownKey(native, TOP_LEVEL_KEYS);
 
@@ -106,20 +105,17 @@ function decodeOutlookRule(native: OutlookMessageRuleNative) {
 
     const structuralMessage = inspectUnmodeledRuleStructure(native);
 
-    if (structuralMessage !== undefined) {
+    if (structuralMessage !== undefined)
         return opaqueNative(native, structuralMessage);
-    }
 
     const conditionsResult = inspectConditions(native.conditions);
 
     if (conditionsResult.kind !== "none") {
-        if (conditionsResult.kind === "opaque") {
+        if (conditionsResult.kind === "opaque")
             return opaqueNative(native, conditionsResult.message);
-        }
 
-        if (conditionsResult.kind === "invalid") {
+        if (conditionsResult.kind === "invalid")
             return invalidNative(conditionsResult.message);
-        }
 
         return unsupportedNativeDecode(
             nativeDecodeReason("exactness-unproven", conditionsResult.message),
@@ -139,21 +135,19 @@ function inspectUnmodeledRuleStructure(
         "isReadOnly",
         "exceptions",
     ] as const) {
-        if (native[key] !== undefined) {
+        if (native[key] !== undefined)
             return `Outlook messageRule field "${key}" carries rule/store semantics outside the initial canonical slice and is preserved opaquely.`;
-        }
+
     }
 
-    if (native.id !== undefined && typeof native.id !== "string") {
+    if (native.id !== undefined && typeof native.id !== "string")
         return 'Outlook messageRule field "id" must be a string when present.';
-    }
 
     if (
         native.displayName !== undefined &&
         typeof native.displayName !== "string"
-    ) {
+    )
         return 'Outlook messageRule field "displayName" must be a string when present.';
-    }
 
     return undefined;
 }
@@ -167,9 +161,8 @@ type ConditionInspection =
 function inspectConditions(
     conditions: OutlookMessageRulePredicatesNative | undefined,
 ): ConditionInspection {
-    if (conditions === undefined) {
+    if (conditions === undefined)
         return { kind: "none" };
-    }
 
     if (!isRecord(conditions)) {
         return {

@@ -34,9 +34,8 @@ export function defineCanonicalFixture<TExpression>(
 ): CanonicalFixture<TExpression> {
     const id = definition.id.trim();
 
-    if (id.length === 0) {
+    if (id.length === 0)
         throw new InvalidCanonicalFixtureError("Fixture ID must not be empty.");
-    }
 
     if (definition.capabilities.length === 0) {
         throw new InvalidCanonicalFixtureError(

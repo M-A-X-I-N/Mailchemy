@@ -69,9 +69,8 @@ function observeExpectation(
 ): TargetRealizationExpectation {
     const result = target.checkDirectRealization(expression);
 
-    if (result.kind === "direct") {
+    if (result.kind === "direct")
         return { kind: "direct" };
-    }
 
     return {
         kind: "unsupported",

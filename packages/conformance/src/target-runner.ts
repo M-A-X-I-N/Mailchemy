@@ -86,9 +86,9 @@ function runCase(
         ...(passed
             ? {}
             : {
-                  message:
+                message:
                       "Target realization result did not match the expected exactness classification.",
-              }),
+            }),
     });
 }
 
@@ -96,9 +96,8 @@ function matchesExpectation(
     actual: DirectRealizationResult,
     expected: TargetRealizationExpectation,
 ): boolean {
-    if (expected.kind === "direct") {
+    if (expected.kind === "direct")
         return actual.kind === "direct";
-    }
 
     return (
         actual.kind === "unsupported" &&

@@ -34,9 +34,8 @@ const booleanCapability = defineSemanticCapability<{
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -68,13 +67,11 @@ const fixture = defineCanonicalFixture({
 });
 
 const booleanEquivalence: CanonicalEquivalence = (left, right) => {
-    if (left.kind !== "condition" || right.kind !== "condition") {
+    if (left.kind !== "condition" || right.kind !== "condition")
         return false;
-    }
 
-    if (left.specimen.capabilityId !== right.specimen.capabilityId) {
+    if (left.specimen.capabilityId !== right.specimen.capabilityId)
         return false;
-    }
 
     const leftValue = left.specimen.parameters as { readonly value: boolean };
     const rightValue = right.specimen.parameters as { readonly value: boolean };

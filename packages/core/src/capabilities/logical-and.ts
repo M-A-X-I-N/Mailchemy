@@ -16,20 +16,19 @@ export const logicalAndCapability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "logic.and.parameters",
-                      "logic.and@1 takes no parameters; expected null.",
-                  ),
-              ),
+                validationIssue(
+                    "logic.and.parameters",
+                    "logic.and@1 takes no parameters; expected null.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
 export function evaluateLogicalAnd(
     operandResults: readonly boolean[],
 ): boolean {
-    if (operandResults.length < 2) {
+    if (operandResults.length < 2)
         throw new RangeError("logic.and@1 requires at least two operands.");
-    }
 
     return operandResults.every(Boolean);
 }

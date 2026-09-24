@@ -45,9 +45,8 @@ function checkLeaf(
 ): DirectRealizationResult {
     const capabilityId = expression.specimen.capabilityId;
 
-    if (capabilityId === markReadCapability.id) {
+    if (capabilityId === markReadCapability.id)
         return directRealization();
-    }
 
     if (capabilityId === subjectContainsCapability.id) {
         return unsupportedRealization(
@@ -90,9 +89,9 @@ function checkAnd(
     for (const operand of expression.operands) {
         const operandResult = checkThunderbirdDirectRealization(operand);
 
-        if (operandResult.kind === "unsupported") {
+        if (operandResult.kind === "unsupported")
             return operandResult;
-        }
+
     }
 
     return directRealization();
@@ -105,9 +104,8 @@ function checkRule(
         expression.condition,
     );
 
-    if (conditionResult.kind === "unsupported") {
+    if (conditionResult.kind === "unsupported")
         return conditionResult;
-    }
 
     if (expression.actions.length !== 1) {
         return unsupportedRealization(

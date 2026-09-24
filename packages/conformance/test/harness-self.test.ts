@@ -43,9 +43,8 @@ const booleanCondition = defineSemanticCapability<{
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -65,11 +64,11 @@ const andCapability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "test.null.invalid",
-                      "Expected a null parameter.",
-                  ),
-              ),
+                validationIssue(
+                    "test.null.invalid",
+                    "Expected a null parameter.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
@@ -83,9 +82,8 @@ function registry(includeAnd = false) {
     const result = new CapabilityRegistry();
     result.register(booleanCondition);
 
-    if (includeAnd) {
+    if (includeAnd)
         result.register(andCapability);
-    }
 
     return result;
 }
@@ -131,13 +129,11 @@ const combinedFixture = defineCanonicalFixture({
 });
 
 const booleanEquivalence: CanonicalEquivalence = (left, right) => {
-    if (left.kind !== "condition" || right.kind !== "condition") {
+    if (left.kind !== "condition" || right.kind !== "condition")
         return false;
-    }
 
-    if (left.specimen.capabilityId !== right.specimen.capabilityId) {
+    if (left.specimen.capabilityId !== right.specimen.capabilityId)
         return false;
-    }
 
     const leftValue = left.specimen.parameters as { readonly value: boolean };
     const rightValue = right.specimen.parameters as { readonly value: boolean };
@@ -162,7 +158,7 @@ describe("R0 conformance harness self-tests", () => {
                                           expression.specimen.parameters as {
                                               readonly value: boolean;
                                           }
-                                      ).value
+                                    ).value
                                     : undefined;
 
                             return {
@@ -202,17 +198,17 @@ describe("R0 conformance harness self-tests", () => {
                               expression.specimen.parameters as {
                                   readonly value: boolean;
                               }
-                          ).value
+                        ).value
                         : false;
 
                 return value
                     ? directRealization()
                     : unsupportedRealization(
-                          unsupportedReason(
-                              "refinement-rejected",
-                              "Fake target rejects the false instance.",
-                          ),
-                      );
+                        unsupportedReason(
+                            "refinement-rejected",
+                            "Fake target rejects the false instance.",
+                        ),
+                    );
             },
         });
         const unprovenTarget = defineDirectRealizationTarget({
@@ -296,11 +292,11 @@ describe("R0 conformance harness self-tests", () => {
                 endpoint.data.requiredFeature
                     ? directRealization()
                     : unsupportedRealization(
-                          unsupportedReason(
-                              "endpoint-profile-missing",
-                              "Fake endpoint lacks the required runtime feature.",
-                          ),
-                      ),
+                        unsupportedReason(
+                            "endpoint-profile-missing",
+                            "Fake endpoint lacks the required runtime feature.",
+                        ),
+                    ),
         });
 
         const result = runTargetRealizationConformance(registry(), refined, [

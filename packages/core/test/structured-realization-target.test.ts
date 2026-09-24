@@ -25,9 +25,8 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -47,11 +46,11 @@ const andCapability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "test.null.invalid",
-                      "Expected a null parameter.",
-                  ),
-              ),
+                validationIssue(
+                    "test.null.invalid",
+                    "Expected a null parameter.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
@@ -136,11 +135,11 @@ describe("StructuredDirectRealizationTarget", () => {
                 expression.kind === "and"
                     ? directRealization()
                     : unsupportedRealization(
-                          unsupportedReason(
-                              "structure-unsupported",
-                              "Synthetic target only supports AND structures.",
-                          ),
-                      ),
+                        unsupportedReason(
+                            "structure-unsupported",
+                            "Synthetic target only supports AND structures.",
+                        ),
+                    ),
         });
 
         const combined = createAndExpression(

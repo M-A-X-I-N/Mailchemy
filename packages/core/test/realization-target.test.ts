@@ -25,9 +25,8 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
             value !== null &&
             "value" in value &&
             typeof value.value === "boolean"
-        ) {
+        )
             return valid(Object.freeze({ value: value.value }));
-        }
 
         return invalid(
             validationIssue(
@@ -52,9 +51,8 @@ describe("DirectRealizationTarget", () => {
                             readonly value: boolean;
                         }
                     ).value
-                ) {
+                )
                     return directRealization();
-                }
 
                 return unsupportedRealization(
                     unsupportedReason(
@@ -88,11 +86,11 @@ describe("DirectRealizationTarget", () => {
             checkDirectRealization: (expression) =>
                 expression.kind === "rule"
                     ? unsupportedRealization(
-                          unsupportedReason(
-                              "structure-unsupported",
-                              "Synthetic target rejects rule structures.",
-                          ),
-                      )
+                        unsupportedReason(
+                            "structure-unsupported",
+                            "Synthetic target rejects rule structures.",
+                        ),
+                    )
                     : directRealization(),
         });
 

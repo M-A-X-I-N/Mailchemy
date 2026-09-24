@@ -33,11 +33,11 @@ function stringContract(
             typeof value === "string"
                 ? valid(value)
                 : invalid(
-                      validationIssue(
-                          "test.string.invalid",
-                          "Expected a string value.",
-                      ),
-                  ),
+                    validationIssue(
+                        "test.string.invalid",
+                        "Expected a string value.",
+                    ),
+                ),
         areParametersEqual: (left, right) => left === right,
     });
 }
@@ -76,9 +76,8 @@ describe("registry integrity", () => {
     function buildRegistry() {
         const registry = new CapabilityRegistry();
 
-        for (const contract of contracts) {
+        for (const contract of contracts)
             registry.register(contract);
-        }
 
         return registry;
     }
@@ -124,9 +123,8 @@ describe("registry integrity", () => {
 
             expect(contractFixtures).toBeDefined();
 
-            if (contractFixtures === undefined) {
+            if (contractFixtures === undefined)
                 continue;
-            }
 
             for (const fixture of contractFixtures) {
                 expect(contract.validateParameters(fixture.input).ok).toBe(

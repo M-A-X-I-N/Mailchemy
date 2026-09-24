@@ -100,9 +100,8 @@ function validExpression(
 ): CanonicalExpression {
     const fixture = fixtures.find((candidate) => candidate.id === fixtureId);
 
-    if (fixture === undefined) {
+    if (fixture === undefined)
         throw new Error('Missing shared fixture "' + fixtureId + '".');
-    }
 
     if (fixture.expectedValidation !== "valid") {
         throw new Error(

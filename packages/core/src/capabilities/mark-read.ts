@@ -16,18 +16,17 @@ export const markReadCapability = defineSemanticCapability<null>({
         value === null
             ? valid(null)
             : invalid(
-                  validationIssue(
-                      "mark-read.parameters",
-                      "mark-read@1 takes no parameters; expected null.",
-                  ),
-              ),
+                validationIssue(
+                    "mark-read.parameters",
+                    "mark-read@1 takes no parameters; expected null.",
+                ),
+            ),
     areParametersEqual: () => true,
 });
 
 export function applyMarkRead(previousReadState: boolean): true {
-    if (previousReadState) {
+    if (previousReadState)
         return true;
-    }
 
     return true;
 }

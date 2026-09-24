@@ -88,9 +88,8 @@ export function eraseCapabilityContract<TParameters>(
             const leftResult = contract.validateParameters(left);
             const rightResult = contract.validateParameters(right);
 
-            if (!leftResult.ok || !rightResult.ok) {
+            if (!leftResult.ok || !rightResult.ok)
                 return false;
-            }
 
             return contract.areParametersEqual(
                 leftResult.value,

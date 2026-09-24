@@ -22,11 +22,11 @@ function stringCondition(id: string) {
             typeof value === "string"
                 ? valid(value)
                 : invalid(
-                      validationIssue(
-                          "test.string.invalid",
-                          "Expected a string value.",
-                      ),
-                  ),
+                    validationIssue(
+                        "test.string.invalid",
+                        "Expected a string value.",
+                    ),
+                ),
         areParametersEqual: (left, right) => left === right,
     });
 }
@@ -40,11 +40,11 @@ function nullCapability(id: string, role: "action" | "logic") {
             value === null
                 ? valid(null)
                 : invalid(
-                      validationIssue(
-                          "test.null.invalid",
-                          "Expected a null parameter.",
-                      ),
-                  ),
+                    validationIssue(
+                        "test.null.invalid",
+                        "Expected a null parameter.",
+                    ),
+                ),
         areParametersEqual: () => true,
     });
 }

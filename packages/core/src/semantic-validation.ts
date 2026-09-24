@@ -131,9 +131,8 @@ function collectConditionIssues(
     path: readonly ValidationPathSegment[],
     stack: Set<object>,
 ): ValidationIssue[] {
-    if (!isRecord(value)) {
+    if (!isRecord(value))
         return [shapeIssue(path, "Expected a condition expression object.")];
-    }
 
     if (stack.has(value)) {
         return [
@@ -217,9 +216,8 @@ function collectActionIssues(
     path: readonly ValidationPathSegment[],
     stack: Set<object>,
 ): ValidationIssue[] {
-    if (!isRecord(value)) {
+    if (!isRecord(value))
         return [shapeIssue(path, "Expected an action expression object.")];
-    }
 
     if (stack.has(value)) {
         return [
@@ -313,9 +311,8 @@ export function validateCapabilitySpecimen(
 ): ValidationResult<CapabilitySpecimen> {
     const issues = collectSpecimenIssues(registry, value, expectedRole, []);
 
-    if (issues.length > 0) {
+    if (issues.length > 0)
         return invalid(...issues);
-    }
 
     return valid(value as CapabilitySpecimen);
 }
@@ -335,13 +332,13 @@ export function validateCanonicalExpression(
     const stack = new Set<object>();
     let issues: ValidationIssue[];
 
-    if (value.kind === "condition" || value.kind === "and") {
+    if (value.kind === "condition" || value.kind === "and")
         issues = collectConditionIssues(registry, value, [], stack);
-    } else if (value.kind === "action") {
+    else if (value.kind === "action")
         issues = collectActionIssues(registry, value, [], stack);
-    } else if (value.kind === "rule") {
+    else if (value.kind === "rule")
         issues = collectRuleIssues(registry, value, [], stack);
-    } else {
+    else {
         issues = [
             validationIssue(
                 "semantic.invalid-kind",
@@ -351,9 +348,8 @@ export function validateCanonicalExpression(
         ];
     }
 
-    if (issues.length > 0) {
+    if (issues.length > 0)
         return invalid(...issues);
-    }
 
     return valid(originalValue as CanonicalExpression);
 }

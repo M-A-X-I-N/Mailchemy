@@ -94,16 +94,14 @@ export function runInitialCrossCodecRoundTrips(): CrossCodecRoundTripRun {
     for (const fixture of fixtures) {
         for (const source of VARIANTS) {
             for (const target of VARIANTS) {
-                if (source.codecId === target.codecId) {
+                if (source.codecId === target.codecId)
                     continue;
-                }
 
                 if (
                     !source.isDirect(fixture.expression) ||
                     !target.isDirect(fixture.expression)
-                ) {
+                )
                     continue;
-                }
 
                 results.push(runPath(fixture, source, target));
             }
@@ -184,9 +182,8 @@ function runPath(
 function decodedExpression(
     result: DecodeResult<unknown>,
 ): CanonicalExpression | undefined {
-    if (result.kind !== "decoded") {
+    if (result.kind !== "decoded")
         return undefined;
-    }
 
     const validation = validateCanonicalExpression(registry, result.expression);
     return validation.ok ? validation.value : undefined;
@@ -196,9 +193,8 @@ function areEquivalent(
     left: CanonicalExpression,
     right: CanonicalExpression,
 ): boolean {
-    if (left.kind !== "action" || right.kind !== "action") {
+    if (left.kind !== "action" || right.kind !== "action")
         return false;
-    }
 
     return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
 }
@@ -226,18 +222,16 @@ function collectValidMarkReadFixtures(): readonly CanonicalFixture<CanonicalExpr
     const fixtures: CanonicalFixture<CanonicalExpression>[] = [];
 
     for (const fixture of markReadFixtures) {
-        if (fixture.expectedValidation !== "valid") {
+        if (fixture.expectedValidation !== "valid")
             continue;
-        }
 
         const validation = validateCanonicalExpression(
             registry,
             fixture.expression,
         );
 
-        if (!validation.ok) {
+        if (!validation.ok)
             continue;
-        }
 
         fixtures.push(
             Object.freeze({
