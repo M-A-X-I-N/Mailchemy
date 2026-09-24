@@ -70,6 +70,26 @@ Do not introduce a bundler during R0 unless a concrete R0 requirement proves one
 
 Do not introduce a runtime validation/schema library merely to model capability contracts. Prefer code-native strongly typed contracts first; add external validation tooling only when an actual runtime boundary requires it.
 
+## Validation commands
+
+After `npm install`, the canonical validation command is:
+
+```text
+npm run check
+```
+
+Individual commands:
+
+```text
+npm run build
+npm run typecheck
+npm run lint
+npm run format:check
+npm test
+```
+
+`npm run format` applies Prettier to the implementation/configuration surface. Existing prose documentation is intentionally excluded from Prettier ownership.
+
 ## TypeScript policy
 
 Use aggressive compiler strictness appropriate for a semantic model.

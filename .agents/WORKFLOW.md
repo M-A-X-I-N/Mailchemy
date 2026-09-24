@@ -42,7 +42,15 @@ For documentation-only or research-only changes, appropriate validation is usual
 - checking internal links and paths;
 - verifying the repository tree and resulting commit state.
 
-Once executable checks exist, use and document the actual project-supported commands rather than inventing ceremonial checks.
+Current implementation validation commands:
+
+```text
+npm run check
+```
+
+The aggregate check performs the supported type/build, lint, formatting, and test validation. Individual commands are `npm run build`, `npm run typecheck`, `npm run lint`, `npm run format:check`, and `npm test`.
+
+Use these commands rather than inventing ceremonial checks.
 
 ## 1.4 Architecture handling
 
