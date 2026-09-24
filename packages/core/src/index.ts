@@ -108,3 +108,11 @@ export {
   type EndpointRefinedRealizationTarget,
   type EndpointRefinedRealizationTargetDefinition,
 } from "./endpoint-profile.js";
+
+export {
+  defineStructuredDirectRealizationTarget,
+  type LeafSemanticExpression,
+  type StructuralSemanticExpression,
+  type StructuredDirectRealizationTarget,
+  type StructuredDirectRealizationTargetDefinition,
+} from "./structured-realization-target.js";
