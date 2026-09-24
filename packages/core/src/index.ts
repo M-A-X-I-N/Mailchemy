@@ -37,3 +37,17 @@ export {
   createCapabilitySpecimen,
   type CapabilitySpecimen,
 } from "./semantic-specimen.js";
+
+export {
+  createActionExpression,
+  createAndExpression,
+  createConditionExpression,
+  createRuleExpression,
+  type ActionCapabilityExpression,
+  type ActionExpression,
+  type AndExpression,
+  type CanonicalExpression,
+  type ConditionCapabilityExpression,
+  type ConditionExpression,
+  type RuleExpression,
+} from "./expression.js";
