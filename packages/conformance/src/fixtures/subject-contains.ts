@@ -25,9 +25,7 @@ function validFixture(
       expectedMatch,
     }),
     notes,
-    references: [
-      "docs/SEMANTIC_CAPABILITIES.md#coreconditionsubjectcontains1",
-    ],
+    references: ["docs/SEMANTIC_CAPABILITIES.md#coreconditionsubjectcontains1"],
   });
 }
 
@@ -86,9 +84,7 @@ export const subjectContainsFixtures = Object.freeze([
       },
     },
     expectedValidation: "invalid",
-    references: [
-      "docs/SEMANTIC_CAPABILITIES.md#coreconditionsubjectcontains1",
-    ],
+    references: ["docs/SEMANTIC_CAPABILITIES.md#coreconditionsubjectcontains1"],
   }),
   defineCanonicalFixture({
     id: "subject.contains.invalid-missing-needle",

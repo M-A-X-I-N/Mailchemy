@@ -23,11 +23,20 @@ describe("core.condition.subject.contains@1", () => {
               const subjectFields = fixture.oracle?.subjectFields;
               const expectedMatch = fixture.oracle?.expectedMatch;
 
+              const expression = fixture.expression;
+
               if (
                 !Array.isArray(subjectFields) ||
                 !subjectFields.every((value) => typeof value === "string") ||
                 typeof expectedMatch !== "boolean" ||
-                fixture.expression.kind !== "condition"
+                typeof expression !== "object" ||
+                expression === null ||
+                !("kind" in expression) ||
+                expression.kind !== "condition" ||
+                !("specimen" in expression) ||
+                typeof expression.specimen !== "object" ||
+                expression.specimen === null ||
+                !("parameters" in expression.specimen)
               ) {
                 return {
                   passed: false,
@@ -37,7 +46,7 @@ describe("core.condition.subject.contains@1", () => {
 
               const actual = evaluateSubjectContains(
                 subjectFields,
-                fixture.expression.specimen.parameters as {
+                expression.specimen.parameters as {
                   readonly needle: string;
                 },
               );
