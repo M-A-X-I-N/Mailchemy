@@ -77,3 +77,23 @@ export {
   type DirectRealizationTarget,
   type DirectRealizationTargetDefinition,
 } from "./realization-target.js";
+
+export {
+  InvalidCodecDefinitionError,
+  decodedNative,
+  defineSemanticCodec,
+  encodedNative,
+  nativeDecodeReason,
+  opaqueNative,
+  unsupportedNativeDecode,
+  type DecodeResult,
+  type DecodedNative,
+  type EncodeResult,
+  type EncodedNative,
+  type NativeDecodeReason,
+  type NativeDecodeReasonCode,
+  type OpaqueNative,
+  type SemanticCodec,
+  type SemanticCodecDefinition,
+  type UnsupportedNativeDecode,
+} from "./codec.js";
