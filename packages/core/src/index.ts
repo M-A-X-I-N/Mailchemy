@@ -97,3 +97,14 @@ export {
   type SemanticCodecDefinition,
   type UnsupportedNativeDecode,
 } from "./codec.js";
+
+export {
+  InvalidEndpointProfileError,
+  defineEndpointCapabilityProfile,
+  refineTargetWithEndpointProfile,
+  type EndpointCapabilityProfile,
+  type EndpointCapabilityProfileDefinition,
+  type EndpointProfileRefinement,
+  type EndpointRefinedRealizationTarget,
+  type EndpointRefinedRealizationTargetDefinition,
+} from "./endpoint-profile.js";
