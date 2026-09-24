@@ -19,8 +19,9 @@ export type EndpointProfileRefinement<TData> = (
   profile: EndpointCapabilityProfile<TData>,
 ) => DirectRealizationResult;
 
-export interface EndpointRefinedRealizationTarget<TData>
-  extends DirectRealizationTarget {
+export interface EndpointRefinedRealizationTarget<
+  TData,
+> extends DirectRealizationTarget {
   readonly baseTarget: DirectRealizationTarget;
   readonly profile: EndpointCapabilityProfile<TData>;
 }
@@ -79,10 +80,7 @@ export function refineTargetWithEndpointProfile<TData>(
         return baseResult;
       }
 
-      return definition.refineDirectRealization(
-        expression,
-        definition.profile,
-      );
+      return definition.refineDirectRealization(expression, definition.profile);
     },
   });
 }

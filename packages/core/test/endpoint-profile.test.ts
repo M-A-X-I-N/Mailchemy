@@ -81,15 +81,16 @@ describe("endpoint capability-profile refinement", () => {
             ),
     });
 
-    expect(baseTarget.checkDirectRealization(condition(flagCondition))).toEqual({
-      kind: "direct",
-    });
+    expect(baseTarget.checkDirectRealization(condition(flagCondition))).toEqual(
+      {
+        kind: "direct",
+      },
+    );
     expect(target.checkDirectRealization(condition(flagCondition))).toEqual({
       kind: "unsupported",
       reason: {
         code: "endpoint-profile-missing",
-        message:
-          'Endpoint profile does not advertise required feature "flag".',
+        message: 'Endpoint profile does not advertise required feature "flag".',
       },
     });
   });
