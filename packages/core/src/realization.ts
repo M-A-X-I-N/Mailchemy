@@ -26,9 +26,7 @@ export interface UnsupportedRealization {
 }
 
 export type RealizationResult =
-  | DirectRealization
-  | DerivedRealization
-  | UnsupportedRealization;
+  DirectRealization | DerivedRealization | UnsupportedRealization;
 
 export function directRealization(): DirectRealization {
   return DIRECT_REALIZATION;
