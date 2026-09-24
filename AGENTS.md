@@ -20,7 +20,7 @@ Repository state and durable project documentation are authoritative over rememb
 
 Mailchemy's initial architecture/research bootstrap is complete. Implementation has begun under the explicitly authorized capability-registry/conformance-harness roadmap in `planning/`.
 
-R0 and R1 are complete: the TypeScript infrastructure/conformance harness is in place, and the first real canonical semantic contracts plus shared A/B/C rule fixtures are implemented. CRH-27 through CRH-40 are complete: the first Sieve/Purelymail, Gmail, Outlook / Microsoft Graph, and Thunderbird slices plus the generated cross-IO conformance matrix are implemented. The remaining active R2 tasks are CRH-41–43. Do not jump ahead into rewrite-planner work outside the active roadmap sequence unless the human explicitly redirects the work.
+R0 and R1 are complete: the TypeScript infrastructure/conformance harness is in place, and the first real canonical semantic contracts plus shared A/B/C rule fixtures are implemented. CRH-27 through CRH-41 are complete: the first Sieve/Purelymail, Gmail, Outlook / Microsoft Graph, and Thunderbird slices, generated cross-IO matrix, and canonical-routed cross-codec round trips are implemented. The remaining active R2 tasks are CRH-42–43. Do not jump ahead into rewrite-planner work outside the active roadmap sequence unless the human explicitly redirects the work.
 
 Research, documentation, repository policy, format/protocol investigation, targeted semantic experiments, and design refinement remain allowed. Keep provisional implementation choices from silently becoming global architecture without evidence.
 
