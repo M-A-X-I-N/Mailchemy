@@ -18,6 +18,9 @@
     },
     {
       "path": "./packages/thunderbird"
+    },
+    {
+      "path": "./packages/cross-io"
     }
   ]
 }

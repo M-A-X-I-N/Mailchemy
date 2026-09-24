@@ -1,0 +1,20 @@
+{
+  "name": "@mailchemy/cross-io",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mailchemy/conformance": "0.0.0",
+    "@mailchemy/core": "0.0.0",
+    "@mailchemy/gmail": "0.0.0",
+    "@mailchemy/outlook": "0.0.0",
+    "@mailchemy/sieve": "0.0.0",
+    "@mailchemy/thunderbird": "0.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  }
+}
