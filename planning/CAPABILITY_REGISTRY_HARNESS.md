@@ -45,10 +45,11 @@
 | CRH-39 — Add Thunderbird round-trip and native-fixture conformance | Done | Shared Direct mark-read fixtures round-trip semantically; representative line-oriented fixtures cover CRLF, version-9 filter envelopes, Subject/attachment exactness refusal, custom actions, and unknown fields |
 | CRH-40 — Generate the first real conformance matrix | Done | Added `@mailchemy/cross-io` aggregation over 23 valid shared fixtures and five target views, with deterministic machine-readable/Markdown output and visible Unsupported reason classes |
 | CRH-41 — Add cross-codec semantic round-trip tests | Done | Added canonical-routed round trips for every currently Direct ordered codec pair: 2 mark-read fixtures × 12 distinct Sieve/Gmail/Outlook/Thunderbird paths, with equivalence checked at both canonical boundaries |
+| CRH-42 — Add negative cross-IO exactness tests | Done | Added executable refusal coverage for Sieve attachment absence, Outlook Subject exactness-unproven, and endpoint-profile loss of `imap4flags` blocking otherwise-Direct Sieve mark-read |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-41 are complete. The first cross-IO matrix and canonical-routed cross-codec semantic round trips now cover the initial target set. The remaining active R2 tasks are CRH-42–43.
+CRH-27 through CRH-42 are complete. The first cross-IO matrix, canonical-routed cross-codec semantic round trips, and negative exactness/refusal coverage now cover the initial target set. The remaining active R2 task is CRH-43: make this conformance suite a CI gate.
 
 ## 1. Purpose
 
