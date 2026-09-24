@@ -42,4 +42,6 @@ export {
   type ConformanceMatrixRow,
 } from "./matrix.js";
 
+export { subjectContainsFixtures } from "./fixtures/subject-contains.js";
+
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;

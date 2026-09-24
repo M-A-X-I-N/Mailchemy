@@ -116,3 +116,14 @@ export {
   type StructuredDirectRealizationTarget,
   type StructuredDirectRealizationTargetDefinition,
 } from "./structured-realization-target.js";
+
+export {
+  evaluateSubjectContains,
+  subjectContainsCapability,
+  type SubjectContainsParameters,
+} from "./capabilities/subject-contains.js";
+
+export {
+  createCoreCapabilityRegistry,
+  registerCoreSemanticCapabilities,
+} from "./core-capability-registry.js";

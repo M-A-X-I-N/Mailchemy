@@ -7,7 +7,7 @@ This directory contains Mailchemy's durable human-facing architecture and design
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — canonical architecture, semantic IR, capability refinements, rewrite planning, codecs, stores/endpoints, exactness rules, and execution-structure implications.
 - [`GLOSSARY.md`](GLOSSARY.md) — durable project vocabulary for semantic capabilities, refinements, rewrites, realization, adapters/codecs/stores/endpoints, exactness, execution context, terminality, and structural support.
 - [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) — motivating rule systems/endpoints and why each matters to the design.
-- [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) — initial TypeScript/ESM implementation toolchain and host-neutrality decision.
+- [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) — initial TypeScript/ESM implementation toolchain and host-neutrality decision.\n- [`SEMANTIC_CAPABILITIES.md`](SEMANTIC_CAPABILITIES.md) — durable contracts for implemented core semantic capability versions.
 
 ## Reading order
 
