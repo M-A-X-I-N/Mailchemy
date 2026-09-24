@@ -159,3 +159,59 @@ See:
 
 - [First cross-system semantic comparison §7.1](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#71-readunread-is-one-of-the-strongest-candidates)
 - [Cross-system control-flow synthesis](../research/CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md)
+
+
+## `core.logic.and@1`
+
+**Role:** logic.
+
+**Parameters:** none. The canonical parameter value is `null`.
+
+### Operand domain
+
+Version 1 requires **at least two canonical condition operands**.
+
+Therefore:
+
+- zero operands → invalid canonical semantics;
+- one operand → invalid canonical semantics;
+- two or more operands → valid when every child condition is itself valid.
+
+Mailchemy does not use an empty conjunction as an implicit constant-true expression, and it does not retain a redundant single-child AND node.
+
+### Truth semantics
+
+For valid operands:
+
+```text
+AND(C1, C2, ..., Cn)
+```
+
+is true exactly when every child condition is true.
+
+This initial truth contract is ordinary logical conjunction.
+
+### Ordering and canonical representation
+
+The truth value of pure condition operands is mathematically independent of order. However, version 1 **preserves the supplied operand order in canonical structure** and does not authorize generic canonical reordering or sorting.
+
+This is deliberate. Mailchemy's wider execution model treats order/state visibility as potentially observable semantics, and future condition families may introduce evaluation behavior for which casually normalizing structure is unsafe.
+
+A later equivalence/rewrite layer may prove two differently ordered structures equivalent in a specific semantic domain. The base canonical constructor does not assume that proof.
+
+### Child validity
+
+An AND structure is not valid merely because the operator specimen is valid. Every child must independently pass canonical condition validation.
+
+This keeps structural validity separate from target realizability: a valid AND may still be Unsupported by a target even when every child leaf is Direct.
+
+### Evidence
+
+The initial cross-system comparison identified conjunction as the strongest common logical primitive across Sieve, Gmail, Outlook, and Thunderbird.
+
+Control-flow research later reinforced that composed structures require their own realizability checks and must not be inferred from leaf support.
+
+See:
+
+- [First cross-system semantic comparison §5.1](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#51-and-is-the-strongest-common-logical-primitive)
+- [Cross-system control-flow synthesis](../research/CROSS_SYSTEM_CONTROL_FLOW_SYNTHESIS.md)

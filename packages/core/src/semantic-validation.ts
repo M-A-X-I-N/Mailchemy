@@ -168,6 +168,16 @@ function collectConditionIssues(
         return issues;
       }
 
+      if (value.operands.length < 2) {
+        issues.push(
+          validationIssue(
+            "semantic.and.arity",
+            "AND expressions require at least two condition operands.",
+            [...path, "operands"],
+          ),
+        );
+      }
+
       for (const [index, operand] of value.operands.entries()) {
         issues.push(
           ...collectConditionIssues(

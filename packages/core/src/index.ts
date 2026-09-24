@@ -138,3 +138,8 @@ export {
   applyMarkRead,
   markReadCapability,
 } from "./capabilities/mark-read.js";
+
+export {
+  evaluateLogicalAnd,
+  logicalAndCapability,
+} from "./capabilities/logical-and.js";
