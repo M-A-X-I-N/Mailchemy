@@ -14,8 +14,13 @@
 | CRH-08 — Add minimal canonical expression types | Done | Condition/action leaves, AND structure, and explicit rule grouping without provider-specific fields |
 | CRH-09 — Add canonical semantic validation | Done | Runtime validation catches malformed parameters, unknown capabilities, role mismatches, structural errors, and cycles before target realization |
 | CRH-10 — Add registry integrity tests | Done | Synthetic registry catalog proves version separation, duplicate protection, deterministic ordering, fixture coverage, and role alignment; CI run `35941623268` passed Ubuntu + Windows |
+| CRH-11 — Implement preliminary realization result types | Done | Direct/Derived/Unsupported union with machine-readable Unsupported reason codes and human-readable diagnostics |
+| CRH-12 — Define target direct-realization contract | Done | Common Direct-or-Unsupported target interface accepts complete canonical expressions/structures; no rewrite search |
+| CRH-13 — Define codec encode/decode contracts | Done | Offline generic codec boundary supports native encode, canonical decode, opaque preservation, and explicit native-decode refusal |
+| CRH-14 — Define endpoint capability-profile refinement hook | Done | Runtime-supplied endpoint profiles may narrow, but never broaden, an underlying target's direct-realization domain |
+| CRH-15 — Add explicit structure-level realizability hook | Done | Structured target builder separates leaf and structure checks; synthetic tests prove Direct leaves can compose into Unsupported structure; CI run `35943078722` passed Ubuntu + Windows |
 
-The R0 registry/specimen kernel remains intentionally synthetic. No real email-provider semantic capability contract has been implemented yet.
+R0 remains intentionally synthetic. No real email-provider semantic capability contract has been implemented yet.
 
 ## 1. Purpose
 
