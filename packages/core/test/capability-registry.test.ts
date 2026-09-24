@@ -68,9 +68,9 @@ describe("CapabilityRegistry", () => {
     expect(
       registered.areParametersEqual({ value: true }, { value: false }),
     ).toBe(false);
-    expect(
-      registered.areParametersEqual({ value: true }, { nope: true }),
-    ).toBe(false);
+    expect(registered.areParametersEqual({ value: true }, { nope: true })).toBe(
+      false,
+    );
   });
 
   it("rejects duplicate semantic identities instead of redefining them", () => {
