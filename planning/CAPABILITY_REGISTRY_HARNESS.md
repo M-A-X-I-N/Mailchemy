@@ -33,10 +33,11 @@
 | CRH-27 — Implement minimal Sieve decode/encode support for initial capabilities | Done | Added `@mailchemy/sieve` with narrow text parsing/encoding, exact `imap4flags` mark-read mapping, explicit Subject/AND exactness refusal, and opaque preservation of unrelated constructs |
 | CRH-28 — Implement Sieve direct-realization declarations/refinements | Done | Added executable Sieve Direct/Unsupported classification: mark-read Direct at the dialect layer, Subject exactness unproven, attachment absent, and structure dependent on child realizability |
 | CRH-29 — Add Sieve round-trip conformance fixtures | Done | Shared Direct fixtures run through the codec round-trip harness; representative native Sieve fixtures cover exact mark-read, Subject exactness refusal, comments/require lists, and opaque unrelated constructs |
+| CRH-30 — Implement Purelymail endpoint-profile overlay | Done | Runtime-supplied normalized Sieve extension profiles narrow the generic target; missing `imap4flags` yields `endpoint-profile-missing`; the 2026-09-24 Purelymail advertisement is a dated replaceable fixture |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-29 are complete: the first deliberately narrow Sieve codec, executable direct-realization target, and semantic/native conformance fixtures now exist. The remaining active Sieve/Purelymail task is CRH-30: the Purelymail endpoint refinement.
+CRH-27 through CRH-30 are complete. The first Sieve/Purelymail slice now has a deliberately narrow codec, executable direct-realization target, semantic/native conformance fixtures, and runtime endpoint-profile refinement. The next active roadmap block is Gmail (CRH-31–33).
 
 ## 1. Purpose
 
