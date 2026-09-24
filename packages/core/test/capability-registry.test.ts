@@ -22,11 +22,7 @@ function booleanParameters(value: unknown) {
     "value" in value &&
     typeof value.value === "boolean"
   ) {
-    return valid<BooleanParameters>(
-      Object.freeze({
-        value: value.value,
-      }),
-    );
+    return valid<BooleanParameters>(Object.freeze({ value: value.value }));
   }
 
   return invalid(
