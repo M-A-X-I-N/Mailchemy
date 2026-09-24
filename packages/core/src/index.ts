@@ -56,3 +56,16 @@ export {
   validateCanonicalExpression,
   validateCapabilitySpecimen,
 } from "./semantic-validation.js";
+
+export {
+  derivedRealization,
+  directRealization,
+  unsupportedRealization,
+  unsupportedReason,
+  type DerivedRealization,
+  type DirectRealization,
+  type RealizationResult,
+  type UnsupportedRealization,
+  type UnsupportedReason,
+  type UnsupportedReasonCode,
+} from "./realization.js";
