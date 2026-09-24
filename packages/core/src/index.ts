@@ -127,3 +127,9 @@ export {
   createCoreCapabilityRegistry,
   registerCoreSemanticCapabilities,
 } from "./core-capability-registry.js";
+
+export {
+  evaluateHasAttachment,
+  hasAttachmentCapability,
+  type MimeEntityAttachmentView,
+} from "./capabilities/has-attachment.js";

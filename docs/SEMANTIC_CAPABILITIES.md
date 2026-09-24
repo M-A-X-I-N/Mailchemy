@@ -63,3 +63,51 @@ See:
 
 - [First cross-system semantic comparison §4.3](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#43-subject-contains-is-broadly-shared-but-not-yet-universally-exact)
 - the individual Sieve, Gmail, Outlook, and Thunderbird semantic-surface surveys under [`../research/`](../research/README.md)
+
+
+## `core.condition.has-attachment@1`
+
+**Role:** condition.
+
+**Parameters:** none. The canonical parameter value is `null`.
+
+### Message projection
+
+Version 1 evaluates the parsed MIME entity tree for the message. The projection supplied to this leaf semantic must expose, for each MIME entity:
+
+- whether the entity is a multipart container;
+- the parsed `Content-Disposition` disposition type, or no disposition when absent/unparseable.
+
+MIME parsing itself is outside this leaf capability. A source that cannot establish this projection reliably must not claim exact semantic decoding.
+
+### Attachment definition
+
+The condition is true if and only if **at least one non-multipart MIME entity has an explicit disposition type of `attachment`**.
+
+Disposition type tokens are compared case-insensitively.
+
+Version 1 intentionally does **not** infer attachment status from:
+
+- a filename parameter alone;
+- a `name` parameter on `Content-Type`;
+- an `inline` disposition;
+- media type;
+- message size;
+- provider UI/API attachment heuristics.
+
+A multipart container does not count as an attachment merely because it carries an abnormal `Content-Disposition: attachment`; a qualifying non-multipart entity must exist.
+
+### Why the initial contract is narrow
+
+The initial research found explicit attachment predicates in Gmail, Outlook, and Thunderbird but did not establish that their provider/client heuristics identify the same MIME structures. Base Sieve/Purelymail did not expose a comparably direct primitive.
+
+Mailchemy therefore starts with a deliberately narrow structural meaning that can be reasoned about exactly. Later semantic versions or separate capabilities may model broader attachment concepts if evidence justifies them.
+
+A native `has attachment` feature is not automatically Direct for this capability. Its native classification must be shown to coincide with this exact MIME-disposition definition.
+
+### Evidence
+
+See:
+
+- [First cross-system semantic comparison §4.6](../research/FIRST_CROSS_SYSTEM_SEMANTIC_COMPARISON.md#46-attachment-presence-is-a-three-system-overlap)
+- the individual Gmail, Outlook, Thunderbird, and Sieve semantic-surface surveys under [`../research/`](../research/README.md)

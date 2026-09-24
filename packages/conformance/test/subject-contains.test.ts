@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  createCoreCapabilityRegistry,
+  CapabilityRegistry,
   evaluateSubjectContains,
   subjectContainsCapability,
 } from "@mailchemy/core";
@@ -13,7 +13,11 @@ import {
 describe("core.condition.subject.contains@1", () => {
   it("satisfies its canonical contract fixture suite", () => {
     const result = runCapabilityContractTests(
-      createCoreCapabilityRegistry(),
+      (() => {
+        const registry = new CapabilityRegistry();
+        registry.register(subjectContainsCapability);
+        return registry;
+      })(),
       subjectContainsFixtures,
       {
         oracles: new Map([
