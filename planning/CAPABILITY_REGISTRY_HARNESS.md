@@ -8,8 +8,14 @@
 | CRH-02 — Create minimal project scaffold | Done | `@mailchemy/core` + `@mailchemy/conformance`, npm workspace, reproducible lockfile |
 | CRH-03 — Establish validation commands | Done | `npm run check` covers build/typecheck, typed lint, formatting, and tests |
 | CRH-04 — Add minimal CI | Done | Ubuntu + Windows GitHub Actions matrix; run `35937740003` passed both jobs |
+| CRH-05 — Implement semantic capability identity | Done | Canonical branded capability IDs with arbitrary namespace depth, strict parsing, stable rendering, and versioned identity |
+| CRH-06 — Define capability contract registration interface | Done | Immutable typed semantic contracts, runtime-erased registry entries, duplicate rejection, deterministic enumeration |
+| CRH-07 — Define semantic specimen abstraction | Done | Validated concrete capability specimens with registry-owned semantic equality |
+| CRH-08 — Add minimal canonical expression types | Done | Condition/action leaves, AND structure, and explicit rule grouping without provider-specific fields |
+| CRH-09 — Add canonical semantic validation | Done | Runtime validation catches malformed parameters, unknown capabilities, role mismatches, structural errors, and cycles before target realization |
+| CRH-10 — Add registry integrity tests | Done | Synthetic registry catalog proves version separation, duplicate protection, deterministic ordering, fixture coverage, and role alignment; CI run `35941623268` passed Ubuntu + Windows |
 
-No semantic capability implementation has started yet.
+The R0 registry/specimen kernel remains intentionally synthetic. No real email-provider semantic capability contract has been implemented yet.
 
 ## 1. Purpose
 
