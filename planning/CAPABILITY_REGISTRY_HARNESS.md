@@ -83,7 +83,8 @@ The first slice does **not** need:
 - plugin discovery;
 - every capability found in research;
 - lossy conversion;
-- a portable interchange format.
+- a portable interchange format;
+- package-registry publishing or consumer distribution. For the foreseeable roadmap, users/developers may clone the repository and build it themselves.
 
 ## 4. First semantic specimen set
 
@@ -1325,7 +1326,8 @@ Unless a task above proves they are necessary, do not introduce before R2:
 - lossy conversion;
 - portable JSON/YAML rule format;
 - automatic generation of semantic capability contracts from provider APIs;
-- a giant provider feature matrix maintained by hand.
+- a giant provider feature matrix maintained by hand;
+- npm publishing, package-registry metadata/polish, release automation, distribution bundles, or package-consumer support. Cloning and building from source is sufficient for this roadmap.
 
 # 10. Checkpoint grouping recommendation
 
