@@ -1397,8 +1397,9 @@ For chat/tool-session continuity, these groups benefit from being worked in one 
 | H | CRH-34–36 | Outlook codec slice |
 | I | CRH-37–39 | Thunderbird codec slice |
 | J | CRH-40–43 | cross-IO milestone and CI |
-| K | CRH-45–47 | first exact rewrite path |
-| L | CRH-49–51 | consolidation and expansion workflow |
+| K | CRH-44 | human-directed implementation documentation/reorganization pass after R2 |
+| L | CRH-45–48 | first exact rewrite path |
+| M | CRH-49–52 | consolidation and expansion workflow |
 
 A fresh chat should stop at group boundaries when the next group would benefit materially from a clean context/recovery checkpoint.
 
