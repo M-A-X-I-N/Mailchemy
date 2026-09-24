@@ -25,7 +25,7 @@ function validFixture(
     capabilities: [logicalAndCapability.id],
     expression: createAndExpression(
       createCapabilitySpecimen(logicalAndCapability, null),
-      operandResults.map((_, index) => subject(`operand-${index}`)),
+      operandResults.map((_, index) => subject(`operand-${String(index)}`)),
     ),
     expectedValidation: "valid",
     oracle: Object.freeze({
