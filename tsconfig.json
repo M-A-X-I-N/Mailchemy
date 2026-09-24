@@ -12,6 +12,9 @@
     },
     {
       "path": "./packages/gmail"
+    },
+    {
+      "path": "./packages/outlook"
     }
   ]
 }
