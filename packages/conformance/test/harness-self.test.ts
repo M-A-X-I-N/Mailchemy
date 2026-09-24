@@ -76,11 +76,12 @@ function condition(value: boolean) {
   );
 }
 
-function registry(...contracts: readonly (typeof booleanCondition | typeof andCapability)[]) {
+function registry(includeAnd = false) {
   const result = new CapabilityRegistry();
+  result.register(booleanCondition);
 
-  for (const contract of contracts) {
-    result.register(contract);
+  if (includeAnd) {
+    result.register(andCapability);
   }
 
   return result;
@@ -144,7 +145,7 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
 describe("R0 conformance harness self-tests", () => {
   it("executes provider-independent validity and oracle contract fixtures", () => {
     const result = runCapabilityContractTests(
-      registry(booleanCondition),
+      registry(),
       [trueFixture, invalidFixture],
       {
         oracles: new Map([
@@ -222,7 +223,7 @@ describe("R0 conformance harness self-tests", () => {
         ),
     });
 
-    const semanticRegistry = registry(booleanCondition);
+    const semanticRegistry = registry();
 
     const runs = [
       runTargetRealizationConformance(semanticRegistry, directTarget, [
@@ -296,7 +297,7 @@ describe("R0 conformance harness self-tests", () => {
     });
 
     const result = runTargetRealizationConformance(
-      registry(booleanCondition),
+      registry(),
       refined,
       [
         {
@@ -331,7 +332,7 @@ describe("R0 conformance harness self-tests", () => {
           ),
         ),
     });
-    const semanticRegistry = registry(booleanCondition, andCapability);
+    const semanticRegistry = registry(true);
 
     const leafRun = runTargetRealizationConformance(
       semanticRegistry,
@@ -374,7 +375,7 @@ describe("R0 conformance harness self-tests", () => {
     });
 
     const result = runCodecRoundTrips(
-      registry(booleanCondition),
+      registry(),
       codec,
       [{ fixture: trueFixture }],
       booleanEquivalence,
