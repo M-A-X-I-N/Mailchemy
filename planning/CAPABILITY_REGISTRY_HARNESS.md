@@ -1216,7 +1216,54 @@ Interpretation for this task:
 
 ---
 
-### CRH-44B — Add exhaustive `/** ... */` documentation comments
+### CRH-44B — Prefer brace-less single-statement control bodies
+
+**Goal:** establish a consistent control-flow style in which a control statement whose child body is exactly one statement omits braces and places that child statement on the following indented line.
+
+Preferred form:
+
+```typescript
+if (condition)
+    doThing();
+
+for (const item of items)
+    process(item);
+```
+
+Avoid both braced single-statement bodies and same-line brace-less bodies:
+
+```typescript
+if (condition) {
+    doThing();
+}
+
+if (condition) doThing();
+```
+
+Apply this convention wherever removing braces is semantically safe and does not create ambiguous or misleading control flow. Relevant constructs include `if`/`else`, `for`, `for...of`, `for...in`, `while`, and similar statement bodies. Braces remain appropriate when:
+
+- the body contains more than one statement;
+- lexical/block scope is materially required;
+- removing braces would alter behavior;
+- removal would introduce a dangling-`else` ambiguity or otherwise make control flow misleading;
+- the language grammar requires a block.
+
+The convention should be enforced automatically where practical through the repository's lint/style tooling rather than relying only on reviewer discipline.
+
+**Acceptance:**
+
+- applicable existing TypeScript control bodies are normalized to the preferred brace-less, next-line form;
+- same-line single-statement control bodies are rejected by the style/tooling configuration where practical;
+- unnecessary braces around semantically safe single-statement control bodies are removed;
+- necessary braces remain where block scope, grammar, or unambiguous control flow requires them;
+- no behavior, semantic contract, provider support claim, or exactness classification changes as part of the style pass;
+- typecheck, lint, formatting checks, tests, and CI remain green.
+
+**Depends on:** CRH-44A.
+
+---
+
+### CRH-44C — Add exhaustive `/** ... */` documentation comments
 
 **Goal:** comprehensively document the implemented TypeScript codebase using doc comments, including internal implementation details rather than documenting only the public API.
 
@@ -1244,7 +1291,7 @@ This is a documentation pass, not an architecture-change pass. If documenting so
 - no behavior, semantic contract, provider support claim, or exactness classification changes as part of the documentation pass;
 - typecheck, lint, formatting checks, tests, and CI remain green.
 
-**Depends on:** CRH-44A.
+**Depends on:** CRH-44B.
 
 ---
 
@@ -1463,7 +1510,7 @@ For chat/tool-session continuity, these groups benefit from being worked in one 
 | H | CRH-34–36 | Outlook codec slice |
 | I | CRH-37–39 | Thunderbird codec slice |
 | J | CRH-40–43 | cross-IO milestone and CI |
-| K | CRH-44A–44B (more CRH-44 subtasks TBD) | staged human-directed formatting/documentation pass after R2; file-structure reorganization will be specified later |
+| K | CRH-44A–44C (more CRH-44 subtasks TBD) | staged human-directed code-style/documentation pass after R2; file-structure reorganization will be specified later |
 | L | CRH-45–48 | first exact rewrite path |
 | M | CRH-49–52 | consolidation and expansion workflow |
 
