@@ -296,19 +296,15 @@ describe("R0 conformance harness self-tests", () => {
             ),
     });
 
-    const result = runTargetRealizationConformance(
-      registry(),
-      refined,
-      [
-        {
-          fixture: trueFixture,
-          expected: {
-            kind: "unsupported",
-            reasonCode: "endpoint-profile-missing",
-          },
+    const result = runTargetRealizationConformance(registry(), refined, [
+      {
+        fixture: trueFixture,
+        expected: {
+          kind: "unsupported",
+          reasonCode: "endpoint-profile-missing",
         },
-      ],
-    );
+      },
+    ]);
 
     expect(result.passed).toBe(true);
     expect(result.results[0]?.actual).toEqual({
