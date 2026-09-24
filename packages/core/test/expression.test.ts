@@ -28,10 +28,7 @@ function stringCondition(id: string) {
   });
 }
 
-function nullCapability(
-  id: string,
-  role: "action" | "logic",
-) {
+function nullCapability(id: string, role: "action" | "logic") {
   return defineSemanticCapability<null>({
     id: parseCapabilityId(id),
     role,
@@ -74,10 +71,7 @@ describe("canonical expression constructors", () => {
     expect(ruleA.kind).toBe("rule");
     expect(ruleB.condition).toBe(attachmentCondition);
     expect(ruleC.condition).toBe(combined);
-    expect(combined.operands).toEqual([
-      subjectCondition,
-      attachmentCondition,
-    ]);
+    expect(combined.operands).toEqual([subjectCondition, attachmentCondition]);
   });
 
   it("preserves rule/action grouping and freezes structural arrays", () => {

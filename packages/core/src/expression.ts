@@ -16,9 +16,7 @@ export interface AndExpression {
   readonly operands: readonly ConditionExpression[];
 }
 
-export type ConditionExpression =
-  | ConditionCapabilityExpression
-  | AndExpression;
+export type ConditionExpression = ConditionCapabilityExpression | AndExpression;
 
 export type ActionExpression = ActionCapabilityExpression;
 
@@ -29,9 +27,7 @@ export interface RuleExpression {
 }
 
 export type CanonicalExpression =
-  | ConditionExpression
-  | ActionExpression
-  | RuleExpression;
+  ConditionExpression | ActionExpression | RuleExpression;
 
 export function createConditionExpression(
   specimen: CapabilitySpecimen,
