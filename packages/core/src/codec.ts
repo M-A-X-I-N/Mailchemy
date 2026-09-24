@@ -21,9 +21,7 @@ export interface OpaqueNative<TNative> {
 }
 
 export type NativeDecodeReasonCode =
-  | "invalid-native"
-  | "semantic-unsupported"
-  | "exactness-unproven";
+  "invalid-native" | "semantic-unsupported" | "exactness-unproven";
 
 export interface NativeDecodeReason {
   readonly code: NativeDecodeReasonCode;
@@ -36,9 +34,7 @@ export interface UnsupportedNativeDecode {
 }
 
 export type DecodeResult<TNative> =
-  | DecodedNative
-  | OpaqueNative<TNative>
-  | UnsupportedNativeDecode;
+  DecodedNative | OpaqueNative<TNative> | UnsupportedNativeDecode;
 
 export interface SemanticCodec<TNative> {
   readonly id: string;
@@ -84,9 +80,7 @@ export function encodedNative<TNative>(
   });
 }
 
-export function decodedNative(
-  expression: CanonicalExpression,
-): DecodedNative {
+export function decodedNative(expression: CanonicalExpression): DecodedNative {
   return Object.freeze({
     kind: "decoded",
     expression,
