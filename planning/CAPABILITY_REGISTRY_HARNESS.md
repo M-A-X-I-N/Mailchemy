@@ -18,9 +18,17 @@
 | CRH-12 — Define target direct-realization contract | Done | Common Direct-or-Unsupported target interface accepts complete canonical expressions/structures; no rewrite search |
 | CRH-13 — Define codec encode/decode contracts | Done | Offline generic codec boundary supports native encode, canonical decode, opaque preservation, and explicit native-decode refusal |
 | CRH-14 — Define endpoint capability-profile refinement hook | Done | Runtime-supplied endpoint profiles may narrow, but never broaden, an underlying target's direct-realization domain |
-| CRH-15 — Add explicit structure-level realizability hook | Done | Structured target builder separates leaf and structure checks; synthetic tests prove Direct leaves can compose into Unsupported structure; CI run `35943078722` passed Ubuntu + Windows |
+| CRH-15 — Add explicit structure-level realizability hook | Done | Structured target builder separates leaf and structure checks; synthetic tests prove Direct leaves can compose into Unsupported structure |
+| CRH-16 — Define canonical fixture/specimen format in code | Done | Shared code-native fixtures carry stable IDs, exercised capability IDs, expected canonical validity, optional oracle metadata, notes, and references |
+| CRH-17 — Implement capability contract test runner | Done | Provider-independent runner validates fixtures, enforces valid/invalid boundary coverage, and supports optional pure semantic oracles |
+| CRH-18 — Implement target realization conformance runner | Done | Shared fixtures run against Direct-or-Unsupported targets with expected Unsupported reason classes treated as passing conformance |
+| CRH-19 — Implement codec round-trip harness | Done | Encode/decode flow validates both canonical ends and requires explicit semantic-equivalence logic rather than AST/native byte equality |
+| CRH-20 — Implement conformance matrix/report model | Done | Machine-readable matrix and deterministic Markdown report are generated from executable target-runner results |
+| CRH-21 — Add harness self-tests with fake targets/codecs | Done | Synthetic integration tests cover Direct, known absence, refinement rejection, exactness-unproven, endpoint-profile rejection, structural rejection, and semantic codec round trip; CI run `35944361660` passed Ubuntu + Windows |
 
-R0 remains intentionally synthetic. No real email-provider semantic capability contract has been implemented yet.
+**Milestone R0 is complete.** The registry, realization interfaces, codec boundary, endpoint refinement, conformance runners, generated reporting, and synthetic integration tests are now executable.
+
+No real email-provider semantic capability contract has been implemented yet. The next roadmap block, CRH-22–26, introduces the first real canonical semantic tranche.
 
 ## 1. Purpose
 

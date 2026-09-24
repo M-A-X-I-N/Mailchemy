@@ -20,7 +20,7 @@ Repository state and durable project documentation are authoritative over rememb
 
 Mailchemy's initial architecture/research bootstrap is complete. Implementation has begun under the explicitly authorized capability-registry/conformance-harness roadmap in `planning/`.
 
-The current R0 work is infrastructure only: TypeScript workspace/tooling, registry/harness primitives, and synthetic conformance tests. Do not jump ahead into real provider/capability implementation outside the active roadmap sequence unless the human explicitly redirects the work.
+R0 is complete: the TypeScript workspace/tooling, registry/realization interfaces, codec boundary, endpoint refinement, conformance harness, generated reporting, and synthetic self-tests are in place. The next active roadmap block is the first real canonical semantic tranche (CRH-22–26). Do not jump ahead into provider-specific implementation outside the active roadmap sequence unless the human explicitly redirects the work.
 
 Research, documentation, repository policy, format/protocol investigation, targeted semantic experiments, and design refinement remain allowed. Keep provisional implementation choices from silently becoming global architecture without evidence.
 
