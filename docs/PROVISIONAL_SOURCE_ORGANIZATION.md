@@ -7,7 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer. CRH-44D7 has now reconciled imports, root barrels/exports, and current-facing durable documentation, while preserving the old → new maps below as intentional historical design evidence.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer. CRH-44D7 reconciled imports, root barrels/exports, and current-facing durable documentation while preserving the old → new maps below as intentional historical design evidence. CRH-44D8 has now completed the unfamiliar-reader browseability audit: the resulting package trees need no further structural churn, and `packages/README.md` supplies the one missing lightweight cross-package navigation layer.
 
 ## 1. Design rules
 
@@ -598,6 +598,21 @@ Repository-wide stale-reference auditing found no remaining old names or paths
 outside this document's intentional design history. Current-facing roadmap text
 was updated from the historical "target-runner" wording to
 "target-realization conformance".
+
+### 5.2 CRH-44D8 unfamiliar-reader audit result
+
+Each final package tree was re-read from package + path + filename alone, with
+source documentation consulted only after forming the initial navigation
+expectation. The audit found no remaining module whose responsibility justified
+another rename, no folder whose nesting obscured more than it clarified, and no
+missing conceptual subfolder worth introducing.
+
+The one remaining navigation problem was above the individual package level:
+`packages/` had no concise entry point explaining the package responsibilities
+and their relationship. [`../packages/README.md`](../packages/README.md) now
+provides that map, the common adapter landmarks, the intentional Sieve
+asymmetry, Core's grouped boundaries, and the package-root import rule. This is
+navigation documentation rather than a second architecture authority.
 
 ## 6. D1 acceptance
 

@@ -57,12 +57,12 @@
 | CRH-44D5 — Reorganize Conformance and Cross-IO | Done | Grouped canonical fixture evidence/tests, renamed conformance runner/report modules descriptively, kept Cross-IO flat, and renamed the refusal test without changing semantic behavior |
 | CRH-44D6 — Standardize adapter package organization | Done | Removed redundant provider-local filename prefixes, aligned equivalent codec/target/conformance layouts, kept packages flat, and preserved Sieve's real endpoint/profile layer |
 | CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Done | Reconciled current-facing references, verified root-only package exports/no deep consumer imports, and explicitly accounted for the deliberate D3 public-name changes |
-| CRH-44D8 — Perform unfamiliar-human browseability audit | Next | Review resulting trees from a newcomer perspective and correct remaining navigation problems |
-| CRH-44D9 — Prove reorganization behavior-neutral | Planned | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
+| CRH-44D8 — Perform unfamiliar-human browseability audit | Done | Audited every package tree/file responsibility as a newcomer; no further rename/nesting changes were justified, and added one central package navigation map for cross-package orientation |
+| CRH-44D9 — Prove reorganization behavior-neutral | Next | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D7 are complete; CRH-44D8 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D8 are complete; CRH-44D9 is the next implementation-hygiene task.
 
 ## 1. Purpose
 
@@ -1699,6 +1699,8 @@ Any deliberate package-surface change from D3 must be explicitly accounted for.
 
 ### CRH-44D8 — Perform the unfamiliar-human browseability audit
 
+**Status:** Done. Reviewed every package tree and authored TypeScript file from an unfamiliar-reader perspective. The resulting names and grouping were sufficiently inferable from package + path + filename: no vague/orphan module, misleading symmetry, unnecessary nesting, or missing conceptual subfolder justified another structural change. The remaining orientation gap was cross-package: a newcomer had no lightweight map explaining which package owns the semantic kernel, reusable conformance evidence, cross-IO aggregation, or each adapter. `packages/README.md` now provides that map, calls out the common adapter shape and Sieve-specific endpoint-profile layer, and records the package-root import boundary without duplicating architecture authority.
+
 Review each resulting package tree as if encountering Mailchemy without prior
 project context.
 
@@ -1738,7 +1740,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D7 are complete. CRH-44D8 is next.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D8 are complete. CRH-44D9 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 
