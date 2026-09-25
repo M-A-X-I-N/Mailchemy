@@ -7,7 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 has now applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer. CRH-44D7 has now reconciled imports, root barrels/exports, and current-facing durable documentation, while preserving the old → new maps below as intentional historical design evidence.
 
 ## 1. Design rules
 
@@ -576,6 +576,28 @@ reach it in reviewable checkpoints:
 Repeated rename/move checkpoints are acceptable here: recoverability and clear
 review history are more important than minimizing the number of `git mv`
 operations.
+
+### 5.1 CRH-44D7 reconciliation result
+
+The physical moves from D4–D6 remain internal implementation details rather than
+new consumer import paths:
+
+- every workspace package continues to export only its package-root entry point;
+- cross-package TypeScript imports use package roots rather than internal
+  subpaths;
+- the D4–D6 barrel changes only repoint module specifiers to the new internal
+  files; they do not add or remove exported symbols.
+
+The deliberate public-surface changes in this organization sequence are the D3
+semantic cleanup recorded in section 2: capability-instance and leaf-expression
+names, capability-contract conformance names, `sharedRuleFixtures`,
+`SieveScriptNative`, and removal of the obsolete
+`mailchemyConformanceScaffold` sentinel.
+
+Repository-wide stale-reference auditing found no remaining old names or paths
+outside this document's intentional design history. Current-facing roadmap text
+was updated from the historical "target-runner" wording to
+"target-realization conformance".
 
 ## 6. D1 acceptance
 

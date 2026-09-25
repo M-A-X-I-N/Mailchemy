@@ -23,7 +23,7 @@
 | CRH-17 — Implement capability contract test runner | Done | Provider-independent runner validates fixtures, enforces valid/invalid boundary coverage, and supports optional pure semantic oracles |
 | CRH-18 — Implement target realization conformance runner | Done | Shared fixtures run against Direct-or-Unsupported targets with expected Unsupported reason classes treated as passing conformance |
 | CRH-19 — Implement codec round-trip harness | Done | Encode/decode flow validates both canonical ends and requires explicit semantic-equivalence logic rather than AST/native byte equality |
-| CRH-20 — Implement conformance matrix/report model | Done | Machine-readable matrix and deterministic Markdown report are generated from executable target-runner results |
+| CRH-20 — Implement conformance matrix/report model | Done | Machine-readable matrix and deterministic Markdown report are generated from executable target-realization conformance results |
 | CRH-21 — Add harness self-tests with fake targets/codecs | Done | Synthetic integration tests cover Direct, known absence, refinement rejection, exactness-unproven, endpoint-profile rejection, structural rejection, and semantic codec round trip; CI run `35944361660` passed Ubuntu + Windows |
 | CRH-22 — Define and register `subject.contains@1` | Done | `core.condition.subject.contains@1` defines decoded/unfolded logical Subject values, NFC + locale-independent lowercase containment, any-field behavior for repeats, missing=false, and empty-needle invalidity |
 | CRH-23 — Define and register `has-attachment@1` | Done | `core.condition.has-attachment@1` uses a deliberately narrow MIME contract: explicit non-multipart `Content-Disposition: attachment`; filename/inline/provider heuristics excluded |
@@ -56,13 +56,13 @@
 | CRH-44D4 — Reorganize Core by conceptual responsibility | Done | Moved Core into capabilities/canonical/realization boundaries, kept singletons flat, mirrored useful test grouping, and changed only required relative module paths |
 | CRH-44D5 — Reorganize Conformance and Cross-IO | Done | Grouped canonical fixture evidence/tests, renamed conformance runner/report modules descriptively, kept Cross-IO flat, and renamed the refusal test without changing semantic behavior |
 | CRH-44D6 — Standardize adapter package organization | Done | Removed redundant provider-local filename prefixes, aligned equivalent codec/target/conformance layouts, kept packages flat, and preserved Sieve's real endpoint/profile layer |
-| CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Next | Repair references and explicitly account for deliberate package-surface changes |
-| CRH-44D8 — Perform unfamiliar-human browseability audit | Planned | Review resulting trees from a newcomer perspective and correct remaining navigation problems |
+| CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Done | Reconciled current-facing references, verified root-only package exports/no deep consumer imports, and explicitly accounted for the deliberate D3 public-name changes |
+| CRH-44D8 — Perform unfamiliar-human browseability audit | Next | Review resulting trees from a newcomer perspective and correct remaining navigation problems |
 | CRH-44D9 — Prove reorganization behavior-neutral | Planned | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D6 are complete; CRH-44D7 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D7 are complete; CRH-44D8 is the next implementation-hygiene task.
 
 ## 1. Purpose
 
@@ -1680,6 +1680,8 @@ other adapters for symmetry.
 
 ### CRH-44D7 — Reconcile imports, barrels, exports, and durable documentation
 
+**Status:** Done. Current-facing repository references now use the post-D3–D6 terminology and paths; the only retained old names/paths are deliberate historical evidence in the approved old → new map and naming rationale. Every workspace package still exposes only its root entry point, cross-package code imports only package roots, and D4–D6 changed barrel module specifiers without changing exported symbol sets. The public-surface changes are therefore limited to the approved D3 semantic cleanup: capability-instance/leaf-expression names, capability-contract conformance names, `sharedRuleFixtures`, `SieveScriptNative`, and removal of the obsolete `mailchemyConformanceScaffold` sentinel.
+
 After the physical/name changes:
 
 - reconcile internal imports;
@@ -1736,7 +1738,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D6 are complete. CRH-44D7 is next.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D7 are complete. CRH-44D8 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 
