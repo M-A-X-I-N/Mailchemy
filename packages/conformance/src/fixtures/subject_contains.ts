@@ -16,7 +16,7 @@ import {
     subjectContainsCapability,
 } from "@mailchemy/core";
 
-import { defineCanonicalFixture } from "../fixture.js";
+import { defineCanonicalFixture } from "./canonical_fixture.js";
 
 /**
  * Builds one valid Subject-containment fixture plus logical Subject field

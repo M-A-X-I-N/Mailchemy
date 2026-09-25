@@ -18,7 +18,7 @@ import {
     type UnsupportedReasonCode,
 } from "@mailchemy/core";
 
-import type { CanonicalFixture } from "./fixture.js";
+import type { CanonicalFixture } from "./fixtures/canonical_fixture.js";
 
 /**
  * Expected direct-realization outcome for one target/fixture conformance case.

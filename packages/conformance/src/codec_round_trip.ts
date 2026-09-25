@@ -17,7 +17,7 @@ import {
     type SemanticCodec,
 } from "@mailchemy/core";
 
-import type { CanonicalFixture } from "./fixture.js";
+import type { CanonicalFixture } from "./fixtures/canonical_fixture.js";
 
 /**
  * Caller-supplied semantic equivalence relation for canonical expressions.

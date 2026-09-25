@@ -1,6 +1,6 @@
 /**
- * Exposes the public `@mailchemy/conformance` fixture, capability-contract
- * conformance, target-runner, round-trip, matrix, and shared-rule APIs.
+ * Exposes the public `@mailchemy/conformance` fixture, capability-contract,
+ * target-realization, codec-round-trip, matrix, and shared-rule conformance APIs.
  *
  * @remarks
  * Re-exporting evidence/harness machinery here does not strengthen any target,
@@ -15,7 +15,7 @@ export {
     type CanonicalFixture,
     type CanonicalFixtureDefinition,
     type ExpectedCanonicalValidation,
-} from "./fixture.js";
+} from "./fixtures/canonical_fixture.js";
 
 export {
     runCapabilityContractConformance,
@@ -34,7 +34,7 @@ export {
     type TargetRealizationCaseResult,
     type TargetRealizationExpectation,
     type TargetRealizationRun,
-} from "./target_runner.js";
+} from "./target_realization_conformance.js";
 
 export {
     runCodecRoundTrips,
@@ -43,7 +43,7 @@ export {
     type CodecRoundTripCaseResult,
     type CodecRoundTripFailureKind,
     type CodecRoundTripRun,
-} from "./round_trip.js";
+} from "./codec_round_trip.js";
 
 export {
     buildConformanceMatrix,
@@ -51,7 +51,7 @@ export {
     type ConformanceMatrix,
     type ConformanceMatrixCell,
     type ConformanceMatrixRow,
-} from "./matrix.js";
+} from "./conformance_matrix.js";
 
 export { hasAttachmentFixtures } from "./fixtures/has_attachment.js";
 export { sharedRuleFixtures } from "./fixtures/shared_rules.js";

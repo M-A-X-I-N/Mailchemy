@@ -126,7 +126,7 @@ describe("negative cross-IO exactness", () => {
 
 /**
  * Retrieves one shared fixture by identity and proves it is valid canonical IR
- * before a negative exactness test uses it.
+ * before an exactness-refusal test uses it.
  *
  * @param fixtures Shared fixture family to search.
  * @param fixtureId Stable fixture identity required by the test.

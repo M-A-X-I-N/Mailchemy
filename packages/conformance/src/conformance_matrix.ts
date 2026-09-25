@@ -14,7 +14,7 @@ import type { UnsupportedReasonCode } from "@mailchemy/core";
 import type {
     TargetRealizationCaseResult,
     TargetRealizationRun,
-} from "./target_runner.js";
+} from "./target_realization_conformance.js";
 
 /**
  * One target/fixture matrix cell derived from executable conformance evidence.

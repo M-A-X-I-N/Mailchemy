@@ -17,7 +17,7 @@ import {
     type CanonicalExpression,
 } from "@mailchemy/core";
 
-import type { CanonicalFixture } from "./fixture.js";
+import type { CanonicalFixture } from "./fixtures/canonical_fixture.js";
 
 /**
  * Result returned by one optional semantic oracle.

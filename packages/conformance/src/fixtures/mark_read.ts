@@ -15,7 +15,7 @@ import {
     markReadCapability,
 } from "@mailchemy/core";
 
-import { defineCanonicalFixture } from "../fixture.js";
+import { defineCanonicalFixture } from "./canonical_fixture.js";
 
 /**
  * Builds one valid mark-read fixture with the prior state needed by the pure

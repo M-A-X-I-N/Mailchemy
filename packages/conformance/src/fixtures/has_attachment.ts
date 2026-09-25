@@ -16,7 +16,7 @@ import {
     hasAttachmentCapability,
 } from "@mailchemy/core";
 
-import { defineCanonicalFixture } from "../fixture.js";
+import { defineCanonicalFixture } from "./canonical_fixture.js";
 
 /**
  * Builds one valid has-attachment fixture plus MIME-entity oracle metadata.

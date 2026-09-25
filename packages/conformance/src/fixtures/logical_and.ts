@@ -17,7 +17,7 @@ import {
     subjectContainsCapability,
 } from "@mailchemy/core";
 
-import { defineCanonicalFixture } from "../fixture.js";
+import { defineCanonicalFixture } from "./canonical_fixture.js";
 
 /**
  * Builds a synthetic canonical condition operand whose identity/order can be

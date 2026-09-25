@@ -1,5 +1,5 @@
 /**
- * Self-tests the R0 conformance harness end-to-end using deliberately synthetic
+ * Exercises the conformance harness end-to-end using deliberately synthetic
  * capabilities, targets, endpoint profiles, structures, and codecs.
  *
  * @remarks
@@ -42,14 +42,14 @@ import {
     type CanonicalEquivalence,
 } from "@mailchemy/conformance";
 
-/** Synthetic boolean condition used throughout harness self-tests. */
+/** Synthetic boolean condition used throughout harness integration tests. */
 const booleanCondition = defineSemanticCapability<{
-    /** Synthetic truth value used throughout harness self-tests. */
+    /** Synthetic truth value used throughout harness integration tests. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
-    description: "Synthetic boolean capability for R0 harness self-tests.",
+    description: "Synthetic boolean capability for harness integration tests.",
     validateParameters: (value) => {
         if (
             typeof value === "object" &&
@@ -73,7 +73,7 @@ const booleanCondition = defineSemanticCapability<{
 const andCapability = defineSemanticCapability<null>({
     id: parseCapabilityId("test.logic.and@1"),
     role: "logic",
-    description: "Synthetic AND capability for R0 harness self-tests.",
+    description: "Synthetic AND capability for harness integration tests.",
     validateParameters: (value) =>
         value === null
             ? valid(null)
@@ -188,7 +188,7 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
  * Exercises the major harness layers together while keeping all evidence
  * synthetic and provider-independent.
  */
-describe("R0 conformance harness self-tests", () => {
+describe("conformance harness integration", () => {
     /**
      * Proves canonical validation, boundary evidence, and pure semantic oracles
      * compose correctly in capability-contract conformance.

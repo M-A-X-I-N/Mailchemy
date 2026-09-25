@@ -27,15 +27,15 @@ import {
 } from "@mailchemy/conformance";
 
 /**
- * Synthetic boolean condition used to exercise target-runner behavior.
+ * Synthetic boolean condition used to exercise target-realization conformance.
  */
 const booleanCapability = defineSemanticCapability<{
-    /** Synthetic truth value carried by target-runner fixtures. */
+    /** Synthetic truth value carried by target-realization fixtures. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
-    description: "Synthetic target-runner condition.",
+    description: "Synthetic target-realization conformance condition.",
     validateParameters: (value) => {
         if (
             typeof value === "object" &&
@@ -58,7 +58,7 @@ const booleanCapability = defineSemanticCapability<{
 /**
  * Creates a fresh registry containing the synthetic boolean contract.
  *
- * @returns Registry used by one target-runner case.
+ * @returns Registry used by one target-realization conformance case.
  */
 function registry() {
     const result = new CapabilityRegistry();

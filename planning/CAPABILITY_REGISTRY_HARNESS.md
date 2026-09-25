@@ -54,15 +54,15 @@
 | CRH-44D2 — Apply authored TypeScript filename convention | Done | Renamed all 71 dashed authored TS filenames to lower_snake_case, updated only required module specifiers, and enabled forceConsistentCasingInFileNames |
 | CRH-44D3 — Improve semantic names of modules and code objects | Done | Applied capability-instance/leaf/conformance/shared-rule/Sieve/helper terminology, removed the obsolete scaffold sentinel, and preserved all 111 ID literals |
 | CRH-44D4 — Reorganize Core by conceptual responsibility | Done | Moved Core into capabilities/canonical/realization boundaries, kept singletons flat, mirrored useful test grouping, and changed only required relative module paths |
-| CRH-44D5 — Reorganize Conformance and Cross-IO | Next | Group fixture evidence and apply descriptive conformance/aggregation names without gratuitous nesting |
-| CRH-44D6 — Standardize adapter package organization | Planned | Remove redundant provider-local filename prefixes and align equivalent layouts while preserving real adapter differences |
+| CRH-44D5 — Reorganize Conformance and Cross-IO | Done | Grouped canonical fixture evidence/tests, renamed conformance runner/report modules descriptively, kept Cross-IO flat, and renamed the refusal test without changing semantic behavior |
+| CRH-44D6 — Standardize adapter package organization | Next | Remove redundant provider-local filename prefixes and align equivalent layouts while preserving real adapter differences |
 | CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Planned | Repair references and explicitly account for deliberate package-surface changes |
 | CRH-44D8 — Perform unfamiliar-human browseability audit | Planned | Review resulting trees from a newcomer perspective and correct remaining navigation problems |
 | CRH-44D9 — Prove reorganization behavior-neutral | Planned | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D4 are complete; CRH-44D5 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D5 are complete; CRH-44D6 is the next implementation-hygiene task.
 
 ## 1. Purpose
 
@@ -1651,6 +1651,8 @@ Avoid creating a folder for a single module merely to shorten the root listing.
 
 ### CRH-44D5 — Reorganize Conformance and Cross-IO
 
+**Status:** Done. Conformance now groups canonical fixture definitions and their tests under `fixtures/`, uses descriptive `codec_round_trip.ts`, `conformance_matrix.ts`, and `target_realization_conformance.ts` module names, and renames the end-to-end synthetic harness test to `harness_integration.test.ts`. Cross-IO remains intentionally flat, with its negative boundary proof renamed to `exactness_refusal.test.ts`. Fifteen authored TypeScript paths moved; semantic AST equivalence is unchanged after accounting for required module paths and four human-facing test-label updates.
+
 Apply the proposed Conformance fixture grouping, descriptive runner/report names,
 test grouping, and the intentionally flat Cross-IO layout.
 
@@ -1732,7 +1734,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D4 are complete. CRH-44D5 is next.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D5 are complete. CRH-44D6 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 

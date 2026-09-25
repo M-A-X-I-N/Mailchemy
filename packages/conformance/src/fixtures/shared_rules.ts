@@ -22,7 +22,7 @@ import {
     subjectContainsCapability,
 } from "@mailchemy/core";
 
-import { defineCanonicalFixture } from "../fixture.js";
+import { defineCanonicalFixture } from "./canonical_fixture.js";
 
 /**
  * Builds a canonical Subject-containment condition for rule-shaped fixtures.
