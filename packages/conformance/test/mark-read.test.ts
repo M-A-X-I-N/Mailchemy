@@ -1,3 +1,10 @@
+/**
+ * Proves the canonical mark-read fixture family against the pure read-state
+ * transition oracle and its idempotence boundary.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -10,7 +17,15 @@ import {
     runCapabilityContractTests,
 } from "@mailchemy/conformance";
 
+/**
+ * Exercises canonical mark-read state semantics only; continuation/provider
+ * execution behavior is outside this evidence surface.
+ */
 describe("core.action.mark-read@1", () => {
+    /**
+     * Proves valid/invalid mark-read fixtures agree with canonical validation and
+     * the state-transition oracle while satisfying boundary coverage.
+     */
     it("satisfies its canonical contract fixture suite", () => {
         const registry = new CapabilityRegistry();
         registry.register(markReadCapability);
@@ -59,6 +74,10 @@ describe("core.action.mark-read@1", () => {
         ]);
     });
 
+    /**
+     * Proves repeated application converges on/read state true for both possible
+     * canonical input states.
+     */
     it("is idempotent over canonical read state", () => {
         expect(applyMarkRead(false)).toBe(true);
         expect(applyMarkRead(true)).toBe(true);

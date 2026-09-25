@@ -1372,6 +1372,8 @@ The documentation must preserve the distinction between semantic meaning, codec 
 
 #### CRH-44C4 — Document conformance fixtures and contract-validation machinery
 
+**Status:** Done. Shared canonical fixtures, capability-contract validation/coverage machinery, initial capability/rule fixture families, and their corresponding tests now follow the shared TypeScript documentation contract.
+
 Document the first coherent half of `@mailchemy/conformance` together with the tests that prove it.
 
 Primary surface includes:
@@ -1525,7 +1527,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C3 are complete. CRH-44C4 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C4 are complete. CRH-44C5 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

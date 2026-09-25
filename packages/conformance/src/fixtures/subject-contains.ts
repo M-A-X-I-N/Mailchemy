@@ -1,3 +1,15 @@
+/**
+ * Defines canonical valid/invalid evidence for
+ * `core.condition.subject.contains@1`, including logical-Subject oracle data
+ * for normalization, repeated fields, and version-1 case behavior.
+ *
+ * @remarks
+ * The fixtures record canonical Subject semantics. They intentionally do not
+ * assert that similarly named native provider predicates are exact.
+ *
+ * @packageDocumentation
+ */
+
 import {
     createCapabilitySpecimen,
     createConditionExpression,
@@ -6,6 +18,17 @@ import {
 
 import { defineCanonicalFixture } from "../fixture.js";
 
+/**
+ * Builds one valid Subject-containment fixture plus logical Subject field
+ * values consumed by the pure semantic evaluator.
+ *
+ * @param id Stable fixture identity.
+ * @param needle Canonical containment needle supplied to the capability.
+ * @param subjectFields Decoded/unfolded logical Subject values.
+ * @param expectedMatch Expected canonical predicate result.
+ * @param notes Human-readable explanation of the exercised semantic boundary.
+ * @returns Immutable valid Subject-containment fixture.
+ */
 function validFixture(
     id: string,
     needle: string,
@@ -31,6 +54,11 @@ function validFixture(
     });
 }
 
+/**
+ * Canonical fixture suite covering missing/repeated Subject fields, NFC
+ * equivalence, lowercase-without-full-folding behavior, whitespace needles, and
+ * invalid parameter shapes.
+ */
 export const subjectContainsFixtures = Object.freeze([
     validFixture(
         "subject.contains.ascii-case-insensitive",

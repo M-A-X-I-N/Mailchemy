@@ -1,3 +1,14 @@
+/**
+ * Defines canonical valid/invalid evidence for `core.logic.and@1`, including
+ * boolean oracle metadata for conjunction truth and minimum-arity boundaries.
+ *
+ * @remarks
+ * The fixtures prove canonical conjunction semantics and structure. They do not
+ * imply a target can directly realize the same composition.
+ *
+ * @packageDocumentation
+ */
+
 import {
     createAndExpression,
     createCapabilitySpecimen,
@@ -8,12 +19,29 @@ import {
 
 import { defineCanonicalFixture } from "../fixture.js";
 
+/**
+ * Builds a synthetic canonical condition operand whose identity/order can be
+ * inspected by conjunction fixtures.
+ *
+ * @param needle Distinct Subject needle used to identify the operand.
+ * @returns Canonical Subject condition expression.
+ */
 function subject(needle: string) {
     return createConditionExpression(
         createCapabilitySpecimen(subjectContainsCapability, { needle }),
     );
 }
 
+/**
+ * Builds one valid conjunction fixture plus pre-evaluated operand-result oracle
+ * metadata.
+ *
+ * @param id Stable fixture identity.
+ * @param operandResults Ordered boolean results supplied to the semantic oracle.
+ * @param expectedMatch Expected conjunction result.
+ * @param notes Human-readable explanation of the exercised boundary.
+ * @returns Immutable valid conjunction fixture.
+ */
 function validFixture(
     id: string,
     operandResults: readonly boolean[],
@@ -39,6 +67,10 @@ function validFixture(
     });
 }
 
+/**
+ * Canonical fixture suite covering conjunction truth, n-ary support, invalid
+ * arity, and invalid operator parameters.
+ */
 export const logicalAndFixtures = Object.freeze([
     validFixture(
         "logic.and.all-true",

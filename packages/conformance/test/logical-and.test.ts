@@ -1,3 +1,10 @@
+/**
+ * Proves the canonical logical-AND fixture family, conjunction truth oracle,
+ * operand-order preservation, and invalid-arity boundary.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -15,7 +22,15 @@ import {
     subjectContainsFixtures,
 } from "@mailchemy/conformance";
 
+/**
+ * Exercises canonical conjunction semantics and structure, not any target's
+ * composition support.
+ */
 describe("core.logic.and@1", () => {
+    /**
+     * Proves valid/invalid conjunction fixtures agree with canonical validation
+     * and the pure truth oracle while meeting boundary-coverage requirements.
+     */
     it("satisfies its canonical contract fixture suite", () => {
         const registry = new CapabilityRegistry();
         registry.register(logicalAndCapability);
@@ -73,6 +88,9 @@ describe("core.logic.and@1", () => {
         });
     });
 
+    /**
+     * Proves canonical conjunction construction preserves supplied operand order.
+     */
     it("preserves canonical operand order instead of sorting", () => {
         const first = createConditionExpression(
             createCapabilitySpecimen(subjectContainsCapability, {
@@ -93,6 +111,10 @@ describe("core.logic.and@1", () => {
         expect(expression.operands).toEqual([first, second]);
     });
 
+    /**
+     * Proves the pure conjunction evaluator rejects operand counts outside the
+     * version-1 minimum-arity semantic domain.
+     */
     it("refuses to evaluate the invalid zero/single operand domain", () => {
         expect(() => evaluateLogicalAnd([])).toThrow(
             "logic.and@1 requires at least two operands.",

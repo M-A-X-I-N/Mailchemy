@@ -1,3 +1,15 @@
+/**
+ * Defines canonical valid/invalid evidence for
+ * `core.condition.has-attachment@1`, including semantic-oracle metadata for
+ * the provider-independent MIME-entity evaluator.
+ *
+ * @remarks
+ * These fixtures prove the canonical contract boundary. They do not claim that
+ * any particular target can encode attachment presence exactly.
+ *
+ * @packageDocumentation
+ */
+
 import {
     createCapabilitySpecimen,
     createConditionExpression,
@@ -6,10 +18,22 @@ import {
 
 import { defineCanonicalFixture } from "../fixture.js";
 
+/**
+ * Builds one valid has-attachment fixture plus MIME-entity oracle metadata.
+ *
+ * @param id Stable fixture identity.
+ * @param entities Parsed MIME-entity views supplied to the semantic evaluator.
+ * @param expectedMatch Expected canonical condition result.
+ * @param notes Human-readable explanation of the exercised boundary.
+ * @returns Immutable valid canonical fixture.
+ */
 function validFixture(
     id: string,
     entities: readonly {
+        /** Parsed Content-Disposition type, or null when absent. */
         readonly dispositionType: string | null;
+
+        /** Whether the entity is itself multipart. */
         readonly isMultipart: boolean;
     }[],
     expectedMatch: boolean,
@@ -35,6 +59,10 @@ function validFixture(
     });
 }
 
+/**
+ * Canonical fixture suite for explicit attachment disposition semantics plus the
+ * invalid non-null parameter boundary.
+ */
 export const hasAttachmentFixtures = Object.freeze([
     validFixture(
         "has-attachment.explicit-attachment",

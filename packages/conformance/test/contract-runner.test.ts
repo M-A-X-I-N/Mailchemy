@@ -1,3 +1,10 @@
+/**
+ * Proves the capability-contract runner's validation, boundary-coverage, and
+ * optional semantic-oracle behavior using synthetic capability evidence.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -15,6 +22,10 @@ import {
     runCapabilityContractTests,
 } from "@mailchemy/conformance";
 
+/**
+ * Synthetic boolean condition used to exercise harness behavior independently
+ * of any real Mailchemy semantic capability or provider.
+ */
 const booleanCapability = defineSemanticCapability<{
     readonly value: boolean;
 }>({
@@ -40,12 +51,21 @@ const booleanCapability = defineSemanticCapability<{
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Creates a fresh registry containing only the synthetic boolean contract.
+ *
+ * @returns Registry used by each independent runner test.
+ */
 function setupRegistry() {
     const registry = new CapabilityRegistry();
     registry.register(booleanCapability);
     return registry;
 }
 
+/**
+ * Valid synthetic fixture providing the positive side of contract coverage and
+ * truth-oracle metadata.
+ */
 const validTrue = defineCanonicalFixture({
     id: "boolean.true",
     capabilities: [booleanCapability.id],
@@ -56,6 +76,10 @@ const validTrue = defineCanonicalFixture({
     oracle: Object.freeze({ expectedTruth: true }),
 });
 
+/**
+ * Invalid synthetic fixture providing the negative parameter boundary required
+ * for complete capability coverage.
+ */
 const invalidParameter = defineCanonicalFixture({
     id: "boolean.invalid-parameter",
     capabilities: [booleanCapability.id],
@@ -70,7 +94,15 @@ const invalidParameter = defineCanonicalFixture({
     expectedValidation: "invalid",
 });
 
+/**
+ * Exercises contract-run aggregation and coverage semantics without asserting
+ * anything about concrete adapters.
+ */
 describe("runCapabilityContractTests", () => {
+    /**
+     * Proves a registered capability passes coverage only when fixtures establish
+     * both valid and invalid canonical boundaries.
+     */
     it("passes a capability whose fixtures establish valid and invalid boundaries", () => {
         const result = runCapabilityContractTests(setupRegistry(), [
             validTrue,
@@ -92,6 +124,10 @@ describe("runCapabilityContractTests", () => {
         ]);
     });
 
+    /**
+     * Proves missing negative evidence fails coverage even when all supplied
+     * fixtures themselves validate as expected.
+     */
     it("fails coverage when a registered capability lacks one side of its boundary", () => {
         const result = runCapabilityContractTests(setupRegistry(), [validTrue]);
 
@@ -104,6 +140,10 @@ describe("runCapabilityContractTests", () => {
         });
     });
 
+    /**
+     * Proves semantic oracles run only after successful expected-valid canonical
+     * validation, so deliberately invalid fixtures are boundary evidence only.
+     */
     it("runs optional pure semantic oracles only for valid fixtures", () => {
         let oracleCalls = 0;
         const result = runCapabilityContractTests(
@@ -146,6 +186,10 @@ describe("runCapabilityContractTests", () => {
         expect(result.passed).toBe(true);
     });
 
+    /**
+     * Proves fixture expectation mismatches fail the run instead of being masked
+     * by coverage accounting.
+     */
     it("fails a fixture when its canonical validation disagrees with expectation", () => {
         const incorrectlyExpectedValid = defineCanonicalFixture({
             id: "boolean.bad-expectation",

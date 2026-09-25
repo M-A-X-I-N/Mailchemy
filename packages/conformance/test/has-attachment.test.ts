@@ -1,3 +1,10 @@
+/**
+ * Proves the canonical has-attachment fixture family against the pure semantic
+ * evaluator and required valid/invalid boundary coverage.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -10,7 +17,15 @@ import {
     runCapabilityContractTests,
 } from "@mailchemy/conformance";
 
+/**
+ * Exercises canonical attachment semantics only; this is not evidence that any
+ * native target realizes the condition exactly.
+ */
 describe("core.condition.has-attachment@1", () => {
+    /**
+     * Proves all attachment fixtures validate as declared, their MIME oracle data
+     * agrees with the core evaluator, and both valid/invalid boundaries exist.
+     */
     it("satisfies its canonical contract fixture suite", () => {
         const registry = new CapabilityRegistry();
         registry.register(hasAttachmentCapability);

@@ -1,3 +1,10 @@
+/**
+ * Proves the canonical Subject-containment fixture family against the pure
+ * semantic evaluator and parameter canonicalization behavior.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -10,7 +17,15 @@ import {
     subjectContainsFixtures,
 } from "@mailchemy/conformance";
 
+/**
+ * Exercises canonical Subject semantics only; similarly named native predicates
+ * are not assumed exact by this suite.
+ */
 describe("core.condition.subject.contains@1", () => {
+    /**
+     * Proves valid/invalid Subject fixtures agree with canonical validation and
+     * the logical-Subject evaluation oracle while satisfying boundary coverage.
+     */
     it("satisfies its canonical contract fixture suite", () => {
         const result = runCapabilityContractTests(
             (() => {
@@ -80,6 +95,10 @@ describe("core.condition.subject.contains@1", () => {
         ]);
     });
 
+    /**
+     * Proves decomposed Unicode fixture input is canonicalized to NFC before the
+     * semantic specimen is retained.
+     */
     it("canonicalizes the needle to NFC at specimen creation time", () => {
         const decomposed = subjectContainsCapability.validateParameters({
             needle: "Cafe\u0301",

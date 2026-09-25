@@ -1,3 +1,15 @@
+/**
+ * Defines the shared A/B/C canonical rule-shaped fixtures plus stable definition
+ * and structural edge cases used across later target/codec conformance work.
+ *
+ * @remarks
+ * These fixtures establish canonical structure and capability composition. They
+ * are not themselves claims that any target realizes A, B, C, or the edge cases
+ * directly.
+ *
+ * @packageDocumentation
+ */
+
 import {
     createActionExpression,
     createAndExpression,
@@ -12,24 +24,44 @@ import {
 
 import { defineCanonicalFixture } from "../fixture.js";
 
+/**
+ * Builds a canonical Subject-containment condition for rule-shaped fixtures.
+ *
+ * @param needle Subject substring represented by the semantic specimen.
+ * @returns Canonical condition expression.
+ */
 function subjectContains(needle: string) {
     return createConditionExpression(
         createCapabilitySpecimen(subjectContainsCapability, { needle }),
     );
 }
 
+/**
+ * Builds the parameterless canonical has-attachment condition.
+ *
+ * @returns Canonical attachment-presence condition expression.
+ */
 function hasAttachment() {
     return createConditionExpression(
         createCapabilitySpecimen(hasAttachmentCapability, null),
     );
 }
 
+/**
+ * Builds the parameterless canonical mark-read action.
+ *
+ * @returns Canonical mark-read action expression.
+ */
 function markRead() {
     return createActionExpression(
         createCapabilitySpecimen(markReadCapability, null),
     );
 }
 
+/**
+ * Shared valid canonical rule fixtures A/B/C plus definition/structure edges
+ * that preserve normalization and operand-order expectations.
+ */
 export const initialRuleFixtures = Object.freeze([
     defineCanonicalFixture({
         id: "rule.a.subject-invoice-mark-read",
