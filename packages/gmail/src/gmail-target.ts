@@ -1,3 +1,15 @@
+/**
+ * Classifies direct exact realizability for the initial Gmail Filter target.
+ *
+ * @remarks
+ * The target models only proven semantic equivalence, not mere similarity to
+ * Gmail criteria/action fields. Mark-read is Direct through removal of the
+ * `UNREAD` system label; Subject and attachment criteria remain
+ * `exactness-unproven`.
+ *
+ * @packageDocumentation
+ */
+
 import {
     directRealization,
     hasAttachmentCapability,
@@ -10,19 +22,38 @@ import {
     type DirectRealizationResult,
 } from "@mailchemy/core";
 
+/**
+ * Stable direct-realization contract for the initial Gmail Filter slice.
+ */
 export interface GmailDirectRealizationTarget {
+    /** Stable implementation-level identity of the Gmail target. */
     readonly id: "gmail.filter.direct@1";
+    /**
+     * Classifies one concrete canonical expression for direct Gmail realization.
+     *
+     * @param expression Canonical expression or structure to inspect.
+     * @returns Direct or structured Unsupported evidence.
+     */
     readonly checkDirectRealization: (
         expression: CanonicalExpression,
     ) => DirectRealizationResult;
 }
 
+/**
+ * Initial Gmail Filter realization target.
+ */
 export const gmailDirectRealizationTarget: GmailDirectRealizationTarget =
     Object.freeze({
         id: "gmail.filter.direct@1",
         checkDirectRealization: checkGmailDirectRealization,
     });
 
+/**
+ * Dispatches Gmail realization checks by canonical expression shape.
+ *
+ * @param expression Canonical expression or structure to classify.
+ * @returns Direct or Unsupported realization evidence.
+ */
 function checkGmailDirectRealization(
     expression: CanonicalExpression,
 ): DirectRealizationResult {
@@ -37,12 +68,24 @@ function checkGmailDirectRealization(
     }
 }
 
+/**
+ * Classifies one canonical condition/action leaf against the initial Gmail
+ * semantic mapping.
+ *
+ * @param expression Condition or action leaf.
+ * @returns Direct for proven mark-read, otherwise reason-specific Unsupported
+ * evidence.
+ */
 function checkLeaf(
     expression: Extract<
         CanonicalExpression,
-        { readonly kind: "condition" | "action" }
+        {
+            /** Leaf discriminator accepted by this classifier. */
+            readonly kind: "condition" | "action";
+        }
     >,
 ): DirectRealizationResult {
+    /** Semantic identity whose Gmail realization is under consideration. */
     const capabilityId = expression.specimen.capabilityId;
 
     if (capabilityId === markReadCapability.id)
@@ -74,8 +117,22 @@ function checkLeaf(
     );
 }
 
+/**
+ * Classifies canonical conjunction after validating the expected logic operator
+ * and every operand recursively.
+ *
+ * @param expression Canonical AND expression.
+ * @returns Direct only when all operands are Direct; otherwise the first
+ * encountered Unsupported evidence.
+ */
 function checkAnd(
-    expression: Extract<CanonicalExpression, { readonly kind: "and" }>,
+    expression: Extract<
+        CanonicalExpression,
+        {
+            /** Conjunction discriminator accepted by this classifier. */
+            readonly kind: "and";
+        }
+    >,
 ): DirectRealizationResult {
     if (expression.operator.capabilityId !== logicalAndCapability.id) {
         return unsupportedRealization(
@@ -97,9 +154,28 @@ function checkAnd(
     return directRealization();
 }
 
+/**
+ * Classifies the initial Gmail filter-shaped rule structure.
+ *
+ * @remarks
+ * This slice proves exact structure only for one condition plus exactly one
+ * action. It does not imply general equivalence for Gmail's multi-filter
+ * execution model or mutation visibility.
+ *
+ * @param expression Canonical rule structure.
+ * @returns Direct when condition and sole action are Direct; otherwise
+ * reason-specific Unsupported evidence.
+ */
 function checkRule(
-    expression: Extract<CanonicalExpression, { readonly kind: "rule" }>,
+    expression: Extract<
+        CanonicalExpression,
+        {
+            /** Rule discriminator accepted by this classifier. */
+            readonly kind: "rule";
+        }
+    >,
 ): DirectRealizationResult {
+    /** Realization evidence for the rule condition. */
     const conditionResult = checkGmailDirectRealization(expression.condition);
 
     if (conditionResult.kind === "unsupported")
@@ -114,6 +190,7 @@ function checkRule(
         );
     }
 
+    /** Sole action required by the initial exact rule-structure slice. */
     const action = expression.actions[0];
 
     if (action === undefined) {

@@ -1,3 +1,10 @@
+/**
+ * Connects shared canonical fixtures to the Gmail codec/target and representative
+ * native Filter fixtures without widening provider semantics.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -24,8 +31,12 @@ import {
 } from "../src/index.js";
 import { nativeGmailFixtures } from "./fixtures/native-gmail.js";
 
+/** Core semantic registry used for Gmail fixture validation/equivalence. */
 const registry = createCoreCapabilityRegistry();
 
+/**
+ * Shared initial canonical fixture corpus considered for Gmail conformance.
+ */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
     ...hasAttachmentFixtures,
@@ -34,12 +45,26 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...initialRuleFixtures,
 ]);
 
+/**
+ * Narrows shared fixtures to cases declared canonically valid.
+ *
+ * @param fixture Shared canonical fixture.
+ * @returns Whether the fixture is expected to validate canonically.
+ */
 function isCanonicallyValidFixture(
     fixture: CanonicalFixture,
 ): fixture is CanonicalFixture<CanonicalExpression> {
     return fixture.expectedValidation === "valid";
 }
 
+/**
+ * Compares the action-only Direct Gmail round-trip subset by canonical specimen
+ * equality.
+ *
+ * @param left First canonical expression.
+ * @param right Second canonical expression.
+ * @returns Whether both are semantically equal action specimens.
+ */
 function areEquivalent(
     left: CanonicalExpression,
     right: CanonicalExpression,
@@ -50,7 +75,15 @@ function areEquivalent(
     return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
 }
 
+/**
+ * Exercises the currently Direct Gmail semantic subset and representative
+ * native decode boundaries.
+ */
 describe("Gmail conformance", () => {
+    /**
+     * Proves every shared initial fixture currently Direct for Gmail survives
+     * codec encode/decode by canonical meaning.
+     */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
@@ -77,6 +110,10 @@ describe("Gmail conformance", () => {
         expect(run.results.every((result) => result.passed)).toBe(true);
     });
 
+    /**
+     * Proves representative native Gmail inputs preserve their
+     * decoded/opaque/refused evidence categories and refusal codes.
+     */
     it("decodes representative native Gmail fixtures without widening semantics", () => {
         for (const fixture of nativeGmailFixtures) {
             const result = gmailFilterCodec.decode(fixture.native);
@@ -97,6 +134,10 @@ describe("Gmail conformance", () => {
         }
     });
 
+    /**
+     * Proves provider-native `UNREAD` label mechanics disappear at the canonical
+     * semantic boundary and decode only to mark-read.
+     */
     it("does not leak the Gmail UNREAD label representation into canonical mark-read", () => {
         const decoded = gmailFilterCodec.decode({
             id: "provider-object-id",

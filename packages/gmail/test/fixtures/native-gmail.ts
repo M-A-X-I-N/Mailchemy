@@ -1,13 +1,32 @@
+/**
+ * Defines representative native Gmail Filter decode evidence for the initial
+ * codec.
+ *
+ * @packageDocumentation
+ */
+
 import type { GmailFilterNative } from "../../src/index.js";
 
+/**
+ * One native Gmail Filter specimen and its expected decode evidence category.
+ */
 export interface NativeGmailFixture {
+    /** Stable fixture identity. */
     readonly id: string;
+    /** Native Gmail Filter object supplied to the codec. */
     readonly native: GmailFilterNative;
+    /** Expected top-level native decode outcome. */
     readonly expectedKind: "decoded" | "unsupported-native" | "opaque";
+    /** Expected refusal category when decode yields unsupported-native. */
     readonly expectedReasonCode?:
         "invalid-native" | "semantic-unsupported" | "exactness-unproven";
 }
 
+/**
+ * Representative Gmail corpus covering exact mark-read, server metadata,
+ * unproven structured criteria, opaque query syntax, and additional label
+ * effects.
+ */
 export const nativeGmailFixtures = Object.freeze([
     {
         id: "native.mark-read.minimal",

@@ -1,3 +1,10 @@
+/**
+ * Exposes the public `@mailchemy/gmail` codec/native-representation and direct
+ * realization-target APIs.
+ *
+ * @packageDocumentation
+ */
+
 export {
     gmailFilterCodec,
     type GmailFilterActionNative,
