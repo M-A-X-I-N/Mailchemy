@@ -1,11 +1,30 @@
+/**
+ * Defines representative Thunderbird native-text decode evidence for the
+ * initial codec.
+ *
+ * @packageDocumentation
+ */
+
+/**
+ * One native Thunderbird filter-text specimen and expected decode category.
+ */
 export interface NativeThunderbirdFixture {
+    /** Stable fixture identity. */
     readonly id: string;
+    /** Native Thunderbird filter text supplied to the codec. */
     readonly source: string;
+    /** Expected top-level native decode outcome. */
     readonly expectedKind: "decoded" | "unsupported-native" | "opaque";
+    /** Expected refusal category when decode yields unsupported-native. */
     readonly expectedReasonCode?:
         "invalid-native" | "semantic-unsupported" | "exactness-unproven";
 }
 
+/**
+ * Representative native corpus covering exact mark-read fragments, CRLF,
+ * unproven conditions, real filter envelopes, custom actions, and unknown
+ * fields.
+ */
 export const nativeThunderbirdFixtures = Object.freeze([
     {
         id: "native.mark-read.fragment",
