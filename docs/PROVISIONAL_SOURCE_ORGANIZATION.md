@@ -7,8 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file is moved or renamed by CRH-44D1. Later CRH-44D tasks apply this
-design in bounded checkpoints.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 has since applied the first bounded checkpoint: authored TypeScript filenames now use `lower_snake_case` in their existing directories, with semantic renames and folder reorganization still pending.
 
 ## 1. Design rules
 

@@ -5,8 +5,8 @@
  * @packageDocumentation
  */
 
-import { defineSemanticCapability } from "../capability-contract.js";
-import { parseCapabilityId } from "../capability-id.js";
+import { defineSemanticCapability } from "../capability_contract.js";
+import { parseCapabilityId } from "../capability_id.js";
 import { invalid, valid, validationIssue } from "../validation.js";
 
 /**

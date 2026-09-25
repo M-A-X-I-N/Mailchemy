@@ -1,6 +1,6 @@
 /**
- * Connects shared canonical fixtures to the Thunderbird codec/target and
- * representative native text fixtures without widening semantics.
+ * Connects the shared canonical fixture corpus to the Sieve codec/target and
+ * representative native Sieve fixtures without widening exactness claims.
  *
  * @packageDocumentation
  */
@@ -9,10 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     areCapabilitySpecimensEqual,
-    createActionExpression,
-    createCapabilitySpecimen,
     createCoreCapabilityRegistry,
-    markReadCapability,
     type CanonicalExpression,
 } from "@mailchemy/core";
 import {
@@ -25,18 +22,14 @@ import {
     type CanonicalFixture,
 } from "@mailchemy/conformance";
 
-import {
-    thunderbirdDirectRealizationTarget,
-    thunderbirdFilterCodec,
-} from "../src/index.js";
-import { nativeThunderbirdFixtures } from "./fixtures/native-thunderbird.js";
+import { sieveCodec, sieveDirectRealizationTarget } from "../src/index.js";
+import { nativeSieveFixtures } from "./fixtures/native_sieve.js";
 
-/** Core registry used for Thunderbird fixture validation/equivalence. */
+/** Core semantic registry used to validate/equate Sieve conformance fixtures. */
 const registry = createCoreCapabilityRegistry();
 
 /**
- * Shared initial canonical fixture corpus considered for Thunderbird
- * conformance.
+ * Shared initial canonical fixture corpus considered for Sieve conformance.
  */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
@@ -47,10 +40,10 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
 ]);
 
 /**
- * Narrows shared fixtures to cases declared canonically valid.
+ * Narrows shared fixtures to cases expected to be valid canonical expressions.
  *
  * @param fixture Shared canonical fixture.
- * @returns Whether the fixture is expected to validate canonically.
+ * @returns Whether the fixture is declared canonically valid.
  */
 function isCanonicallyValidFixture(
     fixture: CanonicalFixture,
@@ -59,12 +52,13 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Thunderbird round-trip subset by canonical
- * specimen equality.
+ * Compares the action-only Direct Sieve round-trip subset by canonical specimen
+ * equality.
  *
- * @param left First canonical expression.
- * @param right Second canonical expression.
- * @returns Whether both are semantically equal action specimens.
+ * @param left First canonically valid expression.
+ * @param right Second canonically valid expression.
+ * @returns Whether both are action expressions with semantically equal
+ * capability specimens.
  */
 function areEquivalent(
     left: CanonicalExpression,
@@ -77,20 +71,20 @@ function areEquivalent(
 }
 
 /**
- * Exercises the currently Direct Thunderbird semantic subset and representative
- * native text decode boundaries.
+ * Exercises the currently Direct Sieve semantic subset plus representative
+ * native decode boundaries.
  */
-describe("Thunderbird conformance", () => {
+describe("Sieve conformance", () => {
     /**
-     * Proves every shared initial fixture currently Direct for Thunderbird
-     * survives codec encode/decode by canonical meaning.
+     * Proves every shared initial fixture currently classified Direct by the
+     * Sieve dialect target survives codec encode/decode by canonical semantics.
      */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
             .filter(
                 (fixture) =>
-                    thunderbirdDirectRealizationTarget.checkDirectRealization(
+                    sieveDirectRealizationTarget.checkDirectRealization(
                         fixture.expression,
                     ).kind === "direct",
             );
@@ -102,7 +96,7 @@ describe("Thunderbird conformance", () => {
 
         const run = runCodecRoundTrips(
             registry,
-            thunderbirdFilterCodec,
+            sieveCodec,
             directFixtures.map((fixture) => ({ fixture })),
             areEquivalent,
         );
@@ -112,12 +106,12 @@ describe("Thunderbird conformance", () => {
     });
 
     /**
-     * Proves representative native filter text preserves its
-     * decoded/opaque/refused evidence category and refusal codes.
+     * Proves representative native inputs retain their decoded/opaque/refused
+     * evidence categories and exactness reason codes.
      */
-    it("parses representative native Thunderbird text without widening semantics", () => {
-        for (const fixture of nativeThunderbirdFixtures) {
-            const result = thunderbirdFilterCodec.decode(fixture.source);
+    it("decodes representative native Sieve fixtures without widening semantics", () => {
+        for (const fixture of nativeSieveFixtures) {
+            const result = sieveCodec.decode(fixture.source);
 
             expect(result.kind, fixture.id).toBe(fixture.expectedKind);
 
@@ -133,20 +127,5 @@ describe("Thunderbird conformance", () => {
                 });
             }
         }
-    });
-
-    /**
-     * Proves the native `Mark read` spelling disappears at the canonical
-     * semantic boundary.
-     */
-    it("does not leak the Thunderbird action spelling into canonical mark-read", () => {
-        const decoded = thunderbirdFilterCodec.decode('action="Mark read"');
-
-        expect(decoded).toEqual({
-            kind: "decoded",
-            expression: createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
-            ),
-        });
     });
 });

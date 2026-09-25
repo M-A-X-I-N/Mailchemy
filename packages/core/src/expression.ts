@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { CapabilitySpecimen } from "./semantic-specimen.js";
+import type { CapabilitySpecimen } from "./semantic_specimen.js";
 
 /**
  * Canonical condition leaf backed by one condition-role capability specimen.

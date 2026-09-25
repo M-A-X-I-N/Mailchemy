@@ -5,9 +5,9 @@
  * @packageDocumentation
  */
 
-import type { CapabilityId } from "./capability-id.js";
-import type { SemanticCapabilityContract } from "./capability-contract.js";
-import type { CapabilityRegistry } from "./capability-registry.js";
+import type { CapabilityId } from "./capability_id.js";
+import type { SemanticCapabilityContract } from "./capability_contract.js";
+import type { CapabilityRegistry } from "./capability_registry.js";
 import type { ValidationIssue } from "./validation.js";
 
 /**

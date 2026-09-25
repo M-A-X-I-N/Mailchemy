@@ -13,7 +13,7 @@ import {
     renderInitialCrossIoConformanceMatrixMarkdown,
 } from "../src/index.js";
 
-import { expectedInitialConformanceMatrixMarkdown } from "./fixtures/expected-initial-conformance-matrix.js";
+import { expectedInitialConformanceMatrixMarkdown } from "./fixtures/expected_initial_conformance_matrix.js";
 
 /**
  * Exercises aggregation/reporting behavior without redefining any adapter's

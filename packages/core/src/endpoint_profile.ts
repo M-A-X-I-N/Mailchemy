@@ -13,7 +13,7 @@ import type { CanonicalExpression } from "./expression.js";
 import type {
     DirectRealizationResult,
     DirectRealizationTarget,
-} from "./realization-target.js";
+} from "./realization_target.js";
 
 /**
  * Immutable capability/constraint data associated with one concrete endpoint

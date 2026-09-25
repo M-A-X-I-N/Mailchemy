@@ -1,6 +1,6 @@
 /**
- * Connects shared canonical fixtures to the Gmail codec/target and representative
- * native Filter fixtures without widening provider semantics.
+ * Connects shared canonical fixtures to the Outlook codec/target and
+ * representative Graph Inbox Rule fixtures without widening semantics.
  *
  * @packageDocumentation
  */
@@ -26,16 +26,16 @@ import {
 } from "@mailchemy/conformance";
 
 import {
-    gmailDirectRealizationTarget,
-    gmailFilterCodec,
+    outlookDirectRealizationTarget,
+    outlookInboxRuleCodec,
 } from "../src/index.js";
-import { nativeGmailFixtures } from "./fixtures/native-gmail.js";
+import { nativeOutlookFixtures } from "./fixtures/native_outlook.js";
 
-/** Core semantic registry used for Gmail fixture validation/equivalence. */
+/** Core registry used for Outlook fixture validation/equivalence. */
 const registry = createCoreCapabilityRegistry();
 
 /**
- * Shared initial canonical fixture corpus considered for Gmail conformance.
+ * Shared initial canonical fixture corpus considered for Outlook conformance.
  */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
@@ -58,8 +58,8 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Gmail round-trip subset by canonical specimen
- * equality.
+ * Compares the action-only Direct Outlook round-trip subset by canonical
+ * specimen equality.
  *
  * @param left First canonical expression.
  * @param right Second canonical expression.
@@ -76,12 +76,12 @@ function areEquivalent(
 }
 
 /**
- * Exercises the currently Direct Gmail semantic subset and representative
- * native decode boundaries.
+ * Exercises the currently Direct Outlook semantic subset and representative
+ * Graph native-decode boundaries.
  */
-describe("Gmail conformance", () => {
+describe("Outlook conformance", () => {
     /**
-     * Proves every shared initial fixture currently Direct for Gmail survives
+     * Proves every shared initial fixture currently Direct for Outlook survives
      * codec encode/decode by canonical meaning.
      */
     it("round-trips every currently Direct initial fixture semantically", () => {
@@ -89,7 +89,7 @@ describe("Gmail conformance", () => {
             .filter(isCanonicallyValidFixture)
             .filter(
                 (fixture) =>
-                    gmailDirectRealizationTarget.checkDirectRealization(
+                    outlookDirectRealizationTarget.checkDirectRealization(
                         fixture.expression,
                     ).kind === "direct",
             );
@@ -101,7 +101,7 @@ describe("Gmail conformance", () => {
 
         const run = runCodecRoundTrips(
             registry,
-            gmailFilterCodec,
+            outlookInboxRuleCodec,
             directFixtures.map((fixture) => ({ fixture })),
             areEquivalent,
         );
@@ -111,12 +111,12 @@ describe("Gmail conformance", () => {
     });
 
     /**
-     * Proves representative native Gmail inputs preserve their
+     * Proves representative native Graph rules preserve their
      * decoded/opaque/refused evidence categories and refusal codes.
      */
-    it("decodes representative native Gmail fixtures without widening semantics", () => {
-        for (const fixture of nativeGmailFixtures) {
-            const result = gmailFilterCodec.decode(fixture.native);
+    it("decodes representative Graph rule fixtures without widening semantics", () => {
+        for (const fixture of nativeOutlookFixtures) {
+            const result = outlookInboxRuleCodec.decode(fixture.native);
 
             expect(result.kind, fixture.id).toBe(fixture.expectedKind);
 
@@ -135,14 +135,15 @@ describe("Gmail conformance", () => {
     });
 
     /**
-     * Proves provider-native `UNREAD` label mechanics disappear at the canonical
-     * semantic boundary and decode only to mark-read.
+     * Proves Graph's native `markAsRead` field and provider metadata disappear
+     * at the canonical semantic boundary.
      */
-    it("does not leak the Gmail UNREAD label representation into canonical mark-read", () => {
-        const decoded = gmailFilterCodec.decode({
-            id: "provider-object-id",
-            action: {
-                removeLabelIds: ["UNREAD"],
+    it("does not leak Graph markAsRead representation into canonical mark-read", () => {
+        const decoded = outlookInboxRuleCodec.decode({
+            id: "provider-rule-id",
+            displayName: "Provider metadata is not semantic mark-read data",
+            actions: {
+                markAsRead: true,
             },
         });
 

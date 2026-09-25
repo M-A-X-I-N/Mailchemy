@@ -20,7 +20,7 @@ import {
     defineDirectRealizationTarget,
     type DirectRealizationResult,
     type DirectRealizationTarget,
-} from "./realization-target.js";
+} from "./realization_target.js";
 
 /**
  * Canonical semantic leaf whose target support can be checked independently.

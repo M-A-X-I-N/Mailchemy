@@ -26,7 +26,7 @@ export {
     type CapabilityFixtureResult,
     type ContractOracleExecution,
     type ContractOracleResult,
-} from "./contract-runner.js";
+} from "./contract_runner.js";
 
 export {
     runTargetRealizationConformance,
@@ -34,7 +34,7 @@ export {
     type TargetRealizationCaseResult,
     type TargetRealizationExpectation,
     type TargetRealizationRun,
-} from "./target-runner.js";
+} from "./target_runner.js";
 
 export {
     runCodecRoundTrips,
@@ -43,7 +43,7 @@ export {
     type CodecRoundTripCaseResult,
     type CodecRoundTripFailureKind,
     type CodecRoundTripRun,
-} from "./round-trip.js";
+} from "./round_trip.js";
 
 export {
     buildConformanceMatrix,
@@ -53,11 +53,11 @@ export {
     type ConformanceMatrixRow,
 } from "./matrix.js";
 
-export { hasAttachmentFixtures } from "./fixtures/has-attachment.js";
-export { initialRuleFixtures } from "./fixtures/initial-rules.js";
-export { logicalAndFixtures } from "./fixtures/logical-and.js";
-export { markReadFixtures } from "./fixtures/mark-read.js";
-export { subjectContainsFixtures } from "./fixtures/subject-contains.js";
+export { hasAttachmentFixtures } from "./fixtures/has_attachment.js";
+export { initialRuleFixtures } from "./fixtures/initial_rules.js";
+export { logicalAndFixtures } from "./fixtures/logical_and.js";
+export { markReadFixtures } from "./fixtures/mark_read.js";
+export { subjectContainsFixtures } from "./fixtures/subject_contains.js";
 
 /**
  * Minimal package-linkage sentinel retained by the workspace scaffold test.

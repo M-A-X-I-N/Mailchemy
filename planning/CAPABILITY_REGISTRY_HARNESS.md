@@ -51,8 +51,8 @@
 | CRH-44B — Prefer brace-less single-statement control bodies | Done | ESLint owns the selected next-line brace-less TypeScript control-flow style |
 | CRH-44C — Exhaustive TypeScript documentation | Done | C1–C11 completed one shared documentation contract, all package passes, and a repository-wide methodology/coverage audit |
 | CRH-44D1 — Audit naming and design provisional source organization | Done | Selected lower_snake_case authored TS filenames, audited semantic names, designed beneficial grouping, and mapped all 90 authored TS paths without moving source |
-| CRH-44D2 — Apply authored TypeScript filename convention | Next | Mechanically convert authored TS filenames to lower_snake_case and enforce exact import casing |
-| CRH-44D3 — Improve semantic names of modules and code objects | Planned | Apply approved terminology/name changes without changing TypeScript casing conventions |
+| CRH-44D2 — Apply authored TypeScript filename convention | Done | Renamed all 71 dashed authored TS filenames to lower_snake_case, updated only required module specifiers, and enabled forceConsistentCasingInFileNames |
+| CRH-44D3 — Improve semantic names of modules and code objects | Next | Apply approved terminology/name changes without changing TypeScript casing conventions |
 | CRH-44D4 — Reorganize Core by conceptual responsibility | Planned | Apply capabilities/canonical/realization boundaries and useful mirrored tests |
 | CRH-44D5 — Reorganize Conformance and Cross-IO | Planned | Group fixture evidence and apply descriptive conformance/aggregation names without gratuitous nesting |
 | CRH-44D6 — Standardize adapter package organization | Planned | Remove redundant provider-local filename prefixes and align equivalent layouts while preserving real adapter differences |
@@ -1594,6 +1594,8 @@ No source file was moved or renamed in D1.
 
 ### CRH-44D2 — Establish and apply the authored TypeScript filename convention
 
+**Status:** Done. All 71 authored TypeScript files whose filenames contained dashes were mechanically renamed to `lower_snake_case`, only corresponding module specifiers changed inside TypeScript, and the shared compiler config now explicitly enables `forceConsistentCasingInFileNames`.
+
 Standardize authored `.ts` modules on `lower_snake_case` in place before
 semantic/path restructuring.
 
@@ -1726,7 +1728,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1 are complete. CRH-44D2 is next.
+CRH-44A, CRH-44B, CRH-44C, CRH-44D1, and CRH-44D2 are complete. CRH-44D3 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 

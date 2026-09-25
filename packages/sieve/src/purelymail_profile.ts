@@ -14,7 +14,7 @@
 import {
     createSieveEndpointRealizationTarget,
     defineSieveEndpointProfile,
-} from "./endpoint-profile.js";
+} from "./endpoint_profile.js";
 
 /**
  * Optional Sieve extensions advertised by Purelymail's unauthenticated

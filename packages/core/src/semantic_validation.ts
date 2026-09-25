@@ -11,16 +11,16 @@
  * @packageDocumentation
  */
 
-import { parseCapabilityId } from "./capability-id.js";
-import type { CapabilityRole } from "./capability-contract.js";
-import type { CapabilityRegistry } from "./capability-registry.js";
+import { parseCapabilityId } from "./capability_id.js";
+import type { CapabilityRole } from "./capability_contract.js";
+import type { CapabilityRegistry } from "./capability_registry.js";
 import type {
     ActionExpression,
     CanonicalExpression,
     ConditionExpression,
     RuleExpression,
 } from "./expression.js";
-import type { CapabilitySpecimen } from "./semantic-specimen.js";
+import type { CapabilitySpecimen } from "./semantic_specimen.js";
 import {
     invalid,
     valid,

@@ -9,11 +9,11 @@
  * @packageDocumentation
  */
 
-export { sieveCodec, type SieveNative } from "./sieve-codec.js";
+export { sieveCodec, type SieveNative } from "./sieve_codec.js";
 export {
     sieveDirectRealizationTarget,
     type SieveDirectRealizationTarget,
-} from "./sieve-target.js";
+} from "./sieve_target.js";
 export {
     InvalidSieveEndpointProfileError,
     createSieveEndpointRealizationTarget,
@@ -21,9 +21,9 @@ export {
     type SieveEndpointProfile,
     type SieveEndpointProfileData,
     type SieveEndpointRealizationTarget,
-} from "./endpoint-profile.js";
+} from "./endpoint_profile.js";
 export {
     purelymailSieveExtensions20260924,
     purelymailSieveProfile20260924,
     purelymailSieveTarget20260924,
-} from "./purelymail-profile.js";
+} from "./purelymail_profile.js";

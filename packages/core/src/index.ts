@@ -18,7 +18,7 @@ export {
     parseCapabilityId,
     type CapabilityId,
     type CapabilityIdParts,
-} from "./capability-id.js";
+} from "./capability_id.js";
 
 export {
     InvalidCapabilityContractError,
@@ -27,12 +27,12 @@ export {
     type RegisteredCapabilityContract,
     type SemanticCapabilityContract,
     type SemanticCapabilityDefinition,
-} from "./capability-contract.js";
+} from "./capability_contract.js";
 
 export {
     CapabilityRegistry,
     DuplicateCapabilityIdError,
-} from "./capability-registry.js";
+} from "./capability_registry.js";
 
 export {
     invalid,
@@ -48,7 +48,7 @@ export {
     areCapabilitySpecimensEqual,
     createCapabilitySpecimen,
     type CapabilitySpecimen,
-} from "./semantic-specimen.js";
+} from "./semantic_specimen.js";
 
 export {
     createActionExpression,
@@ -67,7 +67,7 @@ export {
 export {
     validateCanonicalExpression,
     validateCapabilitySpecimen,
-} from "./semantic-validation.js";
+} from "./semantic_validation.js";
 
 export {
     derivedRealization,
@@ -88,7 +88,7 @@ export {
     type DirectRealizationResult,
     type DirectRealizationTarget,
     type DirectRealizationTargetDefinition,
-} from "./realization-target.js";
+} from "./realization_target.js";
 
 export {
     InvalidCodecDefinitionError,
@@ -119,7 +119,7 @@ export {
     type EndpointProfileRefinement,
     type EndpointRefinedRealizationTarget,
     type EndpointRefinedRealizationTargetDefinition,
-} from "./endpoint-profile.js";
+} from "./endpoint_profile.js";
 
 export {
     defineStructuredDirectRealizationTarget,
@@ -127,28 +127,28 @@ export {
     type StructuralSemanticExpression,
     type StructuredDirectRealizationTarget,
     type StructuredDirectRealizationTargetDefinition,
-} from "./structured-realization-target.js";
+} from "./structured_realization_target.js";
 
 export {
     evaluateSubjectContains,
     subjectContainsCapability,
     type SubjectContainsParameters,
-} from "./capabilities/subject-contains.js";
+} from "./capabilities/subject_contains.js";
 
 export {
     createCoreCapabilityRegistry,
     registerCoreSemanticCapabilities,
-} from "./core-capability-registry.js";
+} from "./core_capability_registry.js";
 
 export {
     evaluateHasAttachment,
     hasAttachmentCapability,
     type MimeEntityAttachmentView,
-} from "./capabilities/has-attachment.js";
+} from "./capabilities/has_attachment.js";
 
-export { applyMarkRead, markReadCapability } from "./capabilities/mark-read.js";
+export { applyMarkRead, markReadCapability } from "./capabilities/mark_read.js";
 
 export {
     evaluateLogicalAnd,
     logicalAndCapability,
-} from "./capabilities/logical-and.js";
+} from "./capabilities/logical_and.js";

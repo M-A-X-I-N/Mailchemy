@@ -8,8 +8,8 @@
 export {
     thunderbirdFilterCodec,
     type ThunderbirdFilterNative,
-} from "./thunderbird-filter-codec.js";
+} from "./thunderbird_filter_codec.js";
 export {
     thunderbirdDirectRealizationTarget,
     type ThunderbirdDirectRealizationTarget,
-} from "./thunderbird-target.js";
+} from "./thunderbird_target.js";

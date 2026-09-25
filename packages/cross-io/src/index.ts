@@ -13,10 +13,10 @@
 export {
     buildInitialCrossIoConformanceMatrix,
     renderInitialCrossIoConformanceMatrixMarkdown,
-} from "./initial-conformance-matrix.js";
+} from "./initial_conformance_matrix.js";
 
 export {
     runInitialCrossCodecRoundTrips,
     type CrossCodecRoundTripResult,
     type CrossCodecRoundTripRun,
-} from "./cross-codec-round-trip.js";
+} from "./cross_codec_round_trip.js";

@@ -5,7 +5,7 @@
  * @packageDocumentation
  */
 
-import type { CapabilityId } from "./capability-id.js";
+import type { CapabilityId } from "./capability_id.js";
 import type { ValidationResult } from "./validation.js";
 
 /**
