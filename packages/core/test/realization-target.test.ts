@@ -25,7 +25,10 @@ import {
 /**
  * Synthetic boolean condition used to demonstrate instance-level refinement.
  */
-const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
+const booleanCondition = defineSemanticCapability<{
+    /** Synthetic truth value used for instance-level realization refinement. */
+    readonly value: boolean;
+}>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
     description: "Synthetic condition for direct-realization tests.",
@@ -66,6 +69,7 @@ describe("DirectRealizationTarget", () => {
                     expression.specimen.capabilityId === booleanCondition.id &&
                     (
                         expression.specimen.parameters as {
+                            /** Synthetic truth value inspected by the direct target. */
                             readonly value: boolean;
                         }
                     ).value

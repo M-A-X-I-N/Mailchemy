@@ -33,6 +33,7 @@ import {
  * Synthetic boolean semantic contract used by round-trip harness tests.
  */
 const booleanCapability = defineSemanticCapability<{
+    /** Synthetic truth value carried by the round-trip test capability. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
@@ -102,8 +103,14 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.specimen.capabilityId !== right.specimen.capabilityId)
         return false;
 
-    const leftValue = left.specimen.parameters as { readonly value: boolean };
-    const rightValue = right.specimen.parameters as { readonly value: boolean };
+    const leftValue = left.specimen.parameters as {
+        /** Left synthetic truth value compared after round trip. */
+        readonly value: boolean;
+    };
+    const rightValue = right.specimen.parameters as {
+        /** Right synthetic truth value compared after round trip. */
+        readonly value: boolean;
+    };
 
     return leftValue.value === rightValue.value;
 };
@@ -123,6 +130,7 @@ describe("runCodecRoundTrips", () => {
                 const parameters =
                     canonical.kind === "condition"
                         ? (canonical.specimen.parameters as {
+                              /** Synthetic truth value encoded by the normalizing codec. */
                               readonly value: boolean;
                           })
                         : { value: false };

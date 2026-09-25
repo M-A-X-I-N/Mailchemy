@@ -81,7 +81,10 @@ describe("core.condition.has-attachment@1", () => {
 
                             const actual = evaluateHasAttachment(
                                 parsed as {
+                                    /** Parsed Content-Disposition disposition token, if present. */
                                     readonly dispositionType: string | null;
+
+                                    /** Whether the fixture entity is a multipart container. */
                                     readonly isMultipart: boolean;
                                 }[],
                             );

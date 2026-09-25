@@ -69,6 +69,7 @@ describe("core.condition.subject.contains@1", () => {
                             const actual = evaluateSubjectContains(
                                 subjectFields,
                                 expression.specimen.parameters as {
+                                    /** Canonical Subject substring consumed by the semantic oracle. */
                                     readonly needle: string;
                                 },
                             );

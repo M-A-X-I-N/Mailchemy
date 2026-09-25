@@ -22,11 +22,13 @@ If implementation behavior and an authoritative document appear to disagree, the
 
 Documentation coverage is exhaustive at the **meaningful code-entity level**.
 
-Every TypeScript file must have a module-level documentation comment, and every declaration or construct that carries independent semantic, structural, behavioral, or evidentiary meaning must have its own documentation comment.
+Every author-owned TypeScript file must have a module-level documentation comment, and every declaration or construct that carries independent semantic, structural, behavioral, or evidentiary meaning must have its own documentation comment.
+
+Generated TypeScript declaration output, such as `packages/*/dist/**/*.d.ts`, is derived build output rather than an independently authored documentation surface. Do not hand-edit generated declarations to satisfy this contract. Audit and improve the author-owned source that produces them instead.
 
 ### 2.1 Required module documentation
 
-Every `.ts` file, including source files, barrel files, test files, and fixture files, begins with a module documentation block before imports:
+Every author-owned `.ts` file, including source files, barrel files, test files, and fixture files, begins with a module documentation block before imports:
 
 ```typescript
 /**

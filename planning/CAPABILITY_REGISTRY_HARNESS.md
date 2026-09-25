@@ -1508,6 +1508,8 @@ Comments must make clear that this package aggregates existing truths; it does n
 
 #### CRH-44C11 — Perform the exhaustive coverage and methodology-drift audit
 
+**Status:** Done. The final repository-wide audit covered all 90 author-owned TypeScript files, 375 top-level declarations, 348 interface/class/type-literal members, and 203 suites/tests. It reconciled 29 inline type-literal member documentation gaps left by the stricter methodology adopted in later sections, clarified in the shared contract that generated `dist/**/*.d.ts` files are derived output rather than hand-edited documentation surfaces, found no remaining semantic/exactness overclaims or methodology drift, and proved all TypeScript changes in C11 are comment-only by comment-stripped AST equivalence.
+
 Close the umbrella task with a repository-wide review rather than assuming the package-local passes collectively guarantee consistency.
 
 Audit for:
@@ -1528,6 +1530,8 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ### CRH-44C umbrella acceptance
 
+**Status:** Complete. CRH-44C1–CRH-44C11 are all complete under the shared documentation methodology.
+
 - the TypeScript implementation is comprehensively covered by `/** ... */` doc comments, including private/internal helpers;
 - important semantic/exactness boundaries are understandable from the code without requiring the reader to reverse-engineer implementation intent;
 - comments remain consistent with the durable architecture/semantic docs and do not invent stronger support claims;
@@ -1539,7 +1543,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C10 are complete. CRH-44C11 is the final documentation section: the repository-wide coverage and methodology-drift audit. It must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md) and reconcile any late findings across earlier sections before CRH-44C can close. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and the complete CRH-44C1–CRH-44C11 documentation umbrella are done. The shared TypeScript documentation contract remains normative for future implementation work. Further CRH-44 subtasks, especially file/module-structure reorganization, remain deliberately deferred until the human supplies the next-stage requirements. If no additional CRH-44 cleanup task is inserted first, the pre-existing roadmap continues with CRH-45.
 
 ---
 

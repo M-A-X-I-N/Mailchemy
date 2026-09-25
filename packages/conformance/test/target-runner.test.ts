@@ -30,6 +30,7 @@ import {
  * Synthetic boolean condition used to exercise target-runner behavior.
  */
 const booleanCapability = defineSemanticCapability<{
+    /** Synthetic truth value carried by target-runner fixtures. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
@@ -105,6 +106,7 @@ describe("runTargetRealizationConformance", () => {
                     expression.kind === "condition"
                         ? (
                               expression.specimen.parameters as {
+                                  /** Synthetic truth value inspected by the target classifier. */
                                   readonly value: boolean;
                               }
                         ).value

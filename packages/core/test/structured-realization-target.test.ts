@@ -25,7 +25,10 @@ import {
 /**
  * Synthetic boolean condition used as a Direct leaf in structural tests.
  */
-const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
+const booleanCondition = defineSemanticCapability<{
+    /** Synthetic truth value carried by the structural-test leaf capability. */
+    readonly value: boolean;
+}>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
     description: "Synthetic leaf for structure-realizability tests.",

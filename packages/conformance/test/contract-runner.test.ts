@@ -27,6 +27,7 @@ import {
  * of any real Mailchemy semantic capability or provider.
  */
 const booleanCapability = defineSemanticCapability<{
+    /** Synthetic truth value carried by this test capability. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
@@ -160,6 +161,7 @@ describe("runCapabilityContractTests", () => {
                                 expression.kind === "condition"
                                     ? (
                                           expression.specimen.parameters as {
+                                              /** Synthetic truth value consumed by the oracle. */
                                               readonly value: boolean;
                                           }
                                     ).value

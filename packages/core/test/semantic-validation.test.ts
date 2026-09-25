@@ -237,12 +237,25 @@ describe("validateCanonicalExpression", () => {
     it("detects cycles in semantic structures", () => {
         const { registry, logic } = setupRegistry();
         const cyclic: {
+            /** Recursive expression discriminator used to construct the cycle. */
             kind: "and";
+
+            /** Synthetic logic-capability specimen attached to the AND node. */
             operator: {
+                /** Capability-specimen discriminator required by canonical shape. */
                 kind: "capability";
+
+                /** Registry identity of the synthetic logic capability. */
                 capabilityId: string;
-                parameters: { value: boolean };
+
+                /** Parameters retained on the synthetic operator specimen. */
+                parameters: {
+                    /** Boolean parameter accepted by the synthetic logic contract. */
+                    value: boolean;
+                };
             };
+
+            /** Mutable operand list used to introduce the self-reference. */
             operands: unknown[];
         } = {
             kind: "and",

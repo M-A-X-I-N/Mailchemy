@@ -28,7 +28,10 @@ import {
 /**
  * Synthetic boolean condition used solely to exercise codec boundaries.
  */
-const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
+const booleanCondition = defineSemanticCapability<{
+    /** Synthetic truth value carried by the codec test capability. */
+    readonly value: boolean;
+}>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
     description: "Synthetic condition for codec tests.",
@@ -81,6 +84,7 @@ describe("SemanticCodec", () => {
                     expression.specimen.capabilityId === booleanCondition.id
                 ) {
                     const parameters = expression.specimen.parameters as {
+                        /** Synthetic truth value encoded into the native test string. */
                         readonly value: boolean;
                     };
 

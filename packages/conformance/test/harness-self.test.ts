@@ -44,6 +44,7 @@ import {
 
 /** Synthetic boolean condition used throughout harness self-tests. */
 const booleanCondition = defineSemanticCapability<{
+    /** Synthetic truth value used throughout harness self-tests. */
     readonly value: boolean;
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
@@ -171,8 +172,14 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.specimen.capabilityId !== right.specimen.capabilityId)
         return false;
 
-    const leftValue = left.specimen.parameters as { readonly value: boolean };
-    const rightValue = right.specimen.parameters as { readonly value: boolean };
+    const leftValue = left.specimen.parameters as {
+        /** Left synthetic truth value compared for semantic equality. */
+        readonly value: boolean;
+    };
+    const rightValue = right.specimen.parameters as {
+        /** Right synthetic truth value compared for semantic equality. */
+        readonly value: boolean;
+    };
 
     return leftValue.value === rightValue.value;
 };
@@ -200,6 +207,7 @@ describe("R0 conformance harness self-tests", () => {
                                 expression.kind === "condition"
                                     ? (
                                           expression.specimen.parameters as {
+                                              /** Synthetic truth value consumed by the contract oracle. */
                                               readonly value: boolean;
                                           }
                                     ).value
@@ -244,6 +252,7 @@ describe("R0 conformance harness self-tests", () => {
                     expression.kind === "condition"
                         ? (
                               expression.specimen.parameters as {
+                                  /** Synthetic truth value inspected by the refinement target. */
                                   readonly value: boolean;
                               }
                         ).value
@@ -423,6 +432,7 @@ describe("R0 conformance harness self-tests", () => {
                 const parameters =
                     expression.kind === "condition"
                         ? (expression.specimen.parameters as {
+                              /** Synthetic truth value encoded by the fake codec. */
                               readonly value: boolean;
                           })
                         : { value: false };
