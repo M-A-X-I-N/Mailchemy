@@ -21,7 +21,7 @@ import {
     type EndpointRefinedRealizationTarget,
 } from "@mailchemy/core";
 
-import { sieveDirectRealizationTarget } from "./sieve_target.js";
+import { sieveDirectRealizationTarget } from "./realization_target.js";
 
 /**
  * Normalized optional-extension data advertised/known for one Sieve endpoint.

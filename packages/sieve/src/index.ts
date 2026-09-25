@@ -9,11 +9,11 @@
  * @packageDocumentation
  */
 
-export { sieveCodec, type SieveScriptNative } from "./sieve_codec.js";
+export { sieveCodec, type SieveScriptNative } from "./codec.js";
 export {
     sieveDirectRealizationTarget,
     type SieveDirectRealizationTarget,
-} from "./sieve_target.js";
+} from "./realization_target.js";
 export {
     InvalidSieveEndpointProfileError,
     createSieveEndpointRealizationTarget,

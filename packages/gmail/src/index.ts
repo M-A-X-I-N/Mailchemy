@@ -10,8 +10,8 @@ export {
     type GmailFilterActionNative,
     type GmailFilterCriteriaNative,
     type GmailFilterNative,
-} from "./gmail_filter_codec.js";
+} from "./filter_codec.js";
 export {
     gmailDirectRealizationTarget,
     type GmailDirectRealizationTarget,
-} from "./gmail_target.js";
+} from "./realization_target.js";

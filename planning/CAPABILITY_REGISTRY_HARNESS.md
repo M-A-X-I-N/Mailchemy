@@ -55,14 +55,14 @@
 | CRH-44D3 — Improve semantic names of modules and code objects | Done | Applied capability-instance/leaf/conformance/shared-rule/Sieve/helper terminology, removed the obsolete scaffold sentinel, and preserved all 111 ID literals |
 | CRH-44D4 — Reorganize Core by conceptual responsibility | Done | Moved Core into capabilities/canonical/realization boundaries, kept singletons flat, mirrored useful test grouping, and changed only required relative module paths |
 | CRH-44D5 — Reorganize Conformance and Cross-IO | Done | Grouped canonical fixture evidence/tests, renamed conformance runner/report modules descriptively, kept Cross-IO flat, and renamed the refusal test without changing semantic behavior |
-| CRH-44D6 — Standardize adapter package organization | Next | Remove redundant provider-local filename prefixes and align equivalent layouts while preserving real adapter differences |
-| CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Planned | Repair references and explicitly account for deliberate package-surface changes |
+| CRH-44D6 — Standardize adapter package organization | Done | Removed redundant provider-local filename prefixes, aligned equivalent codec/target/conformance layouts, kept packages flat, and preserved Sieve's real endpoint/profile layer |
+| CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Next | Repair references and explicitly account for deliberate package-surface changes |
 | CRH-44D8 — Perform unfamiliar-human browseability audit | Planned | Review resulting trees from a newcomer perspective and correct remaining navigation problems |
 | CRH-44D9 — Prove reorganization behavior-neutral | Planned | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D5 are complete; CRH-44D6 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D6 are complete; CRH-44D7 is the next implementation-hygiene task.
 
 ## 1. Purpose
 
@@ -1665,6 +1665,8 @@ than redefining adapter/core semantics.
 
 ### CRH-44D6 — Standardize adapter package organization
 
+**Status:** Done. Gmail, Outlook, Sieve, and Thunderbird now use provider-context-aware local filenames: equivalent codec/realization/conformance concepts align across packages without repeating the provider name, native fixture filenames describe the represented native artifact, and all four adapter packages remain intentionally flat. Sieve retains its distinct `endpoint_profile.ts` / `purelymail_profile.ts` layer because endpoint refinement is real architecture rather than cosmetic symmetry. Twenty-four authored TypeScript paths moved with no semantic-content changes beyond required relative module specifiers.
+
 Apply the provider-local filename cleanup and equivalent layout conventions
 across Sieve, Gmail, Outlook, and Thunderbird.
 
@@ -1734,7 +1736,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D5 are complete. CRH-44D6 is next.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D6 are complete. CRH-44D7 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 

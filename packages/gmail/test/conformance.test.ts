@@ -1,6 +1,6 @@
 /**
- * Connects shared canonical fixtures to the Thunderbird codec/target and
- * representative native text fixtures without widening semantics.
+ * Connects shared canonical fixtures to the Gmail codec/target and representative
+ * native Filter fixtures without widening provider semantics.
  *
  * @packageDocumentation
  */
@@ -26,17 +26,16 @@ import {
 } from "@mailchemy/conformance";
 
 import {
-    thunderbirdDirectRealizationTarget,
-    thunderbirdFilterCodec,
+    gmailDirectRealizationTarget,
+    gmailFilterCodec,
 } from "../src/index.js";
-import { nativeThunderbirdFixtures } from "./fixtures/native_thunderbird.js";
+import { nativeGmailFixtures } from "./fixtures/native_filters.js";
 
-/** Core registry used for Thunderbird fixture validation/equivalence. */
+/** Core semantic registry used for Gmail fixture validation/equivalence. */
 const registry = createCoreCapabilityRegistry();
 
 /**
- * Shared initial canonical fixture corpus considered for Thunderbird
- * conformance.
+ * Shared initial canonical fixture corpus considered for Gmail conformance.
  */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
@@ -59,8 +58,8 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Thunderbird round-trip subset by canonical
- * capability-instance equality.
+ * Compares the action-only Direct Gmail round-trip subset by canonical capability-instance
+ * equality.
  *
  * @param left First canonical expression.
  * @param right Second canonical expression.
@@ -77,20 +76,20 @@ function areEquivalent(
 }
 
 /**
- * Exercises the currently Direct Thunderbird semantic subset and representative
- * native text decode boundaries.
+ * Exercises the currently Direct Gmail semantic subset and representative
+ * native decode boundaries.
  */
-describe("Thunderbird conformance", () => {
+describe("Gmail conformance", () => {
     /**
-     * Proves every shared initial fixture currently Direct for Thunderbird
-     * survives codec encode/decode by canonical meaning.
+     * Proves every shared initial fixture currently Direct for Gmail survives
+     * codec encode/decode by canonical meaning.
      */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
             .filter(
                 (fixture) =>
-                    thunderbirdDirectRealizationTarget.checkDirectRealization(
+                    gmailDirectRealizationTarget.checkDirectRealization(
                         fixture.expression,
                     ).kind === "direct",
             );
@@ -102,7 +101,7 @@ describe("Thunderbird conformance", () => {
 
         const run = runCodecRoundTrips(
             registry,
-            thunderbirdFilterCodec,
+            gmailFilterCodec,
             directFixtures.map((fixture) => ({ fixture })),
             areEquivalent,
         );
@@ -112,12 +111,12 @@ describe("Thunderbird conformance", () => {
     });
 
     /**
-     * Proves representative native filter text preserves its
-     * decoded/opaque/refused evidence category and refusal codes.
+     * Proves representative native Gmail inputs preserve their
+     * decoded/opaque/refused evidence categories and refusal codes.
      */
-    it("parses representative native Thunderbird text without widening semantics", () => {
-        for (const fixture of nativeThunderbirdFixtures) {
-            const result = thunderbirdFilterCodec.decode(fixture.source);
+    it("decodes representative native Gmail fixtures without widening semantics", () => {
+        for (const fixture of nativeGmailFixtures) {
+            const result = gmailFilterCodec.decode(fixture.native);
 
             expect(result.kind, fixture.id).toBe(fixture.expectedKind);
 
@@ -136,11 +135,16 @@ describe("Thunderbird conformance", () => {
     });
 
     /**
-     * Proves the native `Mark read` spelling disappears at the canonical
-     * semantic boundary.
+     * Proves provider-native `UNREAD` label mechanics disappear at the canonical
+     * semantic boundary and decode only to mark-read.
      */
-    it("does not leak the Thunderbird action spelling into canonical mark-read", () => {
-        const decoded = thunderbirdFilterCodec.decode('action="Mark read"');
+    it("does not leak the Gmail UNREAD label representation into canonical mark-read", () => {
+        const decoded = gmailFilterCodec.decode({
+            id: "provider-object-id",
+            action: {
+                removeLabelIds: ["UNREAD"],
+            },
+        });
 
         expect(decoded).toEqual({
             kind: "decoded",

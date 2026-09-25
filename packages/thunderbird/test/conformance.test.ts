@@ -1,6 +1,6 @@
 /**
- * Connects shared canonical fixtures to the Outlook codec/target and
- * representative Graph Inbox Rule fixtures without widening semantics.
+ * Connects shared canonical fixtures to the Thunderbird codec/target and
+ * representative native text fixtures without widening semantics.
  *
  * @packageDocumentation
  */
@@ -26,16 +26,17 @@ import {
 } from "@mailchemy/conformance";
 
 import {
-    outlookDirectRealizationTarget,
-    outlookInboxRuleCodec,
+    thunderbirdDirectRealizationTarget,
+    thunderbirdFilterCodec,
 } from "../src/index.js";
-import { nativeOutlookFixtures } from "./fixtures/native_outlook.js";
+import { nativeThunderbirdFixtures } from "./fixtures/native_filters.js";
 
-/** Core registry used for Outlook fixture validation/equivalence. */
+/** Core registry used for Thunderbird fixture validation/equivalence. */
 const registry = createCoreCapabilityRegistry();
 
 /**
- * Shared initial canonical fixture corpus considered for Outlook conformance.
+ * Shared initial canonical fixture corpus considered for Thunderbird
+ * conformance.
  */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
@@ -58,7 +59,7 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Outlook round-trip subset by canonical
+ * Compares the action-only Direct Thunderbird round-trip subset by canonical
  * capability-instance equality.
  *
  * @param left First canonical expression.
@@ -76,20 +77,20 @@ function areEquivalent(
 }
 
 /**
- * Exercises the currently Direct Outlook semantic subset and representative
- * Graph native-decode boundaries.
+ * Exercises the currently Direct Thunderbird semantic subset and representative
+ * native text decode boundaries.
  */
-describe("Outlook conformance", () => {
+describe("Thunderbird conformance", () => {
     /**
-     * Proves every shared initial fixture currently Direct for Outlook survives
-     * codec encode/decode by canonical meaning.
+     * Proves every shared initial fixture currently Direct for Thunderbird
+     * survives codec encode/decode by canonical meaning.
      */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
             .filter(
                 (fixture) =>
-                    outlookDirectRealizationTarget.checkDirectRealization(
+                    thunderbirdDirectRealizationTarget.checkDirectRealization(
                         fixture.expression,
                     ).kind === "direct",
             );
@@ -101,7 +102,7 @@ describe("Outlook conformance", () => {
 
         const run = runCodecRoundTrips(
             registry,
-            outlookInboxRuleCodec,
+            thunderbirdFilterCodec,
             directFixtures.map((fixture) => ({ fixture })),
             areEquivalent,
         );
@@ -111,12 +112,12 @@ describe("Outlook conformance", () => {
     });
 
     /**
-     * Proves representative native Graph rules preserve their
-     * decoded/opaque/refused evidence categories and refusal codes.
+     * Proves representative native filter text preserves its
+     * decoded/opaque/refused evidence category and refusal codes.
      */
-    it("decodes representative Graph rule fixtures without widening semantics", () => {
-        for (const fixture of nativeOutlookFixtures) {
-            const result = outlookInboxRuleCodec.decode(fixture.native);
+    it("parses representative native Thunderbird text without widening semantics", () => {
+        for (const fixture of nativeThunderbirdFixtures) {
+            const result = thunderbirdFilterCodec.decode(fixture.source);
 
             expect(result.kind, fixture.id).toBe(fixture.expectedKind);
 
@@ -135,17 +136,11 @@ describe("Outlook conformance", () => {
     });
 
     /**
-     * Proves Graph's native `markAsRead` field and provider metadata disappear
-     * at the canonical semantic boundary.
+     * Proves the native `Mark read` spelling disappears at the canonical
+     * semantic boundary.
      */
-    it("does not leak Graph markAsRead representation into canonical mark-read", () => {
-        const decoded = outlookInboxRuleCodec.decode({
-            id: "provider-rule-id",
-            displayName: "Provider metadata is not semantic mark-read data",
-            actions: {
-                markAsRead: true,
-            },
-        });
+    it("does not leak the Thunderbird action spelling into canonical mark-read", () => {
+        const decoded = thunderbirdFilterCodec.decode('action="Mark read"');
 
         expect(decoded).toEqual({
             kind: "decoded",

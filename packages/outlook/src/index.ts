@@ -10,8 +10,8 @@ export {
     type OutlookMessageRuleActionsNative,
     type OutlookMessageRuleNative,
     type OutlookMessageRulePredicatesNative,
-} from "./outlook_inbox_rule_codec.js";
+} from "./inbox_rule_codec.js";
 export {
     outlookDirectRealizationTarget,
     type OutlookDirectRealizationTarget,
-} from "./outlook_target.js";
+} from "./realization_target.js";

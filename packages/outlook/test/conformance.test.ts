@@ -1,6 +1,6 @@
 /**
- * Connects the shared canonical fixture corpus to the Sieve codec/target and
- * representative native Sieve fixtures without widening exactness claims.
+ * Connects shared canonical fixtures to the Outlook codec/target and
+ * representative Graph Inbox Rule fixtures without widening semantics.
  *
  * @packageDocumentation
  */
@@ -9,7 +9,10 @@ import { describe, expect, it } from "vitest";
 
 import {
     areCapabilityInstancesEqual,
+    createActionExpression,
+    createCapabilityInstance,
     createCoreCapabilityRegistry,
+    markReadCapability,
     type CanonicalExpression,
 } from "@mailchemy/core";
 import {
@@ -22,14 +25,17 @@ import {
     type CanonicalFixture,
 } from "@mailchemy/conformance";
 
-import { sieveCodec, sieveDirectRealizationTarget } from "../src/index.js";
-import { nativeSieveFixtures } from "./fixtures/native_sieve.js";
+import {
+    outlookDirectRealizationTarget,
+    outlookInboxRuleCodec,
+} from "../src/index.js";
+import { nativeOutlookFixtures } from "./fixtures/native_rules.js";
 
-/** Core semantic registry used to validate/equate Sieve conformance fixtures. */
+/** Core registry used for Outlook fixture validation/equivalence. */
 const registry = createCoreCapabilityRegistry();
 
 /**
- * Shared initial canonical fixture corpus considered for Sieve conformance.
+ * Shared initial canonical fixture corpus considered for Outlook conformance.
  */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
@@ -40,10 +46,10 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
 ]);
 
 /**
- * Narrows shared fixtures to cases expected to be valid canonical expressions.
+ * Narrows shared fixtures to cases declared canonically valid.
  *
  * @param fixture Shared canonical fixture.
- * @returns Whether the fixture is declared canonically valid.
+ * @returns Whether the fixture is expected to validate canonically.
  */
 function isCanonicallyValidFixture(
     fixture: CanonicalFixture,
@@ -52,13 +58,12 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Sieve round-trip subset by canonical capability-instance
- * equality.
+ * Compares the action-only Direct Outlook round-trip subset by canonical
+ * capability-instance equality.
  *
- * @param left First canonically valid expression.
- * @param right Second canonically valid expression.
- * @returns Whether both are action expressions with semantically equal
- * capability instances.
+ * @param left First canonical expression.
+ * @param right Second canonical expression.
+ * @returns Whether both are semantically equal action capability instances.
  */
 function areEquivalent(
     left: CanonicalExpression,
@@ -71,20 +76,20 @@ function areEquivalent(
 }
 
 /**
- * Exercises the currently Direct Sieve semantic subset plus representative
- * native decode boundaries.
+ * Exercises the currently Direct Outlook semantic subset and representative
+ * Graph native-decode boundaries.
  */
-describe("Sieve conformance", () => {
+describe("Outlook conformance", () => {
     /**
-     * Proves every shared initial fixture currently classified Direct by the
-     * Sieve dialect target survives codec encode/decode by canonical semantics.
+     * Proves every shared initial fixture currently Direct for Outlook survives
+     * codec encode/decode by canonical meaning.
      */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
             .filter(
                 (fixture) =>
-                    sieveDirectRealizationTarget.checkDirectRealization(
+                    outlookDirectRealizationTarget.checkDirectRealization(
                         fixture.expression,
                     ).kind === "direct",
             );
@@ -96,7 +101,7 @@ describe("Sieve conformance", () => {
 
         const run = runCodecRoundTrips(
             registry,
-            sieveCodec,
+            outlookInboxRuleCodec,
             directFixtures.map((fixture) => ({ fixture })),
             areEquivalent,
         );
@@ -106,12 +111,12 @@ describe("Sieve conformance", () => {
     });
 
     /**
-     * Proves representative native inputs retain their decoded/opaque/refused
-     * evidence categories and exactness reason codes.
+     * Proves representative native Graph rules preserve their
+     * decoded/opaque/refused evidence categories and refusal codes.
      */
-    it("decodes representative native Sieve fixtures without widening semantics", () => {
-        for (const fixture of nativeSieveFixtures) {
-            const result = sieveCodec.decode(fixture.source);
+    it("decodes representative Graph rule fixtures without widening semantics", () => {
+        for (const fixture of nativeOutlookFixtures) {
+            const result = outlookInboxRuleCodec.decode(fixture.native);
 
             expect(result.kind, fixture.id).toBe(fixture.expectedKind);
 
@@ -127,5 +132,26 @@ describe("Sieve conformance", () => {
                 });
             }
         }
+    });
+
+    /**
+     * Proves Graph's native `markAsRead` field and provider metadata disappear
+     * at the canonical semantic boundary.
+     */
+    it("does not leak Graph markAsRead representation into canonical mark-read", () => {
+        const decoded = outlookInboxRuleCodec.decode({
+            id: "provider-rule-id",
+            displayName: "Provider metadata is not semantic mark-read data",
+            actions: {
+                markAsRead: true,
+            },
+        });
+
+        expect(decoded).toEqual({
+            kind: "decoded",
+            expression: createActionExpression(
+                createCapabilityInstance(markReadCapability, null),
+            ),
+        });
     });
 });

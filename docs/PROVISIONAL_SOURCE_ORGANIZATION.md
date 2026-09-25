@@ -7,7 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 has now applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout; adapter organization remains pending.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 has now applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer.
 
 ## 1. Design rules
 
