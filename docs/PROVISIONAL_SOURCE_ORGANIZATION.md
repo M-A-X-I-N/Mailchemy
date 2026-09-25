@@ -7,7 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer. CRH-44D7 reconciled imports, root barrels/exports, and current-facing durable documentation while preserving the old → new maps below as intentional historical design evidence. CRH-44D8 has now completed the unfamiliar-reader browseability audit: the resulting package trees need no further structural churn, and `packages/README.md` supplies the one missing lightweight cross-package navigation layer.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal. CRH-44D4 applied the approved Core conceptual folder organization and mirrored useful Core test boundaries. CRH-44D5 applied the approved Conformance fixture/test grouping, descriptive conformance module names, and intentionally flat Cross-IO layout. CRH-44D6 applied the approved flat adapter layouts and provider-context-aware local filenames while preserving Sieve's distinct endpoint/profile layer. CRH-44D7 reconciled imports, root barrels/exports, and current-facing durable documentation while preserving the old → new maps below as intentional historical design evidence. CRH-44D8 completed the unfamiliar-reader browseability audit: the resulting package trees need no further structural churn, and `packages/README.md` supplies the one missing lightweight cross-package navigation layer. CRH-44D9 has now closed the sequence with a mechanical behavior-neutral proof.
 
 ## 1. Design rules
 
@@ -613,6 +613,40 @@ and their relationship. [`../packages/README.md`](../packages/README.md) now
 provides that map, the common adapter landmarks, the intentional Sieve
 asymmetry, Core's grouped boundaries, and the package-root import rule. This is
 navigation documentation rather than a second architecture authority.
+
+### 5.3 CRH-44D9 behavior-neutral proof
+
+The closeout audit uses CRH-44D2
+(`2c680fb3aa6258a3fc6f2ed3284f7ae555365bb6`) as the
+post-filename/pre-semantic baseline. This isolates the deliberately approved D3
+public-name changes from the later physical reorganization while the complete
+old → final path map still accounts for D2 filename normalization.
+
+Mechanical results:
+
+- the path map contains 90 final authored TypeScript destinations and exactly
+  matches the 90 authored TypeScript files in the final tree;
+- zero obsolete planned paths remain;
+- D2 → final root-barrel exports are unchanged for Cross-IO, Gmail, Outlook, and
+  Thunderbird;
+- Core, Conformance, and Sieve root-barrel differences are exactly the approved
+  D3 capability-instance/leaf-expression/conformance/shared-rule/Sieve-native
+  renames plus removal of the obsolete conformance scaffold sentinel;
+- all 111 authored `id: "..."` literals, comprising 95 unique values, are
+  unchanged as a multiset;
+- authored TypeScript contains zero stale pre-D3 symbols and zero cross-package
+  deep imports.
+
+Generated declarations were then deleted and rebuilt from source. All seven
+package root type entry points were regenerated, producing 46 declaration files
+with no missing `exports["."].types` target. Canonical `npm run check` passed
+typecheck, lint, formatting, and all 39 test files / 178 tests. The D9 checkpoint
+is complete only when the commit carrying this record also passes both Ubuntu
+and Windows CI.
+
+This closes CRH-44D as a **provisional browseability organization**. It is not a
+promise that the present tree is Mailchemy's forever architecture; future proven
+functionality may justify different boundaries.
 
 ## 6. D1 acceptance
 

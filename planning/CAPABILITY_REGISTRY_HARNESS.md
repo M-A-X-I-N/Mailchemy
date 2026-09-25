@@ -58,11 +58,11 @@
 | CRH-44D6 — Standardize adapter package organization | Done | Removed redundant provider-local filename prefixes, aligned equivalent codec/target/conformance layouts, kept packages flat, and preserved Sieve's real endpoint/profile layer |
 | CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Done | Reconciled current-facing references, verified root-only package exports/no deep consumer imports, and explicitly accounted for the deliberate D3 public-name changes |
 | CRH-44D8 — Perform unfamiliar-human browseability audit | Done | Audited every package tree/file responsibility as a newcomer; no further rename/nesting changes were justified, and added one central package navigation map for cross-package orientation |
-| CRH-44D9 — Prove reorganization behavior-neutral | Next | Verify planned renames/moves, identities, generated output, canonical validation, and Windows/Linux CI |
+| CRH-44D9 — Prove reorganization behavior-neutral | Done | Accounted for all 90 planned TS destinations, proved only approved D3 root-export changes, preserved all 111 ID literals, rebuilt declarations cleanly, and passed canonical validation |
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D8 are complete; CRH-44D9 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D9 are complete. The CRH-44 implementation-hygiene umbrella is closed; CRH-45 is next.
 
 ## 1. Purpose
 
@@ -1204,7 +1204,7 @@ This phase deliberately waits until the first cross-IO implementation milestone 
 
 ## CRH-44 — Document, prettify, and reorganize the implementation
 
-This remains the umbrella implementation-hygiene phase. It is intentionally being specified in stages as the human supplies the desired conventions. File/module-structure reorganization is expected later, but is **not yet specified** and must not be started as part of the tasks below.
+**Status:** Done. This umbrella implementation-hygiene phase was intentionally specified and executed in stages: formatting/style, exhaustive TypeScript documentation, then the provisional naming/source-organization sequence. CRH-44D9 closes the phase with an explicit behavior-neutral proof; the resulting layout remains provisional browseability organization rather than forever architecture.
 
 ### CRH-44A — Standardize indentation to four spaces
 
@@ -1722,6 +1722,10 @@ Do not change architecture merely to make the tree prettier.
 
 ### CRH-44D9 — Prove the reorganization is behavior-neutral
 
+**Status:** Done. The closeout audit used CRH-44D2 (`2c680fb3aa6258a3fc6f2ed3284f7ae555365bb6`) as the post-filename/pre-semantic baseline and the completed CRH-44D8 tree as the final implementation state. The complete path map contains 90 planned final authored TypeScript paths and exactly matches the 90 files present, with zero obsolete planned paths still existing. Root-barrel export comparison found no changes in Cross-IO, Gmail, Outlook, or Thunderbird; Core, Conformance, and Sieve differ only by the explicit CRH-44D3 semantic renames/removal already recorded in the organization design. All 111 authored `id: "..."` literals (95 unique values) are unchanged as a multiset, providing a broad mechanical identity invariant across capability/codec/target/profile and fixture/test identities. Authored TypeScript contains zero stale pre-D3 symbols and zero cross-package deep imports.
+
+Generated output was deleted and rebuilt from source: all seven package `exports["."].types` entry points were regenerated, with 46 declaration files produced and no missing type entry point. `npm run check` then passed typecheck, lint, formatting, and all 39 test files / 178 tests. The final checkpoint is accepted only with both Ubuntu and Windows CI green.
+
 Close CRH-44D with a mechanical and semantic safety audit:
 
 - every planned move/rename accounted for;
@@ -1740,9 +1744,8 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D8 are complete. CRH-44D9 is next.
-The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
-CRH-44D sequence completes or the human explicitly redirects the work.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D9 are complete. The authorized
+CRH-44D sequence is closed; the pre-existing rewrite roadmap resumes at CRH-45.
 
 ---
 
