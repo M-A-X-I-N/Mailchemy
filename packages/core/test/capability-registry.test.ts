@@ -1,3 +1,10 @@
+/**
+ * Proves semantic capability definition and registry invariants using synthetic
+ * boolean contracts rather than provider-specific semantics.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -11,10 +18,21 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic canonical parameter shape used to exercise typed contract erasure.
+ */
 interface BooleanParameters {
+    /** Boolean value whose equality semantics are intentionally trivial. */
     readonly value: boolean;
 }
 
+/**
+ * Validates the synthetic boolean parameter shape used by registry tests.
+ *
+ * @param value Unknown candidate parameters.
+ * @returns Frozen typed parameters for a boolean object or a structured
+ * synthetic validation failure.
+ */
 function booleanParameters(value: unknown) {
     if (
         typeof value === "object" &&
@@ -32,6 +50,13 @@ function booleanParameters(value: unknown) {
     );
 }
 
+/**
+ * Builds a synthetic condition contract with caller-selected identity.
+ *
+ * @param id Canonical test capability ID.
+ * @param references Synthetic references whose snapshot behavior may be tested.
+ * @returns Immutable boolean semantic capability contract.
+ */
 function makeContract(id: string, references: readonly string[] = []) {
     return defineSemanticCapability<BooleanParameters>({
         id: parseCapabilityId(id),
@@ -43,7 +68,15 @@ function makeContract(id: string, references: readonly string[] = []) {
     });
 }
 
+/**
+ * Exercises registry immutability, erasure, uniqueness, ordering, and required
+ * capability metadata independently of real Mailchemy capability semantics.
+ */
 describe("CapabilityRegistry", () => {
+    /**
+     * Proves definition/registration snapshot caller-owned metadata and preserve
+     * validation plus semantic equality after type erasure.
+     */
     it("registers immutable contracts and validates their parameters", () => {
         const sourceReferences = ["synthetic:test"];
         const contract = makeContract(
@@ -75,6 +108,10 @@ describe("CapabilityRegistry", () => {
         ).toBe(false);
     });
 
+    /**
+     * Proves a registered semantic identity cannot be silently replaced by a
+     * new definition with different meaning.
+     */
     it("rejects duplicate semantic identities instead of redefining them", () => {
         const registry = new CapabilityRegistry();
         const first = makeContract("test.condition.boolean@1");
@@ -91,6 +128,10 @@ describe("CapabilityRegistry", () => {
         expect(registry.get(first.id)?.description).toBe(first.description);
     });
 
+    /**
+     * Proves enumeration is canonical-ID ordered instead of depending on
+     * registration order.
+     */
     it("enumerates contracts deterministically by canonical ID", () => {
         const registry = new CapabilityRegistry();
 
@@ -105,6 +146,10 @@ describe("CapabilityRegistry", () => {
         ]);
     });
 
+    /**
+     * Proves semantic contracts reject blank human-facing metadata rather than
+     * admitting effectively undocumented registrations.
+     */
     it("requires non-empty contract metadata", () => {
         expect(() =>
             defineSemanticCapability<BooleanParameters>({

@@ -1,3 +1,10 @@
+/**
+ * Proves canonical expression constructors preserve provider-neutral structure,
+ * operand/action ordering, grouping, and immutable snapshots.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -13,6 +20,12 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Creates a synthetic string-valued condition contract for expression tests.
+ *
+ * @param id Canonical synthetic semantic identity.
+ * @returns Immutable condition-role string contract.
+ */
 function stringCondition(id: string) {
     return defineSemanticCapability<string>({
         id: parseCapabilityId(id),
@@ -31,6 +44,13 @@ function stringCondition(id: string) {
     });
 }
 
+/**
+ * Creates a synthetic parameterless action or logic contract.
+ *
+ * @param id Canonical synthetic semantic identity.
+ * @param role Structural role needed by the expression under test.
+ * @returns Immutable null-parameter semantic contract.
+ */
 function nullCapability(id: string, role: "action" | "logic") {
     return defineSemanticCapability<null>({
         id: parseCapabilityId(id),
@@ -49,7 +69,15 @@ function nullCapability(id: string, role: "action" | "logic") {
     });
 }
 
+/**
+ * Exercises the minimal provider-neutral condition/action/conjunction/rule
+ * expression constructors used by the first implementation slice.
+ */
 describe("canonical expression constructors", () => {
+    /**
+     * Proves the initial A/B/C rule shapes can be represented entirely with
+     * canonical semantics, without provider-specific fields leaking into IR.
+     */
     it("represents the initial rule-shaped specimen patterns without provider data", () => {
         const subject = stringCondition("test.condition.subject@1");
         const attachment = stringCondition("test.condition.attachment@1");
@@ -83,6 +111,10 @@ describe("canonical expression constructors", () => {
         ]);
     });
 
+    /**
+     * Proves constructor snapshots prevent later caller mutation from changing
+     * canonical rule/action grouping or structural immutability.
+     */
     it("preserves rule/action grouping and freezes structural arrays", () => {
         const conditionContract = stringCondition("test.condition.value@1");
         const actionContract = nullCapability("test.action.noop@1", "action");

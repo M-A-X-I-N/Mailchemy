@@ -1,3 +1,10 @@
+/**
+ * Proves capability-specimen construction, parameter canonicalization,
+ * validation failure, registry-owned equality, and unknown-contract behavior.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -12,10 +19,20 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic parameter shape whose canonicalization/equality are easy to inspect.
+ */
 interface BooleanParameters {
+    /** Boolean semantic value used by the synthetic contract. */
     readonly value: boolean;
 }
 
+/**
+ * Creates a synthetic boolean condition contract for specimen tests.
+ *
+ * @param id Canonical synthetic semantic identity.
+ * @returns Contract that validates/canonicalizes one boolean property.
+ */
 function makeBooleanContract(id: string) {
     return defineSemanticCapability<BooleanParameters>({
         id: parseCapabilityId(id),
@@ -46,7 +63,15 @@ function makeBooleanContract(id: string) {
     });
 }
 
+/**
+ * Exercises the boundary between typed semantic contracts and concrete
+ * canonical capability specimens.
+ */
 describe("CapabilitySpecimen", () => {
+    /**
+     * Proves specimen construction retains the contract's canonicalized frozen
+     * value rather than a later-mutated caller object.
+     */
     it("stores a validated canonical parameter value", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
         const input = { value: true };
@@ -60,6 +85,10 @@ describe("CapabilitySpecimen", () => {
         expect(Object.isFrozen(specimen.parameters)).toBe(true);
     });
 
+    /**
+     * Proves invalid parameters cannot enter canonical specimens by bypassing
+     * contract validation.
+     */
     it("rejects parameters that violate the semantic contract", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
 
@@ -70,6 +99,10 @@ describe("CapabilitySpecimen", () => {
         ).toThrow(InvalidCapabilityParametersError);
     });
 
+    /**
+     * Proves specimen equality delegates parameter meaning to the registered
+     * contract after requiring exact capability identity.
+     */
     it("delegates semantic parameter equality to the registered contract", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
         const otherContract = makeBooleanContract("test.condition.other@1");
@@ -89,6 +122,10 @@ describe("CapabilitySpecimen", () => {
         expect(areCapabilitySpecimensEqual(registry, trueA, other)).toBe(false);
     });
 
+    /**
+     * Proves equality fails closed when no registry contract exists to define
+     * parameter semantics.
+     */
     it("does not invent equality semantics for an unregistered capability", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
         const specimen = createCapabilitySpecimen(contract, { value: true });

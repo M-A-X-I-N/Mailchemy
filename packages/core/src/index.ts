@@ -1,3 +1,15 @@
+/**
+ * Exposes the public `@mailchemy/core` TypeScript surface by re-exporting
+ * semantic primitives, canonical expression types, validation, realization,
+ * codec, endpoint-profile, and current core capability APIs.
+ *
+ * @remarks
+ * Re-exporting an implementation here does not strengthen its semantic or
+ * exactness claims; each underlying module owns those details.
+ *
+ * @packageDocumentation
+ */
+
 export {
     InvalidCapabilityIdError,
     capabilityIdKey,

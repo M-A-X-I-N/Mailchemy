@@ -1,11 +1,36 @@
+/**
+ * Implements `core.condition.subject.contains@1`, including parameter
+ * canonicalization and the provider-independent Subject comparison oracle.
+ *
+ * @packageDocumentation
+ */
+
 import { defineSemanticCapability } from "../capability-contract.js";
 import { parseCapabilityId } from "../capability-id.js";
 import { invalid, valid, validationIssue } from "../validation.js";
 
+/**
+ * Canonical parameters for version-1 Subject containment.
+ */
 export interface SubjectContainsParameters {
+    /**
+     * Non-empty NFC-normalized substring sought in logical Subject field
+     * values before comparison normalization is applied.
+     */
     readonly needle: string;
 }
 
+/**
+ * Canonical Subject-containment condition contract.
+ *
+ * @remarks
+ * Parameters are canonicalized to NFC. Evaluation then applies NFC plus
+ * locale-independent Unicode lowercasing to both needle and each logical
+ * Subject field before contiguous substring matching. The contract deliberately
+ * does not use full Unicode case folding.
+ *
+ * @see docs/SEMANTIC_CAPABILITIES.md#coreconditionsubjectcontains1
+ */
 export const subjectContainsCapability =
     defineSemanticCapability<SubjectContainsParameters>({
         id: parseCapabilityId("core.condition.subject.contains@1"),
@@ -40,6 +65,7 @@ export const subjectContainsCapability =
                 );
             }
 
+            /** Canonical NFC form stored in Subject-containment specimens. */
             const needle = value.needle.normalize("NFC");
 
             if (needle.length === 0) {
@@ -57,10 +83,19 @@ export const subjectContainsCapability =
         areParametersEqual: (left, right) => left.needle === right.needle,
     });
 
+/**
+ * Evaluates Subject containment across all logical Subject field values.
+ *
+ * @param subjectFields Decoded/unfolded logical Subject values; an empty array
+ * represents a missing Subject and therefore cannot match.
+ * @param parameters Canonical version-1 containment parameters.
+ * @returns Whether any Subject field contains the normalized comparison needle.
+ */
 export function evaluateSubjectContains(
     subjectFields: readonly string[],
     parameters: SubjectContainsParameters,
 ): boolean {
+    /** Comparison-normalized form of the canonical needle. */
     const needle = normalizeComparableSubjectText(parameters.needle);
 
     return subjectFields.some((subject) =>
@@ -68,6 +103,13 @@ export function evaluateSubjectContains(
     );
 }
 
+/**
+ * Applies the version-1 comparison normalization shared by Subject values and
+ * the search needle.
+ *
+ * @param value Unicode text to normalize for comparison.
+ * @returns NFC-normalized, locale-independent lowercase text.
+ */
 function normalizeComparableSubjectText(value: string): string {
     return value.normalize("NFC").toLowerCase();
 }
