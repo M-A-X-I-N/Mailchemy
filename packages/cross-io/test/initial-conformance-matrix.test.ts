@@ -1,3 +1,11 @@
+/**
+ * Proves the initial cross-target matrix covers the planned fixture/target
+ * surface, preserves evidence-class distinctions, and matches its frozen
+ * regression baseline.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -7,7 +15,15 @@ import {
 
 import { expectedInitialConformanceMatrixMarkdown } from "./fixtures/expected-initial-conformance-matrix.js";
 
+/**
+ * Exercises aggregation/reporting behavior without redefining any adapter's
+ * underlying realization semantics.
+ */
 describe("initial cross-IO conformance matrix", () => {
+    /**
+     * Proves the matrix includes every initial target column and all 23
+     * canonically valid shared fixtures.
+     */
     it("covers all initial targets and canonically valid shared fixtures", () => {
         const matrix = buildInitialCrossIoConformanceMatrix();
 
@@ -22,6 +38,10 @@ describe("initial cross-IO conformance matrix", () => {
         expect(matrix.passed).toBe(true);
     });
 
+    /**
+     * Proves aggregation preserves adapter evidence classes instead of collapsing
+     * known absence and unproven exactness into one generic unsupported state.
+     */
     it("keeps exactness-unproven distinct from known capability absence", () => {
         const matrix = buildInitialCrossIoConformanceMatrix();
         const attachment = matrix.rows.find(
@@ -38,6 +58,11 @@ describe("initial cross-IO conformance matrix", () => {
         });
     });
 
+    /**
+     * Proves the matrix keeps the dated Purelymail endpoint-refined column
+     * distinct from base Sieve while preserving the observed Direct mark-read
+     * classification for that 2026-09-24 profile.
+     */
     it("shows Purelymail retaining Sieve mark-read support under its dated imap4flags profile", () => {
         const matrix = buildInitialCrossIoConformanceMatrix();
         const markRead = matrix.rows.find(
@@ -54,6 +79,10 @@ describe("initial cross-IO conformance matrix", () => {
         });
     });
 
+    /**
+     * Proves Markdown rendering is deterministic and still matches the frozen
+     * initial matrix baseline used to detect unintended classification drift.
+     */
     it("renders deterministically from the machine-readable matrix", () => {
         const first = renderInitialCrossIoConformanceMatrixMarkdown();
         const second = renderInitialCrossIoConformanceMatrixMarkdown();

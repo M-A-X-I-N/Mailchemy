@@ -1489,6 +1489,8 @@ Primary surface includes:
 
 #### CRH-44C10 — Document the cross-IO aggregation layer
 
+**Status:** Done. The full `@mailchemy/cross-io` matrix aggregation, canonical-routed cross-codec round trips, negative exactness/refusal evidence, frozen matrix baseline, and associated tests now follow the shared TypeScript documentation contract.
+
 Document the full `@mailchemy/cross-io` package and corresponding tests/baselines.
 
 Primary surface includes:
@@ -1537,7 +1539,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C9 are complete. CRH-44C10 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C10 are complete. CRH-44C11 is the final documentation section: the repository-wide coverage and methodology-drift audit. It must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md) and reconcile any late findings across earlier sections before CRH-44C can close. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 
