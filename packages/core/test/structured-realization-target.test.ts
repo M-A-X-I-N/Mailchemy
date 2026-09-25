@@ -1,3 +1,10 @@
+/**
+ * Proves structured realization targets make leaf and composition support
+ * independent decisions instead of inferring structural closure from leaves.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -15,6 +22,9 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic boolean condition used as a Direct leaf in structural tests.
+ */
 const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
@@ -38,6 +48,9 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Synthetic logic capability used to construct canonical AND structures.
+ */
 const andCapability = defineSemanticCapability<null>({
     id: parseCapabilityId("test.logic.and@1"),
     role: "logic",
@@ -54,13 +67,26 @@ const andCapability = defineSemanticCapability<null>({
     areParametersEqual: () => true,
 });
 
+/**
+ * Constructs a synthetic canonical condition leaf.
+ *
+ * @param value Boolean parameter encoded in the synthetic specimen.
+ * @returns Canonical condition expression for structural target tests.
+ */
 function booleanLeaf(value: boolean) {
     return createConditionExpression(
         createCapabilitySpecimen(booleanCondition, { value }),
     );
 }
 
+/**
+ * Exercises the explicit structural-support boundary with synthetic targets.
+ */
 describe("StructuredDirectRealizationTarget", () => {
+    /**
+     * Proves two individually Direct leaves do not imply their conjunction is
+     * Direct when the target explicitly rejects composition.
+     */
     it("can report every leaf Direct while rejecting their composition", () => {
         const target = defineStructuredDirectRealizationTarget({
             id: "synthetic.structure-hating-target",
@@ -95,6 +121,10 @@ describe("StructuredDirectRealizationTarget", () => {
         });
     });
 
+    /**
+     * Proves the generic dispatcher invokes the structure hook directly for a
+     * composition instead of recursively assuming leaf support determines it.
+     */
     it("dispatches a structure to the structure hook without assuming leaf closure", () => {
         let leafChecks = 0;
         let structureChecks = 0;
@@ -127,6 +157,10 @@ describe("StructuredDirectRealizationTarget", () => {
         expect(leafChecks).toBe(0);
     });
 
+    /**
+     * Proves structural rejection is not mandatory: a target may explicitly
+     * classify a composition Direct when its own exactness contract supports it.
+     */
     it("still allows target-specific structures to be declared Direct explicitly", () => {
         const target = defineStructuredDirectRealizationTarget({
             id: "synthetic.structure-friendly-target",

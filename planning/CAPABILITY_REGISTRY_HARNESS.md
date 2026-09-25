@@ -1350,6 +1350,8 @@ This section establishes how the C1 methodology reads when applied to the canoni
 
 #### CRH-44C3 — Document core realization, codec, endpoint, and semantic-validation machinery
 
+**Status:** Done. The remaining `@mailchemy/core` realization, codec, endpoint-profile, structured-support, semantic-validation machinery, and associated tests now follow the shared TypeScript documentation contract.
+
 Complete the remaining `@mailchemy/core` implementation and corresponding tests.
 
 Primary surface includes:
@@ -1523,7 +1525,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C1, and CRH-44C2 are complete. CRH-44C3 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C3 are complete. CRH-44C4 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

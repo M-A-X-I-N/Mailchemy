@@ -1,3 +1,10 @@
+/**
+ * Proves direct-realization targets inspect concrete canonical instances and
+ * structures rather than treating capability IDs as unconditional support bits.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -15,6 +22,9 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic boolean condition used to demonstrate instance-level refinement.
+ */
 const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
@@ -38,7 +48,15 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Exercises the direct-target contract using synthetic support predicates, not
+ * evidence about any real provider or dialect.
+ */
 describe("DirectRealizationTarget", () => {
+    /**
+     * Proves a target can accept one concrete parameter instance while rejecting
+     * another instance of the same semantic capability as refinement-rejected.
+     */
     it("can inspect concrete leaf parameters", () => {
         const target = defineDirectRealizationTarget({
             id: "synthetic.direct-target",
@@ -80,6 +98,10 @@ describe("DirectRealizationTarget", () => {
         });
     });
 
+    /**
+     * Proves target support checks receive complete canonical structures and may
+     * reject composition even when a leaf expression is Direct.
+     */
     it("receives composed semantic structures rather than capability IDs", () => {
         const target = defineDirectRealizationTarget({
             id: "synthetic.structure-aware",
@@ -109,6 +131,10 @@ describe("DirectRealizationTarget", () => {
         });
     });
 
+    /**
+     * Proves realization-target definitions require a stable inspectable
+     * identity rather than accepting blank metadata.
+     */
     it("requires a stable non-empty target identifier", () => {
         expect(() =>
             defineDirectRealizationTarget({

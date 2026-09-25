@@ -1,3 +1,16 @@
+/**
+ * Validates unknown runtime values against the registered canonical semantic
+ * expression model, including capability roles, parameter contracts, structure,
+ * arity, paths, and cycle safety.
+ *
+ * @remarks
+ * This module proves canonical well-formedness before realization/codec logic
+ * consumes an expression. It does not decide whether a target can realize the
+ * valid semantics.
+ *
+ * @packageDocumentation
+ */
+
 import { parseCapabilityId } from "./capability-id.js";
 import type { CapabilityRole } from "./capability-contract.js";
 import type { CapabilityRegistry } from "./capability-registry.js";
@@ -17,12 +30,30 @@ import {
     type ValidationResult,
 } from "./validation.js";
 
+/**
+ * Object shape accepted by structural validators before individual fields are
+ * narrowed to canonical expression contracts.
+ */
 type UnknownRecord = Record<string, unknown>;
 
+/**
+ * Narrows an unknown value to a non-null, non-array object record.
+ *
+ * @param value Runtime candidate to inspect.
+ * @returns Whether the value can be traversed as an object-shaped semantic node.
+ */
 function isRecord(value: unknown): value is UnknownRecord {
     return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+/**
+ * Prefixes nested validation issues with the structural path used to reach the
+ * nested validator.
+ *
+ * @param prefix Path segments preceding the nested validation boundary.
+ * @param issues Issues whose existing paths are relative to that boundary.
+ * @returns Fresh issues with immutable prefixed paths.
+ */
 function prefixedIssues(
     prefix: readonly ValidationPathSegment[],
     issues: readonly ValidationIssue[],
@@ -32,6 +63,14 @@ function prefixedIssues(
     );
 }
 
+/**
+ * Constructs a structural-shape validation issue using the shared canonical
+ * semantic error code.
+ *
+ * @param path Location of the malformed structure.
+ * @param message Human-readable explanation of the expected shape.
+ * @returns Structured semantic.invalid-shape issue.
+ */
 function shapeIssue(
     path: readonly ValidationPathSegment[],
     message: string,
@@ -39,6 +78,18 @@ function shapeIssue(
     return validationIssue("semantic.invalid-shape", message, path);
 }
 
+/**
+ * Collects validation issues for one capability specimen and optionally proves
+ * that its registered capability role matches the surrounding expression role.
+ *
+ * @param registry Registry that owns capability metadata and parameter
+ * validation.
+ * @param value Unknown candidate specimen.
+ * @param expectedRole Required structural role, or undefined when validating a
+ * specimen independently of an enclosing expression.
+ * @param path Structural path to the candidate specimen.
+ * @returns All identity, registration, role, and parameter issues found.
+ */
 function collectSpecimenIssues(
     registry: CapabilityRegistry,
     value: unknown,
@@ -63,6 +114,7 @@ function collectSpecimenIssues(
         ];
     }
 
+    /** Canonical capability identity parsed from the untrusted specimen field. */
     let capabilityId;
 
     try {
@@ -77,6 +129,7 @@ function collectSpecimenIssues(
         ];
     }
 
+    /** Registered semantic contract that gives this identity runtime meaning. */
     const contract = registry.get(capabilityId);
 
     if (contract === undefined) {
@@ -89,6 +142,7 @@ function collectSpecimenIssues(
         ];
     }
 
+    /** Accumulated non-fatal issues so role and parameter failures can coexist. */
     const issues: ValidationIssue[] = [];
 
     if (expectedRole !== undefined && contract.role !== expectedRole) {
@@ -111,6 +165,7 @@ function collectSpecimenIssues(
         return issues;
     }
 
+    /** Contract-owned validation/canonicalization result for specimen parameters. */
     const parameterValidation = contract.validateParameters(value.parameters);
 
     if (!parameterValidation.ok) {
@@ -125,6 +180,21 @@ function collectSpecimenIssues(
     return issues;
 }
 
+/**
+ * Recursively validates a canonical condition expression while preserving issue
+ * paths and detecting cycles on the active traversal branch.
+ *
+ * @remarks
+ * The recursion stack tracks only objects currently being traversed. Removing a
+ * node in finally means shared object references in separate completed branches
+ * are not incorrectly reported as cycles.
+ *
+ * @param registry Registry that owns capability validation and role metadata.
+ * @param value Unknown condition candidate.
+ * @param path Structural path to this condition node.
+ * @param stack Objects currently active in the recursive traversal.
+ * @returns All issues found in this condition subtree.
+ */
 function collectConditionIssues(
     registry: CapabilityRegistry,
     value: unknown,
@@ -157,6 +227,7 @@ function collectConditionIssues(
         }
 
         if (value.kind === "and") {
+            /** Issues contributed by the conjunction operator and its operands. */
             const issues = collectSpecimenIssues(
                 registry,
                 value.operator,
@@ -210,6 +281,16 @@ function collectConditionIssues(
     }
 }
 
+/**
+ * Recursively validates one canonical action expression with role-aware
+ * capability validation and active-branch cycle detection.
+ *
+ * @param registry Registry that owns capability validation and role metadata.
+ * @param value Unknown action candidate.
+ * @param path Structural path to this action node.
+ * @param stack Objects currently active in the recursive traversal.
+ * @returns All issues found in this action subtree.
+ */
 function collectActionIssues(
     registry: CapabilityRegistry,
     value: unknown,
@@ -251,6 +332,16 @@ function collectActionIssues(
     }
 }
 
+/**
+ * Recursively validates a rule-shaped canonical structure by validating its
+ * condition and every action under one shared active-branch cycle stack.
+ *
+ * @param registry Registry that owns capability validation and role metadata.
+ * @param value Object-shaped rule candidate.
+ * @param path Structural path to this rule node.
+ * @param stack Objects currently active in the recursive traversal.
+ * @returns All structural/capability issues found in the rule.
+ */
 function collectRuleIssues(
     registry: CapabilityRegistry,
     value: UnknownRecord,
@@ -270,6 +361,7 @@ function collectRuleIssues(
     stack.add(value);
 
     try {
+        /** Issues from the rule condition plus any subsequently visited actions. */
         const issues = collectConditionIssues(
             registry,
             value.condition,
@@ -304,11 +396,22 @@ function collectRuleIssues(
     }
 }
 
+/**
+ * Validates an unknown capability specimen against registry identity,
+ * registration, role, and parameter contracts.
+ *
+ * @param registry Registry containing the semantic contract vocabulary.
+ * @param value Unknown specimen candidate.
+ * @param expectedRole Optional structural role required by the caller.
+ * @returns The original specimen value typed as canonical when no issues are
+ * found, otherwise structured validation issues.
+ */
 export function validateCapabilitySpecimen(
     registry: CapabilityRegistry,
     value: unknown,
     expectedRole?: CapabilityRole,
 ): ValidationResult<CapabilitySpecimen> {
+    /** Complete issue set produced by specimen validation at the root path. */
     const issues = collectSpecimenIssues(registry, value, expectedRole, []);
 
     if (issues.length > 0)
@@ -317,10 +420,28 @@ export function validateCapabilitySpecimen(
     return valid(value as CapabilitySpecimen);
 }
 
+/**
+ * Validates an unknown canonical expression recursively before it crosses into
+ * realization, codec, or conformance logic.
+ *
+ * @remarks
+ * Validation proves shape, registered capability meaning, role placement,
+ * parameter validity, conjunction arity, and acyclic structure. It does not
+ * establish target support or native exactness.
+ *
+ * @param registry Registry containing the canonical semantic vocabulary.
+ * @param value Unknown canonical-expression candidate.
+ * @returns The original expression typed as canonical when every invariant
+ * holds, otherwise all discovered structured validation issues.
+ */
 export function validateCanonicalExpression(
     registry: CapabilityRegistry,
     value: unknown,
 ): ValidationResult<CanonicalExpression> {
+    /**
+     * Original unknown reference retained so successful validation returns the
+     * caller's expression rather than rebuilding/canonicalizing structure.
+     */
     const originalValue: unknown = value;
 
     if (!isRecord(value)) {
@@ -329,7 +450,10 @@ export function validateCanonicalExpression(
         );
     }
 
+    /** Active recursion stack used solely for cycle detection. */
     const stack = new Set<object>();
+
+    /** Root issue collection selected by the expression discriminator. */
     let issues: ValidationIssue[];
 
     if (value.kind === "condition" || value.kind === "and")
@@ -354,4 +478,8 @@ export function validateCanonicalExpression(
     return valid(originalValue as CanonicalExpression);
 }
 
+/**
+ * Re-exports canonical expression subtypes commonly consumed alongside the
+ * validation entry points.
+ */
 export type { ActionExpression, ConditionExpression, RuleExpression };

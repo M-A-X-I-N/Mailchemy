@@ -1,3 +1,10 @@
+/**
+ * Proves the offline semantic codec contract, including directional encode/decode
+ * behavior, opaque preservation, decode refusal, and definition metadata.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -18,6 +25,9 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic boolean condition used solely to exercise codec boundaries.
+ */
 const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
@@ -41,13 +51,27 @@ const booleanCondition = defineSemanticCapability<{ readonly value: boolean }>({
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Constructs a canonical synthetic boolean condition expression.
+ *
+ * @param value Boolean parameter represented by the synthetic capability.
+ * @returns Canonical condition expression used as codec input/expected output.
+ */
 function booleanExpression(value: boolean) {
     return createConditionExpression(
         createCapabilitySpecimen(booleanCondition, { value }),
     );
 }
 
+/**
+ * Exercises codec semantics using synthetic native strings rather than evidence
+ * about any concrete provider or wire format.
+ */
 describe("SemanticCodec", () => {
+    /**
+     * Proves encode/decode are pure offline representation transforms and can
+     * round-trip the supported synthetic semantic subset without endpoint data.
+     */
     it("encodes and decodes entirely offline", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.boolean-codec",
@@ -106,6 +130,10 @@ describe("SemanticCodec", () => {
         });
     });
 
+    /**
+     * Proves ordinary canonical-to-native incompatibility is represented as an
+     * Unsupported realization result rather than an exceptional control path.
+     */
     it("reports ordinary encode incompatibility without throwing", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.rejecting-codec",
@@ -133,6 +161,10 @@ describe("SemanticCodec", () => {
         });
     });
 
+    /**
+     * Proves preserving unknown native material is a distinct outcome from
+     * refusing decode because the construct cannot be represented/preserved.
+     */
     it("distinguishes opaque preservation from native decode refusal", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.decode-boundaries",
@@ -162,6 +194,9 @@ describe("SemanticCodec", () => {
         });
     });
 
+    /**
+     * Proves codecs require stable non-empty implementation identities.
+     */
     it("requires a stable non-empty codec identifier", () => {
         expect(() =>
             defineSemanticCodec<string>({

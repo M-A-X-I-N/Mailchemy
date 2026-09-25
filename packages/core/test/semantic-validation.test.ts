@@ -1,3 +1,10 @@
+/**
+ * Proves recursive canonical-expression validation across registered capability
+ * parameters, roles, structure, arity-related shape, paths, and cycle safety.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -15,10 +22,21 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic parameter shape used to exercise canonical-validation boundaries.
+ */
 interface BooleanParameters {
+    /** Boolean value accepted by the synthetic contract. */
     readonly value: boolean;
 }
 
+/**
+ * Creates a synthetic boolean-valued capability for a selected structural role.
+ *
+ * @param id Canonical synthetic semantic identity.
+ * @param role Structural role used to test role-aware validation.
+ * @returns Immutable boolean semantic capability contract.
+ */
 function booleanContract(id: string, role: "condition" | "action" | "logic") {
     return defineSemanticCapability<BooleanParameters>({
         id: parseCapabilityId(id),
@@ -49,6 +67,12 @@ function booleanContract(id: string, role: "condition" | "action" | "logic") {
     });
 }
 
+/**
+ * Builds a fresh synthetic registry containing one capability for each
+ * condition/action/logic role.
+ *
+ * @returns Registry plus the three typed contracts used by validation cases.
+ */
 function setupRegistry() {
     const condition = booleanContract("test.condition.boolean@1", "condition");
     const action = booleanContract("test.action.boolean@1", "action");
@@ -62,7 +86,15 @@ function setupRegistry() {
     return { registry, condition, action, logic };
 }
 
+/**
+ * Exercises validation of unknown values before they are trusted as canonical
+ * semantic expressions.
+ */
 describe("validateCanonicalExpression", () => {
+    /**
+     * Proves a registered, correctly-role-placed rule/conjunction/action tree is
+     * accepted and returned as the original canonical expression.
+     */
     it("accepts a well-formed registered rule structure", () => {
         const { registry, condition, action, logic } = setupRegistry();
         const left = createConditionExpression(
@@ -87,6 +119,10 @@ describe("validateCanonicalExpression", () => {
         });
     });
 
+    /**
+     * Proves registered capability parameter contracts run before target
+     * realization and preserve the structural path to nested failures.
+     */
     it("rejects invalid capability parameters before target realization", () => {
         const { registry, condition } = setupRegistry();
         const malformed = {
@@ -112,6 +148,10 @@ describe("validateCanonicalExpression", () => {
         }
     });
 
+    /**
+     * Proves unknown semantic identities are reported as registration failures,
+     * not conflated with parameter-shape failures.
+     */
     it("distinguishes an unregistered capability from malformed parameters", () => {
         const { registry } = setupRegistry();
         const unknown = {
@@ -134,6 +174,10 @@ describe("validateCanonicalExpression", () => {
         }
     });
 
+    /**
+     * Proves an otherwise-valid registered specimen cannot occupy a canonical
+     * expression role that conflicts with its contract metadata.
+     */
     it("rejects capability-role mismatches", () => {
         const { registry, action } = setupRegistry();
         const wrongRole = {
@@ -156,6 +200,10 @@ describe("validateCanonicalExpression", () => {
         }
     });
 
+    /**
+     * Proves malformed AND structure is rejected as shape evidence without
+     * incorrectly converting that case into some unrelated semantic decision.
+     */
     it("rejects malformed structural fields without choosing AND cardinality semantics", () => {
         const { registry, logic } = setupRegistry();
         const malformed = {
@@ -182,6 +230,10 @@ describe("validateCanonicalExpression", () => {
         }
     });
 
+    /**
+     * Proves recursive validation terminates safely and reports active-branch
+     * cycles instead of recursing indefinitely.
+     */
     it("detects cycles in semantic structures", () => {
         const { registry, logic } = setupRegistry();
         const cyclic: {

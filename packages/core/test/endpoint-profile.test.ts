@@ -1,3 +1,10 @@
+/**
+ * Proves endpoint capability profiles can narrow a dialect/base target's Direct
+ * realization domain without redefining or broadening that base target.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -16,6 +23,10 @@ import {
     validationIssue,
 } from "@mailchemy/core";
 
+/**
+ * Synthetic condition whose base-target realization requires an endpoint
+ * feature in the refinement layer.
+ */
 const flagCondition = defineSemanticCapability<null>({
     id: parseCapabilityId("test.condition.requires-flag@1"),
     role: "condition",
@@ -32,6 +43,9 @@ const flagCondition = defineSemanticCapability<null>({
     areParametersEqual: () => true,
 });
 
+/**
+ * Synthetic condition deliberately unsupported by the base target.
+ */
 const absentCondition = defineSemanticCapability<null>({
     id: parseCapabilityId("test.condition.absent@1"),
     role: "condition",
@@ -48,10 +62,20 @@ const absentCondition = defineSemanticCapability<null>({
     areParametersEqual: () => true,
 });
 
+/**
+ * Wraps one synthetic parameterless capability as a canonical condition.
+ *
+ * @param contract Synthetic contract selected for the endpoint-profile case.
+ * @returns Canonical condition expression for target classification.
+ */
 function condition(contract: typeof flagCondition | typeof absentCondition) {
     return createConditionExpression(createCapabilitySpecimen(contract, null));
 }
 
+/**
+ * Synthetic dialect/base target that can directly realize only the flag-backed
+ * condition before endpoint constraints are applied.
+ */
 const baseTarget = defineDirectRealizationTarget({
     id: "synthetic.dialect",
     checkDirectRealization: (expression) =>
@@ -66,7 +90,15 @@ const baseTarget = defineDirectRealizationTarget({
             ),
 });
 
+/**
+ * Exercises endpoint refinement independently of any real provider capability
+ * profile.
+ */
 describe("endpoint capability-profile refinement", () => {
+    /**
+     * Proves an endpoint profile may turn a base Direct result into Unsupported
+     * when the concrete endpoint lacks a required runtime feature.
+     */
     it("narrows Direct support when a runtime profile lacks a required feature", () => {
         const profile = defineEndpointCapabilityProfile({
             id: "synthetic.endpoint.without-flag",
@@ -104,6 +136,10 @@ describe("endpoint capability-profile refinement", () => {
         );
     });
 
+    /**
+     * Proves the same base-target realization remains Direct under a different
+     * endpoint profile that advertises the required feature.
+     */
     it("allows the same dialect realization when another supplied profile has the feature", () => {
         const profile = defineEndpointCapabilityProfile({
             id: "synthetic.endpoint.with-flag",
@@ -133,6 +169,10 @@ describe("endpoint capability-profile refinement", () => {
         );
     });
 
+    /**
+     * Proves endpoint refinement cannot upgrade an expression the base
+     * dialect/target already classified Unsupported.
+     */
     it("cannot broaden a base target that already reports Unsupported", () => {
         let refinementCalls = 0;
         const profile = defineEndpointCapabilityProfile({
@@ -161,6 +201,10 @@ describe("endpoint capability-profile refinement", () => {
         expect(refinementCalls).toBe(0);
     });
 
+    /**
+     * Proves the refined target retains separately inspectable base-target and
+     * endpoint-profile evidence instead of flattening the two layers.
+     */
     it("keeps the endpoint profile separately inspectable from the base target", () => {
         const profile = defineEndpointCapabilityProfile({
             id: "synthetic.endpoint.runtime-profile",
