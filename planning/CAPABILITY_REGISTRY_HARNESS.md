@@ -1413,6 +1413,8 @@ Comments must clearly distinguish the harness's evidence model from the semantic
 
 #### CRH-44C6 — Document the Sieve and Purelymail implementation slice
 
+**Status:** Done. The full `@mailchemy/sieve` codec/parser, dialect target, endpoint-profile refinement, dated Purelymail profile, native fixtures, and associated tests now follow the shared TypeScript documentation contract.
+
 Document the full `@mailchemy/sieve` package and corresponding tests/fixtures as one section because the dialect implementation and endpoint-profile refinement share semantics.
 
 Primary surface includes:
@@ -1529,7 +1531,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C5 are complete. CRH-44C6 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C6 are complete. CRH-44C7 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

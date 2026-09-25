@@ -1,3 +1,15 @@
+/**
+ * Proves the initial Sieve codec's exact mark-read mapping, narrow parser
+ * coverage, exactness refusals, opaque preservation, and malformed-input
+ * diagnostics.
+ *
+ * @remarks
+ * These tests exercise Sieve text representation only. They do not establish
+ * whether any concrete ManageSieve endpoint advertises the extensions used.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -10,7 +22,14 @@ import {
 
 import { sieveCodec } from "../src/index.js";
 
+/**
+ * Exercises the initial offline Sieve codec and parser boundaries.
+ */
 describe("initial Sieve codec", () => {
+    /**
+     * Proves canonical mark-read encodes to the exact initial `imap4flags`
+     * `addflag \Seen` representation.
+     */
     it("encodes canonical mark-read using imap4flags addflag Seen", () => {
         const expression = createActionExpression(
             createCapabilitySpecimen(markReadCapability, null),
@@ -22,6 +41,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves the generated mark-read representation decodes back to the
+     * canonical action.
+     */
     it("decodes the exact generated mark-read form", () => {
         expect(
             sieveCodec.decode('require "imap4flags";\naddflag "\\\\Seen";'),
@@ -33,6 +56,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves comments and equivalent string-list `require` syntax do not alter
+     * the supported mark-read semantic mapping.
+     */
     it("accepts comments and a string-list require declaration", () => {
         expect(
             sieveCodec.decode(
@@ -43,6 +70,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves recognized `addflag` syntax is invalid for this script when the
+     * required `imap4flags` extension declaration is absent.
+     */
     it("rejects addflag without the required imap4flags declaration", () => {
         expect(sieveCodec.decode('addflag "\\\\Seen";')).toEqual({
             kind: "unsupported-native",
@@ -53,6 +84,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves adding `\Seen` together with another flag is not collapsed into
+     * canonical mark-read because the native mutation has additional semantics.
+     */
     it("does not confuse adding other flags with canonical mark-read", () => {
         expect(
             sieveCodec.decode(
@@ -66,6 +101,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves native Subject `:contains` syntax can be parsed while semantic
+     * decoding still refuses the unproven comparator/normalization equivalence.
+     */
     it("understands Subject contains syntax but refuses an unproven exact mapping", () => {
         const native =
             'require "imap4flags"; if header :contains "Subject" "invoice" { addflag "\\\\Seen"; }';
@@ -78,6 +117,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves parsing `allof` structure does not manufacture exactness for
+     * contained Subject predicates whose mapping remains unproven.
+     */
     it("understands allof structure without manufacturing canonical exactness", () => {
         const native =
             'require "imap4flags"; if allof (header :contains "Subject" "invoice", header :contains :comparator "i;ascii-casemap" "Subject" "paid") { addflag "\\\\Seen"; }';
@@ -90,6 +133,11 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves canonical Subject containment is refused at encode time with
+     * `exactness-unproven` rather than being emitted as superficially similar
+     * Sieve syntax.
+     */
     it("refuses canonical Subject contains encoding until equivalence is proven", () => {
         const expression = createConditionExpression(
             createCapabilitySpecimen(subjectContainsCapability, {
@@ -105,6 +153,11 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves valid-looking constructs outside the initial parser/mapping subset
+     * are preserved opaquely instead of being misclassified as invalid native
+     * input or decoded semantics.
+     */
     it("preserves unrelated Sieve constructs opaquely", () => {
         expect(sieveCodec.decode("discard;")).toEqual({
             kind: "opaque",
@@ -114,6 +167,10 @@ describe("initial Sieve codec", () => {
         });
     });
 
+    /**
+     * Proves malformed syntax inside the recognized subset is distinguished from
+     * unsupported-but-preservable constructs.
+     */
     it("reports malformed supported syntax as invalid native input", () => {
         expect(
             sieveCodec.decode('require "imap4flags"; addflag "\\\\Seen"'),

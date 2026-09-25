@@ -1,3 +1,14 @@
+/**
+ * Exposes the public `@mailchemy/sieve` codec, dialect target, endpoint-profile,
+ * and dated Purelymail profile APIs.
+ *
+ * @remarks
+ * The barrel intentionally exports both dialect-level and endpoint-level
+ * surfaces; their separate module contracts remain authoritative.
+ *
+ * @packageDocumentation
+ */
+
 export { sieveCodec, type SieveNative } from "./sieve-codec.js";
 export {
     sieveDirectRealizationTarget,

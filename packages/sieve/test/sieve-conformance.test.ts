@@ -1,3 +1,10 @@
+/**
+ * Connects the shared canonical fixture corpus to the Sieve codec/target and
+ * representative native Sieve fixtures without widening exactness claims.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -18,8 +25,12 @@ import {
 import { sieveCodec, sieveDirectRealizationTarget } from "../src/index.js";
 import { nativeSieveFixtures } from "./fixtures/native-sieve.js";
 
+/** Core semantic registry used to validate/equate Sieve conformance fixtures. */
 const registry = createCoreCapabilityRegistry();
 
+/**
+ * Shared initial canonical fixture corpus considered for Sieve conformance.
+ */
 const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...subjectContainsFixtures,
     ...hasAttachmentFixtures,
@@ -28,12 +39,27 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...initialRuleFixtures,
 ]);
 
+/**
+ * Narrows shared fixtures to cases expected to be valid canonical expressions.
+ *
+ * @param fixture Shared canonical fixture.
+ * @returns Whether the fixture is declared canonically valid.
+ */
 function isCanonicallyValidFixture(
     fixture: CanonicalFixture,
 ): fixture is CanonicalFixture<CanonicalExpression> {
     return fixture.expectedValidation === "valid";
 }
 
+/**
+ * Compares the action-only Direct Sieve round-trip subset by canonical specimen
+ * equality.
+ *
+ * @param left First canonically valid expression.
+ * @param right Second canonically valid expression.
+ * @returns Whether both are action expressions with semantically equal
+ * capability specimens.
+ */
 function areEquivalent(
     left: CanonicalExpression,
     right: CanonicalExpression,
@@ -44,7 +70,15 @@ function areEquivalent(
     return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
 }
 
+/**
+ * Exercises the currently Direct Sieve semantic subset plus representative
+ * native decode boundaries.
+ */
 describe("Sieve conformance", () => {
+    /**
+     * Proves every shared initial fixture currently classified Direct by the
+     * Sieve dialect target survives codec encode/decode by canonical semantics.
+     */
     it("round-trips every currently Direct initial fixture semantically", () => {
         const directFixtures = initialFixtures
             .filter(isCanonicallyValidFixture)
@@ -71,6 +105,10 @@ describe("Sieve conformance", () => {
         expect(run.results.every((result) => result.passed)).toBe(true);
     });
 
+    /**
+     * Proves representative native inputs retain their decoded/opaque/refused
+     * evidence categories and exactness reason codes.
+     */
     it("decodes representative native Sieve fixtures without widening semantics", () => {
         for (const fixture of nativeSieveFixtures) {
             const result = sieveCodec.decode(fixture.source);

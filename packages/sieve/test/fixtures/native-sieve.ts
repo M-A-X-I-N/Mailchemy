@@ -1,11 +1,28 @@
+/**
+ * Defines representative native Sieve decode evidence for the initial codec.
+ *
+ * @packageDocumentation
+ */
+
+/**
+ * One native Sieve source specimen and its expected decode evidence category.
+ */
 export interface NativeSieveFixture {
+    /** Stable fixture identity. */
     readonly id: string;
+    /** Native Sieve source text supplied to the codec. */
     readonly source: string;
+    /** Expected top-level native decode outcome. */
     readonly expectedKind: "decoded" | "unsupported-native" | "opaque";
+    /** Expected refusal category when the decode outcome is unsupported-native. */
     readonly expectedReasonCode?:
         "invalid-native" | "semantic-unsupported" | "exactness-unproven";
 }
 
+/**
+ * Representative initial native Sieve corpus covering exact mark-read,
+ * syntactic variation, unproven Subject exactness, and opaque preservation.
+ */
 export const nativeSieveFixtures = Object.freeze([
     {
         id: "native.mark-read.minimal",
