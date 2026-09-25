@@ -10,6 +10,7 @@ This directory contains Mailchemy's durable human-facing architecture and design
 - [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) — initial TypeScript/ESM implementation toolchain and host-neutrality decision.
 - [`SEMANTIC_CAPABILITIES.md`](SEMANTIC_CAPABILITIES.md) — durable contracts for implemented core semantic capability versions.
 - [`CODE_DOCUMENTATION_CONTRACT.md`](CODE_DOCUMENTATION_CONTRACT.md) — normative TypeScript documentation-comment coverage, claim-authority rules, tag usage, exemplars, and anti-drift procedure.
+- [`PROVISIONAL_SOURCE_ORGANIZATION.md`](PROVISIONAL_SOURCE_ORGANIZATION.md) — CRH-44D provisional source-tree, filename, naming, and browseability design; explicitly an implementation organization rather than a claim of final architecture.
 
 ## Reading order
 
@@ -20,7 +21,8 @@ For a fresh reader:
 3. [`ARCHITECTURE.md`](ARCHITECTURE.md);
 4. [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) when concrete system examples are useful;
 5. [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) for the current implementation toolchain;
-6. [`CODE_DOCUMENTATION_CONTRACT.md`](CODE_DOCUMENTATION_CONTRACT.md) before documenting or reviewing TypeScript implementation code.
+6. [`CODE_DOCUMENTATION_CONTRACT.md`](CODE_DOCUMENTATION_CONTRACT.md) before documenting or reviewing TypeScript implementation code;
+7. [`PROVISIONAL_SOURCE_ORGANIZATION.md`](PROVISIONAL_SOURCE_ORGANIZATION.md) before renaming, moving, or reorganizing implementation modules.
 
 ## Documentation policy
 
