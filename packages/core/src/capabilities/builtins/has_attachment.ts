@@ -5,9 +5,9 @@
  * @packageDocumentation
  */
 
-import { defineSemanticCapability } from "../capability_contract.js";
-import { parseCapabilityId } from "../capability_id.js";
-import { invalid, valid, validationIssue } from "../validation.js";
+import { defineSemanticCapability } from "../contract.js";
+import { parseCapabilityId } from "../id.js";
+import { invalid, valid, validationIssue } from "../../validation_result.js";
 
 /**
  * Minimal MIME-entity view required to evaluate canonical attachment presence.

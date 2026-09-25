@@ -15,12 +15,12 @@ import type {
     CanonicalExpression,
     ConditionLeafExpression,
     RuleExpression,
-} from "./expression.js";
+} from "../canonical/expression.js";
 import {
     defineDirectRealizationTarget,
     type DirectRealizationResult,
     type DirectRealizationTarget,
-} from "./realization_target.js";
+} from "./direct_target.js";
 
 /**
  * Canonical semantic leaf whose target support can be checked independently.

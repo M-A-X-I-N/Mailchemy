@@ -11,16 +11,16 @@
  * @packageDocumentation
  */
 
-import { parseCapabilityId } from "./capability_id.js";
-import type { CapabilityRole } from "./capability_contract.js";
-import type { CapabilityRegistry } from "./capability_registry.js";
+import { parseCapabilityId } from "../capabilities/id.js";
+import type { CapabilityRole } from "../capabilities/contract.js";
+import type { CapabilityRegistry } from "../capabilities/registry.js";
 import type {
     ActionExpression,
     CanonicalExpression,
     ConditionExpression,
     RuleExpression,
 } from "./expression.js";
-import type { CapabilityInstance } from "./capability_instance.js";
+import type { CapabilityInstance } from "../capabilities/instance.js";
 import {
     invalid,
     valid,
@@ -28,7 +28,7 @@ import {
     type ValidationIssue,
     type ValidationPathSegment,
     type ValidationResult,
-} from "./validation.js";
+} from "../validation_result.js";
 
 /**
  * Object shape accepted by structural validators before individual fields are

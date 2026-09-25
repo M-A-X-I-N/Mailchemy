@@ -5,11 +5,11 @@
  * @packageDocumentation
  */
 
-import { CapabilityRegistry } from "./capability_registry.js";
-import { logicalAndCapability } from "./capabilities/logical_and.js";
-import { markReadCapability } from "./capabilities/mark_read.js";
-import { hasAttachmentCapability } from "./capabilities/has_attachment.js";
-import { subjectContainsCapability } from "./capabilities/subject_contains.js";
+import { CapabilityRegistry } from "./registry.js";
+import { logicalAndCapability } from "./builtins/logical_and.js";
+import { markReadCapability } from "./builtins/mark_read.js";
+import { hasAttachmentCapability } from "./builtins/has_attachment.js";
+import { subjectContainsCapability } from "./builtins/subject_contains.js";
 
 /**
  * Registers every currently implemented core semantic capability into an

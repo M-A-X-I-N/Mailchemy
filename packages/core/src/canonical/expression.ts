@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { CapabilityInstance } from "./capability_instance.js";
+import type { CapabilityInstance } from "../capabilities/instance.js";
 
 /**
  * Canonical condition leaf backed by one condition-role capability instance.

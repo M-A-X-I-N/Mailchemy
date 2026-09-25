@@ -5,12 +5,12 @@
  * @packageDocumentation
  */
 
-import { capabilityIdKey, type CapabilityId } from "./capability_id.js";
+import { capabilityIdKey, type CapabilityId } from "./id.js";
 import {
     eraseCapabilityContract,
     type RegisteredCapabilityContract,
     type SemanticCapabilityContract,
-} from "./capability_contract.js";
+} from "./contract.js";
 
 /**
  * Reports an attempt to redefine an already-registered semantic identity.

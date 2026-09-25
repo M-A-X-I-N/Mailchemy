@@ -5,8 +5,8 @@
  * @packageDocumentation
  */
 
-import type { CapabilityId } from "./capability_id.js";
-import type { ValidationResult } from "./validation.js";
+import type { CapabilityId } from "./id.js";
+import type { ValidationResult } from "../validation_result.js";
 
 /**
  * Structural role that determines where a semantic capability may appear in

@@ -9,8 +9,8 @@
  * @packageDocumentation
  */
 
-import type { CanonicalExpression } from "./expression.js";
-import type { UnsupportedRealization } from "./realization.js";
+import type { CanonicalExpression } from "./canonical/expression.js";
+import type { UnsupportedRealization } from "./realization/result.js";
 
 /**
  * Successful canonical-to-native encode result.

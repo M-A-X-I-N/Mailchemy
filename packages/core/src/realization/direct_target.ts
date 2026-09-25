@@ -10,11 +10,11 @@
  * @packageDocumentation
  */
 
-import type { CanonicalExpression } from "./expression.js";
+import type { CanonicalExpression } from "../canonical/expression.js";
 import type {
     DirectRealization,
     UnsupportedRealization,
-} from "./realization.js";
+} from "./result.js";
 
 /**
  * Outcome permitted from a target's direct-realization check.

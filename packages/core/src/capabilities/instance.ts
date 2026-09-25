@@ -5,10 +5,10 @@
  * @packageDocumentation
  */
 
-import type { CapabilityId } from "./capability_id.js";
-import type { SemanticCapabilityContract } from "./capability_contract.js";
-import type { CapabilityRegistry } from "./capability_registry.js";
-import type { ValidationIssue } from "./validation.js";
+import type { CapabilityId } from "./id.js";
+import type { SemanticCapabilityContract } from "./contract.js";
+import type { CapabilityRegistry } from "./registry.js";
+import type { ValidationIssue } from "../validation_result.js";
 
 /**
  * Concrete invocation of one semantic capability with canonicalized parameters.

@@ -9,11 +9,11 @@
  * @packageDocumentation
  */
 
-import type { CanonicalExpression } from "./expression.js";
+import type { CanonicalExpression } from "../canonical/expression.js";
 import type {
     DirectRealizationResult,
     DirectRealizationTarget,
-} from "./realization_target.js";
+} from "./direct_target.js";
 
 /**
  * Immutable capability/constraint data associated with one concrete endpoint
