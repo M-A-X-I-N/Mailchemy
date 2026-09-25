@@ -24,7 +24,7 @@ export interface SemanticCapabilityDefinition<TParameters> {
     /** Stable, versioned identity of the semantic contract being defined. */
     readonly id: CapabilityId;
 
-    /** Canonical expression role permitted for specimens of this capability. */
+    /** Canonical expression role permitted for instances of this capability. */
     readonly role: CapabilityRole;
 
     /** Human-readable summary of the capability's canonical meaning. */
@@ -66,7 +66,7 @@ export interface SemanticCapabilityContract<TParameters> {
     /** Stable, versioned identity of the semantic meaning. */
     readonly id: CapabilityId;
 
-    /** Structural role permitted for specimens of this capability. */
+    /** Structural role permitted for instances of this capability. */
     readonly role: CapabilityRole;
 
     /** Human-readable summary of the canonical semantic contract. */

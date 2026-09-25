@@ -11,7 +11,7 @@
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     markReadCapability,
 } from "@mailchemy/core";
 
@@ -31,7 +31,7 @@ function validFixture(id: string, previousReadState: boolean, notes: string) {
         id,
         capabilities: [markReadCapability.id],
         expression: createActionExpression(
-            createCapabilitySpecimen(markReadCapability, null),
+            createCapabilityInstance(markReadCapability, null),
         ),
         expectedValidation: "valid",
         oracle: Object.freeze({
@@ -63,7 +63,7 @@ export const markReadFixtures = Object.freeze([
         capabilities: [markReadCapability.id],
         expression: {
             kind: "action",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: markReadCapability.id,
                 parameters: {},

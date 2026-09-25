@@ -52,8 +52,8 @@
 | CRH-44C — Exhaustive TypeScript documentation | Done | C1–C11 completed one shared documentation contract, all package passes, and a repository-wide methodology/coverage audit |
 | CRH-44D1 — Audit naming and design provisional source organization | Done | Selected lower_snake_case authored TS filenames, audited semantic names, designed beneficial grouping, and mapped all 90 authored TS paths without moving source |
 | CRH-44D2 — Apply authored TypeScript filename convention | Done | Renamed all 71 dashed authored TS filenames to lower_snake_case, updated only required module specifiers, and enabled forceConsistentCasingInFileNames |
-| CRH-44D3 — Improve semantic names of modules and code objects | Next | Apply approved terminology/name changes without changing TypeScript casing conventions |
-| CRH-44D4 — Reorganize Core by conceptual responsibility | Planned | Apply capabilities/canonical/realization boundaries and useful mirrored tests |
+| CRH-44D3 — Improve semantic names of modules and code objects | Done | Applied capability-instance/leaf/conformance/shared-rule/Sieve/helper terminology, removed the obsolete scaffold sentinel, and preserved all 111 ID literals |
+| CRH-44D4 — Reorganize Core by conceptual responsibility | Next | Apply capabilities/canonical/realization boundaries and useful mirrored tests |
 | CRH-44D5 — Reorganize Conformance and Cross-IO | Planned | Group fixture evidence and apply descriptive conformance/aggregation names without gratuitous nesting |
 | CRH-44D6 — Standardize adapter package organization | Planned | Remove redundant provider-local filename prefixes and align equivalent layouts while preserving real adapter differences |
 | CRH-44D7 — Reconcile imports, exports, barrels, and durable docs | Planned | Repair references and explicitly account for deliberate package-surface changes |
@@ -62,7 +62,7 @@
 
 **Milestone R1 is complete.** Mailchemy now has its first real, documented, executable canonical semantic contracts and shared rule-shaped fixtures.
 
-CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1 are complete; CRH-44D2 is the next implementation-hygiene task.
+CRH-27 through CRH-43 are complete. Milestone R2 is complete: the first cross-IO matrix, canonical-routed cross-codec semantic round trips, negative exactness/refusal coverage, and CI regression gate now cover the initial target set. CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D3 are complete; CRH-44D4 is the next implementation-hygiene task.
 
 ## 1. Purpose
 
@@ -1615,6 +1615,8 @@ Generated `dist/**/*.d.ts` output is regenerated rather than hand-renamed.
 
 ### CRH-44D3 — Improve semantic names of modules and code objects
 
+**Status:** Done. Applied the D1 semantic-name decisions without moving conceptual folders: capability specimen → capability instance (including the canonical leaf property `instance`), leaf-expression type names, capability-contract conformance API/module naming, shared-rule fixture naming, `SieveScriptNative`, adapter unproven-condition helper names, and replacement of the obsolete conformance scaffold sentinel with a real package-export/linkage test. All 111 authored TypeScript `id: "..."` literals are unchanged.
+
 Apply the semantic-name decisions from D1 independently from folder moves.
 
 Primary changes include:
@@ -1728,7 +1730,7 @@ forever architecture.
 
 ---
 
-CRH-44A, CRH-44B, CRH-44C, CRH-44D1, and CRH-44D2 are complete. CRH-44D3 is next.
+CRH-44A, CRH-44B, CRH-44C, and CRH-44D1–CRH-44D3 are complete. CRH-44D4 is next.
 The pre-existing rewrite roadmap resumes at CRH-45 only after the authorized
 CRH-44D sequence completes or the human explicitly redirects the work.
 

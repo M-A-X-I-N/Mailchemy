@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     CapabilityRegistry,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     decodedNative,
     defineSemanticCapability,
@@ -66,7 +66,7 @@ const booleanCapability = defineSemanticCapability<{
  */
 function expression(value: boolean) {
     return createConditionExpression(
-        createCapabilitySpecimen(booleanCapability, { value }),
+        createCapabilityInstance(booleanCapability, { value }),
     );
 }
 
@@ -100,14 +100,14 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.kind !== "condition" || right.kind !== "condition")
         return false;
 
-    if (left.specimen.capabilityId !== right.specimen.capabilityId)
+    if (left.instance.capabilityId !== right.instance.capabilityId)
         return false;
 
-    const leftValue = left.specimen.parameters as {
+    const leftValue = left.instance.parameters as {
         /** Left synthetic truth value compared after round trip. */
         readonly value: boolean;
     };
-    const rightValue = right.specimen.parameters as {
+    const rightValue = right.instance.parameters as {
         /** Right synthetic truth value compared after round trip. */
         readonly value: boolean;
     };
@@ -129,7 +129,7 @@ describe("runCodecRoundTrips", () => {
             encode: (canonical) => {
                 const parameters =
                     canonical.kind === "condition"
-                        ? (canonical.specimen.parameters as {
+                        ? (canonical.instance.parameters as {
                               /** Synthetic truth value encoded by the normalizing codec. */
                               readonly value: boolean;
                           })
@@ -162,7 +162,7 @@ describe("runCodecRoundTrips", () => {
     /**
      * Proves encode refusal is reported at the encode-unsupported stage.
      */
-    it("fails when encode refuses a specimen expected to round trip", () => {
+    it("fails when encode refuses an expression expected to round trip", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.rejecting-codec",
             encode: () =>

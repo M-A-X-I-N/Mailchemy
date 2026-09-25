@@ -92,7 +92,7 @@ function checkLeaf(
     >,
 ): DirectRealizationResult {
     /** Semantic identity whose direct Sieve realization is being classified. */
-    const capabilityId = expression.specimen.capabilityId;
+    const capabilityId = expression.instance.capabilityId;
 
     if (capabilityId === markReadCapability.id)
         return directRealization();

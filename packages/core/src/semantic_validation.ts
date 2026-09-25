@@ -20,7 +20,7 @@ import type {
     ConditionExpression,
     RuleExpression,
 } from "./expression.js";
-import type { CapabilitySpecimen } from "./semantic_specimen.js";
+import type { CapabilityInstance } from "./capability_instance.js";
 import {
     invalid,
     valid,
@@ -79,18 +79,18 @@ function shapeIssue(
 }
 
 /**
- * Collects validation issues for one capability specimen and optionally proves
+ * Collects validation issues for one capability instance and optionally proves
  * that its registered capability role matches the surrounding expression role.
  *
  * @param registry Registry that owns capability metadata and parameter
  * validation.
- * @param value Unknown candidate specimen.
+ * @param value Unknown candidate instance.
  * @param expectedRole Required structural role, or undefined when validating a
- * specimen independently of an enclosing expression.
- * @param path Structural path to the candidate specimen.
+ * instance independently of an enclosing expression.
+ * @param path Structural path to the candidate instance.
  * @returns All identity, registration, role, and parameter issues found.
  */
-function collectSpecimenIssues(
+function collectCapabilityInstanceIssues(
     registry: CapabilityRegistry,
     value: unknown,
     expectedRole: CapabilityRole | undefined,
@@ -100,7 +100,7 @@ function collectSpecimenIssues(
         return [
             shapeIssue(
                 path,
-                'Expected a capability specimen with kind "capability".',
+                'Expected a capability instance with kind "capability".',
             ),
         ];
     }
@@ -114,7 +114,7 @@ function collectSpecimenIssues(
         ];
     }
 
-    /** Canonical capability identity parsed from the untrusted specimen field. */
+    /** Canonical capability identity parsed from the untrusted instance field. */
     let capabilityId;
 
     try {
@@ -159,13 +159,13 @@ function collectSpecimenIssues(
         issues.push(
             shapeIssue(
                 [...path, "parameters"],
-                "Capability specimen is missing parameters.",
+                "Capability instance is missing parameters.",
             ),
         );
         return issues;
     }
 
-    /** Contract-owned validation/canonicalization result for specimen parameters. */
+    /** Contract-owned validation/canonicalization result for instance parameters. */
     const parameterValidation = contract.validateParameters(value.parameters);
 
     if (!parameterValidation.ok) {
@@ -218,17 +218,17 @@ function collectConditionIssues(
 
     try {
         if (value.kind === "condition") {
-            return collectSpecimenIssues(
+            return collectCapabilityInstanceIssues(
                 registry,
-                value.specimen,
+                value.instance,
                 "condition",
-                [...path, "specimen"],
+                [...path, "instance"],
             );
         }
 
         if (value.kind === "and") {
             /** Issues contributed by the conjunction operator and its operands. */
-            const issues = collectSpecimenIssues(
+            const issues = collectCapabilityInstanceIssues(
                 registry,
                 value.operator,
                 "logic",
@@ -323,9 +323,9 @@ function collectActionIssues(
             ];
         }
 
-        return collectSpecimenIssues(registry, value.specimen, "action", [
+        return collectCapabilityInstanceIssues(registry, value.instance, "action", [
             ...path,
-            "specimen",
+            "instance",
         ]);
     } finally {
         stack.delete(value);
@@ -397,27 +397,27 @@ function collectRuleIssues(
 }
 
 /**
- * Validates an unknown capability specimen against registry identity,
+ * Validates an unknown capability instance against registry identity,
  * registration, role, and parameter contracts.
  *
  * @param registry Registry containing the semantic contract vocabulary.
- * @param value Unknown specimen candidate.
+ * @param value Unknown instance candidate.
  * @param expectedRole Optional structural role required by the caller.
- * @returns The original specimen value typed as canonical when no issues are
+ * @returns The original instance value typed as canonical when no issues are
  * found, otherwise structured validation issues.
  */
-export function validateCapabilitySpecimen(
+export function validateCapabilityInstance(
     registry: CapabilityRegistry,
     value: unknown,
     expectedRole?: CapabilityRole,
-): ValidationResult<CapabilitySpecimen> {
-    /** Complete issue set produced by specimen validation at the root path. */
-    const issues = collectSpecimenIssues(registry, value, expectedRole, []);
+): ValidationResult<CapabilityInstance> {
+    /** Complete issue set produced by instance validation at the root path. */
+    const issues = collectCapabilityInstanceIssues(registry, value, expectedRole, []);
 
     if (issues.length > 0)
         return invalid(...issues);
 
-    return valid(value as CapabilitySpecimen);
+    return valid(value as CapabilityInstance);
 }
 
 /**

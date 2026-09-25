@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     markReadCapability,
     subjectContainsCapability,
@@ -25,7 +25,7 @@ import { outlookInboxRuleCodec } from "../src/index.js";
  */
 function markRead() {
     return createActionExpression(
-        createCapabilitySpecimen(markReadCapability, null),
+        createCapabilityInstance(markReadCapability, null),
     );
 }
 
@@ -168,7 +168,7 @@ describe("initial Outlook Inbox Rule codec", () => {
      */
     it("refuses canonical Subject encoding until exact comparison semantics are proven", () => {
         const expression = createConditionExpression(
-            createCapabilitySpecimen(subjectContainsCapability, {
+            createCapabilityInstance(subjectContainsCapability, {
                 needle: "invoice",
             }),
         );

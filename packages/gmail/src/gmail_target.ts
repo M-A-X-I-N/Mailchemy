@@ -86,7 +86,7 @@ function checkLeaf(
     >,
 ): DirectRealizationResult {
     /** Semantic identity whose Gmail realization is under consideration. */
-    const capabilityId = expression.specimen.capabilityId;
+    const capabilityId = expression.instance.capabilityId;
 
     if (capabilityId === markReadCapability.id)
         return directRealization();

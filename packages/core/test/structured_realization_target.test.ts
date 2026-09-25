@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineSemanticCapability,
     defineStructuredDirectRealizationTarget,
@@ -73,12 +73,12 @@ const andCapability = defineSemanticCapability<null>({
 /**
  * Constructs a synthetic canonical condition leaf.
  *
- * @param value Boolean parameter encoded in the synthetic specimen.
+ * @param value Boolean parameter encoded in the synthetic capability instance.
  * @returns Canonical condition expression for structural target tests.
  */
 function booleanLeaf(value: boolean) {
     return createConditionExpression(
-        createCapabilitySpecimen(booleanCondition, { value }),
+        createCapabilityInstance(booleanCondition, { value }),
     );
 }
 
@@ -106,7 +106,7 @@ describe("StructuredDirectRealizationTarget", () => {
         const left = booleanLeaf(true);
         const right = booleanLeaf(false);
         const combined = createAndExpression(
-            createCapabilitySpecimen(andCapability, null),
+            createCapabilityInstance(andCapability, null),
             [left, right],
         );
 
@@ -149,7 +149,7 @@ describe("StructuredDirectRealizationTarget", () => {
         });
 
         const combined = createAndExpression(
-            createCapabilitySpecimen(andCapability, null),
+            createCapabilityInstance(andCapability, null),
             [booleanLeaf(true), booleanLeaf(false)],
         );
 
@@ -180,7 +180,7 @@ describe("StructuredDirectRealizationTarget", () => {
         });
 
         const combined = createAndExpression(
-            createCapabilitySpecimen(andCapability, null),
+            createCapabilityInstance(andCapability, null),
             [booleanLeaf(true), booleanLeaf(false)],
         );
 

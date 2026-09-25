@@ -14,7 +14,7 @@ import { describe, expect, it } from "vitest";
 import {
     CapabilityRegistry,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     decodedNative,
     defineDirectRealizationTarget,
@@ -36,7 +36,7 @@ import {
     buildConformanceMatrix,
     defineCanonicalFixture,
     renderConformanceMatrixMarkdown,
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
     runCodecRoundTrips,
     runTargetRealizationConformance,
     type CanonicalEquivalence,
@@ -94,7 +94,7 @@ const andCapability = defineSemanticCapability<null>({
  */
 function condition(value: boolean) {
     return createConditionExpression(
-        createCapabilitySpecimen(booleanCondition, { value }),
+        createCapabilityInstance(booleanCondition, { value }),
     );
 }
 
@@ -138,7 +138,7 @@ const invalidFixture = defineCanonicalFixture({
     capabilities: [booleanCondition.id],
     expression: {
         kind: "condition",
-        specimen: {
+        instance: {
             kind: "capability",
             capabilityId: booleanCondition.id,
             parameters: { value: "not-boolean" },
@@ -152,7 +152,7 @@ const combinedFixture = defineCanonicalFixture({
     id: "boolean.and",
     capabilities: [booleanCondition.id, andCapability.id],
     expression: createAndExpression(
-        createCapabilitySpecimen(andCapability, null),
+        createCapabilityInstance(andCapability, null),
         [condition(true), condition(false)],
     ),
     expectedValidation: "valid",
@@ -169,14 +169,14 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.kind !== "condition" || right.kind !== "condition")
         return false;
 
-    if (left.specimen.capabilityId !== right.specimen.capabilityId)
+    if (left.instance.capabilityId !== right.instance.capabilityId)
         return false;
 
-    const leftValue = left.specimen.parameters as {
+    const leftValue = left.instance.parameters as {
         /** Left synthetic truth value compared for semantic equality. */
         readonly value: boolean;
     };
-    const rightValue = right.specimen.parameters as {
+    const rightValue = right.instance.parameters as {
         /** Right synthetic truth value compared for semantic equality. */
         readonly value: boolean;
     };
@@ -191,10 +191,10 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
 describe("R0 conformance harness self-tests", () => {
     /**
      * Proves canonical validation, boundary evidence, and pure semantic oracles
-     * compose correctly in the contract runner.
+     * compose correctly in capability-contract conformance.
      */
     it("executes provider-independent validity and oracle contract fixtures", () => {
-        const result = runCapabilityContractTests(
+        const result = runCapabilityContractConformance(
             registry(),
             [trueFixture, invalidFixture],
             {
@@ -206,7 +206,7 @@ describe("R0 conformance harness self-tests", () => {
                             const actual =
                                 expression.kind === "condition"
                                     ? (
-                                          expression.specimen.parameters as {
+                                          expression.instance.parameters as {
                                               /** Synthetic truth value consumed by the contract oracle. */
                                               readonly value: boolean;
                                           }
@@ -251,7 +251,7 @@ describe("R0 conformance harness self-tests", () => {
                 const value =
                     expression.kind === "condition"
                         ? (
-                              expression.specimen.parameters as {
+                              expression.instance.parameters as {
                                   /** Synthetic truth value inspected by the refinement target. */
                                   readonly value: boolean;
                               }
@@ -431,7 +431,7 @@ describe("R0 conformance harness self-tests", () => {
             encode: (expression) => {
                 const parameters =
                     expression.kind === "condition"
-                        ? (expression.specimen.parameters as {
+                        ? (expression.instance.parameters as {
                               /** Synthetic truth value encoded by the fake codec. */
                               readonly value: boolean;
                           })

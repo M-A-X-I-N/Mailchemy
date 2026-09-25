@@ -15,7 +15,7 @@
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     decodedNative,
     defineSemanticCodec,
     encodedNative,
@@ -118,7 +118,7 @@ export const gmailFilterCodec = defineSemanticCodec<GmailFilterNative>({
 function encodeGmailFilter(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
-        expression.specimen.capabilityId === markReadCapability.id
+        expression.instance.capabilityId === markReadCapability.id
     ) {
         return encodedNative({
             action: Object.freeze({
@@ -127,7 +127,7 @@ function encodeGmailFilter(expression: CanonicalExpression) {
         });
     }
 
-    if (containsInitialGmailCriterion(expression)) {
+    if (containsUnprovenGmailCriterion(expression)) {
         return unsupportedRealization(
             unsupportedReason(
                 "exactness-unproven",
@@ -375,7 +375,7 @@ function decodeActionOnly(
     ) {
         return decodedNative(
             createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
+                createCapabilityInstance(markReadCapability, null),
             ),
         );
     }
@@ -393,22 +393,22 @@ function decodeActionOnly(
  * @param expression Canonical expression to inspect recursively.
  * @returns Whether Subject-containment or attachment-presence semantics occur.
  */
-function containsInitialGmailCriterion(
+function containsUnprovenGmailCriterion(
     expression: CanonicalExpression,
 ): boolean {
     switch (expression.kind) {
         case "condition":
             return (
-                expression.specimen.capabilityId ===
+                expression.instance.capabilityId ===
                     subjectContainsCapability.id ||
-                expression.specimen.capabilityId === hasAttachmentCapability.id
+                expression.instance.capabilityId === hasAttachmentCapability.id
             );
         case "action":
             return false;
         case "and":
-            return expression.operands.some(containsInitialGmailCriterion);
+            return expression.operands.some(containsUnprovenGmailCriterion);
         case "rule":
-            return containsInitialGmailCriterion(expression.condition);
+            return containsUnprovenGmailCriterion(expression.condition);
     }
 }
 

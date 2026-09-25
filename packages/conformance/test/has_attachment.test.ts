@@ -14,7 +14,7 @@ import {
 } from "@mailchemy/core";
 import {
     hasAttachmentFixtures,
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
 } from "@mailchemy/conformance";
 
 /**
@@ -30,7 +30,7 @@ describe("core.condition.has-attachment@1", () => {
         const registry = new CapabilityRegistry();
         registry.register(hasAttachmentCapability);
 
-        const result = runCapabilityContractTests(
+        const result = runCapabilityContractConformance(
             registry,
             hasAttachmentFixtures,
             {

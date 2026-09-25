@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     decodedNative,
     defineSemanticCapability,
@@ -62,7 +62,7 @@ const booleanCondition = defineSemanticCapability<{
  */
 function booleanExpression(value: boolean) {
     return createConditionExpression(
-        createCapabilitySpecimen(booleanCondition, { value }),
+        createCapabilityInstance(booleanCondition, { value }),
     );
 }
 
@@ -81,9 +81,9 @@ describe("SemanticCodec", () => {
             encode: (expression) => {
                 if (
                     expression.kind === "condition" &&
-                    expression.specimen.capabilityId === booleanCondition.id
+                    expression.instance.capabilityId === booleanCondition.id
                 ) {
-                    const parameters = expression.specimen.parameters as {
+                    const parameters = expression.instance.parameters as {
                         /** Synthetic truth value encoded into the native test string. */
                         readonly value: boolean;
                     };

@@ -8,13 +8,13 @@
 import { describe, expect, it } from "vitest";
 
 import {
-    areCapabilitySpecimensEqual,
+    areCapabilityInstancesEqual,
     createCoreCapabilityRegistry,
     type CanonicalExpression,
 } from "@mailchemy/core";
 import {
     hasAttachmentFixtures,
-    initialRuleFixtures,
+    sharedRuleFixtures,
     logicalAndFixtures,
     markReadFixtures,
     runCodecRoundTrips,
@@ -36,7 +36,7 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...hasAttachmentFixtures,
     ...markReadFixtures,
     ...logicalAndFixtures,
-    ...initialRuleFixtures,
+    ...sharedRuleFixtures,
 ]);
 
 /**
@@ -52,13 +52,13 @@ function isCanonicallyValidFixture(
 }
 
 /**
- * Compares the action-only Direct Sieve round-trip subset by canonical specimen
+ * Compares the action-only Direct Sieve round-trip subset by canonical capability-instance
  * equality.
  *
  * @param left First canonically valid expression.
  * @param right Second canonically valid expression.
  * @returns Whether both are action expressions with semantically equal
- * capability specimens.
+ * capability instances.
  */
 function areEquivalent(
     left: CanonicalExpression,
@@ -67,7 +67,7 @@ function areEquivalent(
     if (left.kind !== "action" || right.kind !== "action")
         return false;
 
-    return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
+    return areCapabilityInstancesEqual(registry, left.instance, right.instance);
 }
 
 /**

@@ -11,7 +11,7 @@
  */
 
 import {
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     subjectContainsCapability,
 } from "@mailchemy/core";
@@ -40,7 +40,7 @@ function validFixture(
         id,
         capabilities: [subjectContainsCapability.id],
         expression: createConditionExpression(
-            createCapabilitySpecimen(subjectContainsCapability, { needle }),
+            createCapabilityInstance(subjectContainsCapability, { needle }),
         ),
         expectedValidation: "valid",
         oracle: Object.freeze({
@@ -107,7 +107,7 @@ export const subjectContainsFixtures = Object.freeze([
         capabilities: [subjectContainsCapability.id],
         expression: {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: subjectContainsCapability.id,
                 parameters: { needle: "" },
@@ -123,7 +123,7 @@ export const subjectContainsFixtures = Object.freeze([
         capabilities: [subjectContainsCapability.id],
         expression: {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: subjectContainsCapability.id,
                 parameters: {},
@@ -136,7 +136,7 @@ export const subjectContainsFixtures = Object.freeze([
         capabilities: [subjectContainsCapability.id],
         expression: {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: subjectContainsCapability.id,
                 parameters: { needle: "x", caseSensitive: true },

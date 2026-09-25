@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 
-export { sieveCodec, type SieveNative } from "./sieve_codec.js";
+export { sieveCodec, type SieveScriptNative } from "./sieve_codec.js";
 export {
     sieveDirectRealizationTarget,
     type SieveDirectRealizationTarget,

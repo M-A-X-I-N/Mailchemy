@@ -1,33 +1,33 @@
 /**
  * Defines the minimal canonical expression shapes used to compose validated
- * semantic capability specimens into conditions, actions, conjunctions, and
+ * semantic capability instances into conditions, actions, conjunctions, and
  * rule-shaped structures.
  *
  * @packageDocumentation
  */
 
-import type { CapabilitySpecimen } from "./semantic_specimen.js";
+import type { CapabilityInstance } from "./capability_instance.js";
 
 /**
- * Canonical condition leaf backed by one condition-role capability specimen.
+ * Canonical condition leaf backed by one condition-role capability instance.
  */
-export interface ConditionCapabilityExpression {
+export interface ConditionLeafExpression {
     /** Discriminator for a capability-backed condition leaf. */
     readonly kind: "condition";
 
-    /** Concrete semantic specimen evaluated as a condition. */
-    readonly specimen: CapabilitySpecimen;
+    /** Concrete semantic instance evaluated as a condition. */
+    readonly instance: CapabilityInstance;
 }
 
 /**
- * Canonical action leaf backed by one action-role capability specimen.
+ * Canonical action leaf backed by one action-role capability instance.
  */
-export interface ActionCapabilityExpression {
+export interface ActionLeafExpression {
     /** Discriminator for a capability-backed action leaf. */
     readonly kind: "action";
 
-    /** Concrete semantic specimen applied as an action. */
-    readonly specimen: CapabilitySpecimen;
+    /** Concrete semantic instance applied as an action. */
+    readonly instance: CapabilityInstance;
 }
 
 /**
@@ -35,14 +35,14 @@ export interface ActionCapabilityExpression {
  *
  * @remarks
  * Structural validation is responsible for proving that the operator is a
- * logic-role specimen and that at least two operands are present.
+ * logic-role instance and that at least two operands are present.
  */
 export interface AndExpression {
     /** Discriminator for a canonical conjunction node. */
     readonly kind: "and";
 
     /** Concrete logic capability that defines conjunction semantics. */
-    readonly operator: CapabilitySpecimen;
+    readonly operator: CapabilityInstance;
 
     /** Ordered condition operands participating in the conjunction. */
     readonly operands: readonly ConditionExpression[];
@@ -51,12 +51,12 @@ export interface AndExpression {
 /**
  * Canonical condition expression supported by the initial semantic model.
  */
-export type ConditionExpression = ConditionCapabilityExpression | AndExpression;
+export type ConditionExpression = ConditionLeafExpression | AndExpression;
 
 /**
  * Canonical action expression supported by the initial semantic model.
  */
-export type ActionExpression = ActionCapabilityExpression;
+export type ActionExpression = ActionLeafExpression;
 
 /**
  * Canonical rule grouping one condition with an ordered action list.
@@ -84,44 +84,44 @@ export type CanonicalExpression =
     ConditionExpression | ActionExpression | RuleExpression;
 
 /**
- * Wraps a capability specimen as a frozen canonical condition leaf.
+ * Wraps a capability instance as a frozen canonical condition leaf.
  *
- * @param specimen Concrete semantic specimen intended for condition use.
+ * @param instance Concrete semantic instance intended for condition use.
  * @returns Immutable condition-capability expression.
  */
 export function createConditionExpression(
-    specimen: CapabilitySpecimen,
-): ConditionCapabilityExpression {
+    instance: CapabilityInstance,
+): ConditionLeafExpression {
     return Object.freeze({
         kind: "condition",
-        specimen,
+        instance,
     });
 }
 
 /**
- * Wraps a capability specimen as a frozen canonical action leaf.
+ * Wraps a capability instance as a frozen canonical action leaf.
  *
- * @param specimen Concrete semantic specimen intended for action use.
+ * @param instance Concrete semantic instance intended for action use.
  * @returns Immutable action-capability expression.
  */
 export function createActionExpression(
-    specimen: CapabilitySpecimen,
-): ActionCapabilityExpression {
+    instance: CapabilityInstance,
+): ActionLeafExpression {
     return Object.freeze({
         kind: "action",
-        specimen,
+        instance,
     });
 }
 
 /**
  * Constructs a frozen canonical conjunction while snapshotting operand order.
  *
- * @param operator Logic capability specimen defining conjunction semantics.
+ * @param operator Logic capability instance defining conjunction semantics.
  * @param operands Ordered condition operands to preserve.
  * @returns Immutable conjunction expression with a frozen operand snapshot.
  */
 export function createAndExpression(
-    operator: CapabilitySpecimen,
+    operator: CapabilityInstance,
     operands: readonly ConditionExpression[],
 ): AndExpression {
     return Object.freeze({

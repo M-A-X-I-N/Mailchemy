@@ -89,7 +89,7 @@ function checkLeaf(
     >,
 ): DirectRealizationResult {
     /** Semantic identity whose Graph realization is under consideration. */
-    const capabilityId = expression.specimen.capabilityId;
+    const capabilityId = expression.instance.capabilityId;
 
     if (capabilityId === markReadCapability.id)
         return directRealization();

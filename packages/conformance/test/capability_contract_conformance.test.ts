@@ -1,5 +1,5 @@
 /**
- * Proves the capability-contract runner's validation, boundary-coverage, and
+ * Proves the capability-contract conformance validation, boundary-coverage, and
  * optional semantic-oracle behavior using synthetic capability evidence.
  *
  * @packageDocumentation
@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     CapabilityRegistry,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineSemanticCapability,
     invalid,
@@ -19,7 +19,7 @@ import {
 } from "@mailchemy/core";
 import {
     defineCanonicalFixture,
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
 } from "@mailchemy/conformance";
 
 /**
@@ -32,7 +32,7 @@ const booleanCapability = defineSemanticCapability<{
 }>({
     id: parseCapabilityId("test.condition.boolean@1"),
     role: "condition",
-    description: "Synthetic condition for contract-runner tests.",
+    description: "Synthetic condition for capability-contract conformance tests.",
     validateParameters: (value) => {
         if (
             typeof value === "object" &&
@@ -71,7 +71,7 @@ const validTrue = defineCanonicalFixture({
     id: "boolean.true",
     capabilities: [booleanCapability.id],
     expression: createConditionExpression(
-        createCapabilitySpecimen(booleanCapability, { value: true }),
+        createCapabilityInstance(booleanCapability, { value: true }),
     ),
     expectedValidation: "valid",
     oracle: Object.freeze({ expectedTruth: true }),
@@ -86,7 +86,7 @@ const invalidParameter = defineCanonicalFixture({
     capabilities: [booleanCapability.id],
     expression: {
         kind: "condition",
-        specimen: {
+        instance: {
             kind: "capability",
             capabilityId: booleanCapability.id,
             parameters: { value: "wrong" },
@@ -96,16 +96,16 @@ const invalidParameter = defineCanonicalFixture({
 });
 
 /**
- * Exercises contract-run aggregation and coverage semantics without asserting
+ * Exercises capability-contract conformance aggregation and coverage semantics without asserting
  * anything about concrete adapters.
  */
-describe("runCapabilityContractTests", () => {
+describe("runCapabilityContractConformance", () => {
     /**
      * Proves a registered capability passes coverage only when fixtures establish
      * both valid and invalid canonical boundaries.
      */
     it("passes a capability whose fixtures establish valid and invalid boundaries", () => {
-        const result = runCapabilityContractTests(setupRegistry(), [
+        const result = runCapabilityContractConformance(setupRegistry(), [
             validTrue,
             invalidParameter,
         ]);
@@ -130,7 +130,7 @@ describe("runCapabilityContractTests", () => {
      * fixtures themselves validate as expected.
      */
     it("fails coverage when a registered capability lacks one side of its boundary", () => {
-        const result = runCapabilityContractTests(setupRegistry(), [validTrue]);
+        const result = runCapabilityContractConformance(setupRegistry(), [validTrue]);
 
         expect(result.passed).toBe(false);
         expect(result.coverage[0]).toEqual({
@@ -147,7 +147,7 @@ describe("runCapabilityContractTests", () => {
      */
     it("runs optional pure semantic oracles only for valid fixtures", () => {
         let oracleCalls = 0;
-        const result = runCapabilityContractTests(
+        const result = runCapabilityContractConformance(
             setupRegistry(),
             [validTrue, invalidParameter],
             {
@@ -160,7 +160,7 @@ describe("runCapabilityContractTests", () => {
                             const actual =
                                 expression.kind === "condition"
                                     ? (
-                                          expression.specimen.parameters as {
+                                          expression.instance.parameters as {
                                               /** Synthetic truth value consumed by the oracle. */
                                               readonly value: boolean;
                                           }
@@ -200,7 +200,7 @@ describe("runCapabilityContractTests", () => {
             expectedValidation: "valid",
         });
 
-        const result = runCapabilityContractTests(setupRegistry(), [
+        const result = runCapabilityContractConformance(setupRegistry(), [
             incorrectlyExpectedValid,
             invalidParameter,
         ]);

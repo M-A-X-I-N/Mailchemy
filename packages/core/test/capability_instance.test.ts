@@ -1,5 +1,5 @@
 /**
- * Proves capability-specimen construction, parameter canonicalization,
+ * Proves capability-instance construction, parameter canonicalization,
  * validation failure, registry-owned equality, and unknown-contract behavior.
  *
  * @packageDocumentation
@@ -10,8 +10,8 @@ import { describe, expect, it } from "vitest";
 import {
     CapabilityRegistry,
     InvalidCapabilityParametersError,
-    areCapabilitySpecimensEqual,
-    createCapabilitySpecimen,
+    areCapabilityInstancesEqual,
+    createCapabilityInstance,
     defineSemanticCapability,
     invalid,
     parseCapabilityId,
@@ -28,7 +28,7 @@ interface BooleanParameters {
 }
 
 /**
- * Creates a synthetic boolean condition contract for specimen tests.
+ * Creates a synthetic boolean condition contract for instance tests.
  *
  * @param id Canonical synthetic semantic identity.
  * @returns Contract that validates/canonicalizes one boolean property.
@@ -37,7 +37,7 @@ function makeBooleanContract(id: string) {
     return defineSemanticCapability<BooleanParameters>({
         id: parseCapabilityId(id),
         role: "condition",
-        description: "Synthetic boolean specimen contract.",
+        description: "Synthetic boolean instance contract.",
         validateParameters: (value) => {
             if (
                 typeof value === "object" &&
@@ -65,42 +65,42 @@ function makeBooleanContract(id: string) {
 
 /**
  * Exercises the boundary between typed semantic contracts and concrete
- * canonical capability specimens.
+ * canonical capability instances.
  */
-describe("CapabilitySpecimen", () => {
+describe("CapabilityInstance", () => {
     /**
-     * Proves specimen construction retains the contract's canonicalized frozen
+     * Proves instance construction retains the contract's canonicalized frozen
      * value rather than a later-mutated caller object.
      */
     it("stores a validated canonical parameter value", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
         const input = { value: true };
-        const specimen = createCapabilitySpecimen(contract, input);
+        const instance = createCapabilityInstance(contract, input);
 
         input.value = false;
 
-        expect(Object.isFrozen(specimen)).toBe(true);
-        expect(specimen.capabilityId).toBe(contract.id);
-        expect(specimen.parameters).toEqual({ value: true });
-        expect(Object.isFrozen(specimen.parameters)).toBe(true);
+        expect(Object.isFrozen(instance)).toBe(true);
+        expect(instance.capabilityId).toBe(contract.id);
+        expect(instance.parameters).toEqual({ value: true });
+        expect(Object.isFrozen(instance.parameters)).toBe(true);
     });
 
     /**
-     * Proves invalid parameters cannot enter canonical specimens by bypassing
+     * Proves invalid parameters cannot enter canonical instances by bypassing
      * contract validation.
      */
     it("rejects parameters that violate the semantic contract", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
 
         expect(() =>
-            createCapabilitySpecimen(contract, {
+            createCapabilityInstance(contract, {
                 value: "not-boolean",
             } as never),
         ).toThrow(InvalidCapabilityParametersError);
     });
 
     /**
-     * Proves specimen equality delegates parameter meaning to the registered
+     * Proves instance equality delegates parameter meaning to the registered
      * contract after requiring exact capability identity.
      */
     it("delegates semantic parameter equality to the registered contract", () => {
@@ -110,16 +110,16 @@ describe("CapabilitySpecimen", () => {
         registry.register(contract);
         registry.register(otherContract);
 
-        const trueA = createCapabilitySpecimen(contract, { value: true });
-        const trueB = createCapabilitySpecimen(contract, { value: true });
-        const falseValue = createCapabilitySpecimen(contract, { value: false });
-        const other = createCapabilitySpecimen(otherContract, { value: true });
+        const trueA = createCapabilityInstance(contract, { value: true });
+        const trueB = createCapabilityInstance(contract, { value: true });
+        const falseValue = createCapabilityInstance(contract, { value: false });
+        const other = createCapabilityInstance(otherContract, { value: true });
 
-        expect(areCapabilitySpecimensEqual(registry, trueA, trueB)).toBe(true);
-        expect(areCapabilitySpecimensEqual(registry, trueA, falseValue)).toBe(
+        expect(areCapabilityInstancesEqual(registry, trueA, trueB)).toBe(true);
+        expect(areCapabilityInstancesEqual(registry, trueA, falseValue)).toBe(
             false,
         );
-        expect(areCapabilitySpecimensEqual(registry, trueA, other)).toBe(false);
+        expect(areCapabilityInstancesEqual(registry, trueA, other)).toBe(false);
     });
 
     /**
@@ -128,13 +128,13 @@ describe("CapabilitySpecimen", () => {
      */
     it("does not invent equality semantics for an unregistered capability", () => {
         const contract = makeBooleanContract("test.condition.boolean@1");
-        const specimen = createCapabilitySpecimen(contract, { value: true });
+        const instance = createCapabilityInstance(contract, { value: true });
 
         expect(
-            areCapabilitySpecimensEqual(
+            areCapabilityInstancesEqual(
                 new CapabilityRegistry(),
-                specimen,
-                specimen,
+                instance,
+                instance,
             ),
         ).toBe(false);
     });

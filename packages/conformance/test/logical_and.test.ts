@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import {
     CapabilityRegistry,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     evaluateLogicalAnd,
     logicalAndCapability,
@@ -18,7 +18,7 @@ import {
 } from "@mailchemy/core";
 import {
     logicalAndFixtures,
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
     subjectContainsFixtures,
 } from "@mailchemy/conformance";
 
@@ -36,7 +36,7 @@ describe("core.logic.and@1", () => {
         registry.register(logicalAndCapability);
         registry.register(subjectContainsCapability);
 
-        const result = runCapabilityContractTests(
+        const result = runCapabilityContractConformance(
             registry,
             [...logicalAndFixtures, ...subjectContainsFixtures],
             {
@@ -93,18 +93,18 @@ describe("core.logic.and@1", () => {
      */
     it("preserves canonical operand order instead of sorting", () => {
         const first = createConditionExpression(
-            createCapabilitySpecimen(subjectContainsCapability, {
+            createCapabilityInstance(subjectContainsCapability, {
                 needle: "z",
             }),
         );
         const second = createConditionExpression(
-            createCapabilitySpecimen(subjectContainsCapability, {
+            createCapabilityInstance(subjectContainsCapability, {
                 needle: "a",
             }),
         );
 
         const expression = createAndExpression(
-            createCapabilitySpecimen(logicalAndCapability, null),
+            createCapabilityInstance(logicalAndCapability, null),
             [first, second],
         );
 

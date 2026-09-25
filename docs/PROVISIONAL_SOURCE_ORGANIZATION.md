@@ -7,7 +7,7 @@ tree is the project's final architecture. Mailchemy is still growing, so this
 organization should expose the concepts already proven by the implementation
 without trying to predict every future subsystem.
 
-No source file was moved or renamed by CRH-44D1. CRH-44D2 has since applied the first bounded checkpoint: authored TypeScript filenames now use `lower_snake_case` in their existing directories, with semantic renames and folder reorganization still pending.
+No source file was moved or renamed by CRH-44D1. CRH-44D2 subsequently standardized authored TypeScript filenames on `lower_snake_case` in place. CRH-44D3 has now applied the approved semantic naming cleanup—including capability-instance vocabulary, leaf-expression names, capability-contract conformance naming, shared-rule naming, Sieve native-script naming, helper cleanup, and scaffold removal—while conceptual folder reorganization remains pending.
 
 ## 1. Design rules
 

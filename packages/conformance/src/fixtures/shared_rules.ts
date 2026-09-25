@@ -13,7 +13,7 @@
 import {
     createActionExpression,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     createRuleExpression,
     hasAttachmentCapability,
@@ -27,12 +27,12 @@ import { defineCanonicalFixture } from "../fixture.js";
 /**
  * Builds a canonical Subject-containment condition for rule-shaped fixtures.
  *
- * @param needle Subject substring represented by the semantic specimen.
+ * @param needle Subject substring represented by the semantic capability instance.
  * @returns Canonical condition expression.
  */
 function subjectContains(needle: string) {
     return createConditionExpression(
-        createCapabilitySpecimen(subjectContainsCapability, { needle }),
+        createCapabilityInstance(subjectContainsCapability, { needle }),
     );
 }
 
@@ -43,7 +43,7 @@ function subjectContains(needle: string) {
  */
 function hasAttachment() {
     return createConditionExpression(
-        createCapabilitySpecimen(hasAttachmentCapability, null),
+        createCapabilityInstance(hasAttachmentCapability, null),
     );
 }
 
@@ -54,7 +54,7 @@ function hasAttachment() {
  */
 function markRead() {
     return createActionExpression(
-        createCapabilitySpecimen(markReadCapability, null),
+        createCapabilityInstance(markReadCapability, null),
     );
 }
 
@@ -62,7 +62,7 @@ function markRead() {
  * Shared valid canonical rule fixtures A/B/C plus definition/structure edges
  * that preserve normalization and operand-order expectations.
  */
-export const initialRuleFixtures = Object.freeze([
+export const sharedRuleFixtures = Object.freeze([
     defineCanonicalFixture({
         id: "rule.a.subject-invoice-mark-read",
         capabilities: [subjectContainsCapability.id, markReadCapability.id],
@@ -95,7 +95,7 @@ export const initialRuleFixtures = Object.freeze([
         ],
         expression: createRuleExpression(
             createAndExpression(
-                createCapabilitySpecimen(logicalAndCapability, null),
+                createCapabilityInstance(logicalAndCapability, null),
                 [subjectContains("invoice"), hasAttachment()],
             ),
             [markRead()],
@@ -132,7 +132,7 @@ export const initialRuleFixtures = Object.freeze([
         ],
         expression: createRuleExpression(
             createAndExpression(
-                createCapabilitySpecimen(logicalAndCapability, null),
+                createCapabilityInstance(logicalAndCapability, null),
                 [hasAttachment(), subjectContains("invoice")],
             ),
             [markRead()],

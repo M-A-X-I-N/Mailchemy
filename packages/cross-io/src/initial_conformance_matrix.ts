@@ -19,7 +19,7 @@ import {
 import {
     buildConformanceMatrix,
     hasAttachmentFixtures,
-    initialRuleFixtures,
+    sharedRuleFixtures,
     logicalAndFixtures,
     markReadFixtures,
     renderConformanceMatrixMarkdown,
@@ -55,7 +55,7 @@ const INITIAL_FIXTURES: readonly CanonicalFixture[] = Object.freeze([
     ...hasAttachmentFixtures,
     ...markReadFixtures,
     ...logicalAndFixtures,
-    ...initialRuleFixtures,
+    ...sharedRuleFixtures,
 ]);
 
 /**

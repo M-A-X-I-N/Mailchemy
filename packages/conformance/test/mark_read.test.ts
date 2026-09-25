@@ -14,7 +14,7 @@ import {
 } from "@mailchemy/core";
 import {
     markReadFixtures,
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
 } from "@mailchemy/conformance";
 
 /**
@@ -30,7 +30,7 @@ describe("core.action.mark-read@1", () => {
         const registry = new CapabilityRegistry();
         registry.register(markReadCapability);
 
-        const result = runCapabilityContractTests(registry, markReadFixtures, {
+        const result = runCapabilityContractConformance(registry, markReadFixtures, {
             oracles: new Map([
                 [
                     markReadCapability.id,

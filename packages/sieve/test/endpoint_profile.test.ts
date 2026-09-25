@@ -13,7 +13,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     markReadCapability,
     subjectContainsCapability,
@@ -36,7 +36,7 @@ import {
  */
 function markRead() {
     return createActionExpression(
-        createCapabilitySpecimen(markReadCapability, null),
+        createCapabilityInstance(markReadCapability, null),
     );
 }
 
@@ -49,7 +49,7 @@ function markRead() {
  */
 function subjectContains(needle: string) {
     return createConditionExpression(
-        createCapabilitySpecimen(subjectContainsCapability, { needle }),
+        createCapabilityInstance(subjectContainsCapability, { needle }),
     );
 }
 

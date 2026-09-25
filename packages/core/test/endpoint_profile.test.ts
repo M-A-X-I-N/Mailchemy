@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineDirectRealizationTarget,
     defineEndpointCapabilityProfile,
@@ -69,7 +69,7 @@ const absentCondition = defineSemanticCapability<null>({
  * @returns Canonical condition expression for target classification.
  */
 function condition(contract: typeof flagCondition | typeof absentCondition) {
-    return createConditionExpression(createCapabilitySpecimen(contract, null));
+    return createConditionExpression(createCapabilityInstance(contract, null));
 }
 
 /**
@@ -80,7 +80,7 @@ const baseTarget = defineDirectRealizationTarget({
     id: "synthetic.dialect",
     checkDirectRealization: (expression) =>
         expression.kind === "condition" &&
-        expression.specimen.capabilityId === flagCondition.id
+        expression.instance.capabilityId === flagCondition.id
             ? directRealization()
             : unsupportedRealization(
                 unsupportedReason(

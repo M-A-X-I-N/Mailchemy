@@ -14,7 +14,7 @@
  */
 
 import {
-    areCapabilitySpecimensEqual,
+    areCapabilityInstancesEqual,
     createCoreCapabilityRegistry,
     validateCanonicalExpression,
     type CanonicalExpression,
@@ -38,7 +38,7 @@ import {
 import {
     sieveCodec,
     sieveDirectRealizationTarget,
-    type SieveNative,
+    type SieveScriptNative,
 } from "@mailchemy/sieve";
 import {
     thunderbirdDirectRealizationTarget,
@@ -127,7 +127,7 @@ const VARIANTS: readonly CrossCodecVariant[] = Object.freeze([
         sieveDirectRealizationTarget.id,
         sieveDirectRealizationTarget.checkDirectRealization,
         sieveCodec.encode,
-        (native) => sieveCodec.decode(native as SieveNative),
+        (native) => sieveCodec.decode(native as SieveScriptNative),
     ),
     codecVariant(
         gmailFilterCodec.id,
@@ -300,12 +300,12 @@ function decodedExpression(
  *
  * @remarks
  * The current shared Direct corpus contains action leaves only, so semantic
- * equivalence delegates to capability-specimen equality. This is not a generic
+ * equivalence delegates to capability-instance equality. This is not a generic
  * canonical-expression equivalence algorithm.
  *
  * @param left First validated canonical expression.
  * @param right Second validated canonical expression.
- * @returns Whether both represent the same action specimen.
+ * @returns Whether both represent the same action capability instance.
  */
 function areEquivalent(
     left: CanonicalExpression,
@@ -314,7 +314,7 @@ function areEquivalent(
     if (left.kind !== "action" || right.kind !== "action")
         return false;
 
-    return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
+    return areCapabilityInstancesEqual(registry, left.instance, right.instance);
 }
 
 /**

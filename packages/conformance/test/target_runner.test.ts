@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     CapabilityRegistry,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineDirectRealizationTarget,
     defineSemanticCapability,
@@ -78,15 +78,15 @@ function fixture(id: string, value: boolean) {
         id,
         capabilities: [booleanCapability.id],
         expression: createConditionExpression(
-            createCapabilitySpecimen(booleanCapability, { value }),
+            createCapabilityInstance(booleanCapability, { value }),
         ),
         expectedValidation: "valid",
     });
 }
 
-/** Valid synthetic true specimen used across runner cases. */
+/** Valid synthetic true fixture used across runner cases. */
 const trueFixture = fixture("boolean.true", true);
-/** Valid synthetic false specimen used across runner cases. */
+/** Valid synthetic false fixture used across runner cases. */
 const falseFixture = fixture("boolean.false", false);
 
 /**
@@ -105,7 +105,7 @@ describe("runTargetRealizationConformance", () => {
                 const value =
                     expression.kind === "condition"
                         ? (
-                              expression.specimen.parameters as {
+                              expression.instance.parameters as {
                                   /** Synthetic truth value inspected by the target classifier. */
                                   readonly value: boolean;
                               }
@@ -197,7 +197,7 @@ describe("runTargetRealizationConformance", () => {
             capabilities: [booleanCapability.id],
             expression: {
                 kind: "condition",
-                specimen: {
+                instance: {
                     kind: "capability",
                     capabilityId: booleanCapability.id,
                     parameters: { value: "wrong" },

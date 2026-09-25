@@ -11,7 +11,7 @@
  */
 
 import {
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     hasAttachmentCapability,
 } from "@mailchemy/core";
@@ -43,7 +43,7 @@ function validFixture(
         id,
         capabilities: [hasAttachmentCapability.id],
         expression: createConditionExpression(
-            createCapabilitySpecimen(hasAttachmentCapability, null),
+            createCapabilityInstance(hasAttachmentCapability, null),
         ),
         expectedValidation: "valid",
         oracle: Object.freeze({
@@ -109,7 +109,7 @@ export const hasAttachmentFixtures = Object.freeze([
         capabilities: [hasAttachmentCapability.id],
         expression: {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: hasAttachmentCapability.id,
                 parameters: {},

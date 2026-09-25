@@ -11,7 +11,7 @@ import {
     CapabilityRegistry,
     createActionExpression,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     createRuleExpression,
     defineSemanticCapability,
@@ -98,18 +98,18 @@ describe("validateCanonicalExpression", () => {
     it("accepts a well-formed registered rule structure", () => {
         const { registry, condition, action, logic } = setupRegistry();
         const left = createConditionExpression(
-            createCapabilitySpecimen(condition, { value: true }),
+            createCapabilityInstance(condition, { value: true }),
         );
         const right = createConditionExpression(
-            createCapabilitySpecimen(condition, { value: false }),
+            createCapabilityInstance(condition, { value: false }),
         );
         const combined = createAndExpression(
-            createCapabilitySpecimen(logic, { value: true }),
+            createCapabilityInstance(logic, { value: true }),
             [left, right],
         );
         const expression = createRuleExpression(combined, [
             createActionExpression(
-                createCapabilitySpecimen(action, { value: true }),
+                createCapabilityInstance(action, { value: true }),
             ),
         ]);
 
@@ -127,7 +127,7 @@ describe("validateCanonicalExpression", () => {
         const { registry, condition } = setupRegistry();
         const malformed = {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: condition.id,
                 parameters: { value: "not-boolean" },
@@ -142,7 +142,7 @@ describe("validateCanonicalExpression", () => {
             expect(result.issues).toContainEqual(
                 expect.objectContaining({
                     code: "test.boolean.invalid",
-                    path: ["specimen", "parameters"],
+                    path: ["instance", "parameters"],
                 }),
             );
         }
@@ -156,7 +156,7 @@ describe("validateCanonicalExpression", () => {
         const { registry } = setupRegistry();
         const unknown = {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: "test.condition.unknown@1",
                 parameters: { value: true },
@@ -175,14 +175,14 @@ describe("validateCanonicalExpression", () => {
     });
 
     /**
-     * Proves an otherwise-valid registered specimen cannot occupy a canonical
+     * Proves an otherwise-valid registered capability instance cannot occupy a canonical
      * expression role that conflicts with its contract metadata.
      */
     it("rejects capability-role mismatches", () => {
         const { registry, action } = setupRegistry();
         const wrongRole = {
             kind: "condition",
-            specimen: {
+            instance: {
                 kind: "capability",
                 capabilityId: action.id,
                 parameters: { value: true },
@@ -240,15 +240,15 @@ describe("validateCanonicalExpression", () => {
             /** Recursive expression discriminator used to construct the cycle. */
             kind: "and";
 
-            /** Synthetic logic-capability specimen attached to the AND node. */
+            /** Synthetic logic-capability instance attached to the AND node. */
             operator: {
-                /** Capability-specimen discriminator required by canonical shape. */
+                /** Capability-instance discriminator required by canonical shape. */
                 kind: "capability";
 
                 /** Registry identity of the synthetic logic capability. */
                 capabilityId: string;
 
-                /** Parameters retained on the synthetic operator specimen. */
+                /** Parameters retained on the synthetic operator instance. */
                 parameters: {
                     /** Boolean parameter accepted by the synthetic logic contract. */
                     value: boolean;

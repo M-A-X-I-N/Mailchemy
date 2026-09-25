@@ -17,7 +17,7 @@
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     decodedNative,
     defineSemanticCodec,
     encodedNative,
@@ -34,7 +34,7 @@ import {
  * Native textual Sieve representation accepted and produced by the initial
  * codec.
  */
-export type SieveNative = string;
+export type SieveScriptNative = string;
 
 /**
  * Lexical token emitted by the minimal Sieve tokenizer.
@@ -149,7 +149,7 @@ class SieveUnsupportedConstructError extends Error {
  * It recognizes Subject containment syntax but refuses to claim equivalence
  * with Mailchemy's Unicode/NFC Subject contract.
  */
-export const sieveCodec = defineSemanticCodec<SieveNative>({
+export const sieveCodec = defineSemanticCodec<SieveScriptNative>({
     id: "sieve.initial@1",
     encode: encodeSieve,
     decode: decodeSieve,
@@ -165,7 +165,7 @@ export const sieveCodec = defineSemanticCodec<SieveNative>({
 function encodeSieve(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
-        expression.specimen.capabilityId === markReadCapability.id
+        expression.instance.capabilityId === markReadCapability.id
     )
         return encodedNative('require "imap4flags";\n\naddflag "\\\\Seen";\n');
 
@@ -193,7 +193,7 @@ function encodeSieve(expression: CanonicalExpression) {
  * @returns Decoded canonical mark-read, opaque preservation for syntax outside
  * the initial subset, or structured native-decode refusal.
  */
-function decodeSieve(native: SieveNative) {
+function decodeSieve(native: SieveScriptNative) {
     /** Parsed native script used only after syntax/subset recognition succeeds. */
     let parsed: ParsedScript;
 
@@ -240,7 +240,7 @@ function decodeSieve(native: SieveNative) {
         if (isExactSeenAddition(parsed.statement.flags)) {
             return decodedNative(
                 createActionExpression(
-                    createCapabilitySpecimen(markReadCapability, null),
+                    createCapabilityInstance(markReadCapability, null),
                 ),
             );
         }
@@ -264,13 +264,13 @@ function decodeSieve(native: SieveNative) {
  * whose exact Sieve comparator/normalization mapping remains unproven.
  *
  * @param expression Canonical expression to inspect recursively.
- * @returns Whether any reachable condition specimen is
+ * @returns Whether any reachable condition capability instance is
  * `core.condition.subject.contains@1`.
  */
 function containsSubjectCondition(expression: CanonicalExpression): boolean {
     if (expression.kind === "condition") {
         return (
-            expression.specimen.capabilityId ===
+            expression.instance.capabilityId ===
             "core.condition.subject.contains@1"
         );
     }

@@ -11,7 +11,7 @@
 
 import {
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     logicalAndCapability,
     subjectContainsCapability,
@@ -28,7 +28,7 @@ import { defineCanonicalFixture } from "../fixture.js";
  */
 function subject(needle: string) {
     return createConditionExpression(
-        createCapabilitySpecimen(subjectContainsCapability, { needle }),
+        createCapabilityInstance(subjectContainsCapability, { needle }),
     );
 }
 
@@ -52,7 +52,7 @@ function validFixture(
         id,
         capabilities: [logicalAndCapability.id],
         expression: createAndExpression(
-            createCapabilitySpecimen(logicalAndCapability, null),
+            createCapabilityInstance(logicalAndCapability, null),
             operandResults.map((_, index) =>
                 subject(`operand-${String(index)}`),
             ),
@@ -94,7 +94,7 @@ export const logicalAndFixtures = Object.freeze([
         id: "logic.and.invalid-empty",
         capabilities: [logicalAndCapability.id],
         expression: createAndExpression(
-            createCapabilitySpecimen(logicalAndCapability, null),
+            createCapabilityInstance(logicalAndCapability, null),
             [],
         ),
         expectedValidation: "invalid",
@@ -103,7 +103,7 @@ export const logicalAndFixtures = Object.freeze([
         id: "logic.and.invalid-single",
         capabilities: [logicalAndCapability.id],
         expression: createAndExpression(
-            createCapabilitySpecimen(logicalAndCapability, null),
+            createCapabilityInstance(logicalAndCapability, null),
             [subject("only-child")],
         ),
         expectedValidation: "invalid",

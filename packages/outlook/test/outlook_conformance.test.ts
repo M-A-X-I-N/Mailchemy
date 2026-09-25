@@ -8,16 +8,16 @@
 import { describe, expect, it } from "vitest";
 
 import {
-    areCapabilitySpecimensEqual,
+    areCapabilityInstancesEqual,
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createCoreCapabilityRegistry,
     markReadCapability,
     type CanonicalExpression,
 } from "@mailchemy/core";
 import {
     hasAttachmentFixtures,
-    initialRuleFixtures,
+    sharedRuleFixtures,
     logicalAndFixtures,
     markReadFixtures,
     runCodecRoundTrips,
@@ -42,7 +42,7 @@ const initialFixtures: readonly CanonicalFixture[] = Object.freeze([
     ...hasAttachmentFixtures,
     ...markReadFixtures,
     ...logicalAndFixtures,
-    ...initialRuleFixtures,
+    ...sharedRuleFixtures,
 ]);
 
 /**
@@ -59,11 +59,11 @@ function isCanonicallyValidFixture(
 
 /**
  * Compares the action-only Direct Outlook round-trip subset by canonical
- * specimen equality.
+ * capability-instance equality.
  *
  * @param left First canonical expression.
  * @param right Second canonical expression.
- * @returns Whether both are semantically equal action specimens.
+ * @returns Whether both are semantically equal action capability instances.
  */
 function areEquivalent(
     left: CanonicalExpression,
@@ -72,7 +72,7 @@ function areEquivalent(
     if (left.kind !== "action" || right.kind !== "action")
         return false;
 
-    return areCapabilitySpecimensEqual(registry, left.specimen, right.specimen);
+    return areCapabilityInstancesEqual(registry, left.instance, right.instance);
 }
 
 /**
@@ -150,7 +150,7 @@ describe("Outlook conformance", () => {
         expect(decoded).toEqual({
             kind: "decoded",
             expression: createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
+                createCapabilityInstance(markReadCapability, null),
             ),
         });
     });

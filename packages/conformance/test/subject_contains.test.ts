@@ -13,7 +13,7 @@ import {
     subjectContainsCapability,
 } from "@mailchemy/core";
 import {
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
     subjectContainsFixtures,
 } from "@mailchemy/conformance";
 
@@ -27,7 +27,7 @@ describe("core.condition.subject.contains@1", () => {
      * the logical-Subject evaluation oracle while satisfying boundary coverage.
      */
     it("satisfies its canonical contract fixture suite", () => {
-        const result = runCapabilityContractTests(
+        const result = runCapabilityContractConformance(
             (() => {
                 const registry = new CapabilityRegistry();
                 registry.register(subjectContainsCapability);
@@ -54,10 +54,10 @@ describe("core.condition.subject.contains@1", () => {
                                 expression === null ||
                                 !("kind" in expression) ||
                                 expression.kind !== "condition" ||
-                                !("specimen" in expression) ||
-                                typeof expression.specimen !== "object" ||
-                                expression.specimen === null ||
-                                !("parameters" in expression.specimen)
+                                !("instance" in expression) ||
+                                typeof expression.instance !== "object" ||
+                                expression.instance === null ||
+                                !("parameters" in expression.instance)
                             ) {
                                 return {
                                     passed: false,
@@ -68,7 +68,7 @@ describe("core.condition.subject.contains@1", () => {
 
                             const actual = evaluateSubjectContains(
                                 subjectFields,
-                                expression.specimen.parameters as {
+                                expression.instance.parameters as {
                                     /** Canonical Subject substring consumed by the semantic oracle. */
                                     readonly needle: string;
                                 },
@@ -98,9 +98,9 @@ describe("core.condition.subject.contains@1", () => {
 
     /**
      * Proves decomposed Unicode fixture input is canonicalized to NFC before the
-     * semantic specimen is retained.
+     * semantic capability instance is retained.
      */
-    it("canonicalizes the needle to NFC at specimen creation time", () => {
+    it("canonicalizes the needle to NFC at capability-instance creation time", () => {
         const decomposed = subjectContainsCapability.validateParameters({
             needle: "Cafe\u0301",
         });

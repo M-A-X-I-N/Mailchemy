@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     CapabilityRegistry,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineDirectRealizationTarget,
     defineSemanticCapability,
@@ -54,7 +54,7 @@ const fixture = defineCanonicalFixture({
     id: "present.basic",
     capabilities: [capability.id],
     expression: createConditionExpression(
-        createCapabilitySpecimen(capability, null),
+        createCapabilityInstance(capability, null),
     ),
     expectedValidation: "valid",
 });

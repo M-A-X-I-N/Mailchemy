@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import {
     CapabilityRegistry,
     DuplicateCapabilityIdError,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     defineSemanticCapability,
     invalid,
@@ -188,13 +188,13 @@ describe("registry integrity", () => {
     });
 
     /**
-     * Proves registry role metadata prevents an action specimen from being
+     * Proves registry role metadata prevents an action capability instance from being
      * accepted merely because it is wrapped in condition-shaped syntax.
      */
-    it("detects specimen/expression role mismatch through the registry contract", () => {
+    it("detects capability-instance/expression role mismatch through the registry contract", () => {
         const registry = buildRegistry();
-        const actionSpecimen = createCapabilitySpecimen(action, "noop");
-        const incorrectlyWrapped = createConditionExpression(actionSpecimen);
+        const actionInstance = createCapabilityInstance(action, "noop");
+        const incorrectlyWrapped = createConditionExpression(actionInstance);
 
         const result = validateCanonicalExpression(
             registry,

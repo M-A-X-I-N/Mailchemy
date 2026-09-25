@@ -65,7 +65,7 @@ export const subjectContainsCapability =
                 );
             }
 
-            /** Canonical NFC form stored in Subject-containment specimens. */
+            /** Canonical NFC form stored in Subject-containment capability instances. */
             const needle = value.needle.normalize("NFC");
 
             if (needle.length === 0) {

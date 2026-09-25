@@ -10,10 +10,10 @@
  */
 
 import type {
-    ActionCapabilityExpression,
+    ActionLeafExpression,
     AndExpression,
     CanonicalExpression,
-    ConditionCapabilityExpression,
+    ConditionLeafExpression,
     RuleExpression,
 } from "./expression.js";
 import {
@@ -26,7 +26,7 @@ import {
  * Canonical semantic leaf whose target support can be checked independently.
  */
 export type LeafSemanticExpression =
-    ConditionCapabilityExpression | ActionCapabilityExpression;
+    ConditionLeafExpression | ActionLeafExpression;
 
 /**
  * Canonical composition whose execution/grouping semantics require an explicit

@@ -17,7 +17,7 @@
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     decodedNative,
     defineSemanticCodec,
     encodedNative,
@@ -133,7 +133,7 @@ export const outlookInboxRuleCodec =
 function encodeOutlookRule(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
-        expression.specimen.capabilityId === markReadCapability.id
+        expression.instance.capabilityId === markReadCapability.id
     ) {
         return encodedNative({
             actions: Object.freeze({
@@ -142,7 +142,7 @@ function encodeOutlookRule(expression: CanonicalExpression) {
         });
     }
 
-    if (containsInitialOutlookPredicate(expression)) {
+    if (containsUnprovenOutlookPredicate(expression)) {
         return unsupportedRealization(
             unsupportedReason(
                 "exactness-unproven",
@@ -436,7 +436,7 @@ function decodeActionOnly(
     if (actions.markAsRead) {
         return decodedNative(
             createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
+                createCapabilityInstance(markReadCapability, null),
             ),
         );
     }
@@ -454,22 +454,22 @@ function decodeActionOnly(
  * @param expression Canonical expression to inspect recursively.
  * @returns Whether Subject-containment or attachment-presence semantics occur.
  */
-function containsInitialOutlookPredicate(
+function containsUnprovenOutlookPredicate(
     expression: CanonicalExpression,
 ): boolean {
     switch (expression.kind) {
         case "condition":
             return (
-                expression.specimen.capabilityId ===
+                expression.instance.capabilityId ===
                     subjectContainsCapability.id ||
-                expression.specimen.capabilityId === hasAttachmentCapability.id
+                expression.instance.capabilityId === hasAttachmentCapability.id
             );
         case "action":
             return false;
         case "and":
-            return expression.operands.some(containsInitialOutlookPredicate);
+            return expression.operands.some(containsUnprovenOutlookPredicate);
         case "rule":
-            return containsInitialOutlookPredicate(expression.condition);
+            return containsUnprovenOutlookPredicate(expression.condition);
     }
 }
 

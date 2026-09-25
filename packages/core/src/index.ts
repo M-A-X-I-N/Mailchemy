@@ -45,28 +45,28 @@ export {
 
 export {
     InvalidCapabilityParametersError,
-    areCapabilitySpecimensEqual,
-    createCapabilitySpecimen,
-    type CapabilitySpecimen,
-} from "./semantic_specimen.js";
+    areCapabilityInstancesEqual,
+    createCapabilityInstance,
+    type CapabilityInstance,
+} from "./capability_instance.js";
 
 export {
     createActionExpression,
     createAndExpression,
     createConditionExpression,
     createRuleExpression,
-    type ActionCapabilityExpression,
+    type ActionLeafExpression,
     type ActionExpression,
     type AndExpression,
     type CanonicalExpression,
-    type ConditionCapabilityExpression,
+    type ConditionLeafExpression,
     type ConditionExpression,
     type RuleExpression,
 } from "./expression.js";
 
 export {
     validateCanonicalExpression,
-    validateCapabilitySpecimen,
+    validateCapabilityInstance,
 } from "./semantic_validation.js";
 
 export {

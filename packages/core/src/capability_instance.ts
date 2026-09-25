@@ -1,5 +1,5 @@
 /**
- * Defines validated concrete semantic-capability specimens and registry-owned
+ * Defines validated concrete semantic-capability instances and registry-owned
  * semantic equality for their parameter values.
  *
  * @packageDocumentation
@@ -13,10 +13,10 @@ import type { ValidationIssue } from "./validation.js";
 /**
  * Concrete invocation of one semantic capability with canonicalized parameters.
  *
- * @typeParam TParameters Canonical parameter value stored by this specimen.
+ * @typeParam TParameters Canonical parameter value stored by this instance.
  */
-export interface CapabilitySpecimen<TParameters = unknown> {
-    /** Discriminator identifying a leaf semantic-capability specimen. */
+export interface CapabilityInstance<TParameters = unknown> {
+    /** Discriminator identifying a leaf semantic-capability instance. */
     readonly kind: "capability";
 
     /** Exact versioned semantic contract governing the parameters. */
@@ -27,7 +27,7 @@ export interface CapabilitySpecimen<TParameters = unknown> {
 }
 
 /**
- * Reports that parameters supplied for specimen construction violate the
+ * Reports that parameters supplied for instance construction violate the
  * selected semantic contract.
  */
 export class InvalidCapabilityParametersError extends Error {
@@ -38,7 +38,7 @@ export class InvalidCapabilityParametersError extends Error {
     public readonly issues: readonly ValidationIssue[];
 
     /**
-     * Creates a specimen-construction error from contract validation failures.
+     * Creates an instance-construction error from contract validation failures.
      *
      * @param capabilityId Semantic identity whose parameters were invalid.
      * @param issues Structured validation evidence produced by the contract.
@@ -56,18 +56,18 @@ export class InvalidCapabilityParametersError extends Error {
 
 /**
  * Validates parameters under a typed semantic contract and snapshots the
- * resulting canonical value into an immutable specimen.
+ * resulting canonical value into an immutable instance.
  *
  * @typeParam TParameters Canonical parameter shape owned by the contract.
  * @param contract Semantic contract that validates and interprets the value.
- * @param parameters Candidate parameters for this concrete specimen.
- * @returns Frozen specimen containing the contract's canonicalized parameters.
+ * @param parameters Candidate parameters for this concrete instance.
+ * @returns Frozen instance containing the contract's canonicalized parameters.
  * @throws InvalidCapabilityParametersError When contract validation fails.
  */
-export function createCapabilitySpecimen<TParameters>(
+export function createCapabilityInstance<TParameters>(
     contract: SemanticCapabilityContract<TParameters>,
     parameters: TParameters,
-): CapabilitySpecimen<TParameters> {
+): CapabilityInstance<TParameters> {
     const validation = contract.validateParameters(parameters);
 
     if (!validation.ok) {
@@ -85,7 +85,7 @@ export function createCapabilitySpecimen<TParameters>(
 }
 
 /**
- * Compares two specimens using the registered semantic contract for their
+ * Compares two instances using the registered semantic contract for their
  * shared capability identity.
  *
  * @remarks
@@ -94,15 +94,15 @@ export function createCapabilitySpecimen<TParameters>(
  * parameter-equality semantics.
  *
  * @param registry Registry that owns the equality contract.
- * @param left First capability specimen.
- * @param right Second capability specimen.
- * @returns Whether both specimens have the same identity and semantically
+ * @param left First capability instance.
+ * @param right Second capability instance.
+ * @returns Whether both instances have the same identity and semantically
  * equal parameters under the registered contract.
  */
-export function areCapabilitySpecimensEqual(
+export function areCapabilityInstancesEqual(
     registry: CapabilityRegistry,
-    left: CapabilitySpecimen,
-    right: CapabilitySpecimen,
+    left: CapabilityInstance,
+    right: CapabilityInstance,
 ): boolean {
     if (left.capabilityId !== right.capabilityId)
         return false;

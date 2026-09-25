@@ -14,7 +14,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     markReadCapability,
     subjectContainsCapability,
@@ -32,7 +32,7 @@ describe("initial Sieve codec", () => {
      */
     it("encodes canonical mark-read using imap4flags addflag Seen", () => {
         const expression = createActionExpression(
-            createCapabilitySpecimen(markReadCapability, null),
+            createCapabilityInstance(markReadCapability, null),
         );
 
         expect(sieveCodec.encode(expression)).toEqual({
@@ -51,7 +51,7 @@ describe("initial Sieve codec", () => {
         ).toEqual({
             kind: "decoded",
             expression: createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
+                createCapabilityInstance(markReadCapability, null),
             ),
         });
     });
@@ -140,7 +140,7 @@ describe("initial Sieve codec", () => {
      */
     it("refuses canonical Subject contains encoding until equivalence is proven", () => {
         const expression = createConditionExpression(
-            createCapabilitySpecimen(subjectContainsCapability, {
+            createCapabilityInstance(subjectContainsCapability, {
                 needle: "invoice",
             }),
         );

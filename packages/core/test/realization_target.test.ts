@@ -8,7 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     createRuleExpression,
     defineDirectRealizationTarget,
@@ -66,9 +66,9 @@ describe("DirectRealizationTarget", () => {
             checkDirectRealization: (expression) => {
                 if (
                     expression.kind === "condition" &&
-                    expression.specimen.capabilityId === booleanCondition.id &&
+                    expression.instance.capabilityId === booleanCondition.id &&
                     (
-                        expression.specimen.parameters as {
+                        expression.instance.parameters as {
                             /** Synthetic truth value inspected by the direct target. */
                             readonly value: boolean;
                         }
@@ -79,17 +79,17 @@ describe("DirectRealizationTarget", () => {
                 return unsupportedRealization(
                     unsupportedReason(
                         "refinement-rejected",
-                        "Synthetic target only accepts the true specimen.",
+                        "Synthetic target only accepts the true capability instance.",
                     ),
                 );
             },
         });
 
         const accepted = createConditionExpression(
-            createCapabilitySpecimen(booleanCondition, { value: true }),
+            createCapabilityInstance(booleanCondition, { value: true }),
         );
         const rejected = createConditionExpression(
-            createCapabilitySpecimen(booleanCondition, { value: false }),
+            createCapabilityInstance(booleanCondition, { value: false }),
         );
 
         expect(target.checkDirectRealization(accepted).kind).toBe("direct");
@@ -97,7 +97,7 @@ describe("DirectRealizationTarget", () => {
             kind: "unsupported",
             reason: {
                 code: "refinement-rejected",
-                message: "Synthetic target only accepts the true specimen.",
+                message: "Synthetic target only accepts the true capability instance.",
             },
         });
     });
@@ -121,7 +121,7 @@ describe("DirectRealizationTarget", () => {
         });
 
         const condition = createConditionExpression(
-            createCapabilitySpecimen(booleanCondition, { value: true }),
+            createCapabilityInstance(booleanCondition, { value: true }),
         );
         const rule = createRuleExpression(condition, []);
 

@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import {
     createActionExpression,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     createRuleExpression,
     hasAttachmentCapability,
@@ -29,7 +29,7 @@ import { sieveDirectRealizationTarget } from "../src/index.js";
  */
 function subjectContains(needle: string) {
     return createConditionExpression(
-        createCapabilitySpecimen(subjectContainsCapability, { needle }),
+        createCapabilityInstance(subjectContainsCapability, { needle }),
     );
 }
 
@@ -40,7 +40,7 @@ function subjectContains(needle: string) {
  */
 function hasAttachment() {
     return createConditionExpression(
-        createCapabilitySpecimen(hasAttachmentCapability, null),
+        createCapabilityInstance(hasAttachmentCapability, null),
     );
 }
 
@@ -51,7 +51,7 @@ function hasAttachment() {
  */
 function markRead() {
     return createActionExpression(
-        createCapabilitySpecimen(markReadCapability, null),
+        createCapabilityInstance(markReadCapability, null),
     );
 }
 
@@ -111,7 +111,7 @@ describe("Sieve direct realization", () => {
      */
     it("propagates an unsupported AND operand instead of inferring support from structure alone", () => {
         const expression = createAndExpression(
-            createCapabilitySpecimen(logicalAndCapability, null),
+            createCapabilityInstance(logicalAndCapability, null),
             [subjectContains("invoice"), hasAttachment()],
         );
 

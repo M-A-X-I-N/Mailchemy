@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import {
     createActionExpression,
     createAndExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     createConditionExpression,
     createRuleExpression,
     defineSemanticCapability,
@@ -78,26 +78,26 @@ describe("canonical expression constructors", () => {
      * Proves the initial A/B/C rule shapes can be represented entirely with
      * canonical semantics, without provider-specific fields leaking into IR.
      */
-    it("represents the initial rule-shaped specimen patterns without provider data", () => {
+    it("represents the initial rule-shaped expression patterns without provider data", () => {
         const subject = stringCondition("test.condition.subject@1");
         const attachment = stringCondition("test.condition.attachment@1");
         const mark = nullCapability("test.action.mark@1", "action");
         const and = nullCapability("test.logic.and@1", "logic");
 
         const subjectCondition = createConditionExpression(
-            createCapabilitySpecimen(subject, "invoice"),
+            createCapabilityInstance(subject, "invoice"),
         );
         const attachmentCondition = createConditionExpression(
-            createCapabilitySpecimen(attachment, "present"),
+            createCapabilityInstance(attachment, "present"),
         );
         const markAction = createActionExpression(
-            createCapabilitySpecimen(mark, null),
+            createCapabilityInstance(mark, null),
         );
 
         const ruleA = createRuleExpression(subjectCondition, [markAction]);
         const ruleB = createRuleExpression(attachmentCondition, [markAction]);
         const combined = createAndExpression(
-            createCapabilitySpecimen(and, null),
+            createCapabilityInstance(and, null),
             [subjectCondition, attachmentCondition],
         );
         const ruleC = createRuleExpression(combined, [markAction]);
@@ -120,10 +120,10 @@ describe("canonical expression constructors", () => {
         const actionContract = nullCapability("test.action.noop@1", "action");
 
         const condition = createConditionExpression(
-            createCapabilitySpecimen(conditionContract, "x"),
+            createCapabilityInstance(conditionContract, "x"),
         );
         const action = createActionExpression(
-            createCapabilitySpecimen(actionContract, null),
+            createCapabilityInstance(actionContract, null),
         );
         const sourceActions = [action];
         const rule = createRuleExpression(condition, sourceActions);

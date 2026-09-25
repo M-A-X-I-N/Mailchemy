@@ -15,7 +15,7 @@
 
 import {
     createActionExpression,
-    createCapabilitySpecimen,
+    createCapabilityInstance,
     decodedNative,
     defineSemanticCodec,
     encodedNative,
@@ -107,11 +107,11 @@ export const thunderbirdFilterCodec =
 function encodeThunderbird(expression: CanonicalExpression) {
     if (
         expression.kind === "action" &&
-        expression.specimen.capabilityId === markReadCapability.id
+        expression.instance.capabilityId === markReadCapability.id
     )
         return encodedNative('action="Mark read"\n');
 
-    if (containsInitialThunderbirdCondition(expression)) {
+    if (containsUnprovenThunderbirdCondition(expression)) {
         return unsupportedRealization(
             unsupportedReason(
                 "exactness-unproven",
@@ -185,7 +185,7 @@ function decodeThunderbird(native: ThunderbirdFilterNative) {
     if (parsed.actions.length === 1 && parsed.actions[0] === "Mark read") {
         return decodedNative(
             createActionExpression(
-                createCapabilitySpecimen(markReadCapability, null),
+                createCapabilityInstance(markReadCapability, null),
             ),
         );
     }
@@ -474,23 +474,23 @@ function unescapeQuotedValue(value: string): string {
  * @param expression Canonical expression to inspect recursively.
  * @returns Whether Subject-containment or attachment-presence semantics occur.
  */
-function containsInitialThunderbirdCondition(
+function containsUnprovenThunderbirdCondition(
     expression: CanonicalExpression,
 ): boolean {
     switch (expression.kind) {
         case "condition":
             return (
-                expression.specimen.capabilityId ===
+                expression.instance.capabilityId ===
                     subjectContainsCapability.id ||
-                expression.specimen.capabilityId === hasAttachmentCapability.id
+                expression.instance.capabilityId === hasAttachmentCapability.id
             );
         case "action":
             return false;
         case "and":
             return expression.operands.some(
-                containsInitialThunderbirdCondition,
+                containsUnprovenThunderbirdCondition,
             );
         case "rule":
-            return containsInitialThunderbirdCondition(expression.condition);
+            return containsUnprovenThunderbirdCondition(expression.condition);
     }
 }

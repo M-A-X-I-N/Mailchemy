@@ -174,7 +174,7 @@ function collectRequiredExtensions(
         case "condition":
             return [];
         case "action":
-            return expression.specimen.capabilityId === markReadCapability.id
+            return expression.instance.capabilityId === markReadCapability.id
                 ? ["imap4flags"]
                 : [];
         case "and":

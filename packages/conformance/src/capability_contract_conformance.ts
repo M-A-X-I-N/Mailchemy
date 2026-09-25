@@ -100,7 +100,7 @@ export interface CapabilityCoverageResult {
 /**
  * Aggregate result of one capability-contract fixture run.
  */
-export interface CapabilityContractRun {
+export interface CapabilityContractConformanceRun {
     /** Per-fixture validation/oracle evidence. */
     readonly fixtureResults: readonly CapabilityFixtureResult[];
 
@@ -112,9 +112,9 @@ export interface CapabilityContractRun {
 }
 
 /**
- * Optional behavior supplied to a capability-contract run.
+ * Optional behavior supplied to capability-contract conformance.
  */
-export interface CapabilityContractRunnerOptions {
+export interface CapabilityContractConformanceOptions {
     /**
      * Capability-specific pure semantic oracles.
      *
@@ -132,13 +132,13 @@ export interface CapabilityContractRunnerOptions {
  * @param registry Registry whose semantic contracts define validation/coverage.
  * @param fixtures Canonical evidence cases participating in the run.
  * @param options Optional capability-specific semantic oracles.
- * @returns Frozen aggregate contract-run evidence.
+ * @returns Frozen aggregate capability-contract conformance evidence.
  */
-export function runCapabilityContractTests(
+export function runCapabilityContractConformance(
     registry: CapabilityRegistry,
     fixtures: readonly CanonicalFixture[],
-    options: CapabilityContractRunnerOptions = {},
-): CapabilityContractRun {
+    options: CapabilityContractConformanceOptions = {},
+): CapabilityContractConformanceRun {
     /** Per-fixture validation/oracle evidence in supplied fixture order. */
     const fixtureResults = fixtures.map((fixture) =>
         runFixture(registry, fixture, options.oracles),

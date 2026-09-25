@@ -76,7 +76,7 @@ describe("CanonicalFixture", () => {
             capabilities: [parseCapabilityId("test.condition.boolean@1")],
             expression: {
                 kind: "condition",
-                specimen: {
+                instance: {
                     kind: "capability",
                     capabilityId: "test.condition.boolean@1",
                     parameters: { value: "not-boolean" },

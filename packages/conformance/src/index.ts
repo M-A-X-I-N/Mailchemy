@@ -1,6 +1,6 @@
 /**
- * Exposes the public `@mailchemy/conformance` fixture, contract-runner,
- * target-runner, round-trip, matrix, and initial shared-fixture APIs.
+ * Exposes the public `@mailchemy/conformance` fixture, capability-contract
+ * conformance, target-runner, round-trip, matrix, and shared-rule APIs.
  *
  * @remarks
  * Re-exporting evidence/harness machinery here does not strengthen any target,
@@ -18,15 +18,15 @@ export {
 } from "./fixture.js";
 
 export {
-    runCapabilityContractTests,
+    runCapabilityContractConformance,
     type CapabilityContractOracle,
-    type CapabilityContractRun,
-    type CapabilityContractRunnerOptions,
+    type CapabilityContractConformanceRun,
+    type CapabilityContractConformanceOptions,
     type CapabilityCoverageResult,
     type CapabilityFixtureResult,
     type ContractOracleExecution,
     type ContractOracleResult,
-} from "./contract_runner.js";
+} from "./capability_contract_conformance.js";
 
 export {
     runTargetRealizationConformance,
@@ -54,12 +54,7 @@ export {
 } from "./matrix.js";
 
 export { hasAttachmentFixtures } from "./fixtures/has_attachment.js";
-export { initialRuleFixtures } from "./fixtures/initial_rules.js";
+export { sharedRuleFixtures } from "./fixtures/shared_rules.js";
 export { logicalAndFixtures } from "./fixtures/logical_and.js";
 export { markReadFixtures } from "./fixtures/mark_read.js";
 export { subjectContainsFixtures } from "./fixtures/subject_contains.js";
-
-/**
- * Minimal package-linkage sentinel retained by the workspace scaffold test.
- */
-export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;
