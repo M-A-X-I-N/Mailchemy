@@ -1,3 +1,17 @@
+/**
+ * Classifies direct exact realizability for the initial Microsoft Graph Inbox
+ * Rule target.
+ *
+ * @remarks
+ * Mark-read is Direct through `markAsRead=true`. Graph Subject and attachment
+ * predicates remain `exactness-unproven`; the presence of typed native fields
+ * is not sufficient evidence of canonical equivalence. Broader ordered-rule,
+ * exception, and stop-processing semantics are outside this initial
+ * rule-structure slice.
+ *
+ * @packageDocumentation
+ */
+
 import {
     directRealization,
     hasAttachmentCapability,
@@ -10,19 +24,39 @@ import {
     type DirectRealizationResult,
 } from "@mailchemy/core";
 
+/**
+ * Stable direct-realization contract for the initial Graph Inbox Rule slice.
+ */
 export interface OutlookDirectRealizationTarget {
+    /** Stable implementation-level identity of the Outlook target. */
     readonly id: "outlook.graph.inbox-rule.direct@1";
+    /**
+     * Classifies one concrete canonical expression for direct Outlook/Graph
+     * realization.
+     *
+     * @param expression Canonical expression or structure to inspect.
+     * @returns Direct or structured Unsupported evidence.
+     */
     readonly checkDirectRealization: (
         expression: CanonicalExpression,
     ) => DirectRealizationResult;
 }
 
+/**
+ * Initial Microsoft Graph Inbox Rule realization target.
+ */
 export const outlookDirectRealizationTarget: OutlookDirectRealizationTarget =
     Object.freeze({
         id: "outlook.graph.inbox-rule.direct@1",
         checkDirectRealization: checkOutlookDirectRealization,
     });
 
+/**
+ * Dispatches Outlook realization checks by canonical expression shape.
+ *
+ * @param expression Canonical expression or structure to classify.
+ * @returns Direct or Unsupported realization evidence.
+ */
 function checkOutlookDirectRealization(
     expression: CanonicalExpression,
 ): DirectRealizationResult {
@@ -37,12 +71,24 @@ function checkOutlookDirectRealization(
     }
 }
 
+/**
+ * Classifies one canonical condition/action leaf against the initial Graph
+ * semantic mapping.
+ *
+ * @param expression Condition or action leaf.
+ * @returns Direct for proven mark-read, otherwise reason-specific Unsupported
+ * evidence.
+ */
 function checkLeaf(
     expression: Extract<
         CanonicalExpression,
-        { readonly kind: "condition" | "action" }
+        {
+            /** Leaf discriminator accepted by this classifier. */
+            readonly kind: "condition" | "action";
+        }
     >,
 ): DirectRealizationResult {
+    /** Semantic identity whose Graph realization is under consideration. */
     const capabilityId = expression.specimen.capabilityId;
 
     if (capabilityId === markReadCapability.id)
@@ -74,8 +120,22 @@ function checkLeaf(
     );
 }
 
+/**
+ * Classifies canonical conjunction after validating the expected logic operator
+ * and every operand recursively.
+ *
+ * @param expression Canonical AND expression.
+ * @returns Direct only when all operands are Direct; otherwise the first
+ * encountered Unsupported evidence.
+ */
 function checkAnd(
-    expression: Extract<CanonicalExpression, { readonly kind: "and" }>,
+    expression: Extract<
+        CanonicalExpression,
+        {
+            /** Conjunction discriminator accepted by this classifier. */
+            readonly kind: "and";
+        }
+    >,
 ): DirectRealizationResult {
     if (expression.operator.capabilityId !== logicalAndCapability.id) {
         return unsupportedRealization(
@@ -97,9 +157,28 @@ function checkAnd(
     return directRealization();
 }
 
+/**
+ * Classifies the initial single-rule Graph structure.
+ *
+ * @remarks
+ * This slice proves exact structure only for one condition plus exactly one
+ * action. It does not model sequence among rules, exceptions,
+ * `stopProcessingRules`, or state visibility between ordered rules.
+ *
+ * @param expression Canonical rule structure.
+ * @returns Direct when condition and sole action are Direct; otherwise
+ * reason-specific Unsupported evidence.
+ */
 function checkRule(
-    expression: Extract<CanonicalExpression, { readonly kind: "rule" }>,
+    expression: Extract<
+        CanonicalExpression,
+        {
+            /** Rule discriminator accepted by this classifier. */
+            readonly kind: "rule";
+        }
+    >,
 ): DirectRealizationResult {
+    /** Realization evidence for the rule condition. */
     const conditionResult = checkOutlookDirectRealization(expression.condition);
 
     if (conditionResult.kind === "unsupported")
@@ -114,6 +193,7 @@ function checkRule(
         );
     }
 
+    /** Sole action required by the initial exact rule-structure slice. */
     const action = expression.actions[0];
 
     if (action === undefined) {

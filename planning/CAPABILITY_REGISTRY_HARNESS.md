@@ -1452,6 +1452,8 @@ Primary surface includes:
 
 #### CRH-44C8 — Document the Outlook / Microsoft Graph implementation slice
 
+**Status:** Done. The full `@mailchemy/outlook` Graph Inbox Rule representation, codec, direct-realization target, native fixtures, and associated tests now follow the shared TypeScript documentation contract.
+
 Document the full `@mailchemy/outlook` package and corresponding tests/fixtures.
 
 Primary surface includes:
@@ -1533,7 +1535,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C7 are complete. CRH-44C8 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C8 are complete. CRH-44C9 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 
