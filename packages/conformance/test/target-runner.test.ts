@@ -1,3 +1,10 @@
+/**
+ * Proves target-realization conformance comparison and canonical-validation
+ * gating using synthetic targets rather than provider evidence.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -19,6 +26,9 @@ import {
     runTargetRealizationConformance,
 } from "@mailchemy/conformance";
 
+/**
+ * Synthetic boolean condition used to exercise target-runner behavior.
+ */
 const booleanCapability = defineSemanticCapability<{
     readonly value: boolean;
 }>({
@@ -44,12 +54,24 @@ const booleanCapability = defineSemanticCapability<{
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Creates a fresh registry containing the synthetic boolean contract.
+ *
+ * @returns Registry used by one target-runner case.
+ */
 function registry() {
     const result = new CapabilityRegistry();
     result.register(booleanCapability);
     return result;
 }
 
+/**
+ * Builds one canonically valid synthetic boolean fixture.
+ *
+ * @param id Stable fixture identity.
+ * @param value Boolean semantic value.
+ * @returns Canonical fixture for realization classification.
+ */
 function fixture(id: string, value: boolean) {
     return defineCanonicalFixture({
         id,
@@ -61,10 +83,20 @@ function fixture(id: string, value: boolean) {
     });
 }
 
+/** Valid synthetic true specimen used across runner cases. */
 const trueFixture = fixture("boolean.true", true);
+/** Valid synthetic false specimen used across runner cases. */
 const falseFixture = fixture("boolean.false", false);
 
+/**
+ * Exercises exact expectation matching and validation gating in the target
+ * conformance runner.
+ */
 describe("runTargetRealizationConformance", () => {
+    /**
+     * Proves Direct and reason-specific Unsupported results pass when they match
+     * the explicitly declared synthetic expectation.
+     */
     it("treats expected Direct and expected Unsupported as passing results", () => {
         const target = defineDirectRealizationTarget({
             id: "synthetic.true-only",
@@ -110,6 +142,10 @@ describe("runTargetRealizationConformance", () => {
         ]);
     });
 
+    /**
+     * Proves Unsupported refusal categories are evidence-distinct and cannot be
+     * substituted for one another.
+     */
     it("fails when the Unsupported reason is not the expected evidence class", () => {
         const target = defineDirectRealizationTarget({
             id: "synthetic.unproven",
@@ -142,6 +178,9 @@ describe("runTargetRealizationConformance", () => {
         });
     });
 
+    /**
+     * Proves canonical validity is a hard prerequisite for target execution.
+     */
     it("does not query a target with an invalid canonical fixture", () => {
         let calls = 0;
         const target = defineDirectRealizationTarget({

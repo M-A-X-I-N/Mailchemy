@@ -1393,6 +1393,8 @@ Comments must make clear which facts are canonical fixture semantics versus harn
 
 #### CRH-44C5 — Document conformance target, round-trip, and matrix machinery
 
+**Status:** Done. Target-realization conformance, codec round-trip conformance, matrix/report generation, package exports/scaffold, harness self-tests, and their corresponding tests now follow the shared TypeScript documentation contract.
+
 Complete `@mailchemy/conformance` and corresponding tests.
 
 Primary surface includes:
@@ -1527,7 +1529,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A, CRH-44B, and CRH-44C1–CRH-44C4 are complete. CRH-44C5 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1–CRH-44C5 are complete. CRH-44C6 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

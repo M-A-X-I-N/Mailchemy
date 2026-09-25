@@ -1,3 +1,14 @@
+/**
+ * Self-tests the R0 conformance harness end-to-end using deliberately synthetic
+ * capabilities, targets, endpoint profiles, structures, and codecs.
+ *
+ * @remarks
+ * Every target/codec/profile in this module is fake harness evidence. Nothing
+ * here is evidence about a real mail provider or native rule system.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -31,6 +42,7 @@ import {
     type CanonicalEquivalence,
 } from "@mailchemy/conformance";
 
+/** Synthetic boolean condition used throughout harness self-tests. */
 const booleanCondition = defineSemanticCapability<{
     readonly value: boolean;
 }>({
@@ -56,6 +68,7 @@ const booleanCondition = defineSemanticCapability<{
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/** Synthetic conjunction capability used for structural-support self-tests. */
 const andCapability = defineSemanticCapability<null>({
     id: parseCapabilityId("test.logic.and@1"),
     role: "logic",
@@ -72,12 +85,24 @@ const andCapability = defineSemanticCapability<null>({
     areParametersEqual: () => true,
 });
 
+/**
+ * Builds one synthetic canonical boolean condition.
+ *
+ * @param value Boolean semantic value.
+ * @returns Canonical condition expression.
+ */
 function condition(value: boolean) {
     return createConditionExpression(
         createCapabilitySpecimen(booleanCondition, { value }),
     );
 }
 
+/**
+ * Creates the synthetic semantic registry required by a self-test.
+ *
+ * @param includeAnd Whether to include the conjunction contract.
+ * @returns Fresh registry containing the requested synthetic vocabulary.
+ */
 function registry(includeAnd = false) {
     const result = new CapabilityRegistry();
     result.register(booleanCondition);
@@ -88,6 +113,7 @@ function registry(includeAnd = false) {
     return result;
 }
 
+/** Valid true-valued synthetic fixture with truth-oracle metadata. */
 const trueFixture = defineCanonicalFixture({
     id: "boolean.true",
     capabilities: [booleanCondition.id],
@@ -96,6 +122,7 @@ const trueFixture = defineCanonicalFixture({
     oracle: Object.freeze({ expectedTruth: true }),
 });
 
+/** Valid false-valued synthetic fixture with truth-oracle metadata. */
 const falseFixture = defineCanonicalFixture({
     id: "boolean.false",
     capabilities: [booleanCondition.id],
@@ -104,6 +131,7 @@ const falseFixture = defineCanonicalFixture({
     oracle: Object.freeze({ expectedTruth: false }),
 });
 
+/** Invalid synthetic parameter fixture providing negative-boundary evidence. */
 const invalidFixture = defineCanonicalFixture({
     id: "boolean.invalid",
     capabilities: [booleanCondition.id],
@@ -118,6 +146,7 @@ const invalidFixture = defineCanonicalFixture({
     expectedValidation: "invalid",
 });
 
+/** Valid synthetic conjunction fixture used for structural support evidence. */
 const combinedFixture = defineCanonicalFixture({
     id: "boolean.and",
     capabilities: [booleanCondition.id, andCapability.id],
@@ -128,6 +157,13 @@ const combinedFixture = defineCanonicalFixture({
     expectedValidation: "valid",
 });
 
+/**
+ * Compares synthetic boolean canonical meaning for codec round trips.
+ *
+ * @param left First canonical expression.
+ * @param right Second canonical expression.
+ * @returns Whether both encode the same synthetic boolean value.
+ */
 const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.kind !== "condition" || right.kind !== "condition")
         return false;
@@ -141,7 +177,15 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     return leftValue.value === rightValue.value;
 };
 
+/**
+ * Exercises the major harness layers together while keeping all evidence
+ * synthetic and provider-independent.
+ */
 describe("R0 conformance harness self-tests", () => {
+    /**
+     * Proves canonical validation, boundary evidence, and pure semantic oracles
+     * compose correctly in the contract runner.
+     */
     it("executes provider-independent validity and oracle contract fixtures", () => {
         const result = runCapabilityContractTests(
             registry(),
@@ -174,6 +218,10 @@ describe("R0 conformance harness self-tests", () => {
         expect(result.passed).toBe(true);
     });
 
+    /**
+     * Proves distinct realization evidence classes survive target execution and
+     * matrix aggregation without being collapsed.
+     */
     it("handles Direct, known absence, refinement failure, and exactness-unproven as distinct executable outcomes", () => {
         const directTarget = defineDirectRealizationTarget({
             id: "fake.direct",
@@ -275,6 +323,10 @@ describe("R0 conformance harness self-tests", () => {
         );
     });
 
+    /**
+     * Proves endpoint refinement can narrow synthetic base Direct support and
+     * reports endpoint-profile-missing distinctly.
+     */
     it("applies endpoint-profile rejection after base Direct support", () => {
         const baseTarget = defineDirectRealizationTarget({
             id: "fake.dialect",
@@ -319,6 +371,10 @@ describe("R0 conformance harness self-tests", () => {
         });
     });
 
+    /**
+     * Proves the harness respects explicit structural rejection even when leaf
+     * classifications are Direct.
+     */
     it("proves Direct leaves do not imply Direct structure", () => {
         const structureHatingTarget = defineStructuredDirectRealizationTarget({
             id: "fake.structure-hating",
@@ -356,6 +412,10 @@ describe("R0 conformance harness self-tests", () => {
         expect(structureRun.passed).toBe(true);
     });
 
+    /**
+     * Proves end-to-end codec conformance compares semantic meaning rather than
+     * normalized native representation bytes.
+     */
     it("round trips synthetic native data by semantic equivalence rather than byte identity", () => {
         const codec = defineSemanticCodec<string>({
             id: "fake.boolean-codec",

@@ -1,3 +1,10 @@
+/**
+ * Proves deterministic conformance-matrix aggregation and Markdown rendering
+ * from executable synthetic target-run results.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -21,6 +28,7 @@ import {
     runTargetRealizationConformance,
 } from "@mailchemy/conformance";
 
+/** Synthetic parameterless condition represented in matrix evidence. */
 const capability = defineSemanticCapability<null>({
     id: parseCapabilityId("test.condition.present@1"),
     role: "condition",
@@ -37,9 +45,11 @@ const capability = defineSemanticCapability<null>({
     areParametersEqual: () => true,
 });
 
+/** Registry containing the synthetic matrix capability. */
 const registry = new CapabilityRegistry();
 registry.register(capability);
 
+/** Canonically valid fixture used as the matrix row. */
 const fixture = defineCanonicalFixture({
     id: "present.basic",
     capabilities: [capability.id],
@@ -49,7 +59,15 @@ const fixture = defineCanonicalFixture({
     expectedValidation: "valid",
 });
 
+/**
+ * Exercises matrix construction/presentation without introducing new target
+ * semantics beyond the source runs.
+ */
 describe("conformance matrix", () => {
+    /**
+     * Proves Direct and Unsupported executable results become deterministic
+     * machine-readable cells.
+     */
     it("generates machine-readable cells from executable target runs", () => {
         const directTarget = defineDirectRealizationTarget({
             id: "synthetic.direct",
@@ -111,6 +129,9 @@ describe("conformance matrix", () => {
         expect(matrix.passed).toBe(true);
     });
 
+    /**
+     * Proves Markdown is a deterministic presentation of the matrix model.
+     */
     it("renders the machine-readable model as a deterministic Markdown table", () => {
         const directTarget = defineDirectRealizationTarget({
             id: "target-a",
@@ -135,6 +156,10 @@ describe("conformance matrix", () => {
         );
     });
 
+    /**
+     * Proves expectation mismatches remain visible in both machine-readable and
+     * Markdown output.
+     */
     it("shows expectation mismatches instead of hiding them", () => {
         const target = defineDirectRealizationTarget({
             id: "synthetic.unexpected-direct",

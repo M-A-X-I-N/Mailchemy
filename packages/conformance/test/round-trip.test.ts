@@ -1,3 +1,10 @@
+/**
+ * Proves codec round-trip conformance, failure staging, and semantic-equivalence
+ * comparison with synthetic codecs/native values.
+ *
+ * @packageDocumentation
+ */
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -22,6 +29,9 @@ import {
     type CanonicalEquivalence,
 } from "@mailchemy/conformance";
 
+/**
+ * Synthetic boolean semantic contract used by round-trip harness tests.
+ */
 const booleanCapability = defineSemanticCapability<{
     readonly value: boolean;
 }>({
@@ -47,18 +57,30 @@ const booleanCapability = defineSemanticCapability<{
     areParametersEqual: (left, right) => left.value === right.value,
 });
 
+/**
+ * Builds one canonical synthetic boolean expression.
+ *
+ * @param value Boolean semantic value.
+ * @returns Canonical condition expression.
+ */
 function expression(value: boolean) {
     return createConditionExpression(
         createCapabilitySpecimen(booleanCapability, { value }),
     );
 }
 
+/**
+ * Creates a fresh registry for synthetic round-trip validation.
+ *
+ * @returns Registry containing the boolean contract.
+ */
 function registry() {
     const result = new CapabilityRegistry();
     result.register(booleanCapability);
     return result;
 }
 
+/** Valid true-valued fixture expected to survive round trips. */
 const fixture = defineCanonicalFixture({
     id: "boolean.true",
     capabilities: [booleanCapability.id],
@@ -66,6 +88,13 @@ const fixture = defineCanonicalFixture({
     expectedValidation: "valid",
 });
 
+/**
+ * Compares the synthetic boolean semantic meaning after round trip.
+ *
+ * @param left First canonically valid expression.
+ * @param right Second canonically valid expression.
+ * @returns Whether both are the same boolean condition value.
+ */
 const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     if (left.kind !== "condition" || right.kind !== "condition")
         return false;
@@ -79,7 +108,14 @@ const booleanEquivalence: CanonicalEquivalence = (left, right) => {
     return leftValue.value === rightValue.value;
 };
 
+/**
+ * Exercises semantic preservation and stage-specific codec failure reporting.
+ */
 describe("runCodecRoundTrips", () => {
+    /**
+     * Proves native normalization is irrelevant when canonical meaning is
+     * preserved by encode/decode.
+     */
     it("passes on semantic equivalence without comparing native bytes", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.normalizing-codec",
@@ -115,6 +151,9 @@ describe("runCodecRoundTrips", () => {
         ]);
     });
 
+    /**
+     * Proves encode refusal is reported at the encode-unsupported stage.
+     */
     it("fails when encode refuses a specimen expected to round trip", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.rejecting-codec",
@@ -139,6 +178,9 @@ describe("runCodecRoundTrips", () => {
         expect(result.passed).toBe(false);
     });
 
+    /**
+     * Proves opaque preservation is not treated as successful semantic decoding.
+     */
     it("fails when a codec decodes its own output only opaquely", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.opaque-codec",
@@ -157,6 +199,10 @@ describe("runCodecRoundTrips", () => {
         expect(result.results[0]?.failureKind).toBe("decode-opaque");
     });
 
+    /**
+     * Proves successful encode/decode operations still fail when canonical
+     * meaning changes.
+     */
     it("detects semantic drift even when encode/decode both succeed", () => {
         const codec = defineSemanticCodec<string>({
             id: "synthetic.drifting-codec",

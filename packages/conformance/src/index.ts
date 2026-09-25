@@ -1,3 +1,14 @@
+/**
+ * Exposes the public `@mailchemy/conformance` fixture, contract-runner,
+ * target-runner, round-trip, matrix, and initial shared-fixture APIs.
+ *
+ * @remarks
+ * Re-exporting evidence/harness machinery here does not strengthen any target,
+ * codec, or provider exactness claim made by the underlying executable inputs.
+ *
+ * @packageDocumentation
+ */
+
 export {
     InvalidCanonicalFixtureError,
     defineCanonicalFixture,
@@ -48,4 +59,7 @@ export { logicalAndFixtures } from "./fixtures/logical-and.js";
 export { markReadFixtures } from "./fixtures/mark-read.js";
 export { subjectContainsFixtures } from "./fixtures/subject-contains.js";
 
+/**
+ * Minimal package-linkage sentinel retained by the workspace scaffold test.
+ */
 export const mailchemyConformanceScaffold = "mailchemy-conformance" as const;
