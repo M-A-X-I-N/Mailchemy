@@ -1305,6 +1305,8 @@ This is a documentation pass, not an architecture-change pass. If documenting so
 
 #### CRH-44C1 — Freeze the documentation contract and representative exemplars
 
+**Status:** Done. The normative methodology and exemplars now live in [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md).
+
 Before bulk documentation begins, establish the reusable methodology that all later sections must follow.
 
 This section should:
@@ -1519,7 +1521,7 @@ CRH-44C is complete only after this audit finds the repository consistent under 
 
 ---
 
-CRH-44A and CRH-44B are complete. CRH-44C remains intentionally pending human authorization. Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
+CRH-44A, CRH-44B, and CRH-44C1 are complete. CRH-44C2 is the next documentation section; every remaining CRH-44C section must follow [`../docs/CODE_DOCUMENTATION_CONTRACT.md`](../docs/CODE_DOCUMENTATION_CONTRACT.md). Further CRH-44 subtasks, especially file/module-structure reorganization, will be added only after the human supplies the next-stage requirements.
 
 ---
 

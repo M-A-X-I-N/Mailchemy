@@ -7,7 +7,9 @@ This directory contains Mailchemy's durable human-facing architecture and design
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — canonical architecture, semantic IR, capability refinements, rewrite planning, codecs, stores/endpoints, exactness rules, and execution-structure implications.
 - [`GLOSSARY.md`](GLOSSARY.md) — durable project vocabulary for semantic capabilities, refinements, rewrites, realization, adapters/codecs/stores/endpoints, exactness, execution context, terminality, and structural support.
 - [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) — motivating rule systems/endpoints and why each matters to the design.
-- [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) — initial TypeScript/ESM implementation toolchain and host-neutrality decision.\n- [`SEMANTIC_CAPABILITIES.md`](SEMANTIC_CAPABILITIES.md) — durable contracts for implemented core semantic capability versions.
+- [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) — initial TypeScript/ESM implementation toolchain and host-neutrality decision.
+- [`SEMANTIC_CAPABILITIES.md`](SEMANTIC_CAPABILITIES.md) — durable contracts for implemented core semantic capability versions.
+- [`CODE_DOCUMENTATION_CONTRACT.md`](CODE_DOCUMENTATION_CONTRACT.md) — normative TypeScript documentation-comment coverage, claim-authority rules, tag usage, exemplars, and anti-drift procedure.
 
 ## Reading order
 
@@ -17,7 +19,8 @@ For a fresh reader:
 2. [`GLOSSARY.md`](GLOSSARY.md) for project vocabulary;
 3. [`ARCHITECTURE.md`](ARCHITECTURE.md);
 4. [`INITIAL_TARGETS.md`](INITIAL_TARGETS.md) when concrete system examples are useful;
-5. [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) for the current implementation toolchain.
+5. [`IMPLEMENTATION_TOOLCHAIN.md`](IMPLEMENTATION_TOOLCHAIN.md) for the current implementation toolchain;
+6. [`CODE_DOCUMENTATION_CONTRACT.md`](CODE_DOCUMENTATION_CONTRACT.md) before documenting or reviewing TypeScript implementation code.
 
 ## Documentation policy
 
